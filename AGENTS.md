@@ -3,23 +3,14 @@
 ## 命令
 
 ```bash
-# 检查 skills/ 下所有 markdown 文件
-markdownlint --config .markdownlint.toml skills/*/SKILL.md
-
-# 自动修复可修复问题（SKILL.md 仅；子文档格式问题手动处理）
-markdownlint --fix --config .markdownlint.toml skills/*/SKILL.md
-
-# 编辑 SKILL.md 后同步更新 .well-known/agent-skills/index.json 中的 digest
-# 先运行 sha256sum 获取新值，再更新 index.json 中的 "digest" 字段
-sha256sum skills/*/SKILL.md
-
 # pre-commit（3 个并行任务：markdownlint + list 检查 + digest 检查）
 pre-commit run --all-files
 
 # 提交时自动触发钩子，也可手动指定单个任务
-pre-commit run markdownlint --all-files
-pre-commit run check-well-known-list
 pre-commit run check-well-known-digest
+
+# 编辑 SKILL.md 后更新 index.json 中的 digest
+sha256sum skills/*/SKILL.md
 ```
 
 ## 边界
@@ -40,8 +31,6 @@ Conventional Commits。title 英文，body 中文（可选）。
 
 ```
 feat: add structured-agents-md skill
-fix: correct description in writing-agent-docs
-docs: update README with skill dependency table
 chore: update .well-known digest for writing-skills
 ```
 

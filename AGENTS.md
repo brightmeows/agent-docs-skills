@@ -1,4 +1,4 @@
-# Agent Prompt Skills — Agent Guide
+# Agent Docs Skills — Agent Guide
 
 ## 命令
 

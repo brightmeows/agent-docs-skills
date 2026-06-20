@@ -1,4 +1,4 @@
 {
-  "name": "agent-prompt-skills",
+  "name": "agent-docs-skills",
   "skills": ["./skills/writing-agent-docs", "./skills/structuring-agents-md", "./skills/writing-skill-md", "./skills/test-driven-development"]
 }

@@ -1,4 +1,4 @@
-# Agent Prompt Skills
+# Agent Docs Skills
 
 > 为 AI 编码助手（OpenCode、Claude Code 等）提供的**关于编写代理文档本身的**元技能集合。
 >
@@ -37,13 +37,13 @@ test-driven-development（独立基础技能，被 writing-skill-md 引用）
 锁定到指定 release tag：
 
 ```bash
-npx skills add https://codeberg.org/brightmeows/agent-prompt-skills.git#v1.0.0
+npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git#v1.0.0
 ```
 
 拉取 `main` 分支，始终最新：
 
 ```bash
-npx skills add https://codeberg.org/brightmeows/agent-prompt-skills/raw/branch/main
+npx skills add https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main
 ```
 
 ### 手动引用
@@ -51,7 +51,7 @@ npx skills add https://codeberg.org/brightmeows/agent-prompt-skills/raw/branch/m
 克隆仓库后，在 AI 助手的配置中引用 `skills/` 下的 `SKILL.md`：
 
 ```bash
-git clone https://codeberg.org/brightmeows/agent-prompt-skills.git
+git clone https://codeberg.org/brightmeows/agent-docs-skills.git
 ```
 
 ## 贡献

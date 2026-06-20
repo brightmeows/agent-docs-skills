@@ -1,4 +1,4 @@
-# agent-prompt-skills markdownlint 配置
+# agent-docs-skills markdownlint 配置
 #
 # 以下禁用规则均因技能文档特例：
 # - 代码块内容可能被误判为标题 (MD025)

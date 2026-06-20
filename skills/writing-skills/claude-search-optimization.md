@@ -35,6 +35,7 @@ description: 在实现任何功能或修复 bug 时、编写实现代码前使�
 ```
 
 **内容：**
+
 - 使用具体的触发器、症状和表明该技能适用的情况
 - 描述*问题本身*（竞态条件、不一致行为）而非*语言特定症状*（setTimeout、sleep）
 - 除非技能本身是技术特定的，否则保持触发器与技术无关
@@ -62,6 +63,7 @@ description: 在使用 React Router 处理认证重定向时使用
 ## 2. 关键词覆盖
 
 使用 Claude 会搜索的词：
+
 - 错误信息：“Hook timed out”、“ENOTEMPTY”、“race condition”
 - 症状：“flaky”、“hanging”、“zombie”、“pollution”
 - 同义词：“timeout/hang/freeze”、“cleanup/teardown/afterEach”
@@ -70,16 +72,19 @@ description: 在使用 React Router 处理认证重定向时使用
 ## 3. 描述性命名
 
 **使用主动语态，动词优先：**
+
 - `creating-skills` 而非 `skill-creation`
 - `condition-based-waiting` 而非 `async-test-helpers`
 
 **按你做什么或核心洞察来命名：**
+
 - `condition-based-waiting` > `async-test-helpers`
 - `using-skills` 而非 `skill-usage`
 - `flatten-with-flags` > `data-structure-refactoring`
 - `root-cause-tracing` > `debugging-techniques`
 
 **动名词（-ing）描述过程效果好：**
+
 - `creating-skills`、`testing-skills`、`debugging-with-logs`
 
 ## 4. Token 效率（关键）
@@ -87,6 +92,7 @@ description: 在使用 React Router 处理认证重定向时使用
 **问题：** 入门指南和频繁引用的技能会加载到每一次对话中。每个 token 都很重要。
 
 **目标字数：**
+
 - 入门指南工作流：每个 <150 词
 - 频繁加载的技能：总计 <200 词
 - 其他技能：<500 词（仍需简洁）
@@ -94,6 +100,7 @@ description: 在使用 React Router 处理认证重定向时使用
 **技巧：**
 
 **将细节移至工具帮助：**
+
 ```bash
 # 坏：在 SKILL.md 中记录所有参数
 search-conversations supports --text, --both, --after DATE, --before DATE, --limit N
@@ -103,6 +110,7 @@ search-conversations supports multiple modes and filters. Run --help for details
 ```
 
 **使用交叉引用：**
+
 ```markdown
 # 坏：重复工作流细节
 搜索时，用模板分发 subagent……
@@ -113,6 +121,7 @@ search-conversations supports multiple modes and filters. Run --help for details
 ```
 
 **压缩示例：**
+
 ```markdown
 # 坏：臃肿的示例（42 词）
 人类伙伴：“我们之前是怎么处理 React Router 中的认证错误的？”
@@ -126,11 +135,13 @@ search-conversations supports multiple modes and filters. Run --help for details
 ```
 
 **消除冗余：**
+
 - 不要重复交叉引用技能中的内容
 - 不要解释命令本身显而易见的内容
 - 不要包含同一模式的多个示例
 
 **验证：**
+
 ```bash
 wc -w skills/path/SKILL.md
 # 入门指南工作流：每个目标 <150 词

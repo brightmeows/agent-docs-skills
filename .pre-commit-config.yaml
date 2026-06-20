@@ -1,0 +1,76 @@
+repos:
+  - repo: local
+    hooks:
+      - id: markdownlint
+        name: markdownlint
+        description: 检查 skills/ 下所有 markdown 文件格式
+        entry: markdownlint --config .markdownlint.toml
+        language: system
+        types: [markdown]
+        files: ^(skills/[^/]+/SKILL\.md|README\.md|AGENTS\.md)$
+
+      - id: check-well-known-list
+        name: Check well-known list
+        description: 验证 skills/ 目录与 index.json 条目一致
+        entry: bash
+        args:
+          - -c
+          - |
+            set -euo pipefail
+            errors=0
+            index_names=$(jq -r '.skills[].name' .well-known/agent-skills/index.json | sort)
+            echo "=== skills 目录 vs index.json ==="
+            for dir in skills/*/; do
+              name=$(basename "$dir")
+              if ! echo "$index_names" | grep -q "^${name}$"; then
+                echo "  ERROR: skills/${name}/ 在 index.json 中无对应条目"
+                errors=$((errors + 1))
+              fi
+            done
+            for name in $index_names; do
+              if [ ! -f "skills/$name/SKILL.md" ]; then
+                echo "  ERROR: index.json 中 '$name' 无 skills/$name/SKILL.md"
+                errors=$((errors + 1))
+              fi
+            done
+            if [ "$errors" -gt 0 ]; then
+              echo "FAILED: ${errors} 个错误"
+              exit 1
+            fi
+            echo "OK: 技能列表一致"
+        language: system
+        pass_filenames: false
+
+      - id: check-well-known-digest
+        name: Check well-known digest
+        description: 验证 index.json 中的 SHA256 digest 与文件匹配
+        entry: bash
+        args:
+          - -c
+          - |
+            set -euo pipefail
+            errors=0
+            echo "=== SHA256 digest 匹配检查 ==="
+            while IFS="$(printf '\t')" read -r name expected_digest; do
+              skill_file="skills/$name/SKILL.md"
+              if [ ! -f "$skill_file" ]; then
+                echo "  ERROR: $skill_file 不存在"
+                errors=$((errors + 1))
+                continue
+              fi
+              computed=$(sha256sum "$skill_file" | cut -d' ' -f1)
+              expected=$(echo "$expected_digest" | sed 's/^sha256://')
+              if [ "$computed" != "$expected" ]; then
+                echo "  ERROR: $name digest 不匹配"
+                echo "         index.json:  sha256:${expected}"
+                echo "         实际值:      sha256:${computed}"
+                errors=$((errors + 1))
+              fi
+            done < <(jq -r '.skills[] | [.name, .digest] | @tsv' .well-known/agent-skills/index.json)
+            if [ "$errors" -gt 0 ]; then
+              echo "FAILED: ${errors} 个 digest 错误"
+              exit 1
+            fi
+            echo "OK: 所有 digest 匹配"
+        language: system
+        pass_filenames: false

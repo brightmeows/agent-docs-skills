@@ -11,7 +11,7 @@ markdownlint --fix --config .markdownlint.toml skills/*/SKILL.md
 
 # 编辑 SKILL.md 后同步更新 .well-known/agent-skills/index.json 中的 digest
 # 先运行 sha256sum 获取新值，再更新 index.json 中的 "digest" 字段
-sha256sum skills/writing-agent-docs/SKILL.md skills/structuring-agents-md/SKILL.md skills/writing-skills/SKILL.md
+sha256sum skills/writing-agent-docs/SKILL.md skills/structuring-agents-md/SKILL.md skills/writing-skills/SKILL.md skills/test-driven-development/SKILL.md
 ```
 
 ## 边界
@@ -64,7 +64,8 @@ chore: update .well-known digest for writing-skills
 ```
 writing-agent-docs（基础）
 ├── writing-skills → 引用 test-driven-development
-└── structuring-agents-md
+├── structuring-agents-md
+└── test-driven-development（独立基础技能）
 ```
 
 例如：修改 `writing-skills/SKILL.md` 时，应加载 `writing-agent-docs` + `writing-skills` 自身 + `test-driven-development`。

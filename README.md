@@ -13,14 +13,17 @@
 | [writing-agent-docs](skills/writing-agent-docs/SKILL.md) | — | **代理文档写作通用规则**。所有面向代理文本的基础（AGENTS.md、SKILL.md、.cursor/rules、系统提示词等）。核心原则：上下文是公共资源、每 token 须自证价值、确定性约束优先。 |
 | [writing-skills](skills/writing-skills/SKILL.md) | writing-agent-docs | **SKILL.md 技能编写**。将 TDD（RED-GREEN-REFACTOR）应用于流程文档：先写测试（压力场景）→ 观察失败 → 编写技能 → 封堵合理化借口。含 CSO、对抗合理化、流程图使用、完整创建清单。 |
 | [structuring-agents-md](skills/structuring-agents-md/SKILL.md) | writing-agent-docs | **AGENTS.md 结构化指南**。层级作用域、Always/Ask/Never 三层边界、Toolchain First、反自动化生成、增量迭代法。含内容决策指南与 6 份参考文件。 |
+| [test-driven-development](skills/test-driven-development/SKILL.md) | — | **TDD 基础技能**。先写测试 → 看它失败 → 最简实现 → 重构。含铁律、RED-GREEN-REFACTOR 循环、好测试标准、常见合理化借口、红旗清单。 |
 
 ### 依赖关系
 
 ```
 writing-agent-docs（基础通用规则）
 ├── writing-skills（TDD 写技能）
-│   └── 还引用 test-driven-development 技能
+│   └── 引用了 test-driven-development
 └── structuring-agents-md（AGENTS.md 结构）
+
+test-driven-development（独立基础技能，被 writing-skills 引用）
 ```
 
 ## 技能间的引用约定

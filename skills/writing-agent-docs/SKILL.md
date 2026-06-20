@@ -17,7 +17,7 @@ description: 在创建、编辑或审校任何面向代理的文本（AGENTS.md�
 领域专属规则见后续 skill：
 
 - AGENTS.md（项目上下文文档）→ `structuring-agents-md`
-- SKILL.md（技能文档）→ `writing-skills`
+- SKILL.md（技能文档）→ `writing-skill-md`
 
 ---
 
@@ -60,7 +60,7 @@ description: 在创建、编辑或审校任何面向代理的文本（AGENTS.md�
 ```
 
 - 项目工具链 → `structuring-agents-md`
-- 技能脚本 → `writing-skills`
+- 技能脚本 → `writing-skill-md`
 
 #### 3. 不写易于获取的内容——代理能自行发现的，不写进文档
 
@@ -202,7 +202,7 @@ export default function formatDate(date){ var result; ... }
 - [ ] 重内容下沉子文件，入口精简、按需加载
 - [ ] 关键操作有验证 / 确认步骤
 
-> 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-agents-md / writing-skills。
+> 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-agents-md / writing-skill-md。
 
 ---
 
@@ -211,4 +211,4 @@ export default function formatDate(date){ var result; ... }
 通用规则之上：
 
 - 写 **AGENTS.md**（项目上下文、层级作用域、Toolchain First、Always/Ask/Never 边界、反自动生成、最高不建议超 150 行，无最低要求）→ 加载 `structuring-agents-md`
-- 写 **SKILL.md**（TDD、技能类型、CSO、三级渐进式披露、一层引用深度、<500 行目标）→ 加载 `writing-skills`
+- 写 **SKILL.md**（TDD、技能类型、CSO、三级渐进式披露、一层引用深度、<500 行目标）→ 加载 `writing-skill-md`

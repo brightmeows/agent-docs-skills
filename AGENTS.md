@@ -31,7 +31,7 @@ Conventional Commits。title 英文，body 中文（可选）。
 
 ```
 feat: add structured-agents-md skill
-chore: update .well-known digest for writing-skills
+chore: update .well-known digest for writing-skill-md
 ```
 
 ## 技能依赖链
@@ -40,14 +40,14 @@ chore: update .well-known digest for writing-skills
 
 ```
 writing-agent-docs（基础）
-├── writing-skills → 引用 test-driven-development
+├── writing-skill-md → 引用 test-driven-development
 ├── structuring-agents-md
 └── test-driven-development（独立基础技能）
 ```
 
 ## 内容规则
 
-- `skills/writing-skills/examples/`、`skills/structuring-agents-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
+- `skills/writing-skill-md/examples/`、`skills/structuring-agents-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
 - 文件名保持英文连字符风格，与现有命名一致
 - 参考文件（如 `reference/*.md`、`examples/*.md`）必须在开头标注来源
 - 修改后运行 `markdownlint` 验证格式

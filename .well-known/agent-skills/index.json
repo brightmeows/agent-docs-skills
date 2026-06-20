@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "在创建、编辑或审校任何面向代理的文本（AGENTS.md、SKILL.md、.cursor/rules、.junie/guidelines.md、系统提示词、指南文件等）时使用。",
       "url": "https://codeberg.org/brightmeows/agent-prompt-skills/raw/branch/main/skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:9b18bca203fd1c3b58749997ed980b910e2b41c12eeb0990b950e292f7c41e6a"
+      "digest": "sha256:f5741cf657d4f0228b973500dc8f63a6eb5537d8995a661c164c1817cff4f94f"
     },
     {
       "name": "structuring-agents-md",
@@ -16,11 +16,11 @@
       "digest": "sha256:97fdf3e17228afeb244b61a17246f09e5111ac39696ca2174e47ea415c3e0e2d"
     },
     {
-      "name": "writing-skills",
+      "name": "writing-skill-md",
       "type": "skill-md",
       "description": "创建新技能、编辑现有技能或部署前验证技能工作时使用",
-      "url": "https://codeberg.org/brightmeows/agent-prompt-skills/raw/branch/main/skills/writing-skills/SKILL.md",
-      "digest": "sha256:ef6a8d9662a79019351ae8aad84cb3a98f49ecffea412c66cfd15909af3480c6"
+      "url": "https://codeberg.org/brightmeows/agent-prompt-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
+      "digest": "sha256:da611b91421ada1ef5811723931441b5e156717b0ef9bfce11fa5a8cbfa1666f"
     },
     {
       "name": "test-driven-development",

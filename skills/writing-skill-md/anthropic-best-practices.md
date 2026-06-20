@@ -1,6 +1,6 @@
 # 技能编写最佳实践（Anthropic 官方补充）
 
-> 本文件仅保留 **writing-agent-docs（通用写作规则）与 writing-skills（SKILL.md 专属）未覆盖** 的 Anthropic 官方补充指导。简洁、渐进式披露、description 规范、命名、评估迭代等主题见那两个 skill。完整、随官方更新的原文见 [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)。
+> 本文件仅保留 **writing-agent-docs（通用写作规则）与 writing-skill-md（SKILL.md 专属）未覆盖** 的 Anthropic 官方补充指导。简洁、渐进式披露、description 规范、命名、评估迭代等主题见那两个 skill。完整、随官方更新的原文见 [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)。
 
 ---
 

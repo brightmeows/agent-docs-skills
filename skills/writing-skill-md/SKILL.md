@@ -1,5 +1,5 @@
 ---
-name: writing-skills
+name: writing-skill-md
 description: 创建新技能、编辑现有技能或部署前验证技能工作时使用
 ---
 

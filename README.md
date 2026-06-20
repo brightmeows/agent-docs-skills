@@ -1,0 +1,62 @@
+# Agent Prompt Skills
+
+> 为 AI 编码助手（OpenCode、Claude Code 等）提供的**关于编写代理文档本身的**元技能集合。
+>
+> 本仓库的每份技能都在编写过程中遵循了自身所教授的原则——是对技能开发方法论的践行而非仅说教。
+
+为 AI 编码助手编写的代理文档（AGENTS.md、SKILL.md）需要遵循特定的写作方法才能有效引导代理行为。本仓库记录并形式化了这些方法。
+
+## 技能
+
+| 技能 | 前驱依赖 | 说明 |
+|------|----------|------|
+| [writing-agent-docs](skills/writing-agent-docs/SKILL.md) | — | **代理文档写作通用规则**。所有面向代理文本的基础（AGENTS.md、SKILL.md、.cursor/rules、系统提示词等）。核心原则：上下文是公共资源、每 token 须自证价值、确定性约束优先。 |
+| [writing-skills](skills/writing-skills/SKILL.md) | writing-agent-docs | **SKILL.md 技能编写**。将 TDD（RED-GREEN-REFACTOR）应用于流程文档：先写测试（压力场景）→ 观察失败 → 编写技能 → 封堵合理化借口。含 CSO、对抗合理化、流程图使用、完整创建清单。 |
+| [structuring-agents-md](skills/structuring-agents-md/SKILL.md) | writing-agent-docs | **AGENTS.md 结构化指南**。层级作用域、Always/Ask/Never 三层边界、Toolchain First、反自动化生成、增量迭代法。含内容决策指南与 6 份参考文件。 |
+
+### 依赖关系
+
+```
+writing-agent-docs（基础通用规则）
+├── writing-skills（TDD 写技能）
+│   └── 还引用 test-driven-development 技能
+└── structuring-agents-md（AGENTS.md 结构）
+```
+
+## 技能间的引用约定
+
+本仓库技能通过相对路径 `../<skill>/SKILL.md` 互相引用。激活上游技能是下游技能的前提条件——使用前请确保加载依赖链。
+
+## 使用方式
+
+### npx skills（推荐）
+
+锁定到指定 release tag：
+
+```bash
+npx skills add https://codeberg.org/brightmeows/agent-prompt-skills.git#v1.0.0
+```
+
+拉取 `main` 分支，始终最新：
+
+```bash
+npx skills add https://codeberg.org/brightmeows/agent-prompt-skills/raw/branch/main
+```
+
+### 手动引用
+
+克隆仓库后，在 AI 助手的配置中引用 `skills/` 下的 `SKILL.md`：
+
+```bash
+git clone https://codeberg.org/brightmeows/agent-prompt-skills.git
+```
+
+## 贡献
+
+欢迎提交 Issue 或 Pull Request。内容纠错、示例补充、反模式记录等都十分感谢。
+
+请阅读 [AGENTS.md](AGENTS.md) 了解开发工作流。
+
+## 许可
+
+Apache-2.0

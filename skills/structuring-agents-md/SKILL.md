@@ -76,12 +76,14 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 以下为 AGENTS.md 专属：
 
 - **Toolchain First**——确定性约束（代码风格、类型、构建、测试）归属工具链配置，AGENTS.md 只承载建议性指令（架构判断、工作流偏好）。
+
   ```
   # 好——指向工具，不重复规则
   Lint: `pnpm lint`（Biome——见 biome.json）
   # 坏——代替工具写规则
   不要用 var，始终用 const/let，import 顺序按标准库/三方/内部排列...
   ```
+
 - **三层边界 Always / Ask / Never**——比简单禁令清单更有效：
   - **Always Do**：每次自动执行（如提交前运行 `pnpm test`）
   - **Ask First**：重大变更先确认（如改数据库 schema）

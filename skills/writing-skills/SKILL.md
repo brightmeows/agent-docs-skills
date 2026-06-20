@@ -55,12 +55,14 @@ description: 创建新技能、编辑现有技能或部署前验证技能工作�
 ## 何时创建技能
 
 **创建时机：**
+
 - 技术对你来说并非直观易懂
 - 你会跨项目再次参考它
 - 模式适用范围广（非项目专属）
 - 他人会受益
 
 **不要创建：**
+
 - 一次性解决方案
 - 其他地方已有完善文档的标准实践
 - 项目专属约定（放入 CLAUDE.md）
@@ -69,12 +71,15 @@ description: 创建新技能、编辑现有技能或部署前验证技能工作�
 ## 技能类型
 
 ### 技术型
+
 有步骤可循的具体方法（condition-based-waiting、root-cause-tracing）
 
 ### 模式型
+
 思考问题的方式（flatten-with-flags、test-invariants）
 
 ### 参考型
+
 API 文档、语法指南、工具文档（office docs）
 
 ## 目录结构与文件组织
@@ -89,6 +94,7 @@ skills/
 **扁平的命名空间**——所有技能在一个可搜索的命名空间中。
 
 **何时分离到单独文件：**
+
 1. **重量级参考**（100 行以上）——API 文档、完整语法
 2. **可复用工具**——脚本、实用工具、模板
 
@@ -105,6 +111,7 @@ skills/
 ## SKILL.md 结构
 
 **前置元数据（YAML）：**
+
 - 两个必需字段：`name` 和 `description`（所有支持字段见 [agentskills.io/specification](https://agentskills.io/specification)）
 - 总计最多 1024 字符
 - `name`：仅使用字母、数字和连字符（无括号、特殊字符）
@@ -151,6 +158,7 @@ description: 在以下情况使用：[具体触发条件和症状]
 **对发现性至关重要：** 未来的 Claude 通过读取 description 决定是否加载你的技能。
 
 **核心原则：描述 = 何时使用，而非技能做什么。**
+
 - 以 “Use when...” 开头，聚焦触发条件与症状
 - **绝不总结技能的过程或工作流**——测试发现，描述若总结工作流，Claude 会只跟随描述而跳过技能主体
 - 第三人称、含具体症状、与技术无关（除非技能本身技术特定）
@@ -182,11 +190,13 @@ digraph when_flowchart {
 ```
 
 **仅在这些场景使用流程图：**
+
 - 非显而易见的决策点
 - 你可能过早停止的流程循环
 - “何时用 A vs B” 的决策
 
 **绝不在以下场景使用流程图：**
+
 - 参考材料 → 表格、列表
 - 代码示例 → Markdown 代码块
 - 线性指令 → 编号列表
@@ -195,6 +205,7 @@ digraph when_flowchart {
 Graphviz 样式规则见 @graphviz-conventions.dot。
 
 **为人类伙伴可视化：** 使用此目录中的 `render-graphs.js` 将技能的流程图渲染为 SVG：
+
 ```bash
 ./render-graphs.js ../some-skill           # 分别渲染每个图示
 ./render-graphs.js ../some-skill --combine # 将所有图示合并为一张 SVG
@@ -205,6 +216,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 技能专属补充：
 
 选择最相关的语言：
+
 - 测试技术 → TypeScript/JavaScript
 - 系统调试 → Shell/Python
 - 数据处理 → Python
@@ -223,6 +235,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 未测试就编辑技能？同样的违规。
 
 **无例外：**
+
 - 不适用于“简单添加”
 - 不适用于“只是加个章节”
 - 不适用于“文档更新”
@@ -239,6 +252,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 **示例：** TDD、完成前验证、编码前设计
 
 **测试方法：**
+
 - 学术性问题：他们理解规则吗？
 - 压力场景：他们在压力下遵从吗？
 - 多重压力组合：时间 + 沉没成本 + 疲惫
@@ -251,6 +265,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 **示例：** condition-based-waiting、root-cause-tracing、defensive-programming
 
 **测试方法：**
+
 - 应用场景：他们能正确应用技术吗？
 - 变体场景：他们能处理边界情况吗？
 - 信息缺失测试：指令有缺口吗？
@@ -262,6 +277,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 **示例：** reducing-complexity、information-hiding concepts
 
 **测试方法：**
+
 - 识别场景：他们能识别模式何时适用吗？
 - 应用场景：他们能使用心智模型吗？
 - 反例：他们知道何时不适用吗？
@@ -273,6 +289,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 **示例：** API 文档、命令参考、库指南
 
 **测试方法：**
+
 - 检索场景：他们能找到正确的信息吗？
 - 应用场景：他们能正确使用找到的信息吗？
 - 缺口测试：常用场景是否覆盖？
@@ -284,6 +301,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 执行纪律的技能需要抵抗合理化——agent 很聪明，在压力下会找漏洞。
 
 **核心手法：**
+
 - **明确封堵每个具体变通方法**（不只说规则，要禁止具体的“参考保留”“适配”等借口）
 - 建立“借口 → 事实”**合理化表**
 - 创建**红旗清单**供 agent 自检（如“这不一样，因为……”）
@@ -299,6 +317,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 ### RED：编写失败测试（基线）
 
 用 subagent 运行压力场景，不带技能。记录精确行为：
+
 - 他们做了哪些选择？
 - 他们用了什么合理化借口（逐字）？
 - 哪些压力触发了违规？
@@ -316,6 +335,7 @@ Graphviz 样式规则见 @graphviz-conventions.dot。
 agent 发现了新的合理化借口？增加明确对位。重新测试直到防弹。
 
 **测试方法：** 完整测试方法论见 @testing-skills-with-subagents.md：
+
 - 如何编写压力场景
 - 压力类型（时间、沉没成本、权威、疲惫）
 - 系统化封堵漏洞
@@ -324,17 +344,21 @@ agent 发现了新的合理化借口？增加明确对位。重新测试直到�
 ## 反模式
 
 ### 叙述性示例
+
 “在 2025-10-03 的会话中，我们发现空的 projectDir 导致……”
 **为什么不好：** 过于具体，不可复用
 
 ### 代码写入流程图
+
 ```dot
 step1 [label="import fs"];
 step2 [label="read file"];
 ```
+
 **为什么不好：** 无法复制粘贴，难以阅读
 
 ### 通用标签
+
 helper1、helper2、step3、pattern4
 **为什么不好：** 标签应有语义含义
 
@@ -343,6 +367,7 @@ helper1、helper2、step3、pattern4
 **写完任何技能后，你 MUST 停下来完成部署流程。**
 
 **不要：**
+
 - 批量创建多个技能而不逐个测试
 - 在当前技能未被验证前进入下一个
 - 因为“批量更高效”而跳过测试
@@ -356,11 +381,13 @@ helper1、helper2、step3、pattern4
 **重要：使用 TodoWrite 为下方每个清单项创建待办事项。**
 
 **RED 阶段——编写失败测试：**
+
 - [ ] 创建压力场景（纪律型技能用 3 种以上压力组合）
 - [ ] 无技能运行场景——逐字记录基线行为
 - [ ] 识别合理化/失败中的模式
 
 **GREEN 阶段——编写最简技能：**
+
 - [ ] 名称仅使用字母、数字、连字符（无括号/特殊字符）
 - [ ] YAML 前置元数据含必需的 `name` 和 `description` 字段（最多 1024 字符；见 [规范](https://agentskills.io/specification)）
 - [ ] description 以 “Use when...” 开头并包含具体触发器/症状
@@ -373,6 +400,7 @@ helper1、helper2、step3、pattern4
 - [ ] 用技能运行场景——验证 agent 现在遵从
 
 **REFACTOR 阶段——封堵漏洞：**
+
 - [ ] 从测试中识别新的合理化借口
 - [ ] 增加明确对位（如为纪律型技能）
 - [ ] 从所有测试迭代建立合理化表
@@ -380,6 +408,7 @@ helper1、helper2、step3、pattern4
 - [ ] 重新测试直到防弹
 
 **质量检查：**
+
 - [ ] 仅在决策不明显时使用小型流程图
 - [ ] 快速参考表
 - [ ] 常见错误章节
@@ -387,6 +416,7 @@ helper1、helper2、step3、pattern4
 - [ ] 支持文件仅限于工具或重量级参考
 
 **部署：**
+
 - [ ] 将技能提交到 git 并推送到你的 fork（如已配置）
 - [ ] 考虑通过 PR 贡献回来（如果广泛有用）
 

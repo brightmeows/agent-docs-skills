@@ -7,7 +7,7 @@ repos:
         entry: markdownlint --config .markdownlint.toml
         language: system
         types: [markdown]
-        files: ^(skills/[^/]+/SKILL\.md|README\.md|AGENTS\.md)$
+        files: \.md$
 
       - id: check-well-known-list
         name: Check well-known list

@@ -18,9 +18,10 @@ MD046 = false   # 代码块风格 fenced/indented 混用
 MD060 = false   # CJK+代码混排表格中列对齐误报严重
 
 [MD013]
-line_length = 120   # 行宽 120
+line_length = 200   # 行宽 200（CJK 混排 + URL 引用需要更多空间）
 code_blocks = false # 代码块内的长行不报错
 tables = false      # 表格内容不折行
+heading_line_length = 80  # 标题保持简短
 
 [MD033]
 allowed_elements = ["br", "code", "pre", "details", "summary", "Good", "Bad"]  # 技能文档允许的 HTML 元素（含 TDD 正反示例标签）

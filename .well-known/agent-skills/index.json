@@ -6,21 +6,28 @@
       "type": "skill-md",
       "description": "在创建、编辑或审校任何面向代理的文本（AGENTS.md、SKILL.md、.cursor/rules、.junie/guidelines.md、系统提示词、指南文件等）时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:b1091a73e2f56b72fde87660ad35b803f251fa1deeb28e7b6c2ff5f87151efa4"
+      "digest": "sha256:a14afc5708b1102f021d229fbf8f3c0e4bb748e243c3b6791c9cdd0cacc33aaf"
     },
     {
-      "name": "structuring-agents-md",
+      "name": "structuring-project-agent-md",
       "type": "skill-md",
-      "description": "在创建、修改或重构 AGENTS.md 文件时使用。代理行为不符合预期时亦适用。",
-      "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-agents-md/SKILL.md",
-      "digest": "sha256:7fc3da3b6b4785cf021e0c98bbe1a336f80ab51a1318082abc844d8d56c0898f"
+      "description": "在创建、修改或重构项目级代理配置文件（AGENTS.md、CLAUDE.md、.cursor/rules、GEMINI.md、.junie/guidelines.md 等）时使用。代理行为不符合预期时亦适用。",
+      "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
+      "digest": "sha256:804aaee620bb3ea145a2ece4e79f71e39cb90c17d062d099c9daae5b1e12e20c"
+    },
+    {
+      "name": "structuring-personal-agent-md",
+      "type": "skill-md",
+      "description": "在创建或编辑个人级代理配置（~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则等）时使用。",
+      "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-personal-agent-md/SKILL.md",
+      "digest": "sha256:d5cc6b39967778025f88add141c274c3286e8f3fc40c55c6b443443823e844bb"
     },
     {
       "name": "writing-skill-md",
       "type": "skill-md",
-      "description": "创建新技能、编辑现有技能或部署前验证技能工作时使用",
+      "description": "在创建新技能、编辑现有技能或部署前验证技能时使用",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:6f39c7fadf705c55c8e37ead1c8c9031dca7c5e6c06779b6b066473d26bba6c5"
+      "digest": "sha256:8042b41a453baac58149e2b222768cd1752047db751838acc9122544fc4ef679"
     }
   ]
 }

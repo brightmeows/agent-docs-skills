@@ -1,6 +1,6 @@
 # 实证数据参考
 
-> structuring-agents-md 参考文件：AGENTS.md 实证数据汇总（采用情况、Princeton、ETH Zurich、Gloaguen et al.等）。主文中的具体数字指向本文件。
+> structuring-project-agent-md 参考文件：AGENTS.md 实证数据汇总（采用情况、Princeton、ETH Zurich、Gloaguen et al.等）。主文中的具体数字指向本文件。
 
 ## 采用情况
 

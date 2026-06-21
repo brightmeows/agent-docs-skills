@@ -1,6 +1,6 @@
 # AGENTS.md vs Skill vs MCP
 
-> structuring-agents-md 参考文件：AGENTS.md / Skill / MCP 三者的职责划分与 token 开销对比。
+> structuring-project-agent-md 参考文件：AGENTS.md / Skill / MCP 三者的职责划分与 token 开销对比。
 
 | 用途 | 工具 | 示例 |
 |---|---|---|

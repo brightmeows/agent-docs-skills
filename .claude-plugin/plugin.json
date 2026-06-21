@@ -1,4 +1,9 @@
 {
   "name": "agent-docs-skills",
-  "skills": ["./skills/writing-agent-docs", "./skills/structuring-agents-md", "./skills/writing-skill-md"]
+  "skills": [
+    "./skills/writing-agent-docs",
+    "./skills/structuring-project-agent-md",
+    "./skills/structuring-personal-agent-md",
+    "./skills/writing-skill-md"
+  ]
 }

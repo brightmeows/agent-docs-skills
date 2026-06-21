@@ -30,7 +30,7 @@ sha256sum skills/*/SKILL.md
 - 修改 `.md` 后运行 `markdownlint` 验证
 - 修改 `skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
 - 新增/移除技能目录时同步更新 `.claude-plugin/plugin.json` 和 `.well-known/agent-skills/index.json`
-- **修改任何技能前**，必须先读取 `writing-agent-docs`（基础写作原则）和对应的领域 skill（`writing-skill-md` 或 `structuring-agents-md`），并按其要求执行——本仓库是元技能仓库，技能本身即是规范
+- **修改任何技能前**，必须先读取 `writing-agent-docs`（基础写作原则）和对应的领域 skill（`writing-skill-md`、`structuring-project-agent-md` 或 `structuring-personal-agent-md`），并按其要求执行——本仓库是元技能仓库，技能本身即是规范
 
 ### Ask
 
@@ -58,14 +58,15 @@ chore: update .well-known digest for writing-skill-md
 技能间的依赖关系（修改前的读取义务见上方 Always 边界）：
 
 ```
-writing-agent-docs（基础）
-├── writing-skill-md（主线面向代理；末尾含人类作者 TDD 参考）
-└── structuring-agents-md
+writing-agent-docs（基础写作原则）
+├── writing-skill-md（SKILL.md 格式——跨项目级/个人级）
+├── structuring-project-agent-md（项目级配置：AGENTS.md / CLAUDE.md / .cursor/rules）
+└── structuring-personal-agent-md（个人级配置：CLAUDE_GLOBAL.md / 个人 AGENTS.md）
 ```
 
 ## 内容规则
 
-- `skills/writing-skill-md/examples/`、`skills/structuring-agents-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
+- `skills/writing-skill-md/examples/`、`skills/structuring-project-agent-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
 - 文件名保持英文连字符风格，与现有命名一致
 - 参考文件（如 `reference/*.md`、`examples/*.md`）必须在开头标注来源
 - 修改后运行 `markdownlint` 验证格式

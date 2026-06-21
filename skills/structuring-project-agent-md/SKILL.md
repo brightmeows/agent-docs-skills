@@ -1,12 +1,12 @@
 ---
-name: structuring-agents-md
-description: 在创建、修改或重构 AGENTS.md 文件时使用。代理行为不符合预期时亦适用。
+name: structuring-project-agent-md
+description: 在创建、修改或重构项目级代理配置文件（AGENTS.md、CLAUDE.md、.cursor/rules、GEMINI.md、.junie/guidelines.md 等）时使用。代理行为不符合预期时亦适用。
 license: Apache-2.0
 ---
 
-# AGENTS.md 技能
+# 项目级代理配置技能
 
-本技能为 AGENTS.md 的创建与维护提供结构化指导。
+本技能覆盖项目中**所有**面向代理的配置文件（AGENTS.md、CLAUDE.md、.cursor/rules 等）的创建与维护。
 
 ---
 
@@ -14,20 +14,27 @@ license: Apache-2.0
 
 **必须先激活 [`writing-agent-docs`](../writing-agent-docs/SKILL.md)。**
 
-该技能定义代理文档写作的通用规则。本技能仅承载 AGENTS.md 专属内容，不重复通用规则——遇通用写作决策时回退到前置 Skill。
+该技能定义代理文档写作的通用规则。本技能仅承载项目级配置专属内容，不重复通用规则——遇通用写作决策时回退到前置 Skill。
+
+> **作用域**：本技能仅覆盖**项目级**（仓库内）代理配置文件。个人级（home 目录）的同类配置见 `structuring-personal-agent-md`。
 
 ---
 
 ## 定位
 
-**AGENTS.md** 是面向编码代理的项目说明文件。与 README 职责分离：
+项目级配置文件告诉代理**在此项目中如何工作**。各文件的定位：
 
-- **AGENTS.md**：构建命令、测试指令、代码约定、边界规则——面向代理
-- **README**：项目概述、快速开始、贡献指南——面向人
+| 文件 / 目录 | 定位 | 工具原生支持 |
+|-------------|------|-------------|
+| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 60,000+ 仓库、25+ 工具 |
+| `CLAUDE.md` | Claude Code 原生项目配置 | Claude Code |
+| `.cursor/rules/*.mdc` | Cursor 文件匹配规则 | Cursor、OpenCode 等 |
+| `GEMINI.md` | Gemini CLI 项目配置 | Gemini CLI |
+| `.junie/guidelines.md` | JetBrains Junie 配置 | JetBrains Junie |
 
-README 不杂代理指令，AGENTS.md 不重复项目介绍。
+与 README 职责分离（README 面向人，项目级配置面向代理）。
 
-AGENTS.md 是跨工具开放标准，被 60,000+ 开源仓库采用、25+ 工具原生支持。
+**核心原则**：维护一个主要的 AGENTS.md 作为跨工具真理源，通过 symlink 或工具配置让各工具读取。仅在跨工具有实质性行为差异时维护独立文件。
 
 ---
 
@@ -49,6 +56,22 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 | **深层 AGENTS.md** | 极端特化规则，覆盖祖先的不适用约束 |
 
 根文件应精简，内容冗余则下沉到子目录。子文件只声明该目录特有内容，祖先已声明的无需重复。
+
+---
+
+## CLAUDE.md 专属指导
+
+CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是 symlink 到 AGENTS.md 以维护单一真理源；当需要使用 `@import`、Commands 等 Claude Code 独有特性时，可维护独立文件。
+
+详细策略、独有特性、Commands 目录说明见 [`reference/claude-md.md`](reference/claude-md.md)。
+
+---
+
+## .cursor/rules 格式
+
+`.cursor/rules/` 目录使用 `.mdc` 文件格式，通过 `globs` 字段按文件匹配注入规则（`alwaysApply: true` 则常驻）。与 AGENTS.md 的职责划分：AGENTS.md 管全局约定，`.mdc` 管文件级规则。
+
+详细格式、字段说明、职责对比、选用指南见 [`reference/cursor-rules.md`](reference/cursor-rules.md)。
 
 ---
 
@@ -104,13 +127,16 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 ### 常见错误
 
 | 错误 | 详见 |
-|---|---|
+|---|---|---|
 | 含 README 内容 | 定位 |
 | 重复工具链已强制内容 | 写作原则 Toolchain First |
 | 自动生成不审校 | 写作原则 反自动化生成 / reference/auto-gen-warning.md |
 | 不同工具各维护一份 | 维护唯一 AGENTS.md，symlink 到各工具入口文件（CLAUDE.md / GEMINI.md 等）|
 | 否定指令 | 前置 Skill（肯定指令优先） |
 | 边界规则混排在大表或单一列表 | 写作原则：三层边界 / 分小节放置 |
+| CLAUDE.md 与 AGENTS.md 不相关而用 symlink | CLAUDE.md 专属指导 |
+| 把个人偏好写在项目级配置 | writing-agent-docs → 作用域 |
+| .cursor/rules 无 glob 范围 | .cursor/rules 格式节 |
 
 ---
 
@@ -135,10 +161,13 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 ## 参考文件
 
 | 文件 | 内容 |
-|---|---|
+|---|---|---|
 | [reference/content-decisions.md](reference/content-decisions.md) | 附录：内容决策详细目录（维度评分 / 放入条件 / 根子目录拆分） |
 | [reference/comparison-tools.md](reference/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
 | [reference/empirical-evidence.md](reference/empirical-evidence.md) | Princeton/ETH Zurich/上下文效率等实证数据 |
-| [reference/agent-persona.md](reference/agent-persona.md) | Agent Persona 完整定义（specialist / Registry / 单角色） |
+| [reference/agent-persona.md](reference/agent-persona.md) | Agent Persona 完整定义（项目级 + 个人级） |
 | [reference/auto-gen-warning.md](reference/auto-gen-warning.md) | LLM 自动生成危害与实证数据 |
 | [reference/v1.1-features.md](reference/v1.1-features.md) | AGENTS.md v1.1 YAML Frontmatter |
+| [reference/cross-tool-compat.md](reference/cross-tool-compat.md) | AGENTS.md / CLAUDE.md / Cursor / OpenCode 概念对照 |
+| [reference/claude-md.md](reference/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
+| [reference/cursor-rules.md](reference/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|

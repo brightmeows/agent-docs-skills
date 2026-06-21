@@ -17,8 +17,17 @@ license: Apache-2.0
 
 领域专属规则见后续 skill：
 
-- AGENTS.md（项目上下文文档）→ `structuring-agents-md`
+- AGENTS.md / CLAUDE.md / .cursor/rules（项目级配置）→ `structuring-project-agent-md`
 - SKILL.md（技能文档）→ `writing-skill-md`
+- 个人级配置（~/.claude/CLAUDE_GLOBAL.md 等）→ `structuring-personal-agent-md`
+
+---
+
+## 作用域
+
+面向代理的文档分**项目级**（仓库内 AGENTS.md / CLAUDE.md / .cursor/rules / GEMINI.md 等）
+和**个人级**（~/.claude/CLAUDE_GLOBAL.md / ~/.agents/AGENTS.md 等）。
+各作用域的文件清单、写作目标、加载顺序见 [`scope-and-loader.md`](scope-and-loader.md)。
 
 ---
 
@@ -60,7 +69,7 @@ license: Apache-2.0
 字段命名由 schemas/validate.py 强制；此处仅记例外
 ```
 
-- 项目工具链 → `structuring-agents-md`
+- 项目工具链 → `structuring-project-agent-md`
 - 技能脚本 → `writing-skill-md`
 
 #### 3. 不写易于获取的内容——代理能自行发现的，不写进文档
@@ -203,7 +212,7 @@ export default function formatDate(date){ var result; ... }
 - [ ] 重内容下沉子文件，入口精简、按需加载
 - [ ] 关键操作有验证 / 确认步骤
 
-> 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-agents-md / writing-skill-md。
+> 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。
 
 ---
 
@@ -211,5 +220,5 @@ export default function formatDate(date){ var result; ... }
 
 通用规则之上：
 
-- 写 **AGENTS.md**（项目上下文、层级作用域、Toolchain First、Always/Ask/Never 边界、反自动生成、最高不建议超 150 行，无最低要求）→ 加载 `structuring-agents-md`
+- 写 **AGENTS.md / CLAUDE.md / .cursor/rules**（项目级配置）→ 加载 `structuring-project-agent-md`
 - 写 **SKILL.md**（TDD、技能类型、CSO、三级渐进式披露、一层引用深度、<500 行目标）→ 加载 `writing-skill-md`

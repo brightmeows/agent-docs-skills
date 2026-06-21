@@ -1,0 +1,158 @@
+---
+name: structuring-personal-agent-md
+description: 在创建或编辑个人级代理配置（~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则等）时使用。
+license: Apache-2.0
+---
+
+# 个人级代理配置技能
+
+本技能覆盖 home 目录中个人版 AGENTS.md / CLAUDE.md / CURSOR.md 等面向代理的配置文件。
+
+---
+
+## 前置 Skill
+
+**必须先激活 [`writing-agent-docs`](../writing-agent-docs/SKILL.md)。**
+
+该技能定义代理文档写作的通用规则。本技能仅承载个人级配置专属内容，不重复通用规则——遇通用写作决策时回退到前置 Skill。
+
+> **作用域**：本技能仅覆盖**个人级**（home 目录）代理配置文件。项目级同类配置见 `structuring-project-agent-md`。
+
+---
+
+## 定位
+
+个人级代理配置文件告诉 agent**你希望它如何为你工作**，独立于任何项目。
+
+与项目级配置（AGENTS.md / CLAUDE.md）的区别：
+
+| 维度 | 项目级 | 个人级 |
+|------|--------|--------|
+| **位置** | 仓库根目录 | `~/.claude/`、`~/.agents/`、`~/.cursor/` 等 |
+| **作用域** | 仅该项目 | 所有项目 |
+| **谁写** | 项目团队 | 你自己 |
+| **版本控制** | 进 git | 不进 git |
+| **生命周期** | 随项目演变 | 随个人偏好变化 |
+| **内容** | 项目特有约定、命令 | 个人工作流偏好、全局约束 |
+
+---
+
+## 配置文件位置
+
+| 工具 | 个人级配置文件 | 说明 |
+|------|---------------|------|
+| **Claude Code** | `~/.claude/CLAUDE_GLOBAL.md` | 全局指令，在项目 CLAUDE.md 之前加载 |
+| **通用** | `~/.agents/AGENTS.md` | 个人级 AGENTS.md（部分工具支持）|
+| **Cursor** | `~/.cursor/rules/*.mdc`（全局） | 全局规则，可配 alwaysApply 或 globs |
+| **OpenCode** | `~/.config/opencode/*.md` | 通过 `instructions` 字段引用 |
+
+### 加载优先级
+
+```
+个人级（CLAUDE_GLOBAL.md 等） → 项目级（CLAUDE.md / AGENTS.md）
+                      ↓
+              项目级覆盖冲突规则
+```
+
+即：个人级定义通用的行为基调，项目级在需要时覆盖。
+
+---
+
+## 写作原则（个人级专属）
+
+### 1. 专注于持续性，而非项目特异性
+
+个人级配置跨所有项目生效，不要写入：
+
+```markdown
+# 坏：项目特有
+本项目使用 pnpm，运行 pnpm dev 启动
+
+# 好：通用偏好
+我偏好 pnpm 而非 npm，新建项目时请用 pnpm init
+```
+
+### 2. 表达偏好，而非强硬规则
+
+个人级配置表达“你希望怎么做”，项目级配置表达“这个项目要求怎么做”：
+
+```markdown
+# 坏：强硬规则
+必须在提交前运行测试
+
+# 好：个人偏好
+我习惯在提交前先跑测试；如果项目有测试命令，建议先运行
+```
+
+### 3. 保持简短
+
+个人级配置是常驻上下文的，越长对项目级有效内容的挤压越多。建议 **5–15 行**。
+
+```markdown
+# 推荐的个人 CLAUDE_GLOBAL.md
+你是一个 senior 全栈工程师。
+我的偏好：
+- TypeScript + React + Tailwind
+- 测试优先，但不强求 100% 覆盖
+- 小提交、描述性 commit message
+- 不喜欢死代码和注释掉的代码块
+```
+
+### 4. 可以在个人级定义 Persona
+
+这是个人级配置最重要的用途——为 agent 设定角色：
+
+```markdown
+# ~/.claude/CLAUDE_GLOBAL.md
+你是一个有 10 年经验的 Rust 后端工程师。
+- 安全性和正确性优先于性能
+- 显式错误处理，不用 unwrap/expect
+- 文档注释（///）必须有语义价值
+```
+
+> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 `structuring-project-agent-md/reference/agent-persona.md`。
+
+---
+
+## 常见模式
+
+### 语言/框架偏好
+
+```markdown
+我主要用 TypeScript 和 Rust。
+新建 TS 项目用 pnpm + vitest。
+Rust 项目用 cargo nextest。
+```
+
+### 通用工具链
+
+```markdown
+终端用 zsh + starship prompt。
+编辑器相关问题先检查 .editorconfig 和 .vscode/。
+```
+
+### 安全基线
+
+```markdown
+禁止将 API key 和 token 写入代码或提交。
+使用 `pass` 或 1password CLI 管理密钥。
+```
+
+### 提交习惯
+
+```markdown
+提交用 Conventional Commits（feat/fix/chore/docs/refactor）。
+提交前检查 git diff --stat。
+```
+
+---
+
+## 常见错误
+
+| 错误 | 正确做法 |
+|------|---------|
+| 把项目特有命令写入个人级 | 仅写通用偏好，项目特有放 AGENTS.md |
+| 个人级配置过长（>30 行）| 精简到 5–15 行，长内容用技能替代 |
+| 用否定指令表达偏好 | 改写为肯定替代（见 writing-agent-docs） |
+| 在个人级重复项目级已覆盖的内容 | 信任就近优先规则——个人级只写个人偏好 |
+| 把 SKILL.md 当个人级配置 | SKILL.md 是按需加载的任务知识，个人级是常驻偏好 |

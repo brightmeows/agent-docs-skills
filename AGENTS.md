@@ -25,15 +25,24 @@ sha256sum skills/*/SKILL.md
 
 ## 边界
 
-| 层级 | 规则 |
-|------|------|
-| **Never** | 勿启用 `.markdownlint.toml` 中禁用的规则（注释已说明原因） |
-| **Always** | 修改 `.md` 后运行 `markdownlint` 验证 |
-| **Always** | 修改 `skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段 |
-| **Always** | 新增/移除技能目录时同步更新 `.claude-plugin/plugin.json` 和 `.well-known/agent-skills/index.json` |
-| **Note** | 通过 raw URL 使用 `npx skills add` 时，仓库根目录必须配置 `.well-known/agent-skills/index.json`，否则无法发现技能 |
-| **Ask** | 需修改 `.markdownlint.toml` 配置时先确认 |
-| **Always** | 本仓库是元技能仓库——修改任何技能前，先加载该技能本身及其依赖链 |
+### Always
+
+- 修改 `.md` 后运行 `markdownlint` 验证
+- 修改 `skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
+- 新增/移除技能目录时同步更新 `.claude-plugin/plugin.json` 和 `.well-known/agent-skills/index.json`
+- **修改任何技能前**，必须先读取 `writing-agent-docs`（基础写作原则）和对应的领域 skill（`writing-skill-md` 或 `structuring-agents-md`），并按其要求执行——本仓库是元技能仓库，技能本身即是规范
+
+### Ask
+
+- 需修改 `.markdownlint.toml` 配置时先确认
+
+### Never
+
+- 勿启用 `.markdownlint.toml` 中禁用的规则（注释已说明原因）
+
+### Note
+
+- 通过 raw URL 使用 `npx skills add` 时，仓库根目录必须配置 `.well-known/agent-skills/index.json`，否则无法发现技能
 
 ## 提交格式
 
@@ -46,7 +55,7 @@ chore: update .well-known digest for writing-skill-md
 
 ## 技能依赖链
 
-修改前加载依赖（已通过 `writing-agent-docs` 覆盖写作原则，无需重复）：
+技能间的依赖关系（修改前的读取义务见上方 Always 边界）：
 
 ```
 writing-agent-docs（基础）

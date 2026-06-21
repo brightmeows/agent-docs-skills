@@ -1,5 +1,15 @@
 # Agent Docs Skills — Agent Guide
 
+## 仓库定位
+
+本仓库是**指导代理生成代理用文档的元技能集合**。
+
+- **使用者**：AI 编码助手（OpenCode、Claude Code 等）
+- **产出物**：AGENTS.md、SKILL.md、.cursor/rules、系统提示词等 agent-facing 文档
+- **核心目标**：让代理能独立生成高质量、可发现、可遵从的代理文档
+
+因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 `writing-skill-md/tdd-validation.md`。
+
 ## 命令
 
 ```bash
@@ -40,9 +50,8 @@ chore: update .well-known digest for writing-skill-md
 
 ```
 writing-agent-docs（基础）
-├── writing-skill-md → 引用 test-driven-development
-├── structuring-agents-md
-└── test-driven-development（独立基础技能）
+├── writing-skill-md（主线面向代理；末尾含人类作者 TDD 参考）
+└── structuring-agents-md
 ```
 
 ## 内容规则

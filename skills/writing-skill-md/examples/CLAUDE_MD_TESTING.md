@@ -93,7 +93,7 @@ CLAUDE.md 中完全不提及技能。
 是否有相关技能。有技能时你应该使用。
 
 浏览：`ls ~/.claude/skills/`
-搜索：`grep -r “keyword” ~/.claude/skills/`
+搜索：`grep -r "keyword" ~/.claude/skills/`
 ```
 
 ### 变体 C：Claude.AI 强调风格
@@ -104,7 +104,7 @@ CLAUDE.md 中完全不提及技能。
 位于 `~/.claude/skills/`。
 
 浏览分类：`ls ~/.claude/skills/`
-搜索：`grep -r “keyword” ~/.claude/skills/ --include=“SKILL.md”`
+搜索：`grep -r "keyword" ~/.claude/skills/ --include="SKILL.md"`
 
 说明：`skills/using-skills`
 </available_skills>
@@ -133,7 +133,7 @@ Claude 可能认为自己知道如何处理任务，
 
 1. **开始前：** 检查相关技能
    - 浏览：`ls ~/.claude/skills/`
-   - 搜索：`grep -r “symptom” ~/.claude/skills/`
+   - 搜索：`grep -r "symptom" ~/.claude/skills/`
 
 2. **如有技能存在：** 完整阅读后再继续
 

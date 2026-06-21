@@ -185,7 +185,7 @@ digraph when_flowchart {
 - 线性指令 → 编号列表
 - 无语义含义的标签（step1、helper2）
 
-Graphviz 样式规则见 @graphviz-conventions.dot。
+Graphviz 样式规则见 [graphviz-conventions.dot](./graphviz-conventions.dot)。
 
 **为人类伙伴可视化：** 使用此目录中的 `render-graphs.js` 将技能的流程图渲染为 SVG：
 

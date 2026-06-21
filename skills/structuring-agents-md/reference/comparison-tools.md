@@ -1,5 +1,7 @@
 # AGENTS.md vs Skill vs MCP
 
+> structuring-agents-md 参考文件：AGENTS.md / Skill / MCP 三者的职责划分与 token 开销对比。
+
 | 用途 | 工具 | 示例 |
 |---|---|---|
 | 项目约定、命令、边界 | AGENTS.md | “用 pnpm，命名导出” |
@@ -8,4 +10,4 @@
 
 AGENTS.md 管**项目上下文**，Skill 管**任务知识**，MCP 管**外部工具**——三者互补。
 
-**为何不把一切都塞进 AGENTS.md**：AGENTS.md 内容常驻上下文，而 Skill 按需加载。2026 年有实测报告称，等效内容在 Skill 中每轮约消耗 53 token，而作为 AGENTS.md 条目则达 944+ token（约 18×）——任务知识放 Skill 能显著降低常驻开销。
+**为何不把一切都塞进 AGENTS.md**：AGENTS.md 内容常驻上下文，而 Skill 按需加载。开发者实测显示，等效内容在 Skill 中每轮约消耗 53 token，而作为 AGENTS.md 常驻条目则达 944+ token（约 18×）——任务知识放 Skill 能显著降低常驻开销。

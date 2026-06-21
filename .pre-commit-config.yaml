@@ -74,3 +74,72 @@ repos:
             echo "OK: 所有 digest 匹配"
         language: system
         pass_filenames: false
+
+      - id: check-skill-md-spec
+        name: Check SKILL.md spec
+        description: |
+          验证 SKILL.md frontmatter 与 body 符合 writing-skill-md 自定规则
+          (name 与父目录一致、name/description 长度、body 行数、
+          frontmatter description 与 index.json 一致)
+        entry: bash
+        args:
+          - -c
+          - |
+            set -euo pipefail
+            errors=0
+            echo "=== SKILL.md spec 校验 ==="
+            for skill_file in skills/*/SKILL.md; do
+              [ -f "$skill_file" ] || continue
+              name=$(basename "$(dirname "$skill_file")")
+
+              # 提取 frontmatter 中的 name 和 description
+              fm_name=$(awk '/^---$/{flag++; next} flag==1 && /^name:/{sub(/^name:[[:space:]]*/,""); print; exit}' "$skill_file")
+              fm_desc=$(awk '/^---$/{flag++; next} flag==1 && /^description:/{sub(/^description:[[:space:]]*/,""); print; exit}' "$skill_file")
+
+              # 1. name 与父目录名一致
+              if [ "$fm_name" != "$name" ]; then
+                echo "  ERROR: $skill_file"
+                echo "         frontmatter name='$fm_name' ≠ 父目录名='$name'"
+                errors=$((errors + 1))
+              fi
+
+              # 2. name ≤64 字符、仅小写字母/数字/连字符、无连续或首尾连字符
+              if [ ${#fm_name} -gt 64 ]; then
+                echo "  ERROR: $skill_file name 超过 64 字符（当前 ${#fm_name}）"
+                errors=$((errors + 1))
+              fi
+              if ! echo "$fm_name" | grep -qE '^[a-z0-9]+(-[a-z0-9]+)*$'; then
+                echo "  ERROR: $skill_file name='$fm_name' 不符合命名规则"
+                echo "         （仅小写字母/数字/连字符，无连续或首尾连字符）"
+                errors=$((errors + 1))
+              fi
+
+              # 3. description ≤1024 字符
+              desc_len=${#fm_desc}
+              if [ "$desc_len" -gt 1024 ]; then
+                echo "  ERROR: $skill_file description 超过 1024 字符（当前 $desc_len）"
+                errors=$((errors + 1))
+              fi
+
+              # 4. body <500 行（不含 frontmatter）
+              body_lines=$(awk '/^---$/{flag++; next} flag>=2{count++} END{print count+0}' "$skill_file")
+              if [ "$body_lines" -ge 500 ]; then
+                echo "  ERROR: $skill_file body ≥500 行（当前 $body_lines，目标 <500）"
+                errors=$((errors + 1))
+              fi
+
+              # 5. frontmatter description 与 index.json 一致
+              index_desc=$(jq -r --arg n "$name" '.skills[] | select(.name == $n) | .description' .well-known/agent-skills/index.json)
+              if [ "$fm_desc" != "$index_desc" ]; then
+                echo "  ERROR: $skill_file"
+                echo "         frontmatter description ≠ index.json description"
+                errors=$((errors + 1))
+              fi
+            done
+            if [ "$errors" -gt 0 ]; then
+              echo "FAILED: ${errors} 个 spec 错误"
+              exit 1
+            fi
+            echo "OK: 所有 SKILL.md 符合 spec"
+        language: system
+        pass_filenames: false

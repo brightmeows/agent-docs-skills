@@ -39,22 +39,16 @@ license: Apache-2.0
 
 ## 配置文件位置
 
-| 工具 | 个人级配置文件 | 说明 |
-|------|---------------|------|
-| **Claude Code** | `~/.claude/CLAUDE_GLOBAL.md` | 全局指令，在项目 CLAUDE.md 之前加载 |
-| **通用** | `~/.agents/AGENTS.md` | 个人级 AGENTS.md（部分工具支持）|
-| **Cursor** | `~/.cursor/rules/*.mdc`（全局） | 全局规则，可配 alwaysApply 或 globs |
-| **OpenCode** | `~/.config/opencode/*.md` | 通过 `instructions` 字段引用 |
+完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [scope-and-loader.md](../writing-agent-docs/scope-and-loader.md)。本节仅列个人级写作时最常用的入口：
 
-### 加载优先级
+| 工具 | 入口文件 |
+|------|---------|
+| **Claude Code** | `~/.claude/CLAUDE_GLOBAL.md` |
+| **通用** | `~/.agents/AGENTS.md` |
+| **Cursor** | `~/.cursor/rules/*.mdc`（全局）|
+| **OpenCode** | `~/.config/opencode/*.md`（经 `instructions` 字段引用）|
 
-```
-个人级（CLAUDE_GLOBAL.md 等） → 项目级（CLAUDE.md / AGENTS.md）
-                      ↓
-              项目级覆盖冲突规则
-```
-
-即：个人级定义通用的行为基调，项目级在需要时覆盖。
+**加载优先级**：个人级定义通用行为基调，项目级在冲突时覆盖（就近优先）。
 
 ---
 

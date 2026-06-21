@@ -1,5 +1,7 @@
 # Agent Persona（角色定义）
 
+> structuring-agents-md 参考文件：Agent Persona 的三种定义模式（specialist / Registry / 单角色）。
+
 ## 1. 定义 specialist 角色
 
 ```

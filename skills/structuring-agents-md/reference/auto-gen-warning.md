@@ -1,5 +1,7 @@
 # 警告：LLM 自动生成的 AGENTS.md 有害
 
+> structuring-agents-md 参考文件：LLM 自动生成 AGENTS.md 的危害与实证数据（Gloaguen et al., 2026；Augmentcode, 2026）。主文“反自动化生成”原则的数据支撑。
+
 Gloaguen et al.（2026）对 138 个真实仓库的实证研究：
 
 - LLM 自动生成的 AGENTS.md **一致降低代理任务成功率**，同时推理成本增加 20%+

@@ -1,5 +1,7 @@
 # 实证数据参考
 
+> structuring-agents-md 参考文件：AGENTS.md 实证数据汇总（采用情况、Princeton、ETH Zurich、Gloaguen et al.等）。主文中的具体数字指向本文件。
+
 ## 采用情况
 
 AGENTS.md 已被 **60,000+ 开源仓库**采用、被 25+ 工具原生支持（Codex、Copilot、Cursor、Windsurf、Gemini CLI、Devin、Amp 等）。

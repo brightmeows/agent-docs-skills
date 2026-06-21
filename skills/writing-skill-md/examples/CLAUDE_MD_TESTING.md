@@ -1,5 +1,9 @@
 # 测试 CLAUDE.md 技能文档
 
+> writing-skill-md 示例文件：完整的 TDD 实战测试记录。供 tdd-validation.md 的“完整实战示例”引用。
+>
+> **历史语境**：本示例录制于 Claude Code 语境（`~/.claude/skills/`、`CLAUDE.md`），其方法论适用于任何代理文档；保留原路径作为真实场景记录。
+
 测试不同文档变体，找出什么才能真正让 agent 在压力下发现并使用技能。
 
 ## 测试场景

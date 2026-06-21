@@ -1,6 +1,6 @@
 ---
 name: writing-skill-md
-description: 在创建新技能、编辑现有技能或部署前验证技能时使用
+description: 在创建新技能、编辑现有技能或部署前验证技能时使用。
 license: Apache-2.0
 ---
 
@@ -118,9 +118,9 @@ skills/
 **前置元数据（YAML）：**
 
 - 两个必需字段：`name` 和 `description`（所有支持字段见 [agentskills.io/specification](https://agentskills.io/specification)）
-- 总计最多 1024 字符
-- `name`：仅使用字母、数字和连字符（无括号、特殊字符）
-- `description`：触发条件导向（第三人称、仅描述何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
+- `name`：≤64 字符，仅小写字母、数字、连字符；不得连续连字符（`--`）、不得首尾连字符、**必须与父目录名一致**
+- `description`：≤1024 字符，触发条件导向（第三人称、仅描述何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
+- 可选字段：`license`（许可证）、`compatibility`（≤500 字符，环境/工具要求）、`metadata`（任意键值对，如 author/version）、`allowed-tools`（实验性，预批准工具列表）
 
 **主体大小**：SKILL.md body 保持 <500 行；接近上限时拆分到参考文件（超 100 行的参考文件加目录）。
 
@@ -183,14 +183,14 @@ description: 在当前会话中执行含独立任务的实施计划时使用
 
 ```dot
 digraph when_flowchart {
-    “需要展示信息？” [shape=diamond];
-    “可能有误的决策点？” [shape=diamond];
-    “用 markdown” [shape=box];
-    “小型内联流程图” [shape=box];
+    "需要展示信息？" [shape=diamond];
+    "可能有误的决策点？" [shape=diamond];
+    "用 markdown" [shape=box];
+    "小型内联流程图" [shape=box];
 
-    “需要展示信息？” -> “可能有误的决策点？” [label=“是”];
-    “可能有误的决策点？” -> “小型内联流程图” [label=“是”];
-    “可能有误的决策点？” -> “用 markdown” [label=“否”];
+    "需要展示信息？" -> "可能有误的决策点？" [label="是"];
+    "可能有误的决策点？" -> "小型内联流程图" [label="是"];
+    "可能有误的决策点？" -> "用 markdown" [label="否"];
 }
 ```
 
@@ -287,8 +287,8 @@ helper1、helper2、step3、pattern4
 
 **编写中——结构与内容：**
 
-- [ ] 名称仅使用字母、数字、连字符（无括号/特殊字符）
-- [ ] YAML 前置元数据含必需的 `name` 和 `description` 字段（最多 1024 字符；见 [规范](https://agentskills.io/specification)）
+- [ ] 名称仅用小写字母、数字、连字符（无连续/首尾连字符，与父目录名一致，≤64 字符）
+- [ ] YAML 前置元数据含必需的 `name`（≤64）和 `description`（≤1024）字段；见 [规范](https://agentskills.io/specification)
 - [ ] description 以 “Use when...” 开头并包含具体触发器/症状
 - [ ] description 以第三人称编写，未总结工作流
 - [ ] 全文含搜索关键词（错误、症状、工具）

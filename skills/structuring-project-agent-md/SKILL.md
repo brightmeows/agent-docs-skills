@@ -26,7 +26,7 @@ license: Apache-2.0
 
 | 文件 / 目录 | 定位 | 工具原生支持 |
 |-------------|------|-------------|
-| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 60,000+ 仓库、25+ 工具 |
+| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 60,000+ 仓库、30+ 工具 |
 | `CLAUDE.md` | Claude Code 原生项目配置 | Claude Code |
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则 | Cursor、OpenCode 等 |
 | `GEMINI.md` | Gemini CLI 项目配置 | Gemini CLI |

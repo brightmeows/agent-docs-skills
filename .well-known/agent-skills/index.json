@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "在创建、修改或重构项目级代理配置文件（AGENTS.md、CLAUDE.md、.cursor/rules、GEMINI.md、.junie/guidelines.md 等）时使用。代理行为不符合预期时亦适用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:804aaee620bb3ea145a2ece4e79f71e39cb90c17d062d099c9daae5b1e12e20c"
+      "digest": "sha256:b9d9896b8c6bf51699ee93a8cae073492cb7828c4bb582f48cecc301db90626e"
     },
     {
       "name": "structuring-personal-agent-md",
@@ -25,9 +25,9 @@
     {
       "name": "writing-skill-md",
       "type": "skill-md",
-      "description": "在创建新技能、编辑现有技能或部署前验证技能时使用",
+      "description": "在创建新技能、编辑现有技能或部署前验证技能时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:8042b41a453baac58149e2b222768cd1752047db751838acc9122544fc4ef679"
+      "digest": "sha256:9d882572a76455d0357a2f917dd270486afebd53d780b1f9ecc3a12f64b08497"
     }
   ]
 }

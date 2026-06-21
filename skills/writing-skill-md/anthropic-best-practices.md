@@ -1,6 +1,11 @@
 # 技能编写最佳实践（Anthropic 官方补充）
 
-> 本文件仅保留 **writing-agent-docs（通用写作规则）与 writing-skill-md（SKILL.md 专属）未覆盖** 的 Anthropic 官方补充指导。简洁、渐进式披露、description 规范、命名、评估迭代等主题见那两个 skill。完整、随官方更新的原文见 [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)。
+> 本文件仅保留 **writing-agent-docs（通用写作规则）与 writing-skill-md（SKILL.md 专属）未覆盖** 的 Anthropic 官方补充指导。简洁、渐进式披露、description 规范、命名、评估迭代等主题见那两个 skill。
+> 完整、随官方更新的原文与资源：
+>
+> - [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)（官方文档）
+> - [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)（工程博客）
+> - [anthropics/skills](https://github.com/anthropics/skills)（官方技能实现参考）
 
 ---
 
@@ -174,3 +179,13 @@ Use the GitHub:create_issue tool to create issues.
 # 好：明确依赖
 "Install: pip install pypdf. Then: from pypdf import PdfReader; reader = PdfReader('file.pdf')"
 ```
+
+## 规范校验工具
+
+[agentskills.io](https://agentskills.io) 提供官方校验工具 `skills-ref`：
+
+```bash
+skills-ref validate ./my-skill
+```
+
+检查 SKILL.md frontmatter 是否合规（name 命名规则、必需字段、字符限制）。部署前运行可确定性捕获格式违规——呼应 Toolchain First 原则，把可机器校验的规则交给机器。

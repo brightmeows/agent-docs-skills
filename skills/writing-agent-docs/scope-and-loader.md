@@ -39,7 +39,7 @@
 | `~/.cursor/rules/`（全局）| 全局 Cursor 规则 | Cursor |
 | `~/.config/opencode/opencode.json` | 全局 OpenCode 工具配置 | OpenCode |
 | `~/.claude/settings.json` | Claude Code 全局设置 | Claude Code |
-| `~/.claude/skills/` / `~/.agents/skills/` | 个人技能（跨项目可用）| Claude Code / Codex 等 |
+| `~/.claude/skills/` / `~/.agents/skills/` / `~/.cursor/skills/` | 个人技能（跨项目可用）| Claude Code / Codex / Cursor 等 |
 | `~/.cursor/settings.json` | Cursor 全局设置 | Cursor |
 
 **写作目标**：个人偏好、全局规则、通用工作流。不写项目特有内容。保持简短（5–15 行），避免挤压项目级配置的 token 预算。

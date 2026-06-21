@@ -62,7 +62,7 @@ Favor explicit error handling and composition over inheritance.
 
 ### 个人级 Persona 写作原则
 
-- **持续于项目**——不写项目特有的引用
+- **保持项目无关**——不写项目特有的引用
 - **表达偏好，非规则**——语言偏好、工作流习惯、编码哲学
 - **保持简短**——5–10 行，太长会稀释项目级配置的注意力
 

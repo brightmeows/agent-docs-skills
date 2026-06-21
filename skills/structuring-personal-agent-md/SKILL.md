@@ -6,7 +6,7 @@ license: Apache-2.0
 
 # 个人级代理配置技能
 
-本技能覆盖 home 目录中个人版 AGENTS.md / CLAUDE.md / CURSOR.md 等面向代理的配置文件。
+本技能覆盖 home 目录中个人版 AGENTS.md / CLAUDE.md / `.cursor/rules` 等面向代理的配置文件。
 
 ---
 

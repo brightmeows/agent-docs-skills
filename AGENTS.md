@@ -13,7 +13,7 @@
 ## 命令
 
 ```bash
-# pre-commit（3 个并行任务：markdownlint + list 检查 + digest 检查）
+# pre-commit（3 个任务：markdownlint + list 检查 + digest 检查）
 pre-commit run --all-files
 
 # 提交时自动触发钩子，也可手动指定单个任务

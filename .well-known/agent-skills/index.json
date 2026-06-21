@@ -27,7 +27,7 @@
       "type": "skill-md",
       "description": "在创建新技能、编辑现有技能或部署前验证技能时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:9a64a313b442abedc9239b5ce9229bc9f6bf7cc45fc15d9bf5afd4f04515055e"
+      "digest": "sha256:ee27ae1ed2b8a15fc47dc122727c64b565461586bd42065d4561c5d437b6e2b3"
     }
   ]
 }

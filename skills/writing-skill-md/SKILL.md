@@ -324,4 +324,21 @@ helper1、helper2、step3、pattern4
 
 ---
 
+## 参考文件索引
+
+所有支持文件均直接从本 SKILL.md 链接（一层引用深度）：
+
+| 文件 | 用途 |
+|---|---|
+| [anthropic-best-practices.md](./anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
+| [claude-search-optimization.md](./claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
+| [graphviz-conventions.dot](./graphviz-conventions.dot) | Graphviz 流程图样式规则 |
+| [render-graphs.js](./render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具 |
+| [tdd-validation.md](./tdd-validation.md) | **人类作者参考**：TDD 验证方法（RED-GREEN-REFACTOR、压力场景、铁律）|
+| [anti-rationalization.md](./anti-rationalization.md) | **人类作者参考**：合理化借口对照表、封堵手法、红旗清单模板 |
+| [persuasion-principles.md](./persuasion-principles.md) | **人类作者参考**：技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
+| [examples/CLAUDE_MD_TESTING.md](./examples/CLAUDE_MD_TESTING.md) | **人类作者参考**：CLAUDE.md 测试文档变体的完整实战测试记录 |
+
+---
+
 > **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **[tdd-validation.md](./tdd-validation.md)**。代理在常规任务中无需执行——[写完即自检](#写完即自检) 已覆盖基础验证。

@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "在创建、修改或重构 AGENTS.md 文件时使用。代理行为不符合预期时亦适用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-agents-md/SKILL.md",
-      "digest": "sha256:97fdf3e17228afeb244b61a17246f09e5111ac39696ca2174e47ea415c3e0e2d"
+      "digest": "sha256:7fc3da3b6b4785cf021e0c98bbe1a336f80ab51a1318082abc844d8d56c0898f"
     },
     {
       "name": "writing-skill-md",

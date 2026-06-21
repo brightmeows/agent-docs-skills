@@ -1,6 +1,7 @@
 ---
 name: writing-agent-docs
 description: 在创建、编辑或审校任何面向代理的文本（AGENTS.md、SKILL.md、.cursor/rules、.junie/guidelines.md、系统提示词、指南文件等）时使用。
+license: Apache-2.0
 ---
 
 # 编写代理文档——通用规则

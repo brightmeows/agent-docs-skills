@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "在创建、编辑或审校任何面向代理的文本（AGENTS.md、SKILL.md、.cursor/rules、.junie/guidelines.md、系统提示词、指南文件等）时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:f5741cf657d4f0228b973500dc8f63a6eb5537d8995a661c164c1817cff4f94f"
+      "digest": "sha256:b1091a73e2f56b72fde87660ad35b803f251fa1deeb28e7b6c2ff5f87151efa4"
     },
     {
       "name": "structuring-agents-md",
@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "创建新技能、编辑现有技能或部署前验证技能工作时使用",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:4beed4763c5921a0eabc53d9ee21932a1de3e8dd608e58151067955d0cf345af"
+      "digest": "sha256:6f39c7fadf705c55c8e37ead1c8c9031dca7c5e6c06779b6b066473d26bba6c5"
     }
   ]
 }

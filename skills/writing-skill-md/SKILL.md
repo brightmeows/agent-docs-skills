@@ -1,6 +1,7 @@
 ---
 name: writing-skill-md
-description: 创建新技能、编辑现有技能或部署前验证技能工作时使用
+description: 在创建新技能、编辑现有技能或部署前验证技能时使用
+license: Apache-2.0
 ---
 
 # 编写技能

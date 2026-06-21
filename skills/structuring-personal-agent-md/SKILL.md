@@ -16,7 +16,7 @@ license: Apache-2.0
 
 该技能定义代理文档写作的通用规则。本技能仅承载个人级配置专属内容，不重复通用规则——遇通用写作决策时回退到前置 Skill。
 
-> **作用域**：本技能仅覆盖**个人级**（home 目录）代理配置文件。项目级同类配置见 `structuring-project-agent-md`。
+> **作用域**：本技能仅覆盖**个人级**（home 目录）代理配置文件。项目级同类配置见 [`structuring-project-agent-md`](../structuring-project-agent-md/SKILL.md)。
 
 ---
 
@@ -110,7 +110,7 @@ license: Apache-2.0
 - 文档注释（///）必须有语义价值
 ```
 
-> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 `structuring-project-agent-md/reference/agent-persona.md`。
+> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 [agent-persona.md](../structuring-project-agent-md/reference/agent-persona.md)。
 
 ---
 

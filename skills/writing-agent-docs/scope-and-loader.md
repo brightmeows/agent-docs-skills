@@ -80,12 +80,12 @@
 
 | 配置类型 | 加载时机 | token 开销 | 适用场景 |
 |---------|---------|-----------|---------|
-| AGENTS.md | 项目发现时加载（常驻）| 每轮 ~944+ token | 项目上下文、边界、命令 |
+| AGENTS.md | 项目发现时加载（常驻）| 等效内容常驻开销约 18× 于 Skill | 项目上下文、边界、命令 |
 | opencode.json | 代理启动时加载（常驻）| 配置项计入上下文 | 工具配置、MCP、权限 |
 | .cursor/rules/\*.mdc | 按 glob 匹配注入（常驻）| 匹配时注入 | 文件级规则 |
-| SKILL.md | 按需加载 body | 每轮 ~53 token（约 18× 节省）| 任务知识、工作流 |
+| SKILL.md | 按需加载 body | 仅在匹配时按需加载（约 1/18 常驻开销）| 任务知识、工作流 |
 
-开发者实测显示，等效内容在 SKILL.md 中每轮约消耗 53 token，而在 AGENTS.md 中常驻条目达 944+ token（约 18 倍）——见 `structuring-project-agent-md/reference/comparison-tools.md`。
+**为何不把任务知识塞进 AGENTS.md**：AGENTS.md 内容常驻上下文，Skill 按需加载。开发者实测显示，等效内容作为 AGENTS.md 常驻条目相对于作为 Skill 按需加载，每轮 token 开销约高 18 倍（内部实测，2026；详见 [comparison-tools.md](../structuring-project-agent-md/reference/comparison-tools.md)）。
 
 **同层优先级**（项目级根目录多文件时）：
 
@@ -140,5 +140,5 @@
 
 ## 参考
 
-- `structuring-project-agent-md/reference/comparison-tools.md` — AGENTS.md vs Skill vs MCP token 对比
-- `writing-agent-docs/SKILL.md` — 作用域定义
+- [comparison-tools.md](../structuring-project-agent-md/reference/comparison-tools.md) — AGENTS.md vs Skill vs MCP token 对比
+- [SKILL.md](./SKILL.md) — 作用域定义

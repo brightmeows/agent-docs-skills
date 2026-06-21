@@ -21,7 +21,7 @@
 
 执行纪律的技能（如 TDD）需要抵抗合理化。agent 很聪明，在压力下会找到漏洞。
 
-**心理学笔记：** 理解说服技术为何有效，帮助你系统化地应用它们。研究基础见 persuasion-principles.md（Cialdini, 2021; Meincke et al., 2025）中的权威、承诺、稀缺性、社会认同和统一性原则。
+**心理学笔记：** 理解说服技术为何有效，帮助你系统化地应用它们。研究基础见 [persuasion-principles.md](./persuasion-principles.md)（Cialdini, 2021; Meincke et al., 2025）中的权威、承诺、稀缺性、社会认同和统一性原则。
 
 ### 明确封堵每个漏洞
 

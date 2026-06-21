@@ -4,7 +4,7 @@
 
 **需要加载此参考时：** 创建或编辑**纪律执行型**技能时、部署前，验证技能在压力下能工作并能抵抗合理化。
 
-**完整实战示例：** 参见 examples/CLAUDE_MD_TESTING.md。
+**完整实战示例：** 参见 [examples/CLAUDE_MD_TESTING.md](./examples/CLAUDE_MD_TESTING.md)。
 
 ## 何时使用
 
@@ -234,7 +234,7 @@ C) 现在写测试（30 分钟），然后提交
 
 **最佳测试组合 3 种以上压力。**
 
-**为何有效：** 参见 writing-skill-md 目录中的 persuasion-principles.md，了解权威、稀缺性和承诺原则如何增加遵从压力的研究。
+**为何有效：** 参见 [persuasion-principles.md](./persuasion-principles.md)，了解权威、稀缺性和承诺原则如何增加遵从压力的研究。
 
 #### 好场景的关键要素
 
@@ -344,7 +344,7 @@ agent 现在应：
 
 **核心原则：** 违反规则的字面含义就是在违反规则的精神——切断“我遵循精神”的整类借口。
 
-具体封堵手法（规则否定、合理化表、红旗清单、description 违规症状）的操作步骤见上方 REFACTOR 阶段。完整的借口对照表、封堵模板与红旗清单见 **anti-rationalization.md**（说服技术研究基础见 persuasion-principles.md）。
+具体封堵手法（规则否定、合理化表、红旗清单、description 违规症状）的操作步骤见上方 REFACTOR 阶段。完整的借口对照表、封堵模板与红旗清单见 **[anti-rationalization.md](./anti-rationalization.md)**（说服技术研究基础见 [persuasion-principles.md](./persuasion-principles.md)）。
 
 ## 元测试（当 GREEN 不生效时）
 

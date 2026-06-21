@@ -18,7 +18,7 @@ license: Apache-2.0
 
 **技能的作用域**：技能可以放在项目级（仓库内 `skills/` 或 `.claude/skills/`）或个人级（`~/.claude/skills/`、`~/.agents/skills/`）。见下方 [作用域选择](#作用域选择)。
 
-**官方指导：** Anthropic 官方的技能编写最佳实践见 anthropic-best-practices.md。本文档提供补充的模式和指南。
+**官方指导：** Anthropic 官方的技能编写最佳实践见 [anthropic-best-practices.md](./anthropic-best-practices.md)。本文档提供补充的模式和指南。
 
 ---
 
@@ -177,7 +177,7 @@ description: 在执行计划时使用——按任务分发 subagent，任务间�
 description: 在当前会话中执行含独立任务的实施计划时使用
 ```
 
-关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **claude-search-optimization.md**。
+关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **[claude-search-optimization.md](./claude-search-optimization.md)**。
 
 ## 流程图使用
 

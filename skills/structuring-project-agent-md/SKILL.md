@@ -16,7 +16,7 @@ license: Apache-2.0
 
 该技能定义代理文档写作的通用规则。本技能仅承载项目级配置专属内容，不重复通用规则——遇通用写作决策时回退到前置 Skill。
 
-> **作用域**：本技能仅覆盖**项目级**（仓库内）代理配置文件。个人级（home 目录）的同类配置见 `structuring-personal-agent-md`。
+> **作用域**：本技能仅覆盖**项目级**（仓库内）代理配置文件。个人级（home 目录）的同类配置见 [`structuring-personal-agent-md`](../structuring-personal-agent-md/SKILL.md)。
 
 ---
 
@@ -85,7 +85,8 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 4. **精简**：代理已能遵循的规则可移除
 5. **重复**
 
-**大小参考**：无最低行数要求；最高不建议超过 150 行。超出后遵循率显著下降（ETH Zurich 2026：冗余内容推理成本 +23%，成功率 -2%）。
+**大小参考**：无最低行数要求；最高不建议超过 150 行（参考 [CLAUDE.md best practices](https://automationswitch.com/ai-workflows/skillmd-vs-agentsmd-vs-claudemd-when-to-use-each)）。
+超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（Gloaguen et al., 2026：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](reference/empirical-evidence.md)）。
 
 ### 重构
 
@@ -112,7 +113,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
   - **Ask First**：重大变更先确认（如改数据库 schema）
   - **Never Do**：绝对禁止（如提交密钥、push main）——配肯定替代（见前置 Skill“肯定指令优先”）
   - **分小节放置**：用 `### Always` / `### Ask` / `### Never` 独立小节分类承载各条目，代理跳读时可快速定位。混排在大表或单一列表中会削弱分类索引价值。
-- **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率且推理成本 +20%+（见 reference/auto-gen-warning.md）。`/init` 等结果只当“内容清单”，手工重写。
+- **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率、推高推理成本（完整数据与机制见 [reference/auto-gen-warning.md](reference/auto-gen-warning.md)）。`/init` 等结果只当“内容清单”，手工重写。
 - **关键文件路径显式标注**——入口点、基类、配置文件应显式标注路径。
 - **@import 引用**——部分工具（如 Claude Code）支持 `@路径/文件名.md` 内联引用外部文件，根文件保持精简，知识按需加载。非 v1.1 标准特性，使用前确认工具兼容性。
 - **重点标注非常规**——主流实践、常见配置等显而易见的内容一笔带过；非常规、反直觉、项目特有的内容重点提及。
@@ -130,7 +131,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 |---|---|---|
 | 含 README 内容 | 定位 |
 | 重复工具链已强制内容 | 写作原则 Toolchain First |
-| 自动生成不审校 | 写作原则 反自动化生成 / reference/auto-gen-warning.md |
+| 自动生成不审校 | 写作原则 反自动化生成 / [auto-gen-warning.md](reference/auto-gen-warning.md) |
 | 不同工具各维护一份 | 维护唯一 AGENTS.md，symlink 到各工具入口文件（CLAUDE.md / GEMINI.md 等）|
 | 否定指令 | 前置 Skill（肯定指令优先） |
 | 边界规则混排在大表或单一列表 | 写作原则：三层边界 / 分小节放置 |

@@ -32,7 +32,7 @@
 | **JetBrains Junie** | `.junie/guidelines.md` | 项目级 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
 | **通用（跨工具）** | `AGENTS.md` | 跨工具 fallback 标准 |
-| **GitHub Copilot** | `AGENTS.md` | 项目级，2026-06 起 code review 支持 |
+| **GitHub Copilot** | `AGENTS.md` | 项目级，自 [2026-06-18](https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/) 起 code review 支持 |
 
 ---
 

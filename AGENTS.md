@@ -8,7 +8,7 @@
 - **产出物**：AGENTS.md、SKILL.md、.cursor/rules、系统提示词等 agent-facing 文档
 - **核心目标**：让代理能独立生成高质量、可发现、可遵从的代理文档
 
-因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 `writing-skill-md/tdd-validation.md`。
+因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 [writing-skill-md/tdd-validation.md](skills/writing-skill-md/tdd-validation.md)。
 
 ## 命令
 

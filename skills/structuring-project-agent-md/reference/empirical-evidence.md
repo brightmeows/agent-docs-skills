@@ -21,6 +21,7 @@ Lulla, Mohsenimofidi, Galster, Zhang, Baltes, Treude（Singapore Management Univ
 ## Gloaguen et al. (2026) —— 成功率与行为（ETH Zurich）
 
 Gloaguen, Mündler, Müller, Raychev, Vechev（ETH Zurich SRI Lab）。ICLR 2026 Workshop。
+论文：[arXiv:2602.11988](https://arxiv.org/abs/2602.11988)——《Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?》。
 
 在 12 个仓库、138 个任务实例（AGENTbench）+ SWE-bench Lite 上测量（4 个 agent × 多模型）：
 

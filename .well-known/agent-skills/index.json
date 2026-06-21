@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "在创建或编辑个人级代理配置（~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则等）时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-personal-agent-md/SKILL.md",
-      "digest": "sha256:46825276b3ffcc9dca8fa018bb11ad076eec68af8317289e6d8eb7066c818793"
+      "digest": "sha256:5afeeb3a6595bdbd80d211e5861d8a8132eccaac65eecb55bd75210d2578fbe6"
     },
     {
       "name": "writing-skill-md",

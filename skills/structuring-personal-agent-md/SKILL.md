@@ -116,33 +116,18 @@ license: Apache-2.0
 
 ## 常见模式
 
-### 语言/框架偏好
+以下模式可按需取舍，组合成 5–15 行的个人配置：
 
 ```markdown
-我主要用 TypeScript 和 Rust。
-新建 TS 项目用 pnpm + vitest。
-Rust 项目用 cargo nextest。
-```
+# 语言/工具链偏好
+我主要用 TypeScript 和 Rust；新建 TS 项目用 pnpm + vitest，Rust 用 cargo nextest。
+终端 zsh + starship；编辑器问题先查 .editorconfig 和 .vscode/。
 
-### 通用工具链
+# 安全基线（绝对）
+永不将 API key/token 写入代码或提交；密钥用 `pass` 或 1password CLI 管理。
 
-```markdown
-终端用 zsh + starship prompt。
-编辑器相关问题先检查 .editorconfig 和 .vscode/。
-```
-
-### 安全基线
-
-```markdown
-禁止将 API key 和 token 写入代码或提交。
-使用 `pass` 或 1password CLI 管理密钥。
-```
-
-### 提交习惯
-
-```markdown
-提交用 Conventional Commits（feat/fix/chore/docs/refactor）。
-提交前检查 git diff --stat。
+# 提交习惯
+用 Conventional Commits（feat/fix/chore/docs/refactor）；提交前看 git diff --stat。
 ```
 
 ---

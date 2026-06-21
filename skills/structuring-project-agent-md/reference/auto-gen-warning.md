@@ -1,13 +1,15 @@
 # 警告：LLM 自动生成的 AGENTS.md 有害
 
-> structuring-project-agent-md 参考文件：LLM 自动生成 AGENTS.md 的危害与实证数据（Gloaguen et al., 2026；Augmentcode, 2026）。主文“反自动化生成”原则的数据支撑。
+> structuring-project-agent-md 参考文件：LLM 自动生成 AGENTS.md 的危害与实证数据（Gloaguen et al., 2026）。主文"反自动化生成"原则的数据支撑。
 
-Gloaguen et al.（2026）对 138 个真实仓库的实证研究：
+Gloaguen et al.（2026, ETH Zurich）对 138 个任务实例（来自 12 个仓库）的实证研究：
 
 - LLM 自动生成的 AGENTS.md **一致降低代理任务成功率**，同时推理成本增加 20%+
+- 自动生成使 agent **多走 2.45–3.92 步/任务**——重复 agent 本可自行发现的内容，反致探索绕路
 - 原因：代理**忠实跟随**生成指令，但生成内容含微妙不准确，导致探索范围扩大、推理成本上升
 - 开发者手写的文件也仅带来 +4% 的边际提升——且仅限于极简精确的文件
+- 移除现有文档后 LLM 生成文件反而 +2.7%——说明生成内容多与现有文档冗余
 
-Augmentcode（2026）实测补充：自动生成的上下文文件让 agent **多走 2.45–3.92 步/任务**——它重复了 agent 本可自行发现的内容，反致探索绕路。
+产业实测印证（Augmentcode 博客, 2026）：最好的 AGENTS.md 带来相当于 Haiku→Opus 的质量跃升，最差的比没有 AGENTS.md 更糟。
 
-**结论**：不要依赖 `/init` 等自动生成命令。将生成结果作为“内容清单”参考，应用 Toolchain First 原则过滤后手工重写。
+**结论**：不要依赖 `/init` 等自动生成命令。将生成结果作为"内容清单"参考，应用 Toolchain First 原则过滤后手工重写。

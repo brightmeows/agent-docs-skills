@@ -8,16 +8,17 @@
 - **产出物**：AGENTS.md、SKILL.md、.cursor/rules、系统提示词等 agent-facing 文档
 - **核心目标**：让代理能独立生成高质量、可发现、可遵从的代理文档
 
-因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 [writing-skill-md/tdd-validation.md](skills/writing-skill-md/tdd-validation.md)。
+因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 [writing-skill-md/authoring/tdd-validation.md](skills/writing-skill-md/authoring/tdd-validation.md)。
 
 ## 命令
 
 ```bash
-# pre-commit（3 个任务：markdownlint + list 检查 + digest 检查）
+# pre-commit（4 个任务：markdownlint + list 检查 + digest 检查 + spec 检查）
 pre-commit run --all-files
 
 # 提交时自动触发钩子，也可手动指定单个任务
-pre-commit run check-well-known-digest
+pre-commit run check-well-known-digest       # index.json digest 与 SKILL.md 匹配
+pre-commit run check-skill-md-spec           # frontmatter name/description 与 body 行数合规
 
 # 编辑 SKILL.md 后更新 index.json 中的 digest
 sha256sum skills/*/SKILL.md
@@ -66,7 +67,7 @@ writing-agent-docs（基础写作原则）
 
 ## 内容规则
 
-- `skills/writing-skill-md/examples/`、`skills/structuring-project-agent-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
+- `skills/writing-skill-md/authoring/`、`skills/structuring-project-agent-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
 - 文件名保持英文连字符风格，与现有命名一致
-- 参考文件（如 `reference/*.md`、`examples/*.md`）必须在开头标注来源
+- 参考文件（如 `reference/*.md`、`authoring/*.md`）必须在开头标注来源
 - 修改后运行 `markdownlint` 验证格式

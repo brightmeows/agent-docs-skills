@@ -222,3 +222,12 @@ export default function formatDate(date){ var result; ... }
 
 - 写 **AGENTS.md / CLAUDE.md / .cursor/rules**（项目级配置）→ 加载 `structuring-project-agent-md`
 - 写 **SKILL.md**（TDD、技能类型、CSO、三级渐进式披露、一层引用深度、<500 行目标）→ 加载 `writing-skill-md`
+
+---
+
+## 参考文件
+
+| 文件 | 用途 |
+|---|---|
+| [scope-and-loader.md](./scope-and-loader.md) | 作用域与加载顺序的唯一定义（文件清单、流水线、优先级、两类作用域对比）|
+| [agent-persona.md](./agent-persona.md) | Agent Persona 定义（项目级 + 个人级，跨技能共享）|

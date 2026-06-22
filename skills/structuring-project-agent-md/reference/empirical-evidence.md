@@ -6,7 +6,7 @@
 
 AGENTS.md 已被 **60,000+ 开源仓库**采用、被 30+ 工具原生支持（Codex、Copilot、Cursor、Windsurf、Gemini CLI、Devin、Amp、Claude Code 等）。
 
-GitHub 对 2,500+ 仓库的实证分析显示测试指令在 75% 的高质量 AGENTS.md 中出现——频率最高（Nigh, 2025）。
+GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的六个核心领域之一（Nigh, 2025）。
 
 ## Lulla et al. (2026) —— 运行效率
 

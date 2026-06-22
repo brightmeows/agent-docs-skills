@@ -1,7 +1,7 @@
 # 作用域与加载顺序
 
 > `writing-agent-docs` 参考文件。
-> 面向代理的文档按存放位置分为两个作用域；不同文件的加载时机和优先级决定你应该写到哪里。
+> 面向代理的文档按存放位置分为两个作用域；不同文件的加载时机和优先级决定你应该写到哪里。本文件是**作用域与加载的唯一定义**——领域 skill（structuring-project / structuring-personal）仅以链接引用此处，不重复。
 
 ---
 
@@ -15,7 +15,7 @@
 
 | 文件 / 目录 | 用途 | 工具 |
 |-------------|------|------|
-| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 25+ 工具原生支持 |
+| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 30+ 工具原生支持 |
 | `CLAUDE.md` | 项目级 Claude Code 配置文件 | Claude Code |
 | `.cursor/rules/*.mdc` | 文件模式匹配规则，按 glob 注入 | Cursor、OpenCode 等 |
 | `GEMINI.md` | 项目级 Gemini CLI 配置 | Gemini CLI |
@@ -36,8 +36,9 @@
 |------|------|------|
 | `~/.claude/CLAUDE_GLOBAL.md` | 全局行为指令，优先于项目 CLAUDE.md | Claude Code |
 | `~/.agents/AGENTS.md` | 个人级 AGENTS.md（部分工具支持）| 通用 |
+| `~/.config/opencode/AGENTS.md` | 个人级全局规则 | OpenCode |
+| `~/.config/opencode/opencode.json` | 全局工具与 agent 配置（agent prompt 可经 `{file:...}` 引用 .md）| OpenCode |
 | `~/.cursor/rules/`（全局）| 全局 Cursor 规则 | Cursor |
-| `~/.config/opencode/opencode.json` | 全局 OpenCode 工具配置 | OpenCode |
 | `~/.claude/settings.json` | Claude Code 全局设置 | Claude Code |
 | `~/.claude/skills/` / `~/.agents/skills/` / `~/.cursor/skills/` | 个人技能（跨项目可用）| Claude Code / Codex / Cursor 等 |
 | `~/.cursor/settings.json` | Cursor 全局设置 | Cursor |
@@ -45,6 +46,18 @@
 **写作目标**：个人偏好、全局规则、通用工作流。不写项目特有内容。保持简短（5–15 行），避免挤压项目级配置的 token 预算。
 
 **维护者**：本人，不进版本控制。
+
+### 两类作用域对比
+
+| 维度 | 项目级 | 个人级 |
+|------|--------|--------|
+| **位置** | 仓库根目录 | `~/.claude/`、`~/.agents/`、`~/.config/opencode/` 等 |
+| **作用域** | 仅该项目 | 所有项目 |
+| **谁写** | 项目团队 | 你自己 |
+| **版本控制** | 进 git | 不进 git |
+| **生命周期** | 随项目演变 | 随个人偏好变化 |
+| **内容** | 项目特有约定、命令 | 个人工作流偏好、全局约束 |
+| **优先级** | 覆盖个人级冲突 | 被项目级覆盖 |
 
 ---
 
@@ -56,7 +69,7 @@
 
 1. **基础模型知识（预训练）**——模型自身的训练数据、通用编程知识
 2. **个人级配置**（全局加载一次）
-   - `~/.config/opencode/opencode.json`
+   - `~/.config/opencode/opencode.json`、`~/.config/opencode/AGENTS.md`
    - `~/.claude/CLAUDE_GLOBAL.md`
    - `~/.claude/settings.json`、`~/.cursor/settings.json`
    - `~/.claude/skills/*/SKILL.md`、`~/.agents/skills/*/SKILL.md`
@@ -74,18 +87,18 @@
 
 ### 优先级规则
 
-**就近优先**：个人级（全局）→ 项目级（仓库根）→ 子目录级别。项目级覆盖个人级冲突内容。
+**就近优先**：子目录级 > 项目级（仓库根）> 个人级（全局）。越靠近工作目录的配置越优先；项目级覆盖个人级冲突内容，子目录级再覆盖项目级。
 
 **常驻 vs 按需**：
 
 | 配置类型 | 加载时机 | token 开销 | 适用场景 |
 |---------|---------|-----------|---------|
-| AGENTS.md | 项目发现时加载（常驻）| 等效内容常驻开销约 18× 于 Skill | 项目上下文、边界、命令 |
+| AGENTS.md | 项目发现时加载（常驻）| 常驻开销显著高于 Skill | 项目上下文、边界、命令 |
 | opencode.json | 代理启动时加载（常驻）| 配置项计入上下文 | 工具配置、MCP、权限 |
 | .cursor/rules/\*.mdc | 按 glob 匹配注入（常驻）| 匹配时注入 | 文件级规则 |
-| SKILL.md | 按需加载 body | 仅在匹配时按需加载（约 1/18 常驻开销）| 任务知识、工作流 |
+| SKILL.md | 按需加载 body | 仅在匹配时加载 | 任务知识、工作流 |
 
-**为何不把任务知识塞进 AGENTS.md**：AGENTS.md 内容常驻上下文，Skill 按需加载。开发者实测显示，等效内容作为 AGENTS.md 常驻条目相对于作为 Skill 按需加载，每轮 token 开销约高 18 倍（内部实测，2026；详见 [comparison-tools.md](../structuring-project-agent-md/reference/comparison-tools.md)）。
+**为何不把任务知识塞进 AGENTS.md**：AGENTS.md 常驻上下文，Skill 按需加载——等效内容常驻的 token 开销远高于按需加载（具体倍数与机制见 [comparison-tools.md](../structuring-project-agent-md/reference/comparison-tools.md)）。
 
 **同层优先级**（项目级根目录多文件时）：
 
@@ -116,11 +129,11 @@
 
 ### OpenCode
 
-1. 加载 `~/.config/opencode/opencode.json`（个人级）
-2. 发现项目根 `opencode.json` / `.opencode/opencode.json`
-3. 深合并（project overrides global）
-4. 扫描 skills 路径
-5. 扫描 references
+1. 加载 `~/.config/opencode/opencode.json`（个人级工具配置）
+2. 加载 `~/.config/opencode/AGENTS.md`（个人级全局规则）
+3. 发现项目根 `opencode.json` / `.opencode/opencode.json`，深合并（project overrides global）
+4. 读取项目根 `AGENTS.md` 及父目录链
+5. 扫描 skills 路径与 `~/.config/opencode/agents/*.md`（agent 定义）
 
 ### Claude Code
 
@@ -140,5 +153,6 @@
 
 ## 参考
 
-- [comparison-tools.md](../structuring-project-agent-md/reference/comparison-tools.md) — AGENTS.md vs Skill vs MCP token 对比
+- [comparison-tools.md](../structuring-project-agent-md/reference/comparison-tools.md) — AGENTS.md vs Skill vs MCP token 对比（常驻开销倍数的唯一定义）
+- [agent-persona.md](./agent-persona.md) — Agent Persona 定义（项目级 + 个人级）
 - [SKILL.md](./SKILL.md) — 作用域定义

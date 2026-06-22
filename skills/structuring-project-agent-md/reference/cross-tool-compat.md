@@ -1,7 +1,7 @@
 # 跨工具兼容性参考
 
 > `structuring-project-agent-md` 参考文件。
-> 不同工具对同一概念有不同的命名、路径和加载方式。写跨工具配置时参考此表。
+> 不同工具对同一概念有不同的命名、路径和加载方式；写跨工具配置时参考此表。含 AGENTS.md v1.1 标准化进展。
 
 ---
 
@@ -38,11 +38,24 @@
 
 ## 加载差异
 
-| 工具 | 个人级 → 项目级优先级 |
-|------|---------------------|
-| **OpenCode** | 深合并（project overrides global），未知字段报错 |
-| **Claude Code** | CLAUDE_GLOBAL.md 先加载 → CLAUDE.md 覆盖 |
-| **Cursor** | 全局 `.cursor/rules/` → 项目 `.cursor/rules/` 覆盖 |
+各工具的完整加载流水线与个人级 / 项目级优先级见 [scope-and-loader.md](../../writing-agent-docs/scope-and-loader.md#典型工具的加载差异)。
+
+---
+
+## 标准化进展
+
+AGENTS.md v1.1 已进入标准化讨论（[GitHub issue #135](https://github.com/agentsmd/agents.md/issues/135)）。
+
+**YAML Frontmatter**（渐进式披露，已定稿为可选）：可选的 frontmatter 允许代理在加载全文前建立轻量索引。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
+
+```yaml
+---
+description: React frontend conventions and build commands
+tags: [react, frontend, ui]
+---
+```
+
+frontmatter 帮助代理判断何时需要加载该文件的完整内容，无需全文扫描。
 
 ---
 

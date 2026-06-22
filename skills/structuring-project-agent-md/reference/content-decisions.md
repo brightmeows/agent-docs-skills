@@ -85,9 +85,8 @@
 
 - **根**：全仓库 Always/Ask/Never 边界规则
 - **子目录**：该包特有约束（如永不直接访问某外部服务）
-- **Always Do**：每次提交前自动执行（如运行 `pnpm test`）
-- **Ask First**：涉及重大变更时先确认（如修改数据库 schema）
-- **Never Do**：绝对禁止的操作（如提交密钥、删除测试、push main）
+
+三层边界（Always Do / Ask First / Never Do）的定义与示例见 [SKILL.md“写作原则”](../SKILL.md#写作原则)。
 
 ### 测试
 

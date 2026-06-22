@@ -1,6 +1,6 @@
 # Agent Persona（角色定义）
 
-> structuring-project-agent-md 参考文件：Agent Persona 的三种定义模式（specialist / Registry / 单角色）与个人级扩展。
+> `writing-agent-docs` 参考文件：Agent Persona 的三种定义模式（specialist / Registry / 单角色）与个人级扩展。本文件是 Persona 的唯一定义——structuring-project 与 structuring-personal 仅以链接引用此处。
 
 ## 1. 定义 specialist 角色
 

@@ -6,28 +6,28 @@
       "type": "skill-md",
       "description": "提供代理文档写作的通用基础原则——token 效率、简洁优先、否定替代、增量迭代、示例优先、确定性约束优先。在创建、编辑或审校 AGENTS.md、SKILL.md、.cursor/rules、系统提示词等面向代理的文本时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:88d478302fac906106246b02473e356ace7c6f4ea34a5a274a7a9163e9d85b52"
+      "digest": "sha256:8ee03da74970a5d07ba0987b4c124f21b8f79711c5e886c27afce5a3255f8fd8"
     },
     {
       "name": "structuring-project-agent-md",
       "type": "skill-md",
       "description": "指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:85540b3fba149a8f9b801d655ed166cdd25a4c77156a1cc99d861e22cf423685"
+      "digest": "sha256:d5456d0db8beaaeb45627b6c434234db1c5424fe1a83ef89063ead6661a94ba5"
     },
     {
       "name": "structuring-personal-agent-md",
       "type": "skill-md",
       "description": "指导个人级代理配置的创建——个人偏好表达、Persona 设定、常驻上下文精简。在创建或编辑 ~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-personal-agent-md/SKILL.md",
-      "digest": "sha256:291c557e425c2b4c6e8bc98f6b637a47dbf1d42a349dd4affe4e5605d3c41067"
+      "digest": "sha256:57615a7a42e1b72291388553507ab9a24f2564449022dc2da2e999d6ab8476ef"
     },
     {
       "name": "writing-skill-md",
       "type": "skill-md",
       "description": "指导 SKILL.md 的创建与格式——技能类型、YAML 前置元数据、CSO、渐进式披露、反模式与自检。在创建新技能、编辑现有技能或部署前验证时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:b7c2cb81a030930e4aa81314ebc842e4bc391f5dbd6f7ef43af2d60f11633528"
+      "digest": "sha256:28223507f773bca96e7e6f2b8890f4275518d07cde870758d48bc9ba0fdf8c08"
     }
   ]
 }

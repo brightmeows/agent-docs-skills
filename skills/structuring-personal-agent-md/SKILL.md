@@ -24,31 +24,15 @@ license: Apache-2.0
 
 个人级代理配置文件告诉 agent**你希望它如何为你工作**，独立于任何项目。
 
-与项目级配置（AGENTS.md / CLAUDE.md）的区别：
-
-| 维度 | 项目级 | 个人级 |
-|------|--------|--------|
-| **位置** | 仓库根目录 | `~/.claude/`、`~/.agents/`、`~/.cursor/` 等 |
-| **作用域** | 仅该项目 | 所有项目 |
-| **谁写** | 项目团队 | 你自己 |
-| **版本控制** | 进 git | 不进 git |
-| **生命周期** | 随项目演变 | 随个人偏好变化 |
-| **内容** | 项目特有约定、命令 | 个人工作流偏好、全局约束 |
+与项目级配置的区别（位置 / 作用域 / 谁写 / 版本控制 / 生命周期 / 内容 / 优先级）见 [scope-and-loader.md 的“两类作用域对比”](../writing-agent-docs/scope-and-loader.md#两类作用域对比)。
 
 ---
 
 ## 配置文件位置
 
-完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [scope-and-loader.md](../writing-agent-docs/scope-and-loader.md)。本节仅列个人级写作时最常用的入口：
+完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [scope-and-loader.md](../writing-agent-docs/scope-and-loader.md)。写作时最常用：Claude Code 的 `~/.claude/CLAUDE_GLOBAL.md`、通用的 `~/.agents/AGENTS.md`、OpenCode 的 `~/.config/opencode/AGENTS.md`。
 
-| 工具 | 入口文件 |
-|------|---------|
-| **Claude Code** | `~/.claude/CLAUDE_GLOBAL.md` |
-| **通用** | `~/.agents/AGENTS.md` |
-| **Cursor** | `~/.cursor/rules/*.mdc`（全局）|
-| **OpenCode** | `~/.config/opencode/*.md`（经 `instructions` 字段引用）|
-
-**加载优先级**：个人级定义通用行为基调，项目级在冲突时覆盖（就近优先）。
+**加载优先级**：就近优先——个人级定义通用行为基调，项目级在冲突时覆盖（详见 [scope-and-loader.md](../writing-agent-docs/scope-and-loader.md#优先级规则)）。
 
 ---
 
@@ -104,7 +88,7 @@ license: Apache-2.0
 - 文档注释（///）必须有语义价值
 ```
 
-> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 [agent-persona.md](../structuring-project-agent-md/reference/agent-persona.md)。
+> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 [agent-persona.md](../writing-agent-docs/agent-persona.md)。
 
 ---
 

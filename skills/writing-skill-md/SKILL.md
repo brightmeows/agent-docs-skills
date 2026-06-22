@@ -12,7 +12,7 @@ license: Apache-2.0
 
 技能的好坏取决于三点：代理能否**找到**它（CSO）、能否**理解**它（结构）、能否**遵从**它（清晰）。
 
-**验证思维**：借鉴 TDD——先想清楚代理在没有这个技能时会怎么失败，再写最简的指导。本技能的主流程是代理可直接执行的实操指南；完整 TDD subagent 压力测试作为**人类作者参考**见 [tdd-validation.md](./tdd-validation.md)。
+**验证思维**：借鉴 TDD——先想清楚代理在没有这个技能时会怎么失败，再写最简的指导。本技能的主流程是代理可直接执行的实操指南；完整 TDD subagent 压力测试作为**人类作者参考**见 [tdd-validation.md](./authoring/tdd-validation.md)。
 
 **核心原则：** 如果你没想过 agent 在无技能时会如何失败，你就不知道技能是否教会了正确的东西。
 
@@ -303,7 +303,7 @@ helper1、helper2、step3、pattern4
 | **模式型** | 自检 + 反例走查 | 识别测试 + 应用测试 |
 | **参考型** | 自检 + 检索走查（常用场景能否找到） | 检索测试 + 缺口测试 |
 
-**深度验证方法**（人类作者）见 [tdd-validation.md](./tdd-validation.md)。
+**深度验证方法**（人类作者）见 [tdd-validation.md](./authoring/tdd-validation.md)。
 
 ## 技能创建清单
 
@@ -333,7 +333,7 @@ helper1、helper2、step3、pattern4
 - [ ] 完成上方 [写完即自检](#写完即自检) 全部项
 - [ ] 走查：代理能否找到（CSO）、能否理解（结构）、能否遵从（清晰）
 - [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息
-- [ ] （纪律执行型）考虑跑基线测试——见 [tdd-validation.md](./tdd-validation.md)
+- [ ] （纪律执行型）考虑跑基线测试——见 [tdd-validation.md](./authoring/tdd-validation.md)
 
 **部署：**
 
@@ -356,19 +356,26 @@ helper1、helper2、step3、pattern4
 
 ## 参考文件索引
 
-所有支持文件均直接从本 SKILL.md 链接（一层引用深度）：
+所有支持文件均直接从本 SKILL.md 链接（一层引用深度）。按读者分两组：
+
+**代理可执行参考**（常规任务中按需加载）：
 
 | 文件 | 用途 |
 |---|---|
 | [anthropic-best-practices.md](./anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
 | [claude-search-optimization.md](./claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
 | [graphviz-conventions.dot](./graphviz-conventions.dot) | Graphviz 流程图样式规则 |
-| [render-graphs.js](./render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具 |
-| [tdd-validation.md](./tdd-validation.md) | **人类作者参考**：TDD 验证方法（RED-GREEN-REFACTOR、压力场景、铁律）|
-| [anti-rationalization.md](./anti-rationalization.md) | **人类作者参考**：合理化借口对照表、封堵手法、红旗清单模板 |
-| [persuasion-principles.md](./persuasion-principles.md) | **人类作者参考**：技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
-| [examples/CLAUDE_MD_TESTING.md](./examples/CLAUDE_MD_TESTING.md) | **人类作者参考**：CLAUDE.md 测试文档变体的完整实战测试记录 |
+| [render-graphs.js](./render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具（人类可视化辅助）|
+
+**人类作者参考**（`authoring/`，代理常规任务无需加载）：
+
+| 文件 | 用途 |
+|---|---|
+| [tdd-validation.md](./authoring/tdd-validation.md) | TDD 验证方法（RED-GREEN-REFACTOR、压力场景、铁律）|
+| [anti-rationalization.md](./authoring/anti-rationalization.md) | 合理化借口对照表、封堵手法、红旗清单模板 |
+| [persuasion-principles.md](./authoring/persuasion-principles.md) | 技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
+| [claude-md-testing.md](./authoring/claude-md-testing.md) | CLAUDE.md 测试文档变体的完整实战测试记录 |
 
 ---
 
-> **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **[tdd-validation.md](./tdd-validation.md)**。代理在常规任务中无需执行——[写完即自检](#写完即自检) 已覆盖基础验证。
+> **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **[tdd-validation.md](./authoring/tdd-validation.md)**。代理在常规任务中无需执行——[写完即自检](#写完即自检) 已覆盖基础验证。

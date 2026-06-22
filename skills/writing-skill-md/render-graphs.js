@@ -93,8 +93,8 @@ function main() {
     console.error('  --combine    将所有图示合并为一张 SVG');
     console.error('');
     console.error('示例：');
-    console.error('  ./render-graphs.js ../subagent-driven-development');
-    console.error('  ./render-graphs.js ../subagent-driven-development --combine');
+    console.error('  ./render-graphs.js .                         # 渲染当前目录技能');
+    console.error('  ./render-graphs.js ../some-other-skill       # 渲染其他技能');
     process.exit(1);
   }
 

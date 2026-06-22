@@ -117,18 +117,20 @@ skills/
 
 **前置元数据（YAML）：**
 
-- 两个必需字段：`name` 和 `description`（所有支持字段见 [agentskills.io/specification](https://agentskills.io/specification)）
-- `name`：≤64 字符，仅小写字母、数字、连字符；不得连续连字符（`--`）、不得首尾连字符、**必须与父目录名一致**
+- 两个必需字段：`name` 和 `description`（开放标准字段见 [agentskills.io/specification](https://agentskills.io/specification)）；两者均不得含 XML 标签
+- `name`：≤64 字符，仅小写字母、数字、连字符；不得连续连字符（`--`）、不得首尾连字符、不得含保留词（`anthropic`、`claude`）、**必须与父目录名一致**
   - **推荐动名词（gerund）形式**：`processing-pdfs`、`testing-code`、`managing-databases`，语义清晰地描述技能提供的能力
   - 也可用名词短语：`pdf-processing`、`code-review`；避免模糊命名：`helper`、`utils`、`tools`
-- `description`：≤1024 字符，触发条件导向（第三人称、描述做什么 + 何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
-- 可选字段（完整规范见 [agentskills.io/specification](https://agentskills.io/specification)）：
-  - **标准元数据**：`license`（许可证）、`compatibility`（≤500 字符，环境/工具要求）、`metadata`（任意键值对）
-  - **控制加载**：`disable-model-invocation`（阻止自动加载，仅手动触发）、`user-invocable`（从 `/` 菜单隐藏）
-  - **工具权限**：`allowed-tools`（技能激活期间预批准的工具白名单）、`disallowed-tools`（技能激活期间移除的工具）
-  - **运行时**：`model`（指定模型）、`context: fork`（隔离 subagent 运行）、`arguments`（命名参数替换，`$name` 语法）
+- `description`：≤1024 字符、非空，触发条件导向（第三人称、描述做什么 + 何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
+- **agentskills.io 开放标准可选字段**（跨平台通用，见 [规范](https://agentskills.io/specification)）：
+  - `license`（许可证）、`compatibility`（≤500 字符，环境/工具要求）、`metadata`（任意键值对）
+  - `allowed-tools`（预批准的工具白名单，**实验性**——各实现支持程度不同）
+- **Claude Code 平台特有字段**（非开放标准，跨平台不通用，仅 Claude Code 支持）：
+  - `disable-model-invocation`（阻止自动加载，仅手动触发）、`user-invocable`（从 `/` 菜单隐藏）
+  - `disallowed-tools`（技能激活期间移除的工具）、`model`（指定模型）
+  - `context: fork`（隔离 subagent 运行）、`arguments`（命名参数替换，`$name` 语法）
 
-**主体大小**：SKILL.md body 保持 <500 行；接近上限时拆分到参考文件（超 100 行的参考文件加目录）。
+**主体大小**：SKILL.md body 保持 <500 行 / **指令 < 5000 tokens**（agentskills.io 推荐预算）；接近上限时拆分到参考文件（超 100 行的参考文件加目录）。
 
 ```markdown
 ---
@@ -260,7 +262,7 @@ helper1、helper2、step3、pattern4
 ## 安全考虑
 
 技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。
-[Liu et al., 2026](https://arxiv.org/abs/2601.10338)（42,447 个技能）发现 26.1% 含至少一个漏洞；
+[Liu et al., 2026](https://arxiv.org/abs/2601.10338)（分析 31,132 个技能，收集自 42,447）发现 26.1% 含至少一个漏洞；
 [SkillAttack](https://arxiv.org/abs/2604.04989) 通过对抗性 prompting 验证可利用性，100 个真实技能上攻击成功率高达 26%。
 
 ### 编写安全注意事项

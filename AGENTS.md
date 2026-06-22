@@ -30,7 +30,7 @@ sha256sum skills/*/SKILL.md
 
 - 修改 `.md` 后运行 `markdownlint` 验证
 - 修改 `skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
-- 新增/移除技能目录时同步更新 `.claude-plugin/plugin.json` 和 `.well-known/agent-skills/index.json`
+- 新增/移除技能目录时同步更新 `.well-known/agent-skills/index.json`
 - **修改任何技能前**，必须先读取 `writing-agent-docs`（基础写作原则）和对应的领域 skill（`writing-skill-md`、`structuring-project-agent-md` 或 `structuring-personal-agent-md`），并按其要求执行——本仓库是元技能仓库，技能本身即是规范
 
 ### Ask

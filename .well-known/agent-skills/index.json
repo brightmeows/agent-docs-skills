@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "在创建、修改或重构项目级代理配置文件（AGENTS.md、CLAUDE.md、.cursor/rules、GEMINI.md、.junie/guidelines.md 等）时使用。代理行为不符合预期时亦适用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:3b5c0d66a316219234f02b92f6b558f826a3002ea811a8641ce908b0c80dc8ee"
+      "digest": "sha256:9feeb3046d6320e2e600b8070027055dcfc54d71feddece693ad6019c389c0f5"
     },
     {
       "name": "structuring-personal-agent-md",

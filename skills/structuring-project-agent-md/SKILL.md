@@ -85,7 +85,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 4. **精简**：代理已能遵循的规则可移除
 5. **重复**
 
-**大小参考**：无最低行数要求；最高不建议超过 150 行（参考 [CLAUDE.md best practices](https://automationswitch.com/ai-workflows/skillmd-vs-agentsmd-vs-claudemd-when-to-use-each)）。
+**大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；arXiv:2606.15828 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
 超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（Gloaguen et al., 2026：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](reference/empirical-evidence.md)）。
 
 ### 重构
@@ -118,6 +118,27 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 - **@import 引用**——部分工具（如 Claude Code）支持 `@路径/文件名.md` 内联引用外部文件，根文件保持精简，知识按需加载。非 v1.1 标准特性，使用前确认工具兼容性。
 - **重点标注非常规**——主流实践、常见配置等显而易见的内容一笔带过；非常规、反直觉、项目特有的内容重点提及。
 
+### 决策表（Decision Tables）
+
+当项目中存在两种或多种合理做法时，决策表能强制让代理在选择前做出决定，而不靠猜测。来自 [AugmentCode 实证研究](https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files) 的最强模式之一——将决策表加入 AGENTS.md 后 `best_practices` 提升 25%。
+
+```markdown
+## 状态管理选型
+
+| 场景 | → React Query | → Zustand |
+|------|:---:|:---:|
+| 服务器是唯一数据源 | ✅ | |
+| 多代码路径修改此状态 | | ✅ |
+| 需要乐观更新 + 本地状态 | | ✅ |
+```
+
+**原则：**
+
+- 用表格而非文字描述对比，代理可直接查表决策
+- 列是选项，行是判断条件，单元格标记适用性
+- 适用于框架选型、模式选择、架构决策等场景
+- 避免超出 3–4 列，列过多时优先简化
+
 ### 维护规则
 
 以下为 AGENTS.md 专属：
@@ -138,6 +159,21 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 | CLAUDE.md 与 AGENTS.md 不相关而用 symlink | CLAUDE.md 专属指导 |
 | 把个人偏好写在项目级配置 | writing-agent-docs → 作用域 |
 | .cursor/rules 无 glob 范围 | .cursor/rules 格式节 |
+
+### 配置异味检测
+
+arXiv:2606.15828 分析了 100 个热门仓库的 AGENTS.md，识别出六种常见配置异味。编写和审计时应检查：
+
+| 异味 | 说明 | 检查方法 |
+|------|------|---------|
+| **Lint Leakage**（最普遍，62%） | 重复 linter/formatter 已强制的规则（命名风格、缩进、import 排序） | 被 Biome/ESLint/Ruff 等工具能自动修复的 → 删除 |
+| **Context Bloat**（42%） | 文件 >200 行，堆砌规则和细节 | 拆分到子目录 AGENTS.md 或技能文件 |
+| **Skill Leakage**（35%） | 把仅特定场景需要的指令放入常驻 AGENTS.md（如测试指南、脚手架流程） | 迁移到技能或子文件按需加载 |
+| **Conflicting Instructions**（28%） | 指令互相矛盾，如两个不同路径指向同一职责 | 定期审计，冲突处显式注明优先级 |
+| **Init Fossilization**（24%） | 由 `/init` 自动生成后从未人工审校修改 | 创建后至少人工审校一次，迭代更新 |
+| **Blind Reference**（16%） | 引用外部文件时不说明用途和场景 | 每条引用配一句话：什么内容、何时读 |
+
+**核心原则**：配置越精炼、越聚焦项目特有内容，代理表现越好。冗余指令每多一条，关键规则的注意力就少一分。
 
 ---
 

@@ -18,7 +18,7 @@ license: Apache-2.0
 
 **技能的作用域**：技能可以放在项目级（仓库内 `skills/` 或 `.claude/skills/`）或个人级（`~/.claude/skills/`、`~/.agents/skills/`）。见下方 [作用域选择](#作用域选择)。
 
-**官方指导：** Anthropic 官方的技能编写最佳实践见 [anthropic-best-practices.md](./anthropic-best-practices.md)。本文档提供补充的模式和指南。
+**官方指导：** Anthropic 官方的技能编写最佳实践见 [anthropic-best-practices.md](./references/anthropic-best-practices.md)。本文档提供补充的模式和指南。
 
 ---
 
@@ -89,29 +89,43 @@ API 文档、语法指南、工具文档（office docs）
 
 ## 目录结构与文件组织
 
+遵循 [agentskills.io 规范](https://agentskills.io/specification) 与 [Anthropic 官方约定](https://anthropics-skills.mintlify.app/creating-skills/bundled-resources)：
+
 ```
-skills/
-  skill-name/
-    SKILL.md              # 主参考（必需）
-    supporting-file.*     # 仅必要时
+skill-name/
+├── SKILL.md          # 必需：元数据 + 指令（<500 行）
+├── references/       # 代理按需加载的文档
+├── scripts/          # 可执行代码
+├── assets/           # 静态资源（模板、字体、图标）
+└── authoring/        # 人类作者参考（代理常规任务不加载——本仓库补充）
 ```
 
-**扁平的命名空间**——所有技能在一个可搜索的命名空间中。
+**子目录用途：**
 
-**何时分离到单独文件：**
+| 目录 | 内容 | 加载时机 |
+|---|---|---|
+| `references/` | 详细参考、外部权威转载、按域/框架拆分的指南 | 代理任务中按需加载 |
+| `scripts/` | 可执行代码（确定性/重复性任务） | 执行时不进入上下文 |
+| `assets/` | 输出用静态文件（模板、字体、图标） | 嵌入输出时读取 |
+| `authoring/` | 仅供人类作者参考的内容（如 TDD 验证流程） | 代理常规任务不加载 |
 
-1. **重量级参考**（100 行以上）——API 文档、完整语法
-2. **可复用工具**——脚本、实用工具、模板
+所有目录可选，仅在提供明确价值时添加。`authoring/` 是本仓库补充——官方标准未覆盖“代理常规任务不加载”这一类别。
+
+**何时分离到子文件：**
+
+1. **重量级参考**（100 行以上）→ `references/`
+2. **可复用工具 / 脚本** → `scripts/`
+3. **静态资源** → `assets/`
 
 **保持内联：** 原则和概念、代码模式（50 行以内）、其他所有内容。
 
-**引用保持一层深度**——所有被引用文件直接从 SKILL.md 链接，避免深层嵌套（嵌套会导致代理用 `head` 预览，信息不完整）。
+**引用保持一层深度**——所有被引用文件直接从 SKILL.md 链接（如 `references/foo.md`），避免深层嵌套（嵌套会导致代理用 `head` 预览，信息不完整）。
 
-### 三种组织模式
+### 组织模式
 
 - **自包含**——所有内容内联于 SKILL.md（适用：无需重量级参考）。
-- **带可复用工具**——SKILL.md（概述 + 模式）+ 可适配的工作辅助代码（如 `example.ts`）。
-- **带重量级参考**——SKILL.md（概述 + 工作流）+ 大块参考文件（如 600 行 API 参考）+ `scripts/`（适用：参考材料太大不便内联）。
+- **带参考文档**——SKILL.md（概述 + 工作流）+ `references/`（按需加载的详细参考）。
+- **带可复用工具**——在带参考文档基础上增加 `scripts/`（可执行辅助代码）或 `assets/`（输出用资源）。
 
 ## SKILL.md 结构
 
@@ -187,7 +201,7 @@ description: 在执行计划时使用——按任务分发 subagent，任务间�
 description: 协调多个 subagent 执行跨任务实施计划。在当前会话中涉及多个独立任务时使用。
 ```
 
-关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **[claude-search-optimization.md](./claude-search-optimization.md)**。
+关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **[claude-search-optimization.md](./references/claude-search-optimization.md)**。
 
 ## 流程图使用
 
@@ -217,13 +231,13 @@ digraph when_flowchart {
 - 线性指令 → 编号列表
 - 无语义含义的标签（step1、helper2）
 
-Graphviz 样式规则见 [graphviz-conventions.dot](./graphviz-conventions.dot)。
+Graphviz 样式规则见 [graphviz-conventions.dot](./references/graphviz-conventions.dot)。
 
-**为人类伙伴可视化：** 使用此目录中的 `render-graphs.js` 将技能的流程图渲染为 SVG：
+**为人类伙伴可视化：** 使用 `scripts/render-graphs.js` 将技能的流程图渲染为 SVG：
 
 ```bash
-./render-graphs.js ../some-skill           # 分别渲染每个图示
-./render-graphs.js ../some-skill --combine # 将所有图示合并为一张 SVG
+./scripts/render-graphs.js ../some-skill           # 分别渲染每个图示
+./scripts/render-graphs.js ../some-skill --combine # 将所有图示合并为一张 SVG
 ```
 
 ## 代码示例
@@ -360,18 +374,23 @@ helper1、helper2、step3、pattern4
 
 ## 参考文件索引
 
-所有支持文件均直接从本 SKILL.md 链接（一层引用深度）。按读者分两组：
+所有支持文件均直接从本 SKILL.md 链接（一层引用深度）。按目录与加载时机分组：
 
-**代理可执行参考**（常规任务中按需加载）：
+**`references/`**（代理任务中按需加载）：
 
 | 文件 | 用途 |
 |---|---|
-| [anthropic-best-practices.md](./anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
-| [claude-search-optimization.md](./claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
-| [graphviz-conventions.dot](./graphviz-conventions.dot) | Graphviz 流程图样式规则 |
-| [render-graphs.js](./render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具（人类可视化辅助）|
+| [anthropic-best-practices.md](./references/anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
+| [claude-search-optimization.md](./references/claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
+| [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
 
-**人类作者参考**（`authoring/`，代理常规任务无需加载）：
+**`scripts/`**（执行时不进入上下文）：
+
+| 文件 | 用途 |
+|---|---|
+| [render-graphs.js](./scripts/render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具（人类可视化辅助）|
+
+**`authoring/`**（人类作者参考，代理常规任务无需加载）：
 
 | 文件 | 用途 |
 |---|---|

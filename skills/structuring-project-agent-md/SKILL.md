@@ -63,7 +63,7 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 
 CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是 symlink 到 AGENTS.md 以维护单一真理源；当需要使用 `@import`、Commands 等 Claude Code 独有特性时，可维护独立文件。
 
-详细策略、独有特性、Commands 目录说明见 [`reference/claude-md.md`](reference/claude-md.md)。
+详细策略、独有特性、Commands 目录说明见 [`references/claude-md.md`](references/claude-md.md)。
 
 ---
 
@@ -71,7 +71,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 `.cursor/rules/` 目录使用 `.mdc` 文件格式，通过 `globs` 字段按文件匹配注入规则（`alwaysApply: true` 则常驻）。与 AGENTS.md 的职责划分：AGENTS.md 管全局约定，`.mdc` 管文件级规则。
 
-详细格式、字段说明、职责对比、选用指南见 [`reference/cursor-rules.md`](reference/cursor-rules.md)。
+详细格式、字段说明、职责对比、选用指南见 [`references/cursor-rules.md`](references/cursor-rules.md)。
 
 ---
 
@@ -86,7 +86,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 5. **重复**
 
 **大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；[dos Santos et al., 2026](https://arxiv.org/abs/2606.15828) 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
-超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988)：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](reference/empirical-evidence.md)）。
+超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988)：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](references/empirical-evidence.md)）。
 
 ### 重构
 
@@ -113,9 +113,9 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
   - **Ask First**：重大变更先确认（如改数据库 schema）
   - **Never Do**：绝对禁止（如提交密钥、push main）——配肯定替代（见前置 Skill“肯定指令优先”）
   - **分小节放置**：用 `### Always` / `### Ask` / `### Never` 独立小节分类承载各条目，代理跳读时可快速定位。混排在大表或单一列表中会削弱分类索引价值。
-- **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率、推高推理成本（完整数据与机制见 [reference/auto-gen-warning.md](reference/auto-gen-warning.md)）。`/init` 等结果只当“内容清单”，手工重写。
+- **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率、推高推理成本（完整数据与机制见 [references/auto-gen-warning.md](references/auto-gen-warning.md)）。`/init` 等结果只当“内容清单”，手工重写。
 - **关键文件路径显式标注**——入口点、基类、配置文件应显式标注路径。
-- **@import 引用**——部分工具（如 Claude Code）支持 `@路径/文件名.md` 内联引用外部文件，根文件保持精简，知识按需加载。非 v1.1 标准特性（进展见 [cross-tool-compat.md](reference/cross-tool-compat.md#标准化进展)），使用前确认工具兼容性。
+- **@import 引用**——部分工具（如 Claude Code）支持 `@路径/文件名.md` 内联引用外部文件，根文件保持精简，知识按需加载。非 v1.1 标准特性（进展见 [cross-tool-compat.md](references/cross-tool-compat.md#标准化进展)），使用前确认工具兼容性。
 - **重点标注非常规**——主流实践、常见配置等显而易见的内容一笔带过；非常规、反直觉、项目特有的内容重点提及。
 
 ### 决策表（Decision Tables）
@@ -213,7 +213,7 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 
 **判定**：重要性高 + 推断难 + 特异 → 放入；可工具化（linter / 类型 / CI 能强制）→ 不放，指向工具配置；介于之间 → 视项目复杂度 / 团队 / 安全要求酌情放入。
 
-各内容类型的分类（推荐 / 可选 / 不放）、详细维度评分与根 / 子目录拆分见 [reference/content-decisions.md](reference/content-decisions.md)（附录：详细目录）。
+各内容类型的分类（推荐 / 可选 / 不放）、详细维度评分与根 / 子目录拆分见 [references/content-decisions.md](references/content-decisions.md)（附录：详细目录）。
 
 ---
 
@@ -221,11 +221,11 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 
 | 文件 | 内容 |
 |---|---|
-| [reference/content-decisions.md](reference/content-decisions.md) | 附录：内容决策详细目录（维度评分 / 放入条件 / 根子目录拆分） |
-| [reference/comparison-tools.md](reference/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
-| [reference/empirical-evidence.md](reference/empirical-evidence.md) | Princeton/ETH Zurich/上下文效率等实证数据 |
-| [agent-persona.md](../writing-agent-docs/agent-persona.md) | Agent Persona 完整定义（项目级 + 个人级，跨技能共享） |
-| [reference/auto-gen-warning.md](reference/auto-gen-warning.md) | LLM 自动生成危害与实证数据 |
-| [reference/cross-tool-compat.md](reference/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |
-| [reference/claude-md.md](reference/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
-| [reference/cursor-rules.md](reference/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
+| [references/content-decisions.md](references/content-decisions.md) | 附录：内容决策详细目录（维度评分 / 放入条件 / 根子目录拆分） |
+| [references/comparison-tools.md](references/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
+| [references/empirical-evidence.md](references/empirical-evidence.md) | Princeton/ETH Zurich/上下文效率等实证数据 |
+| [agent-persona.md](../writing-agent-docs/references/agent-persona.md) | Agent Persona 完整定义（项目级 + 个人级，跨技能共享） |
+| [references/auto-gen-warning.md](references/auto-gen-warning.md) | LLM 自动生成危害与实证数据 |
+| [references/cross-tool-compat.md](references/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |
+| [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
+| [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|

@@ -68,7 +68,4 @@ writing-agent-docs（基础写作原则）
 
 ## 内容规则
 
-- `skills/writing-skill-md/authoring/`、`skills/structuring-project-agent-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
-- 文件名保持英文连字符风格，与现有命名一致
-- 参考文件（如 `reference/*.md`、`authoring/*.md`）必须在开头标注来源
 - 修改后通过 `pre-commit run markdownlint` 验证格式

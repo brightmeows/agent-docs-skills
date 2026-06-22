@@ -27,7 +27,7 @@ license: Apache-2.0
 
 面向代理的文档分**项目级**（仓库内 AGENTS.md / CLAUDE.md / .cursor/rules / GEMINI.md 等）
 和**个人级**（~/.claude/CLAUDE_GLOBAL.md / ~/.agents/AGENTS.md 等）。
-各作用域的文件清单、写作目标、加载顺序见 [`scope-and-loader.md`](scope-and-loader.md)。
+各作用域的文件清单、写作目标、加载顺序见 [`scope-and-loader.md`](references/scope-and-loader.md)。
 
 ---
 
@@ -148,7 +148,7 @@ export default function formatDate(date){ var result; ... }
 
 #### 8. 命名与路径规范
 
-- **正斜杠**（跨平台）：`reference/guide.md`，不用 `reference\guide.md`
+- **正斜杠**（跨平台）：`references/guide.md`，不用 `references\guide.md`
 - **描述性命名**：`form_validation_rules.md`，不用 `doc2.md`
 - **行号引用禁用**：用类型名 / 函数名 / 模块名，不用“第 42 行”
 - **命令带精确 flag**：`pytest -v` 而非“跑测试”
@@ -229,5 +229,5 @@ export default function formatDate(date){ var result; ... }
 
 | 文件 | 用途 |
 |---|---|
-| [scope-and-loader.md](./scope-and-loader.md) | 作用域与加载顺序的唯一定义（文件清单、流水线、优先级、两类作用域对比）|
-| [agent-persona.md](./agent-persona.md) | Agent Persona 定义（项目级 + 个人级，跨技能共享）|
+| [scope-and-loader.md](./references/scope-and-loader.md) | 作用域与加载顺序的唯一定义（文件清单、流水线、优先级、两类作用域对比）|
+| [agent-persona.md](./references/agent-persona.md) | Agent Persona 定义（项目级 + 个人级，跨技能共享）|

@@ -6,28 +6,28 @@
       "type": "skill-md",
       "description": "阐明代理文档写作的通用基础原则——token 效率、简洁优先、否定替代、增量迭代、示例优先、确定性约束优先。在创建、编辑或审校 AGENTS.md、SKILL.md、.cursor/rules、系统提示词等面向代理的文本时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:e298a96b607f38a207cfe5e851f9bc03ddff9e938276b7cd3890d864383af270"
+      "digest": "sha256:eaf0020daa8f25d2ac9a7128c155084aa5ab9f05b7c73692655aaf8d02e3aae4"
     },
     {
       "name": "structuring-project-agent-md",
       "type": "skill-md",
       "description": "指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:59588c7652bb6845d56d60efe1ed06670afb1de07283969af8066791aebc6574"
+      "digest": "sha256:aad814e97fd1001ddec0d2cc50c07f203d61b10a415037faf5139120ee9c9835"
     },
     {
       "name": "structuring-personal-agent-md",
       "type": "skill-md",
       "description": "指导个人级代理配置的创建与维护——个人偏好表达、Persona 设定、常驻上下文精简。在创建或编辑 ~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-personal-agent-md/SKILL.md",
-      "digest": "sha256:c2371f0a65f33b97293c1c89218c8480871c39278d25676f0d03b7391dce0457"
+      "digest": "sha256:d94a8f22f697e873c7aeb47aee8d332fecdb8818142a2ef1f778395c5fc49e9a"
     },
     {
       "name": "writing-skill-md",
       "type": "skill-md",
       "description": "指导 SKILL.md 的创建与格式——技能类型、YAML 前置元数据、CSO、渐进式披露、反模式与自检。在创建或编辑 skills/*/SKILL.md 及其 frontmatter、或部署前验证技能时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:3a61abc348dab47ea048562d38b427d61607d2324e8b871f670314ff50a3eb11"
+      "digest": "sha256:27c473ea1f0d0577e82c762429677a73dfe48c9624fef6d24209d1244aaa0c47"
     }
   ]
 }

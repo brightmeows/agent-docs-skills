@@ -111,7 +111,15 @@ skill-name/
 
 所有目录可选，仅在提供明确价值时添加。`authoring/` 是本仓库补充——官方标准未覆盖“代理常规任务不加载”这一类别。
 
-**分类标准是加载时机，不是内容来源**——`references/` 收纳所有代理按需加载的文档，不区分自撰参考与外部转载。不要自创按来源细分的子目录；不确定时参考 [anthropics/skills](https://github.com/anthropics/skills) 仓库的实际组织。
+**分类标准是加载时机，不是内容来源**——`references/` 收纳所有代理按需加载的文档，不区分自撰参考与外部转载。不确定时参考 [anthropics/skills](https://github.com/anthropics/skills) 仓库的实际组织。
+
+**子目录分类指导**：
+
+- **按主题/领域分**：参考文件多且有自然主题层次时，在 `references/` 内部按主题分子目录（官方 [Hierarchical Topics](https://anthropics-skills.mintlify.app/creating-skills/bundled-resources#reference-organization-patterns) 模式），如 `references/core/`、`references/extensions/`。
+- **纯参考型例外**：若 SKILL.md 为索引、主体全是参考文档，主题目录可直接做顶层（如 `memo/`、`ext/`），不强制套 `references/`。
+- **不要按内容来源分**：无论放顶层还是 `references/` 内，分类维度是主题/领域，不是来源（自撰 vs 转载）。
+
+**官方未覆盖的边界**（如 Gherkin 测试规格、示例数据）：可建自定义目录（如 `test/`、`samples/`），在 SKILL.md 中明确说明其用途与加载时机。官方约定是起点，不是终点。
 
 **何时分离到子文件：**
 
@@ -127,7 +135,8 @@ skill-name/
 
 - **自包含**——所有内容内联于 SKILL.md（适用：无需重量级参考）。
 - **带参考文档**——SKILL.md（概述 + 工作流）+ `references/`（按需加载的详细参考）。
-- **带可复用工具**——在带参考文档基础上增加 `scripts/`（可执行辅助代码）或 `assets/`（输出用资源）。
+- **索引型（纯参考）**——SKILL.md 为索引，参考文档按主题分目录存放（`memo/`、`ext/` 等）。参考文件多、需要按主题导航时适用。
+- **带可复用工具**——在上述任一模式基础上增加 `scripts/`（可执行辅助代码）或 `assets/`（输出用资源）。
 
 ## SKILL.md 结构
 

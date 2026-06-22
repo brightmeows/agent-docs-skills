@@ -1,9 +1,16 @@
 {
   "name": "agent-docs-skills",
-  "skills": [
-    "./skills/writing-agent-docs",
-    "./skills/structuring-project-agent-md",
-    "./skills/structuring-personal-agent-md",
-    "./skills/writing-skill-md"
+  "version": "0.2.2",
+  "description": "Meta-skills for AI coding assistants on writing effective agent documentation — AGENTS.md, SKILL.md, .cursor/rules, and system prompts.",
+  "homepage": "https://codeberg.org/brightmeows/agent-docs-skills",
+  "repository": "https://codeberg.org/brightmeows/agent-docs-skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-docs",
+    "agents-md",
+    "skill-md",
+    "cursor-rules",
+    "documentation",
+    "meta-skill"
   ]
 }

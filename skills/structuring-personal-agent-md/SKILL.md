@@ -1,6 +1,6 @@
 ---
 name: structuring-personal-agent-md
-description: 在创建或编辑个人级代理配置（~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则等）时使用。
+description: 指导个人级代理配置的创建——个人偏好表达、Persona 设定、常驻上下文精简。在创建或编辑 ~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则时使用。
 license: Apache-2.0
 ---
 

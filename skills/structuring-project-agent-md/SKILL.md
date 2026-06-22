@@ -1,6 +1,6 @@
 ---
 name: structuring-project-agent-md
-description: 在创建、修改或重构项目级代理配置文件（AGENTS.md、CLAUDE.md、.cursor/rules、GEMINI.md、.junie/guidelines.md 等）时使用。代理行为不符合预期时亦适用。
+description: 指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。
 license: Apache-2.0
 ---
 

@@ -4,30 +4,30 @@
     {
       "name": "writing-agent-docs",
       "type": "skill-md",
-      "description": "在创建、编辑或审校任何面向代理的文本（AGENTS.md、SKILL.md、.cursor/rules、.junie/guidelines.md、系统提示词、指南文件等）时使用。",
+      "description": "提供代理文档写作的通用基础原则——token 效率、简洁优先、否定替代、增量迭代、示例优先、确定性约束优先。在创建、编辑或审校 AGENTS.md、SKILL.md、.cursor/rules、系统提示词等面向代理的文本时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:a14afc5708b1102f021d229fbf8f3c0e4bb748e243c3b6791c9cdd0cacc33aaf"
+      "digest": "sha256:88d478302fac906106246b02473e356ace7c6f4ea34a5a274a7a9163e9d85b52"
     },
     {
       "name": "structuring-project-agent-md",
       "type": "skill-md",
-      "description": "在创建、修改或重构项目级代理配置文件（AGENTS.md、CLAUDE.md、.cursor/rules、GEMINI.md、.junie/guidelines.md 等）时使用。代理行为不符合预期时亦适用。",
+      "description": "指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:9feeb3046d6320e2e600b8070027055dcfc54d71feddece693ad6019c389c0f5"
+      "digest": "sha256:828044dd68bd4b9b3a5f050dd19726b6917ec64cb4190671b145eda98cd4b2c0"
     },
     {
       "name": "structuring-personal-agent-md",
       "type": "skill-md",
-      "description": "在创建或编辑个人级代理配置（~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则等）时使用。",
+      "description": "指导个人级代理配置的创建——个人偏好表达、Persona 设定、常驻上下文精简。在创建或编辑 ~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-personal-agent-md/SKILL.md",
-      "digest": "sha256:5a8d866953765867481be1422ee65263c96abdca3e3e35a47a615c6e4d637ce3"
+      "digest": "sha256:291c557e425c2b4c6e8bc98f6b637a47dbf1d42a349dd4affe4e5605d3c41067"
     },
     {
       "name": "writing-skill-md",
       "type": "skill-md",
-      "description": "在创建新技能、编辑现有技能或部署前验证技能时使用。",
+      "description": "指导 SKILL.md 的创建与格式——技能类型、YAML 前置元数据、CSO、渐进式披露、反模式与自检。在创建新技能、编辑现有技能或部署前验证时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:4bb86f5e8e6c7d57960707e563f2e1afddbff96c1536953cb47d6a9c37dd3f91"
+      "digest": "sha256:ba537ae890f4332e9b4c111a5c1edb15bca5cda2a194c3f8d39a3c21f8b17936"
     }
   ]
 }

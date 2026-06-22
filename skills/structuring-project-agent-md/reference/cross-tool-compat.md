@@ -44,9 +44,9 @@
 
 ## 标准化进展
 
-AGENTS.md v1.1 已进入标准化讨论（[GitHub issue #135](https://github.com/agentsmd/agents.md/issues/135)）。
+AGENTS.md v1.1 处于**草案提案**阶段（[GitHub issue #135](https://github.com/agentsmd/agents.md/issues/135)，尚未合入，保持完全向后兼容）。提案明确了管辖范围、累积、优先级、隐式继承四大语义，并定义了 AGENTS.md 与 SKILL.md 的职责边界（behavior vs capabilities）。
 
-**YAML Frontmatter**（渐进式披露，已定稿为可选）：可选的 frontmatter 允许代理在加载全文前建立轻量索引。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
+**YAML Frontmatter**（渐进式披露，提案为可选）：可选的 frontmatter 允许代理在加载全文前建立轻量索引。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
 
 ```yaml
 ---

@@ -38,7 +38,7 @@
 
 ## 加载差异
 
-各工具的完整加载流水线与个人级 / 项目级优先级见 [scope-and-loader.md](../../writing-agent-docs/scope-and-loader.md#典型工具的加载差异)。
+各工具的完整加载流水线与个人级 / 项目级优先级见 [scope-and-loader.md](../../writing-agent-docs/references/scope-and-loader.md#典型工具的加载差异)。
 
 ---
 

@@ -151,8 +151,8 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 | 错误 | 详见 |
 |---|---|---|
 | 含 README 内容 | 定位 |
-| 重复工具链已强制内容 | 写作原则 Toolchain First |
-| 自动生成不审校 | 写作原则 反自动化生成 / [auto-gen-warning.md](reference/auto-gen-warning.md) |
+| 重复工具链已强制内容（即 Lint Leakage）| 写作原则 Toolchain First / [配置异味检测](#配置异味检测) |
+| 自动生成不审校（即 Init Fossilization）| 写作原则 反自动化生成 / [配置异味检测](#配置异味检测) |
 | 不同工具各维护一份 | 维护唯一 AGENTS.md，symlink 到各工具入口文件（CLAUDE.md / GEMINI.md 等）|
 | 否定指令 | 前置 Skill（肯定指令优先） |
 | 边界规则混排在大表或单一列表 | 写作原则：三层边界 / 分小节放置 |
@@ -174,6 +174,8 @@ arXiv:2606.15828 分析了 100 个热门仓库的 AGENTS.md，识别出六种常
 | **Blind Reference**（16%） | 引用外部文件时不说明用途和场景 | 每条引用配一句话：什么内容、何时读 |
 
 **核心原则**：配置越精炼、越聚焦项目特有内容，代理表现越好。冗余指令每多一条，关键规则的注意力就少一分。
+
+> 异味 Lint Leakage 和 Init Fossilization 在上方[常见错误表](#常见错误)中也有对应条目（重复工具链已强制内容、自动生成不审校），从实践角度互为补充。
 
 ---
 

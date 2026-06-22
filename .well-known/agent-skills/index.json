@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:828044dd68bd4b9b3a5f050dd19726b6917ec64cb4190671b145eda98cd4b2c0"
+      "digest": "sha256:995eb31cf11b55eec34d7494d6bca99d771ab2d0e53d76c895e395e5f5d64020"
     },
     {
       "name": "structuring-personal-agent-md",

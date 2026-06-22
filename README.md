@@ -4,7 +4,7 @@
 >
 > 本仓库的每份技能都在编写过程中遵循了自身所教授的原则——是对技能开发方法论的践行而非仅说教。
 
-为 AI 编码助手编写的代理文档（AGENTS.md、SKILL.md）需要遵循特定的写作方法才能有效引导代理行为。本仓库记录并形式化了这些方法。
+为 AI 编码助手编写的代理文档（AGENTS.md、SKILL.md）需要遵循特定的写作方法才能有效引导代理行为。本仓库记录并形式化了这些方法。技能格式遵循 [Agent Skills](https://agentskills.io) 开放标准，通过 `.well-known/agent-skills` 规范实现自动发现。
 
 ## 技能
 
@@ -41,7 +41,7 @@ npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git#v0.2.0
 拉取 `main` 分支，始终最新：
 
 ```bash
-npx skills add https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main
+npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git
 ```
 
 ### 手动引用

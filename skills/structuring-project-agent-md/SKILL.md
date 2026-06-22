@@ -85,8 +85,8 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 4. **精简**：代理已能遵循的规则可移除
 5. **重复**
 
-**大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；arXiv:2606.15828 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
-超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（Gloaguen et al., 2026：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](reference/empirical-evidence.md)）。
+**大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；[arXiv:2606.15828](https://arxiv.org/abs/2606.15828) 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
+超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988)：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](reference/empirical-evidence.md)）。
 
 ### 重构
 
@@ -173,7 +173,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 ### 配置异味检测
 
-arXiv:2606.15828 分析了 100 个热门仓库的 AGENTS.md，识别出六种常见配置异味。编写和审计时应检查：
+[arXiv:2606.15828](https://arxiv.org/abs/2606.15828) 分析了 100 个热门仓库的 AGENTS.md，识别出六种常见配置异味。编写和审计时应检查：
 
 | 异味 | 说明 | 检查方法 |
 |------|------|---------|

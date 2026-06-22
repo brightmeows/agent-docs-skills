@@ -2,7 +2,7 @@
 
 > structuring-project-agent-md 参考文件：LLM 自动生成 AGENTS.md 的危害与实证数据（Gloaguen et al., 2026）。主文“反自动化生成”原则的数据支撑。
 
-Gloaguen et al.（2026, ETH Zurich）对 138 个任务实例（来自 12 个仓库）的实证研究（论文：[arXiv:2602.11988](https://arxiv.org/abs/2602.11988)）：
+[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988) 对 138 个任务实例（来自 12 个仓库）的实证研究发现：
 
 - LLM 自动生成的 AGENTS.md **一致降低代理任务成功率**，同时推理成本增加 20%+
 - 自动生成使 agent **多走 2.45–3.92 步/任务**——重复 agent 本可自行发现的内容，反致探索绕路

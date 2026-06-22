@@ -13,3 +13,4 @@ Thumbs.db
 # 构建产物（如有）
 /node_modules
 /tmp
+/downloads

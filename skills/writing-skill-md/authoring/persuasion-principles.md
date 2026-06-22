@@ -6,7 +6,7 @@
 
 LLM 与人类一样响应相同的说服原则。理解这一心理有助于你设计更有效的技能——目的不是操控，而是确保关键实践在压力下仍被遵守。
 
-**研究基础：** Meincke 等人（2025）在 N=28,000 个 AI 对话中测试了 7 项说服原则。说服技术使遵从率提升至两倍以上（33% → 72%，p < .001）。
+**研究基础：** [Meincke 等人（2025）](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5357179)在 N=28,000 个 AI 对话中测试了 7 项说服原则。说服技术使遵从率提升至两倍以上（33% → 72%，p < .001）。
 
 ## 七项原则
 
@@ -204,7 +204,7 @@ LLM 与人类一样响应相同的说服原则。理解这一心理有助于你�
 - 说服七原则
 - 影响力研究的实证基础
 
-**Meincke, L., Shapiro, D., Duckworth, A. L., Mollick, E., Mollick, L., & Cialdini, R. (2025).** Call Me A Jerk: Persuading AI to Comply with Objectionable Requests. University of Pennsylvania.
+**Meincke et al. (2025).** Call Me A Jerk: Persuading AI to Comply with Objectionable Requests. [SSRN 5357179](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5357179)。
 
 - 在 N=28,000 次 LLM 对话中测试了 7 项原则
 - 说服技术使遵从率从 33% 提升至 72%

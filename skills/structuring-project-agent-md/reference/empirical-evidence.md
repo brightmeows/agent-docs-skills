@@ -10,7 +10,7 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 
 ## Lulla et al. (2026) —— 运行效率
 
-Lulla, Mohsenimofidi, Galster, Zhang, Baltes, Treude（Singapore Management Univ. / Heidelberg / Bamberg / King's College London）。ICSE JAWs 2026。
+论文：[arXiv:2601.20404](https://arxiv.org/abs/2601.20404)——《On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents》。
 
 在 10 个仓库、124 个 PR 中测量（OpenAI Codex / gpt-5.2-codex，配对实验）：
 
@@ -18,9 +18,8 @@ Lulla, Mohsenimofidi, Galster, Zhang, Baltes, Treude（Singapore Management Univ
 - **中位输出 token 减少 16.6%**（均值 20.1%）
 - 任务完成行为可比——效率提升不以质量为代价
 
-## Gloaguen et al. (2026) —— 成功率与行为（ETH Zurich）
+## Gloaguen et al. (2026) —— 成功率与行为
 
-Gloaguen, Mündler, Müller, Raychev, Vechev（ETH Zurich SRI Lab）。ICLR 2026 Workshop。
 论文：[arXiv:2602.11988](https://arxiv.org/abs/2602.11988)——《Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?》。
 
 在 12 个仓库、138 个任务实例（AGENTbench）+ SWE-bench Lite 上测量（4 个 agent × 多模型）：
@@ -34,12 +33,12 @@ Gloaguen, Mündler, Müller, Raychev, Vechev（ETH Zurich SRI Lab）。ICLR 2026
 
 ## 内容分类实证
 
-- **Chatlatanagulchai et al. (2025)** "Agent READMEs"：context file 集中于功能性指令（构建/测试/实现），非功能性关注（性能/安全）稀少
-- **Mohsenimofidi et al. (2026)** MSR 2026：最常见类别为 conventions、architecture、project description——即代理最难自行推断的 core 项目知识
+- **Chatlatanagulchai et al. (2025)** "Agent READMEs"（[arXiv:2511.12884](https://arxiv.org/abs/2511.12884)）：context file 集中于功能性指令（构建/测试/实现），非功能性关注（性能/安全）稀少
+- **Mohsenimofidi et al. (2026)** MSR 2026（[arXiv:2510.21413](https://arxiv.org/abs/2510.21413)）：最常见类别为 conventions、architecture、project description——即代理最难自行推断的 core 项目知识
 
 ## 标准化趋势
 
-**NIST AI Agent Standards Initiative（2026-02）**——可互操作、安全的 AI agent 标准框架，为 agent 配置文件标准化方向提供背书。
+**[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)（2026-02）**——可互操作、安全的 AI agent 标准框架，为 agent 配置文件标准化方向提供背书。
 
 ## OpenAI Codex 默认截断
 

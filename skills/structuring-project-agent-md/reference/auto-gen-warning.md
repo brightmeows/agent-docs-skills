@@ -1,6 +1,6 @@
 # 警告：LLM 自动生成的 AGENTS.md 有害
 
-> structuring-project-agent-md 参考文件：LLM 自动生成 AGENTS.md 的危害与实证数据（Gloaguen et al., 2026）。主文"反自动化生成"原则的数据支撑。
+> structuring-project-agent-md 参考文件：LLM 自动生成 AGENTS.md 的危害与实证数据（Gloaguen et al., 2026）。主文“反自动化生成”原则的数据支撑。
 
 Gloaguen et al.（2026, ETH Zurich）对 138 个任务实例（来自 12 个仓库）的实证研究（论文：[arXiv:2602.11988](https://arxiv.org/abs/2602.11988)）：
 
@@ -12,4 +12,4 @@ Gloaguen et al.（2026, ETH Zurich）对 138 个任务实例（来自 12 个仓�
 
 产业实测印证（Augmentcode 博客, 2026）：最好的 AGENTS.md 带来相当于 Haiku→Opus 的质量跃升，最差的比没有 AGENTS.md 更糟。
 
-**结论**：不要依赖 `/init` 等自动生成命令。将生成结果作为"内容清单"参考，应用 Toolchain First 原则过滤后手工重写。
+**结论**：不要依赖 `/init` 等自动生成命令。将生成结果作为“内容清单”参考，应用 Toolchain First 原则过滤后手工重写。

@@ -27,7 +27,7 @@
       "type": "skill-md",
       "description": "指导 SKILL.md 的创建与格式——技能类型、YAML 前置元数据、CSO、渐进式披露、反模式与自检。在创建新技能、编辑现有技能或部署前验证时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:212fd1f9aedf5154c07c1d6c3a9579bf371992b6fa835246a1e9cad49e87a155"
+      "digest": "sha256:b7c2cb81a030930e4aa81314ebc842e4bc391f5dbd6f7ef43af2d60f11633528"
     }
   ]
 }

@@ -8,20 +8,21 @@
 - **产出物**：AGENTS.md、SKILL.md、.cursor/rules、系统提示词等 agent-facing 文档
 - **核心目标**：让代理能独立生成高质量、可发现、可遵从的代理文档
 
-因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 [writing-skill-md/authoring/tdd-validation.md](skills/writing-skill-md/authoring/tdd-validation.md)。
+因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 [writing-skill-md/authoring/tdd-validation.md](skills/agent-docs-skills/writing-skill-md/authoring/tdd-validation.md)。
 
 ## 命令
 
 ```bash
-# pre-commit（4 个任务：markdownlint + list 检查 + digest 检查 + spec 检查）
+# pre-commit（5 个任务：markdownlint + list 检查 + digest 检查 + name 一致性 + 格式检查）
 pre-commit run --all-files
 
 # 提交时自动触发钩子，也可手动指定单个任务
 pre-commit run check-well-known-digest       # index.json digest 与 SKILL.md 匹配
-pre-commit run check-skill-md-spec           # frontmatter name/description 与 body 行数合规
+pre-commit run check-skill-name-consistency  # frontmatter name/description 与 index.json 一致
+pre-commit run check-skill-md-format         # frontmatter 字段格式与 body 行数合规
 
 # 编辑 SKILL.md 后更新 index.json 中的 digest
-sha256sum skills/*/SKILL.md
+sha256sum skills/agent-docs-skills/*/SKILL.md
 ```
 
 ## 边界
@@ -29,7 +30,7 @@ sha256sum skills/*/SKILL.md
 ### Always
 
 - 修改 `.md` 后通过 `pre-commit run markdownlint` 验证（pre-commit 中以 `--config .markdownlint.toml` 覆盖默认规则，勿直接调用 markdownlint-cli2）
-- 修改 `skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
+- 修改 `skills/agent-docs-skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
 - 新增/移除技能目录时同步更新 `.well-known/agent-skills/index.json`（`.claude-plugin/plugin.json` 依赖默认 `skills/` 目录扫描，无需维护技能列表）
 - 发布新版本（release/tag）时，同步更新 `.claude-plugin/plugin.json` 的 `version` 字段和 `README.md` 中的安装命令版本引用
 - **修改任何技能前**，必须先读取 `writing-agent-docs`（基础写作原则）和对应的领域 skill（`writing-skill-md`、`structuring-project-agent-md` 或 `structuring-personal-agent-md`），并按其要求执行——本仓库是元技能仓库，技能本身即是规范

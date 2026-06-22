@@ -11,28 +11,36 @@ repos:
 
       - id: check-well-known-list
         name: Check well-known list
-        description: 验证 skills/ 目录与 index.json 条目一致
+        description: 验证 skills/ 下 SKILL.md 目录与 index.json 条目一致
         entry: bash
         args:
           - -c
           - |
             set -euo pipefail
             errors=0
-            index_names=$(jq -r '.skills[].name' .well-known/agent-skills/index.json | sort)
-            echo "=== skills 目录 vs index.json ==="
-            for dir in skills/*/; do
-              name=$(basename "$dir")
-              if ! echo "$index_names" | grep -q "^${name}$"; then
-                echo "  ERROR: skills/${name}/ 在 index.json 中无对应条目"
+            index_names=$(jq -r '.skills[].name' .well-known/agent-skills/index.json | sort -u)
+            fs_names=$(find skills -name SKILL.md -type f -printf '%h\n' | xargs -I{} basename {} | sort -u)
+            echo "=== SKILL.md 目录 vs index.json ==="
+
+            # Forward: 文件系统中有但 index.json 中无
+            missing_in_index=$(comm -23 <(echo "$fs_names") <(echo "$index_names"))
+            if [ -n "$missing_in_index" ]; then
+              while IFS= read -r name; do
+                path=$(find skills -path "*/$name/SKILL.md" -type f | head -1)
+                echo "  ERROR: $path 的 name='$name' 在 index.json 中无对应条目"
                 errors=$((errors + 1))
-              fi
-            done
-            for name in $index_names; do
-              if [ ! -f "skills/$name/SKILL.md" ]; then
-                echo "  ERROR: index.json 中 '$name' 无 skills/$name/SKILL.md"
+              done <<< "$missing_in_index"
+            fi
+
+            # Reverse: index.json 中有但文件系统中无
+            missing_on_fs=$(comm -13 <(echo "$fs_names") <(echo "$index_names"))
+            if [ -n "$missing_on_fs" ]; then
+              while IFS= read -r name; do
+                echo "  ERROR: index.json 中 '$name' 无对应的 SKILL.md 文件"
                 errors=$((errors + 1))
-              fi
-            done
+              done <<< "$missing_on_fs"
+            fi
+
             if [ "$errors" -gt 0 ]; then
               echo "FAILED: ${errors} 个错误"
               exit 1
@@ -51,17 +59,17 @@ repos:
             set -euo pipefail
             errors=0
             echo "=== SHA256 digest 匹配检查 ==="
-            while IFS="$(printf '\t')" read -r name expected_digest; do
-              skill_file="skills/$name/SKILL.md"
-              if [ ! -f "$skill_file" ]; then
-                echo "  ERROR: $skill_file 不存在"
+            while IFS=$'\t' read -r name expected_digest; do
+              skill_file=$(find skills -path "*/$name/SKILL.md" -type f | head -1)
+              if [ -z "$skill_file" ]; then
+                echo "  ERROR: index.json 中 '$name' 对应的 SKILL.md 不存在"
                 errors=$((errors + 1))
                 continue
               fi
               computed=$(sha256sum "$skill_file" | cut -d' ' -f1)
               expected=$(echo "$expected_digest" | sed 's/^sha256://')
               if [ "$computed" != "$expected" ]; then
-                echo "  ERROR: $name digest 不匹配"
+                echo "  ERROR: $name digest 不匹配 ($skill_file)"
                 echo "         index.json:  sha256:${expected}"
                 echo "         实际值:      sha256:${computed}"
                 errors=$((errors + 1))
@@ -75,35 +83,63 @@ repos:
         language: system
         pass_filenames: false
 
-      - id: check-skill-md-spec
-        name: Check SKILL.md spec
+      - id: check-skill-name-consistency
+        name: Check SKILL.md name consistency
         description: |
-          验证 SKILL.md frontmatter 与 body 符合 writing-skill-md 自定规则
-          (name 与父目录一致、name/description 长度、body 行数、
-          frontmatter description 与 index.json 一致)
+          验证 SKILL.md frontmatter name 与父目录一致、
+          description 与 index.json 一致
         entry: bash
         args:
           - -c
           - |
             set -euo pipefail
             errors=0
-            echo "=== SKILL.md spec 校验 ==="
-            for skill_file in skills/*/SKILL.md; do
-              [ -f "$skill_file" ] || continue
+            echo "=== SKILL.md 名称一致性检查 ==="
+            while IFS= read -r skill_file; do
               name=$(basename "$(dirname "$skill_file")")
-
-              # 提取 frontmatter 中的 name 和 description
               fm_name=$(awk '/^---$/{flag++; next} flag==1 && /^name:/{sub(/^name:[[:space:]]*/,""); print; exit}' "$skill_file")
               fm_desc=$(awk '/^---$/{flag++; next} flag==1 && /^description:/{sub(/^description:[[:space:]]*/,""); print; exit}' "$skill_file")
 
-              # 1. name 与父目录名一致
+              # name 与父目录名一致
               if [ "$fm_name" != "$name" ]; then
                 echo "  ERROR: $skill_file"
                 echo "         frontmatter name='$fm_name' ≠ 父目录名='$name'"
                 errors=$((errors + 1))
               fi
 
-              # 2. name ≤64 字符、仅小写字母/数字/连字符、无连续或首尾连字符
+              # description 与 index.json 一致
+              index_desc=$(jq -r --arg n "$name" '.skills[] | select(.name == $n) | .description' .well-known/agent-skills/index.json)
+              if [ "$fm_desc" != "$index_desc" ]; then
+                echo "  ERROR: $skill_file"
+                echo "         frontmatter description ≠ index.json description"
+                errors=$((errors + 1))
+              fi
+            done < <(find skills -name SKILL.md -type f | sort)
+            if [ "$errors" -gt 0 ]; then
+              echo "FAILED: ${errors} 个一致性错误"
+              exit 1
+            fi
+            echo "OK: 所有名称一致"
+        language: system
+        pass_filenames: false
+
+      - id: check-skill-md-format
+        name: Check SKILL.md format
+        description: |
+          验证 SKILL.md frontmatter 字段格式与 body 行数合规
+          (name 格式、description 长度、body 行数)
+        entry: bash
+        args:
+          - -c
+          - |
+            set -euo pipefail
+            errors=0
+            echo "=== SKILL.md 格式检查 ==="
+            while IFS= read -r skill_file; do
+              fm_name=$(awk '/^---$/{flag++; next} flag==1 && /^name:/{sub(/^name:[[:space:]]*/,""); print; exit}' "$skill_file")
+              fm_desc=$(awk '/^---$/{flag++; next} flag==1 && /^description:/{sub(/^description:[[:space:]]*/,""); print; exit}' "$skill_file")
+
+              # name ≤64 字符、仅小写字母/数字/连字符、无连续或首尾连字符
               if [ ${#fm_name} -gt 64 ]; then
                 echo "  ERROR: $skill_file name 超过 64 字符（当前 ${#fm_name}）"
                 errors=$((errors + 1))
@@ -113,13 +149,12 @@ repos:
                 echo "         （仅小写字母/数字/连字符，无连续或首尾连字符）"
                 errors=$((errors + 1))
               fi
-              # name 不得含保留词(anthropic/claude)
               if echo "$fm_name" | grep -qi 'anthropic\|claude'; then
                 echo "  ERROR: $skill_file name='$fm_name' 含保留词（不得含 anthropic/claude）"
                 errors=$((errors + 1))
               fi
 
-              # 3. description ≤1024 字符
+              # description ≤1024 字符
               desc_len=${#fm_desc}
               if [ "$desc_len" -gt 1024 ]; then
                 echo "  ERROR: $skill_file description 超过 1024 字符（当前 $desc_len）"
@@ -131,25 +166,17 @@ repos:
                 errors=$((errors + 1))
               fi
 
-              # 4. body <500 行（不含 frontmatter）
+              # body <500 行（不含 frontmatter）
               body_lines=$(awk '/^---$/{flag++; next} flag>=2{count++} END{print count+0}' "$skill_file")
               if [ "$body_lines" -ge 500 ]; then
                 echo "  ERROR: $skill_file body ≥500 行（当前 $body_lines，目标 <500）"
                 errors=$((errors + 1))
               fi
-
-              # 5. frontmatter description 与 index.json 一致
-              index_desc=$(jq -r --arg n "$name" '.skills[] | select(.name == $n) | .description' .well-known/agent-skills/index.json)
-              if [ "$fm_desc" != "$index_desc" ]; then
-                echo "  ERROR: $skill_file"
-                echo "         frontmatter description ≠ index.json description"
-                errors=$((errors + 1))
-              fi
-            done
+            done < <(find skills -name SKILL.md -type f | sort)
             if [ "$errors" -gt 0 ]; then
-              echo "FAILED: ${errors} 个 spec 错误"
+              echo "FAILED: ${errors} 个格式错误"
               exit 1
             fi
-            echo "OK: 所有 SKILL.md 符合 spec"
+            echo "OK: 所有 SKILL.md 格式合规"
         language: system
         pass_filenames: false

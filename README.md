@@ -10,10 +10,10 @@
 
 | 技能 | 前驱依赖 | 说明 |
 |------|----------|------|
-| [writing-agent-docs](skills/writing-agent-docs/SKILL.md) | — | **代理文档写作通用规则**。所有面向代理文本的基础（AGENTS.md、SKILL.md、.cursor/rules、系统提示词等）。核心原则：上下文是公共资源、每 token 须自证价值、确定性约束优先。 |
-| [writing-skill-md](skills/writing-skill-md/SKILL.md) | writing-agent-docs | **SKILL.md 技能编写**。面向代理的实操指南：技能类型、目录结构、SKILL.md 结构、CSO、流程图、反模式、写完即自检。末尾含人类作者 TDD 验证方法参考（压力测试、对抗合理化）。 |
-| [structuring-project-agent-md](skills/structuring-project-agent-md/SKILL.md) | writing-agent-docs | **项目级代理配置指南**（AGENTS.md / CLAUDE.md / .cursor/rules）。层级作用域、Always/Ask/Never 三层边界、Toolchain First、反自动化生成、增量迭代法。含 CLAUDE.md 专属指导与 .cursor/rules 格式。 |
-| [structuring-personal-agent-md](skills/structuring-personal-agent-md/SKILL.md) | writing-agent-docs | **个人级代理配置指南**（CLAUDE_GLOBAL.md / 个人 AGENTS.md）。全局偏好、Persona 定义、个人级写作原则与常见模式。 |
+| [writing-agent-docs](skills/agent-docs-skills/writing-agent-docs/SKILL.md) | — | **代理文档写作通用规则**。所有面向代理文本的基础（AGENTS.md、SKILL.md、.cursor/rules、系统提示词等）。核心原则：上下文是公共资源、每 token 须自证价值、确定性约束优先。 |
+| [writing-skill-md](skills/agent-docs-skills/writing-skill-md/SKILL.md) | writing-agent-docs | **SKILL.md 技能编写**。面向代理的实操指南：技能类型、目录结构、SKILL.md 结构、CSO、流程图、反模式、写完即自检。末尾含人类作者 TDD 验证方法参考（压力测试、对抗合理化）。 |
+| [structuring-project-agent-md](skills/agent-docs-skills/structuring-project-agent-md/SKILL.md) | writing-agent-docs | **项目级代理配置指南**（AGENTS.md / CLAUDE.md / .cursor/rules）。层级作用域、Always/Ask/Never 三层边界、Toolchain First、反自动化生成、增量迭代法。含 CLAUDE.md 专属指导与 .cursor/rules 格式。 |
+| [structuring-personal-agent-md](skills/agent-docs-skills/structuring-personal-agent-md/SKILL.md) | writing-agent-docs | **个人级代理配置指南**（CLAUDE_GLOBAL.md / 个人 AGENTS.md）。全局偏好、Persona 定义、个人级写作原则与常见模式。 |
 
 ### 依赖关系
 

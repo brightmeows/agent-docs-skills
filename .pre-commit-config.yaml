@@ -113,11 +113,21 @@ repos:
                 echo "         （仅小写字母/数字/连字符，无连续或首尾连字符）"
                 errors=$((errors + 1))
               fi
+              # name 不得含保留词(anthropic/claude)
+              if echo "$fm_name" | grep -qi 'anthropic\|claude'; then
+                echo "  ERROR: $skill_file name='$fm_name' 含保留词（不得含 anthropic/claude）"
+                errors=$((errors + 1))
+              fi
 
               # 3. description ≤1024 字符
               desc_len=${#fm_desc}
               if [ "$desc_len" -gt 1024 ]; then
                 echo "  ERROR: $skill_file description 超过 1024 字符（当前 $desc_len）"
+                errors=$((errors + 1))
+              fi
+              # name/description 不得含 XML 标签
+              if echo "$fm_name$fm_desc" | grep -qE '<[^>]+>'; then
+                echo "  ERROR: $skill_file name/description 含 XML 标签"
                 errors=$((errors + 1))
               fi
 

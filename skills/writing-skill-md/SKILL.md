@@ -119,15 +119,21 @@ skills/
 
 - 两个必需字段：`name` 和 `description`（所有支持字段见 [agentskills.io/specification](https://agentskills.io/specification)）
 - `name`：≤64 字符，仅小写字母、数字、连字符；不得连续连字符（`--`）、不得首尾连字符、**必须与父目录名一致**
-- `description`：≤1024 字符，触发条件导向（第三人称、仅描述何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
-- 可选字段：`license`（许可证）、`compatibility`（≤500 字符，环境/工具要求）、`metadata`（任意键值对，如 author/version）、`allowed-tools`（实验性，预批准工具列表）
+  - **推荐动名词（gerund）形式**：`processing-pdfs`、`testing-code`、`managing-databases`，语义清晰地描述技能提供的能力
+  - 也可用名词短语：`pdf-processing`、`code-review`；避免模糊命名：`helper`、`utils`、`tools`
+- `description`：≤1024 字符，触发条件导向（第三人称、描述做什么 + 何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
+- 可选字段（完整规范见 [agentskills.io/specification](https://agentskills.io/specification)）：
+  - **标准元数据**：`license`（许可证）、`compatibility`（≤500 字符，环境/工具要求）、`metadata`（任意键值对）
+  - **控制加载**：`disable-model-invocation`（阻止自动加载，仅手动触发）、`user-invocable`（从 `/` 菜单隐藏）
+  - **工具权限**：`allowed-tools`（技能激活期间预批准的工具白名单）、`disallowed-tools`（技能激活期间移除的工具）
+  - **运行时**：`model`（指定模型）、`context: fork`（隔离 subagent 运行）、`arguments`（命名参数替换，`$name` 语法）
 
 **主体大小**：SKILL.md body 保持 <500 行；接近上限时拆分到参考文件（超 100 行的参考文件加目录）。
 
 ```markdown
 ---
 name: Skill-Name-With-Hyphens
-description: 在以下情况使用：[具体触发条件和症状]
+description: [做什么]. 在以下情况使用：[具体触发条件和症状]
 ---
 
 # 技能名称
@@ -162,9 +168,10 @@ description: 在以下情况使用：[具体触发条件和症状]
 
 **对发现性至关重要：** 未来的 Claude 通过读取 description 决定是否加载你的技能。
 
-**核心原则：描述 = 何时使用，而非技能做什么。**
+**核心原则：描述 = 做什么 + 何时使用，绝不总结工作流。**
 
-- 以 “Use when...” 开头，聚焦触发条件与症状
+- 前半句说明技能功能（做什么），后半句聚焦触发条件与症状（何时使用）
+  - 模式：`[做什么]. Use when [触发条件].` 或 `[做什么]. [触发条件时] 使用。`
 - **绝不总结技能的过程或工作流**——测试发现，描述若总结工作流，Claude 会只跟随描述而跳过技能主体
 - 第三人称、含具体症状、与技术无关（除非技能本身技术特定）
 
@@ -173,8 +180,8 @@ description: 在以下情况使用：[具体触发条件和症状]
 ```yaml
 # 坏：总结了工作流——Claude 可能跟随它而非阅读技能
 description: 在执行计划时使用——按任务分发 subagent，任务间进行代码审查
-# 好：仅触发条件，无工作流总结
-description: 在当前会话中执行含独立任务的实施计划时使用
+# 好：功能 + 触发条件，无工作流总结
+description: 协调多个 subagent 执行跨任务实施计划。在当前会话中涉及多个独立任务时使用。
 ```
 
 关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **[claude-search-optimization.md](./claude-search-optimization.md)**。
@@ -249,6 +256,27 @@ step2 [label="read file"];
 helper1、helper2、step3、pattern4
 **为什么不好：** 标签应有语义含义
 
+## 安全考虑
+
+技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险（SkillAttack, arXiv:2604.04989 对 100 个真实技能分析发现 26.1% 存在可被利用的漏洞）。
+
+### 编写安全注意事项
+
+- **避免在脚本中硬编码凭证**——API key、token 等不应包含在技能脚本或参考文件中
+- **`allowed-tools` 遵循最小权限原则**——只给技能完成任务所需的最小工具集，避免开放 `Bash(*)`、`Read(*)` 等通配权限
+- **公开分发的技能需审计脚本**——`scripts/` 目录下的可执行文件可能被代理在用户环境中运行，必须确保无害
+- **description 不暴露敏感信息**——技能描述注入系统提示词，不应包含内部路径、凭证或密钥
+- **来源不明技能不自动加载**——来自不可信源的技能应先审阅 SKILL.md 和脚本再启用
+
+### 发现即检查清单
+
+部署前额外确认：
+
+- [ ] 无硬编码凭证或密钥
+- [ ] `allowed-tools` 未过度授权
+- [ ] 脚本文件安全（不执行危险操作）
+- [ ] description 不暴露敏感信息
+
 ## 验证与自检
 
 **核心原则：未经验证的技能 = 未经验证的代码。** 但验证强度因技能类型而异，代理可执行的自检是所有类型的基础。
@@ -257,7 +285,7 @@ helper1、helper2、step3、pattern4
 
 部署前逐项确认（所有技能类型，代理可执行）：
 
-- [ ] description 以 “Use when...” 开头，仅含触发条件，未总结工作流
+- [ ] description 格式为“做什么 + 何时使用”，未总结工作流
 - [ ] 全文含搜索关键词（错误信息、症状、工具名）
 - [ ] 概述含核心原则，一两句话
 - [ ] 代码示例完整可运行，来自真实场景
@@ -287,10 +315,10 @@ helper1、helper2、step3、pattern4
 
 **编写中——结构与内容：**
 
-- [ ] 名称仅用小写字母、数字、连字符（无连续/首尾连字符，与父目录名一致，≤64 字符）
-- [ ] YAML 前置元数据含必需的 `name`（≤64）和 `description`（≤1024）字段；见 [规范](https://agentskills.io/specification)
-- [ ] description 以 “Use when...” 开头并包含具体触发器/症状
-- [ ] description 以第三人称编写，未总结工作流
+- [ ] 名称仅用小写字母、数字、连字符（无连续/首尾连字符，与父目录名一致，≤64 字符）；推荐**动名词形式**（`processing-pdfs`）
+- [ ] YAML 前置元数据含必需的 `name`（≤64）和 `description`（≤1024）字段；可选字段视需要添加（`allowed-tools`、`disable-model-invocation` 等）——见 [规范](https://agentskills.io/specification)
+- [ ] description 格式为“做什么 + 何时使用”，未总结工作流
+- [ ] description 以第三人称编写，含具体触发条件/症状
 - [ ] 全文含搜索关键词（错误、症状、工具）
 - [ ] 清晰的概述含核心原则
 - [ ] 代码内联或链接到单独文件
@@ -303,6 +331,7 @@ helper1、helper2、step3、pattern4
 
 - [ ] 完成上方 [写完即自检](#写完即自检) 全部项
 - [ ] 走查：代理能否找到（CSO）、能否理解（结构）、能否遵从（清晰）
+- [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息
 - [ ] （纪律执行型）考虑跑基线测试——见 [tdd-validation.md](./tdd-validation.md)
 
 **部署：**

@@ -3,6 +3,7 @@
 > 本文件仅保留 **writing-agent-docs（通用写作规则）与 writing-skill-md（SKILL.md 专属）未覆盖** 的 Anthropic 官方补充指导。简洁、渐进式披露、description 规范、命名、评估迭代等主题见那两个 skill。
 > 完整、随官方更新的原文与资源：
 >
+> - [The Complete Guide to Building Skills for Claude](https://claude.com/blog/complete-guide-to-building-skills-for-claude)（32 页完整指南，含 3 种测试方法、micro-skills 模式——[PDF 直链](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)）
 > - [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)（官方文档）
 > - [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)（工程博客）
 > - [anthropics/skills](https://github.com/anthropics/skills)（官方技能实现参考）

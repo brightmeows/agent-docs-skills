@@ -28,7 +28,7 @@ sha256sum skills/*/SKILL.md
 
 ### Always
 
-- 修改 `.md` 后运行 `markdownlint` 验证
+- 修改 `.md` 后通过 `pre-commit run markdownlint` 验证（pre-commit 中以 `--config .markdownlint.toml` 覆盖默认规则，勿直接调用 markdownlint-cli2）
 - 修改 `skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
 - 新增/移除技能目录时同步更新 `.well-known/agent-skills/index.json`（`.claude-plugin/plugin.json` 依赖默认 `skills/` 目录扫描，无需维护技能列表）
 - 发布新版本（release/tag）时，同步更新 `.claude-plugin/plugin.json` 的 `version` 字段和 `README.md` 中的安装命令版本引用
@@ -71,4 +71,4 @@ writing-agent-docs（基础写作原则）
 - `skills/writing-skill-md/authoring/`、`skills/structuring-project-agent-md/reference/` 等子文档只修改格式问题，不修改实质性内容；`SKILL.md` 索引文件允许结构编辑和措辞优化
 - 文件名保持英文连字符风格，与现有命名一致
 - 参考文件（如 `reference/*.md`、`authoring/*.md`）必须在开头标注来源
-- 修改后运行 `markdownlint` 验证格式
+- 修改后通过 `pre-commit run markdownlint` 验证格式

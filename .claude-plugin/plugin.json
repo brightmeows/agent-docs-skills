@@ -1,6 +1,6 @@
 {
   "name": "agent-docs-skills",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Meta-skills for AI coding assistants on writing effective agent documentation — AGENTS.md, SKILL.md, .cursor/rules, and system prompts.",
   "homepage": "https://codeberg.org/brightmeows/agent-docs-skills",
   "repository": "https://codeberg.org/brightmeows/agent-docs-skills",

@@ -24,7 +24,7 @@ license: Apache-2.0
 
 ## 前置 Skill
 
-**必须先激活 [`writing-agent-docs`](../writing-agent-docs/SKILL.md)**——代理文档写作的通用规则。本技能仅承载 SKILL.md 专属内容（技能类型、CSO、三级渐进式披露、反模式、自检），不重复通用规则。
+**必须先激活 [`writing-agent-docs`](../writing-agent-docs/SKILL.md)——禁止以任何理由绕过此步骤。** 代理文档写作的通用规则。本技能仅承载 SKILL.md 专属内容（技能类型、CSO、三级渐进式披露、反模式、自检），不重复通用规则。
 
 ---
 

@@ -13,21 +13,21 @@
       "type": "skill-md",
       "description": "指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:aad814e97fd1001ddec0d2cc50c07f203d61b10a415037faf5139120ee9c9835"
+      "digest": "sha256:9bfa36ca0c7315291673f60108831e0e22446b001d3e9d18852cad6b0ac2c27b"
     },
     {
       "name": "structuring-personal-agent-md",
       "type": "skill-md",
       "description": "指导个人级代理配置的创建与维护——个人偏好表达、Persona 设定、常驻上下文精简。在创建或编辑 ~/.claude/CLAUDE_GLOBAL.md、个人 AGENTS.md、~/.cursor/rules 全局规则时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/structuring-personal-agent-md/SKILL.md",
-      "digest": "sha256:d94a8f22f697e873c7aeb47aee8d332fecdb8818142a2ef1f778395c5fc49e9a"
+      "digest": "sha256:0d91069f7766409ac5c7d7d746395f957e98653950fa682f5cdc623e0d09d50e"
     },
     {
       "name": "writing-skill-md",
       "type": "skill-md",
       "description": "指导 SKILL.md 的创建与格式——技能类型、YAML 前置元数据、CSO、渐进式披露、反模式与自检。在创建或编辑 skills/*/SKILL.md 及其 frontmatter、或部署前验证技能时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:33883310a86e205ed9228857415133f8343a4823722f5cd2f4531929f4a1fa9f"
+      "digest": "sha256:9775d719dcd15db135fe5889b93552b9c030c8c2ad496779be2e4d79edc9478b"
     }
   ]
 }

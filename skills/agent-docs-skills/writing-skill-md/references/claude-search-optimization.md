@@ -156,7 +156,7 @@ wc -w skills/path/SKILL.md
 
 区分本地与外部技能，并加明确要求标记：
 
-- 好：本地同级技能用相对路径链接 + 必须激活标记——`**必须先激活 [writing-agent-docs](../../writing-agent-docs/SKILL.md)**`
+- 好：本地同级技能用相对路径链接 + 必须激活标记——`**必须先激活 [writing-agent-docs](../../writing-agent-docs/SKILL.md)——禁止以任何理由绕过此步骤**`
 - 好：外部命名空间技能用技能名 + 必须理解标记——`**必需背景：** 你 MUST 理解 superpowers:systematic-debugging`
 - 坏：`@skills/writing-agent-docs/SKILL.md`（强制加载，浪费上下文）
 

@@ -12,7 +12,7 @@ license: Apache-2.0
 
 ## 前置 Skill
 
-**必须先激活 [`writing-agent-docs`](../writing-agent-docs/SKILL.md)。**
+**必须先激活 [`writing-agent-docs`](../writing-agent-docs/SKILL.md)——禁止以任何理由绕过此步骤。**
 
 该技能定义代理文档写作的通用规则。本技能仅承载项目级配置专属内容，不重复通用规则——遇通用写作决策时回退到前置 Skill。
 

@@ -1,6 +1,6 @@
 ---
 name: structuring-project-agent-md
-description: 指导项目级代理配置的创建与维护——层级结构、Toolchain First、Always/Ask/Never 边界、常见异味检测。在创建或修改 AGENTS.md、CLAUDE.md、.cursor/rules 等文件，或代理行为不符合预期时使用。
+description: 指导项目级代理配置文件的创建、维护与审计。在创建或修改仓库内 AGENTS.md、CLAUDE.md、.cursor/rules，或代理在项目中反复犯错、忽略约定、配置臃肿/冲突时使用。
 license: Apache-2.0
 ---
 

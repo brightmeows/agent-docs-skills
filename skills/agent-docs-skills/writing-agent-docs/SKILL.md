@@ -1,6 +1,6 @@
 ---
 name: writing-agent-docs
-description: 阐明代理文档写作的通用基础原则——token 效率、简洁优先、否定替代、增量迭代、示例优先、确定性约束优先。在创建、编辑或审校 AGENTS.md、SKILL.md、.cursor/rules、系统提示词等面向代理的文本时使用。
+description: 提供代理文档写作的通用基础原则与约束。在创建、编辑或审校 AGENTS.md、SKILL.md、.cursor/rules、系统提示词等面向代理的文本前使用；是 structuring-project-agent-md、writing-skill-md 与 structuring-personal-agent-md 的前置依赖。
 license: Apache-2.0
 ---
 

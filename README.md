@@ -35,7 +35,7 @@ writing-agent-docs（基础写作原则）
 锁定到指定 release tag：
 
 ```bash
-npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git#v0.2.5
+npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git#v0.2.6
 ```
 
 拉取 `main` 分支，始终最新：

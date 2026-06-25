@@ -31,6 +31,19 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 - **Context Map 价值有限**：目录映射对实现任务的文件发现加速不显著——代理已能自主导航。真实价值在于新会话的架构定向（spec 编写、错误分类、ADR 撰写），而非实现代理的导航捷径
 - 移除现有文档后 LLM 生成文件反而 +2.7%——说明生成内容多与现有文档冗余
 
+## McMillan (2026) —— 结构变量与即时遵从
+
+论文：[arXiv:2605.10039](https://arxiv.org/abs/2605.10039)——《Instruction Adherence in Coding Agent Configuration Files: A Factorial Study of Four File-Structure Variables》。
+
+在 1,650 个 Claude Code CLI 会话（16,050 函数级观测，Sonnet 4.6 主力 + Opus 4.6 交叉验证）上做因子实验，检验四个文件结构变量：
+
+- **文件大小、指令位置、文件架构、相邻文件冲突**——四个变量均未产生可检测的对比效应（多重检验校正后）
+- size 与 conflict 的 null 有贝叶斯因子支持（BF10 0.05–0.10）；position 与 architecture 为未能拒绝但无 BF 支持
+- **最大效应是会话内**：每多生成一个函数，单步遵从概率约 −5.6%（OR=0.944），关系非单调
+- 测试对象为单条 trivial 标注指令的**即时遵从**，非整体成功率或成本——故与 Gloaguen（成本）/ dos Santos（相关性）测的维度不同，三者互补而非矛盾
+
+**启示**：不必过度优化指令的具体位置与文件架构；真正该关注的是会话长度管理（任务分解、定期重置上下文）。
+
 ## 内容分类实证
 
 - **Chatlatanagulchai et al. (2025)** "Agent READMEs"（[arXiv:2511.12884](https://arxiv.org/abs/2511.12884)）：context file 集中于功能性指令（构建/测试/实现），非功能性关注（性能/安全）稀少

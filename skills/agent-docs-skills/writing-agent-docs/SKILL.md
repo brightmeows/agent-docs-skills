@@ -36,6 +36,8 @@ license: Apache-2.0
 - **上下文是公共资源**：文档与系统提示、对话历史、其他元数据抢同一个有限注意力预算
 - **每 token 须自证价值**：目标是找到“最大化期望结果的最小高信号 token 集”
 
+> 这些原则是 **context engineering**（结构化、维护、治理塑造 AI 行为的信息）的具体应用——框架见 [Anthropic 官方指南](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)。
+
 质疑每条信息：
 
 - 模型真的需要吗？
@@ -104,7 +106,8 @@ with pdfplumber.open("file.pdf") as pdf: ...
 
 #### 5. 肯定指令优先，否定慎用
 
-- 告诉 LLM“不要做 X”反而强化对其的 attention（Pink Elephant Problem）
+- 告诉 LLM“不要做 X”反而强化对其的 attention（Pink Elephant Problem）。机制上，**提及禁用词本身就会 prime 模型产生它**
+- [Rana, 2026](https://arxiv.org/abs/2601.08070)（n=40,000）发现否定约束的违反中 **87.5% 属“priming failure”**：命名禁用词激活目标表征（logit lens 定位于第 23–27 层因果负责），仅 12.5% 属晚期 FFN 覆盖失败
 - **默认改写为肯定**；硬性禁令须保留否定时，**必须配一个明确的肯定替代**
 
 ```markdown
@@ -183,6 +186,8 @@ export default function formatDate(date){ var result; ... }
 - Markdown 分节
 - **原子任务**：不合并可独立完成的步骤
 - **bookend**：关键规则放文件顶部和任务区前（长上下文中部 attention 最弱）
+- 边界：单条指令的**即时遵从**对位置不敏感——[McMillan, 2026](https://arxiv.org/abs/2605.10039) 在 Claude Code（1,650 会话）未检测到位置效应
+- 真正的遵从衰减来自**会话内长度**（每多生成一个函数，单步遵从约 −5.6%）。故 bookend 服务于整体可读性与长会话稳健性，而非保证某条规则被即时遵从
 - 步骤仅用于真正有顺序的工作流；并列任务用 bullet 不用编号（避免引入伪顺序）
 
 ---

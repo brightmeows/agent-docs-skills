@@ -12,4 +12,6 @@
 
 产业实测印证（Augmentcode 博客, 2026）：最好的 AGENTS.md 带来相当于 Haiku→Opus 的质量跃升，最差的比没有 AGENTS.md 更糟。
 
+**关键区分——问题在“自动生成”，不在文件本身**：同期 [Lulla et al., 2026](https://arxiv.org/abs/2601.20404) 在 10 仓库 / 124 PR 测得**手写** AGENTS.md 使运行时间 −28.6%、token −16.6%。即手写精简提升效率，自动生成损害效率。`/init` 等结果必须手工重写，而非弃用 AGENTS.md。
+
 **结论**：不要依赖 `/init` 等自动生成命令。将生成结果作为“内容清单”参考，应用 Toolchain First 原则过滤后手工重写。

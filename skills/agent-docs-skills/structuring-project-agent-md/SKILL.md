@@ -86,7 +86,13 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 5. **重复**
 
 **大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；[dos Santos et al., 2026](https://arxiv.org/abs/2606.15828) 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
-超出后冗余内容会推高推理成本、削弱代理对关键规则的注意力（[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988)：context file 中不必要指令使推理 token 增加 14–22%——详见 [empirical-evidence.md](references/empirical-evidence.md)）。
+
+实证呈现张力——**效果由内容质量与精简度共同决定，而非“有无”本身**：
+
+- **手写精简有益**：[Lulla et al., 2026](https://arxiv.org/abs/2601.20404) 在 10 仓库 / 124 PR 配对实验中测得手写 AGENTS.md 使中位运行时间 **−28.6%**、输出 token **−16.6%**，且任务完成行为可比——精简文件提升效率。
+- **冗余内容有害**：[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988) 发现 context file 中不必要指令使推理 token **+14–22%**，自动生成更是一致降低成功率。
+
+结论：精简、聚焦非显而易见内容是收益来源；冗余与自动生成是成本来源（详见 [empirical-evidence.md](references/empirical-evidence.md)）。
 
 ### 重构
 

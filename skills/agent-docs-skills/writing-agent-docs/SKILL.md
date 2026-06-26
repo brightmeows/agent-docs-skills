@@ -27,7 +27,7 @@ license: Apache-2.0
 
 面向代理的文档分**项目级**（仓库内 AGENTS.md / CLAUDE.md / .cursor/rules / GEMINI.md 等）
 和**个人级**（~/.claude/CLAUDE_GLOBAL.md / ~/.agents/AGENTS.md 等）。
-各作用域的文件清单、写作目标、加载顺序见本地参考[L1]。
+各作用域的文件清单、写作目标、加载顺序见[L1]。
 
 ---
 
@@ -36,7 +36,7 @@ license: Apache-2.0
 - **上下文是公共资源**：文档与系统提示、对话历史、其他元数据抢同一个有限注意力预算
 - **每 token 须自证价值**：目标是找到“最大化期望结果的最小高信号 token 集”
 
-> 这些原则是 **context engineering**（结构化、维护、治理塑造 AI 行为的信息）的具体应用——框架见 Anthropic 官方指南[R1]。
+> 这些原则是 **context engineering**（结构化、维护、治理塑造 AI 行为的信息）的具体应用——框架见 [R1]。
 
 质疑每条信息：
 
@@ -123,7 +123,7 @@ with pdfplumber.open("file.pdf") as pdf: ...
 
 #### B.2 肯定指令优先，否定慎用
 
-- 告诉 LLM“不要做 X”反而强化对其的 attention（Pink Elephant Problem）——提及禁用词本身就会 prime 模型产生它（Rana, 2026[R2]）
+- 告诉 LLM“不要做 X”反而强化对其的 attention（Pink Elephant Problem）——提及禁用词本身就会 prime 模型产生它（[R2]）
 - **默认改写为肯定**；硬性禁令须保留否定时，**必须配一个明确的肯定替代**
 
 ```markdown
@@ -134,14 +134,14 @@ with pdfplumber.open("file.pdf") as pdf: ...
 ```
 
 - 指令越多，否定的劣势越大；指令少于 5–6 条时差距小
-- **例外——可 grep 的约束**：当约束可被确定性检查（grep / lint 可验证）时，否定形式更精确——禁令可 grep 确认，等效的肯定表达无法被自动校验（AgentPatterns.ai[R3]）
+- **例外——可 grep 的约束**：当约束可被确定性检查（grep / lint 可验证）时，否定形式更精确——禁令可 grep 确认，等效的肯定表达无法被自动校验（[R3]）
 
 #### B.3 示例驱动
 
 - **正反示例优先于纯文字解释**——一个正反示例胜过三段文字描述
 - 示例要完整可运行、来自真实场景、注释解释“为什么”
 - **避免“WRONG:”反例单独出现**——它会将要避免的模式注入上下文；有正确示例时，无需反例
-- **示例用真实值，禁用占位符**——代理会字面复制占位字符串（Vercel Academy[R4]：“Placeholder values are landmines.”）；禁用 `"string"`、`"YOUR_VALUE"`、`"example-slug"`，使用项目真实数据
+- **示例用真实值，禁用占位符**——代理会字面复制占位字符串（[R4]：“Placeholder values are landmines.”）；禁用 `"string"`、`"YOUR_VALUE"`、`"example-slug"`，使用项目真实数据
 
 ```markdown
 # 好：正反对比，一图胜千言
@@ -188,10 +188,10 @@ export default function formatDate(date){ var result; ... }
 - Markdown 分节
 - **原子任务**：不合并可独立完成的步骤
 - **bookend**：关键规则放文件顶部和任务区前（长上下文中部 attention 最弱）
-- 注意：位置对单条指令的即时遵从影响有限（McMillan, 2026[R5]），会话长度才是关键——bookend 服务可读性而非保证即时遵从
+- 注意：位置对单条指令的即时遵从影响有限（[R5]），会话长度才是关键——bookend 服务可读性而非保证即时遵从
 - 步骤仅用于真正有顺序的工作流；并列任务用 bullet 不用编号（避免引入伪顺序）
 - **按目标任务组织**：不按组件/端点/函数组织文档，而按代理要完成的任务组织。
-  任务文档包含完整步骤序列，消除顺序歧义（Vercel Academy[R4]：
+  任务文档包含完整步骤序列，消除顺序歧义（[R4]：
   “Endpoint docs answer 'how do I call this?' Workflows answer 'how do I accomplish this?'”）
 
 #### C.4 优先结构化而非逐条列举
@@ -199,9 +199,9 @@ export default function formatDate(date){ var result; ... }
 同等信息量下，优先用结构化格式（表格、具名区块、key-value 对、代码块 + 标签头）而非纯逐条 bullet list。
 
 - 代理解析结构化数据比解析无序列表更可靠——表格的行列关系、具名区块的标签是显式信号
-  （Vercel Academy[R4]：“Agents extract structured data from markdown tables easily.
+  （[R4]：“Agents extract structured data from markdown tables easily.
   Bullet lists with mixed formatting are much harder to parse consistently.”）
-- 逐条积累的规则列表是反模式——它把约束平铺成线性序列，丢失了类别、优先级和层次关系；有效指令应构成**相互作用的约束系统**而非规则清单（AgentPatterns.ai[R3]）
+- 逐条积累的规则列表是反模式——它把约束平铺成线性序列，丢失了类别、优先级和层次关系；有效指令应构成**相互作用的约束系统**而非规则清单（[R3]）
 - 长 bullet list 应重组为带标头的节或表格
 
 ```markdown

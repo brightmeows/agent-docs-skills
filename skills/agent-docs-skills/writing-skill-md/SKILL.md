@@ -201,7 +201,7 @@ description: [做什么]. 在以下情况使用：[具体触发条件和症状]
 改进前后的代码对比
 
 ## 快速参考
-便于扫描常用操作的表格或列表——对比信息优先用表格而非纯 bullet list（writing-agent-docs 原则 13）
+便于扫描常用操作的表格或列表——对比信息优先用表格而非纯 bullet list（writing-agent-docs 原则 C.4）
 
 ## 实现
 简单模式用内联代码
@@ -288,7 +288,7 @@ Graphviz 样式规则见 [graphviz-conventions.dot](./references/graphviz-conven
 
 你很擅长移植——一个好的示例就足够了。
 
-> **示例用真实值**：技能中的代码示例必须用项目真实数据而非占位符（`"string"`、`"YOUR_VALUE"`）——代理会字面复制占位字符串（writing-agent-docs 原则 7）。
+> **示例用真实值**：技能中的代码示例必须用项目真实数据而非占位符（`"string"`、`"YOUR_VALUE"`）——代理会字面复制占位字符串（writing-agent-docs 原则 B.3）。
 
 ## 反模式
 

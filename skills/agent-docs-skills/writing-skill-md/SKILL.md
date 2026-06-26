@@ -315,11 +315,12 @@ helper1、helper2、step3、pattern4
 
 ## 安全考虑
 
-技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链分三层：
+技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链分四层：
 
 - **漏洞发现**：[R4]（USENIX Security 2026）大规模分析发现逾四分之一技能含漏洞，含可执行脚本者风险更高。
+- **大规模产业审计**：[R8]（Snyk ToxicSkills，2026-02）扫描 3,984 个技能——**36.82% 含任意级别安全问题、13.4% 达 critical、76 个确认恶意**；规模与时效均优于 R4。
 - **可利用性验证**：[R5]（Duan et al., 2026）通过对抗性 prompting 证实真实技能可被利用。
-- **供应链投毒**：[R6] 提出 DDIPE——恶意逻辑藏于技能文档的代码示例，代理复用示例时即触发。技能已成为新兴软件供应链攻击面。
+- **供应链投毒**：[R6] 提出 DDIPE——恶意逻辑藏于技能文档的代码示例，代理复用示例时即触发。[R8] 进一步发现 **91% 的恶意技能同时使用 prompt injection + 传统恶意代码**——前者绕过安全机制、后者实施窃取，二者汇聚使传统代码扫描失效。技能已成为新兴软件供应链攻击面。
 
 ### 编写安全注意事项
 
@@ -329,6 +330,7 @@ helper1、helper2、step3、pattern4
 - **审慎对待代码示例**——技能中的代码示例与配置模板会被代理复用执行（DDIPE 攻击载体，[R6]）；借鉴第三方示例时先审阅其完整逻辑，避免照搬来源不明的片段
 - **description 不暴露敏感信息**——技能描述注入系统提示词，不应包含内部路径、凭证或密钥
 - **来源不明技能不自动加载**——来自不可信源的技能应先审阅 SKILL.md 和脚本再启用
+- **审慎对待会修改记忆/状态文件的技能**——[R8] 发现恶意技能可改写代理记忆文件（如 `SOUL.md`、`MEMORY.md`）实现跨会话持久化投毒；审查技能是否写记忆文件、写入内容是否可信
 
 ### 发现即检查清单
 
@@ -339,6 +341,8 @@ helper1、helper2、step3、pattern4
 - [ ] 脚本文件安全（不执行危险操作）
 - [ ] 代码示例与配置模板已审阅（无来源不明的可执行片段）
 - [ ] description 不暴露敏感信息
+- [ ] 部署前用 `mcp-scan` 扫描（`uvx mcp-scan@latest --skills`，[R8]）——把可机器校验的交给机器
+- [ ] 技能若写代理记忆文件（`SOUL.md`/`MEMORY.md` 等），写入内容已审阅
 
 ## 验证与自检
 
@@ -423,6 +427,7 @@ helper1、helper2、step3、pattern4
 | [R5] | [arXiv:2604.04989](https://arxiv.org/abs/2604.04989) | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
 | [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
 | [R7] | [github.com/mgechev](https://github.com/mgechev/skills-best-practices) | Skills Best Practices | 否定触发条件、技能验证方法论 |
+| [R8] | [snyk.io](https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/) | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
 
 ---
 

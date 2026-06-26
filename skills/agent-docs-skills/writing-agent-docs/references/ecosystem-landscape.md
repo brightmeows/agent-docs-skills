@@ -11,9 +11,14 @@
 
 | 类型 | 数量 | 累计安装 | 职责 |
 |------|------|---------|------|
-| **Agent Skills** | ~66,000 | 领先 | 指令与工作流（SKILL.md），教会 agent **做什么** |
+| **Agent Skills** | ~66,000¹ | 领先 | 指令与工作流（SKILL.md），教会 agent **做什么** |
 | **MCP Servers** | ~7,800 | 快速增长 | 外部工具与数据连接，给 agent **用什么** |
 | **Marketplaces** | ~8,300 | 生态基础 | 分发、发现与安全扫描 |
+
+> ¹ Skillselion 追踪数据（skills.sh 注册表 + GitHub 公开仓库索引）。
+> 若计入全 GitHub 自动抓取（如 SkillsMP），公开 SKILL.md 文件总量已达 **~190 万**（[R3] 2026-06）。
+> 两口径不冲突——Skillselion 反映经过注册/索引的活跃技能，SkillsMP 反映 GitHub 上的原始总量。
+> 质量参差：47,150 个公开技能平均评分仅 6.2/12（[R2]）。
 
 来源：[R1] Skillselion Catalog（skills.sh 注册表 + GitHub）。
 
@@ -96,6 +101,8 @@ SkillsBench 评测（[R2]，arXiv 2026）对 47,150 个公开技能的评估：
 |------|------|------|---------|
 | [R1] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
 | [R2] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 47,150 公开技能平均 6.2/12；精选技能提升 +16.2pp |
+| [R3] | <https://agentman.ai/blog/agent-skills-ecosystem-report-2026> | The Agent Skills Ecosystem in 2026 | 2026-06 报告：~40 兼容产品、1.9M+ 公开技能、22,511 技能安全审计、质量/安全双维度警示 |
 
 [R1]: https://skillselion.com/state-of-ai-agent-skills-2026
 [R2]: https://arxiv.org/abs/2602.12670
+[R3]: https://agentman.ai/blog/agent-skills-ecosystem-report-2026

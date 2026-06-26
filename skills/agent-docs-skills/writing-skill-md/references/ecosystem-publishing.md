@@ -8,7 +8,7 @@
 
 技能生态在 2026 年上半年经历了爆发式增长。根据 Skillselion 追踪数据（[R14]），
 公开生态已达 **~66,000 个 agent skills、~7,800 个 MCP servers**，累计安装量 **112M**。
-各市场索引规模因口径而异——SkillsMP 约 80 万、Skills.sh 约 60 万、ClawHub 约 1.3 万
+各市场索引规模因口径而异——SkillsMP 约 **190 万**、Skills.sh 约 60 万、ClawHub 约 1.3 万
 （安全清查后余 3,200+）。质量参差——SkillsBench 评测 47,150 个公开技能平均 6.2/12（[R9]）。
 
 主要市场分布：
@@ -30,7 +30,7 @@
 
 ## 技能生态验证
 
-SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 84 个任务 × 11 个领域 × 7,308 条轨迹。关键发现：
+SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 **87 个任务** × 11 个领域 × 7,308 条轨迹（v1.1 从 84 个扩至 87 个，采用原生 BenchFlow task.md 格式）。关键发现：
 
 - **质量方差大**：47,150 个公开技能平均评分仅 6.2/12，仅 top-quartile（≥9 分）才有实质提升
 - **精选技能有效**：精选技能提升通过率平均 16.2 个百分点（医疗领域 +51.9）
@@ -40,14 +40,16 @@ SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 84 个�
 
 ## 跨工具兼容性
 
-SKILL.md 开放标准已被 **40+ 工具** 原生支持（Claude Code、OpenCode、Codex CLI、Cursor、
+SKILL.md 开放标准已被 **~40 工具** 原生支持，包括 Claude Code、OpenCode、Codex CLI、Cursor、
 Gemini CLI、GitHub Copilot、Microsoft Agent Framework、JetBrains Junie、Goose、Amp、
-Kiro、Roo Code、Factory 等）。写一次技能，跨平台可用。OpenCode、Cursor 等额外支持
-Claude Code 扩展字段的子集。
+Kiro、Roo Code、Factory、Databricks Genie Code、Snowflake Cortex Code、Spring AI 等
+（完整列表见 [agentskills.io 展示页](https://agentskills.io/clients)）。写一次技能，跨平台可用。
+OpenCode、Cursor 等额外支持 Claude Code 扩展字段的子集。
 
 ## 参考文献
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
-| [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 84 任务 × 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
+| [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 87 任务（v1.1）× 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
 | [R14] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
+| [R15] | <https://agentman.ai/blog/agent-skills-ecosystem-report-2026> | The Agent Skills Ecosystem in 2026 | 2026-06 生态系统报告：~40 兼容产品、190 万+ 公开技能、SkillsBench 6.2/12、安全审计 22,511 技能含 140,963 问题 |

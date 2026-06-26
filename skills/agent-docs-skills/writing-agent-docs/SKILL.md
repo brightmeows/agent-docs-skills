@@ -287,13 +287,13 @@ export default function formatDate(date){ var result; ... }
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
-| [R1] | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) | Effective Context Engineering for AI Agents | 结构化上下文管理框架的官方指南 |
-| [R2] | [arXiv:2601.08070](https://arxiv.org/abs/2601.08070) | Pink Elephant Punished: The Negative Instruction Priming Effect in LLMs | 否定指令会 prime 模型产生被禁止的行为 |
-| [R3] | [agentpatterns.ai](https://agentpatterns.ai/training/foundations/prompt-engineering/) | Prompt Engineering for Agent Instructions and Systems | 指令应构成约束系统而非规则清单 |
-| [R4] | [vercel.com](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs) | Agent-Friendly Docs | 代理解析结构化数据比无序列举更可靠 |
-| [R5] | [arXiv:2605.10039](https://arxiv.org/abs/2605.10039) | Positional Bias in LLM Instruction Following | 指令位置对遵从影响有限，会话长度是关键 |
-| [R6] | [blakecrosley.com](https://blakecrosley.com/blog/agents-md-patterns) | AGENTS.md Patterns: What Actually Changes Agent Behavior | 命令优先指令、完成标准定义、阻塞升级路径 |
-| [R7] | [github.com/mgechev](https://github.com/mgechev/skills-best-practices) | Skills Best Practices | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
+| [R1] | <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents> | Effective Context Engineering for AI Agents | 结构化上下文管理框架的官方指南 |
+| [R2] | <https://arxiv.org/abs/2601.08070> | Pink Elephant Punished: The Negative Instruction Priming Effect in LLMs | 否定指令会 prime 模型产生被禁止的行为 |
+| [R3] | <https://agentpatterns.ai/training/foundations/prompt-engineering/> | Prompt Engineering for Agent Instructions and Systems | 指令应构成约束系统而非规则清单 |
+| [R4] | <https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs> | Agent-Friendly Docs | 代理解析结构化数据比无序列举更可靠 |
+| [R5] | <https://arxiv.org/abs/2605.10039> | Positional Bias in LLM Instruction Following | 指令位置对遵从影响有限，会话长度是关键 |
+| [R6] | <https://blakecrosley.com/blog/agents-md-patterns> | AGENTS.md Patterns: What Actually Changes Agent Behavior | 命令优先指令、完成标准定义、阻塞升级路径 |
+| [R7] | <https://github.com/mgechev/skills-best-practices> | Skills Best Practices | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
 
 ---
 

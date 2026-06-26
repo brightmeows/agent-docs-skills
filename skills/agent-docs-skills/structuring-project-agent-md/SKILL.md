@@ -265,11 +265,11 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
-| [R1] | [arXiv:2606.15828](https://arxiv.org/abs/2606.15828) | Context Bloat in AGENTS.md: An Empirical Study of 100 Repositories | 42% 仓库 AGENTS.md 超 200 行出现 Context Bloat |
-| [R2] | [arXiv:2601.20404](https://arxiv.org/abs/2601.20404) | Hand-crafted AGENTS.md Improves Efficiency Without Quality Loss | 手写 AGENTS.md 降低运行时间与 token 消耗 |
-| [R3] | [arXiv:2602.11988](https://arxiv.org/abs/2602.11988) | Redundant Instructions Increase Reasoning Costs in LLM Agents | 不必要指令推高推理成本 |
-| [R4] | [arXiv:2605.10039](https://arxiv.org/abs/2605.10039) | Positional Bias in LLM Instruction Following | 文件大小/位置对遵从无显著效应 |
-| [R5] | [augmentcode.com](https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files) | How to Write Good agents.md Files | 决策表提升 best_practices 遵从率 25% |
+| [R1] | <https://arxiv.org/abs/2606.15828> | Context Bloat in AGENTS.md: An Empirical Study of 100 Repositories | 42% 仓库 AGENTS.md 超 200 行出现 Context Bloat |
+| [R2] | <https://arxiv.org/abs/2601.20404> | Hand-crafted AGENTS.md Improves Efficiency Without Quality Loss | 手写 AGENTS.md 降低运行时间与 token 消耗 |
+| [R3] | <https://arxiv.org/abs/2602.11988> | Redundant Instructions Increase Reasoning Costs in LLM Agents | 不必要指令推高推理成本 |
+| [R4] | <https://arxiv.org/abs/2605.10039> | Positional Bias in LLM Instruction Following | 文件大小/位置对遵从无显著效应 |
+| [R5] | <https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files> | How to Write Good agents.md Files | 决策表提升 best_practices 遵从率 25% |
 
 ---
 

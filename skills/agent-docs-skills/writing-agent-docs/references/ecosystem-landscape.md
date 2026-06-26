@@ -94,8 +94,8 @@ SkillsBench 评测（[R2]，arXiv 2026）对 47,150 个公开技能的评估：
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
-| [R1] | [skillselion.com](https://skillselion.com/state-of-ai-agent-skills-2026) | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
-| [R2] | [arXiv:2602.12670](https://arxiv.org/abs/2602.12670) | SkillsBench: A Benchmark for Agent Skill Evaluation | 47,150 公开技能平均 6.2/12；精选技能提升 +16.2pp |
+| [R1] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
+| [R2] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 47,150 公开技能平均 6.2/12；精选技能提升 +16.2pp |
 
 [R1]: https://skillselion.com/state-of-ai-agent-skills-2026
 [R2]: https://arxiv.org/abs/2602.12670

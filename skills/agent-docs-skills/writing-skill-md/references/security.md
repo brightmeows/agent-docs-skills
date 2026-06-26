@@ -93,16 +93,16 @@
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
-| [R4] | [arXiv:2601.10338](https://arxiv.org/abs/2601.10338) | Vulnerability Analysis of Agent Skill Ecosystem | 逾四分之一技能含安全漏洞 |
-| [R5] | [arXiv:2604.04989](https://arxiv.org/abs/2604.04989) | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
-| [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
-| [R8] | [snyk.io](https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/) | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
-| [R9] | [arXiv:2602.12670](https://arxiv.org/abs/2602.12670) | SkillsBench: A Benchmark for Agent Skill Evaluation | 84 任务 × 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
-| [R10] | [arXiv:2605.11770](https://arxiv.org/abs/2605.11770) | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
-| [R11] | [orca.security](https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/) | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
-| [R12] | [cloudsecurityalliance.org](https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf) | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
-| [R13] | [air.security](https://www.air.security/blog-posts/the-story-of-skills) | The Story of Skills — How We Hijacked 26,000 Agents | AIR 证实虚假技能可绕过所有扫描器，触及 26,000 agent，含企业账户 |
-| [R14] | [owasp.org](https://owasp.org/www-project-agentic-skills-top-10/) | OWASP Agentic Skills Top 10 | 首个 agent skill 安全行业标准（AST01 Malicious Skills 等十大风险）|
+| [R4] | <https://arxiv.org/abs/2601.10338> | Vulnerability Analysis of Agent Skill Ecosystem | 逾四分之一技能含安全漏洞 |
+| [R5] | <https://arxiv.org/abs/2604.04989> | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
+| [R6] | <https://arxiv.org/abs/2604.03081> | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
+| [R8] | <https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/> | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
+| [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 84 任务 × 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
+| [R10] | <https://arxiv.org/abs/2605.11770> | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
+| [R11] | <https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/> | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
+| [R12] | <https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf> | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
+| [R13] | <https://www.air.security/blog-posts/the-story-of-skills> | The Story of Skills — How We Hijacked 26,000 Agents | AIR 证实虚假技能可绕过所有扫描器，触及 26,000 agent，含企业账户 |
+| [R14] | <https://owasp.org/www-project-agentic-skills-top-10/> | OWASP Agentic Skills Top 10 | 首个 agent skill 安全行业标准（AST01 Malicious Skills 等十大风险）|
 
 ## 本地参考
 

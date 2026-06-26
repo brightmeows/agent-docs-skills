@@ -143,7 +143,7 @@ client = Client(api_key=os.environ["MY_API_KEY"])
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
-| [R1] | [hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills) | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 从目录/URL/对话自动创建 SKILL.md；三级渐进披露 |
+| [R1] | <https://hermes-agent.nousresearch.com/docs/user-guide/features/skills> | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 从目录/URL/对话自动创建 SKILL.md；三级渐进披露 |
 
 ## 本地参考
 
@@ -152,5 +152,3 @@ client = Client(api_key=os.environ["MY_API_KEY"])
 | [L1] | [writing-skill-md SKILL.md](../SKILL.md) | 主技能文件，包含技能创建清单和自检项 |
 | [L2] | [security.md](../references/security.md) | 安全考虑的完整参考 |
 | [L3] | [claude-search-optimization.md](../references/claude-search-optimization.md) | CSO 完整规则和 description 编写规范 |
-
-[R1]: https://hermes-agent.nousresearch.com/docs/user-guide/features/skills

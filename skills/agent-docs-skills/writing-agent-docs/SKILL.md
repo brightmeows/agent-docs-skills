@@ -304,3 +304,4 @@ export default function formatDate(date){ var result; ... }
 | [L1] | [scope-and-loader.md](./references/scope-and-loader.md) | 作用域与加载顺序的唯一定义（文件清单、流水线、优先级、两类作用域对比）|
 | [L2] | [agent-persona.md](./references/agent-persona.md) | Agent Persona 定义（项目级 + 个人级，跨技能共享）|
 | [L3] | [comparison-tools.md](./references/comparison-tools.md) | 配置机制职责对比（AGENTS.md / Skill / MCP / Hooks / Subagent）+ 常驻 vs 按需 token 经济 |
+| [L4] | [ecosystem-landscape.md](./references/ecosystem-landscape.md) | 生态全景：Agent Skills / MCP / Marketplaces 三大类工具的职责划分、组合模式与选型指南 |

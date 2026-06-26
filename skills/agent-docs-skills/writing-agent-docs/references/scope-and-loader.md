@@ -15,7 +15,7 @@
 
 | 文件 / 目录 | 用途 | 工具 |
 |-------------|------|------|
-| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 30+ 工具原生支持 |
+| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 40+ 工具原生支持 |
 | `CLAUDE.md` | 项目级 Claude Code 配置文件 | Claude Code |
 | `.cursor/rules/*.mdc` | 文件模式匹配规则，按 glob 注入 | Cursor、OpenCode 等 |
 | `GEMINI.md` | 项目级 Gemini CLI 配置 | Gemini CLI |

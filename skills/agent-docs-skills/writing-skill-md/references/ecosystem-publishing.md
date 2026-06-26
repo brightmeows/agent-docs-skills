@@ -40,7 +40,10 @@ SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 84 个�
 
 ## 跨工具兼容性
 
-SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode、Codex CLI、Cursor、Gemini CLI、GitHub Copilot、Microsoft Agent Framework 等）。写一次技能，跨平台可用。OpenCode、Cursor 等额外支持 Claude Code 扩展字段的子集。
+SKILL.md 开放标准已被 **40+ 工具** 原生支持（Claude Code、OpenCode、Codex CLI、Cursor、
+Gemini CLI、GitHub Copilot、Microsoft Agent Framework、JetBrains Junie、Goose、Amp、
+Kiro、Roo Code、Factory 等）。写一次技能，跨平台可用。OpenCode、Cursor 等额外支持
+Claude Code 扩展字段的子集。
 
 ## 参考文献
 

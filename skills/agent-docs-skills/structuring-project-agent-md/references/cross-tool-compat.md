@@ -74,6 +74,26 @@ frontmatter 帮助代理判断何时需要加载该文件的完整内容，无�
 
 ---
 
+### 相关规范：Google ARD（Agentic Resource Discovery）
+
+Google 联合多家合作伙伴于 2026-06 发布 **Agentic Resource Discovery（ARD）** 开放规范（[R5]），
+定义了 agent 资源（技能、工具、agent 自身）的发布、发现与验证协议。
+
+ARD 与 `.well-known/agent-skills/index.json` 的异同：
+
+| 维度 | `.well-known/index.json`（agentskills.io） | ARD（agenticresourcediscovery.org） |
+|------|------------------------------------------|-------------------------------------|
+| **定位** | 技能索引清单，位于仓库根目录 | 发现协议，可托管于任意 Web 服务器 |
+| **发现方式** | 约定路径 `.well-known/agent-skills/` | HTTP `Link` header / `/.well-known/ard` |
+| **覆盖范围** | 仅 Agent Skills | Skills + MCP Servers + Agents |
+| **验证机制** | digest SHA256 匹配 | 签名 + 元数据校验 |
+| **两者关系** | 互补——`.well-known/` 管理技能索引，ARD 扩展发现范围到全类 agent 资源 | |
+
+写跨工具配置时先确保 `.well-known/agent-skills/index.json` 有效（所有市场均支持），
+需要跨类资源发现时才考虑 ARD。
+
+---
+
 ## 迁移指南
 
 ### 从单一 AGENTS.md 扩展到多工具
@@ -98,3 +118,4 @@ frontmatter 帮助代理判断何时需要加载该文件的完整内容，无�
 | [R2] | <https://github.com/agentsmd/agents.md/issues/135> | AGENTS.md v1.1 proposal | AGENTS.md v1.1 草案，明确管辖范围、累积、优先级、隐式继承四大语义 |
 | [R3] | <https://hermes-agent.nousresearch.com/docs/user-guide/features/skills> | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 自动创建 SKILL.md、三级渐进披露、skill bundles、`SOUL.md` 持久记忆 |
 | [R4] | <https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation> | Linux Foundation Announces the Formation of the AAIF | AAIF 成立公告，AGENTS.md 归入 Linux Foundation 旗下 |
+| [R5] | <https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/> | Announcing the Agentic Resource Discovery Specification | Google ARD：agent 资源（技能/工具/agent）发布、发现与验证的开放规范 |

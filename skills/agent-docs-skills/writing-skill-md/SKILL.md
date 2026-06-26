@@ -1,6 +1,6 @@
 ---
 name: writing-skill-md
-description: 指导 SKILL.md 的创建、格式规范与部署前验证。在新建或修改 skills/*/SKILL.md、调整 frontmatter、或需要确保技能可被搜索发现与正确加载时使用。
+description: 指导 SKILL.md 的创建、格式规范与部署前验证。在新建或修改 skills/*/SKILL.md、技能不触发、description 不匹配、或需要确保技能可被搜索发现与正确加载时使用。
 license: Apache-2.0
 ---
 

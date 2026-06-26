@@ -412,23 +412,14 @@ helper1、helper2、step3、pattern4
 
 ## 参考文献
 
-[R1] agentskills.io. “Agent Skills Specification.” *agentskills.io*, 2026.
-    <https://agentskills.io/specification>
-
-[R2] Anthropic. “Creating Skills — Bundled Resources.” *anthropic.com*, 2026.
-    <https://anthropics-skills.mintlify.app/creating-skills/bundled-resources>
-
-[R3] anthropics/skills. GitHub repository.
-    <https://github.com/anthropics/skills>
-
-[R4] Liu, Z. et al. “Vulnerability Analysis of Agent Skill Ecosystem.” *arXiv:2601.10338*, 2026.
-    <https://arxiv.org/abs/2601.10338>
-
-[R5] Duan, R. et al. “SkillAttack: Adversarial Prompting on Agent Skills.” *arXiv:2604.04989*, 2026.
-    <https://arxiv.org/abs/2604.04989>
-
-[R6] Qu, Y. et al. “DDIPE: Supply Chain Poisoning of Agent Skills.” *arXiv:2604.03081*, 2026.
-    <https://arxiv.org/abs/2604.03081>
+| 编号 | 链接 | 标题 |
+|------|------|------|
+| [R1] | [agentskills.io](https://agentskills.io/specification) | Agent Skills Specification |
+| [R2] | [anthropic.com](https://anthropics-skills.mintlify.app/creating-skills/bundled-resources) | Creating Skills — Bundled Resources |
+| [R3] | [github.com](https://github.com/anthropics/skills) | anthropics/skills |
+| [R4] | [arXiv:2601.10338](https://arxiv.org/abs/2601.10338) | Vulnerability Analysis of Agent Skill Ecosystem |
+| [R5] | [arXiv:2604.04989](https://arxiv.org/abs/2604.04989) | SkillAttack: Adversarial Prompting on Agent Skills |
+| [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills |
 
 ---
 

@@ -226,20 +226,13 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 
 ## 参考文献
 
-[R1] dos Santos, A. et al. “Context Bloat in AGENTS.md: An Empirical Study of 100 Repositories.” *arXiv:2606.15828*, 2026.
-    <https://arxiv.org/abs/2606.15828>
-
-[R2] Lulla, K. et al. “Hand-crafted AGENTS.md Improves Efficiency Without Quality Loss.” *arXiv:2601.20404*, 2026.
-    <https://arxiv.org/abs/2601.20404>
-
-[R3] Gloaguen, P. et al. “Redundant Instructions Increase Reasoning Costs in LLM Agents.” *arXiv:2602.11988*, 2026.
-    <https://arxiv.org/abs/2602.11988>
-
-[R4] McMillan, C. “Positional Bias in LLM Instruction Following.” *arXiv:2605.10039*, 2026.
-    <https://arxiv.org/abs/2605.10039>
-
-[R5] AugmentCode. “How to Write Good agents.md Files.” *augmentcode.com*, 2026.
-    <https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files>
+| 编号 | 链接 | 标题 |
+|------|------|------|
+| [R1] | [arXiv:2606.15828](https://arxiv.org/abs/2606.15828) | Context Bloat in AGENTS.md: An Empirical Study of 100 Repositories |
+| [R2] | [arXiv:2601.20404](https://arxiv.org/abs/2601.20404) | Hand-crafted AGENTS.md Improves Efficiency Without Quality Loss |
+| [R3] | [arXiv:2602.11988](https://arxiv.org/abs/2602.11988) | Redundant Instructions Increase Reasoning Costs in LLM Agents |
+| [R4] | [arXiv:2605.10039](https://arxiv.org/abs/2605.10039) | Positional Bias in LLM Instruction Following |
+| [R5] | [augmentcode.com](https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files) | How to Write Good agents.md Files |
 
 ---
 

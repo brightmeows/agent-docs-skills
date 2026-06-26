@@ -283,20 +283,13 @@ export default function formatDate(date){ var result; ... }
 
 ## 参考文献
 
-[R1] Anthropic. “Effective Context Engineering for AI Agents.” *anthropic.com*, 2026.
-    <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>
-
-[R2] Rana, N. “Pink Elephant Punished: The Negative Instruction Priming Effect in LLMs.” *arXiv:2601.08070*, 2026.
-    <https://arxiv.org/abs/2601.08070>
-
-[R3] AgentPatterns.ai. “Prompt Engineering for Agent Instructions and Systems.” *agentpatterns.ai*, 2026.
-    <https://agentpatterns.ai/training/foundations/prompt-engineering/>
-
-[R4] Vercel Academy. “Agent-Friendly Docs.” *vercel.com*, 2026.
-    <https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs>
-
-[R5] McMillan, C. “Positional Bias in LLM Instruction Following.” *arXiv:2605.10039*, 2026.
-    <https://arxiv.org/abs/2605.10039>
+| 编号 | 链接 | 标题 |
+|------|------|------|
+| [R1] | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) | Effective Context Engineering for AI Agents |
+| [R2] | [arXiv:2601.08070](https://arxiv.org/abs/2601.08070) | Pink Elephant Punished: The Negative Instruction Priming Effect in LLMs |
+| [R3] | [agentpatterns.ai](https://agentpatterns.ai/training/foundations/prompt-engineering/) | Prompt Engineering for Agent Instructions and Systems |
+| [R4] | [vercel.com](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs) | Agent-Friendly Docs |
+| [R5] | [arXiv:2605.10039](https://arxiv.org/abs/2605.10039) | Positional Bias in LLM Instruction Following |
 
 ---
 

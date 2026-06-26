@@ -41,7 +41,7 @@
 | AGENTS.md | ✅ 全部主流代理读取（跨工具 fallback）|
 | SKILL.md | ✅ Agent Skills 开放标准（Claude Code / OpenCode / Cursor 原生；实现程度不一）|
 
-> **写跨工具配置时**：机制层指导应明确标注工具归属；不确定某代理是否支持时，优先用跨工具标准（AGENTS.md 表达意图、SKILL.md 按需加载），把 Claude Code 专属机制作为"可选增强"而非依赖。完整概念对照见 [cross-tool-compat.md](./cross-tool-compat.md)。
+> **写跨工具配置时**：机制层指导应明确标注工具归属；不确定某代理是否支持时，优先用跨工具标准（AGENTS.md 表达意图、SKILL.md 按需加载），把 Claude Code 专属机制作为“可选增强”而非依赖。完整概念对照见 [cross-tool-compat.md](./cross-tool-compat.md)。
 
 ---
 
@@ -63,12 +63,12 @@
 
 ### 反模式映射（信号 → 正确位置）
 
-官方博客明确给出"出现以下信号时该换位置"：
+官方博客明确给出“出现以下信号时该换位置”：
 
 | 信号 | 错误位置 | 正确位置 |
 |---|---|---|
-| "每次 X，总要做 Y" | CLAUDE.md | **Hook**（`PostToolUse` 跑 formatter / `Stop` 发通知）|
-| "绝不做 X" | CLAUDE.md | **Hook + permissions**（`PreToolUse` exit 2 阻断）|
+| “每次 X，总要做 Y” | CLAUDE.md | **Hook**（`PostToolUse` 跑 formatter / `Stop` 发通知）|
+| “绝不做 X” | CLAUDE.md | **Hook + permissions**（`PreToolUse` exit 2 阻断）|
 | 30 行流程写进配置 | CLAUDE.md | **Skill**（body 按需加载）|
 | API 专属规则无 paths | 无 glob 的 rule | 带 `paths:` 的 **rule**（或 `.cursor/rules` globs）|
 | 个人偏好 | 项目级 CLAUDE.md | 个人级文件（见 `structuring-personal-agent-md`）|
@@ -183,14 +183,14 @@ paths:
 所有 API handler 必须先用 Zod 校验输入。
 ```
 
-无 `paths` 的 rule 等同 CLAUDE.md（常驻、耗 token），应避免。横切多个（但非全部）目录的约束（如"migrations 是 append-only"）适合 path-scoped rule；仅子目录专属的约定适合子目录 CLAUDE.md。
+无 `paths` 的 rule 等同 CLAUDE.md（常驻、耗 token），应避免。横切多个（但非全部）目录的约束（如“migrations 是 append-only”）适合 path-scoped rule；仅子目录专属的约定适合子目录 CLAUDE.md。
 
 ---
 
 ## Output styles 与 append-system-prompt（慎用 · Claude Code 专属）
 
 - **Output styles**（`.claude/output-styles/`）注入系统提示，**永不压缩、加载权重最高**——但**会覆盖默认系统提示**（除非 frontmatter 设 `keep-coding-instructions: true`）。
-  误用会让 Claude 从"软件工程师助手"退化为"通用助手"，丢失变更范围控制、注释时机、验证习惯等默认指令。优先用内置的 `Proactive` / `Explanatory` / `Learning`。
+  误用会让 Claude 从“软件工程师助手”退化为“通用助手”，丢失变更范围控制、注释时机、验证习惯等默认指令。优先用内置的 `Proactive` / `Explanatory` / `Learning`。
 - **append-system-prompt**（`--append-system-prompt` CLI flag）是**追加**而非替换，仅当次调用生效，更安全。适合领域知识、格式偏好。但收益递减——指令越多遵从越松，矛盾指令尤甚。
 
 ---
@@ -205,8 +205,8 @@ paths:
 
 | 仓库原则 | 机制层落地 |
 |---|---|
-| `writing-agent-docs` A.2「确定性约束优先」| 能用 `PreToolUse` hook 阻断的，不写进 AGENTS.md |
-| `writing-agent-docs` C.5「工作流闭包——完成标准」| `Stop` 的 prompt/agent hook 验证"真的完成"而非代理自报 |
+| `writing-agent-docs` A.2“确定性约束优先”| 能用 `PreToolUse` hook 阻断的，不写进 AGENTS.md |
+| `writing-agent-docs` C.5“工作流闭包——完成标准”| `Stop` 的 prompt/agent hook 验证“真的完成”而非代理自报 |
 | `structuring-project` 三层边界 `Never` | `Never` 类禁令 → hook + permissions（确定性兜底）|
 | `structuring-project` Toolchain First | hook 是 Claude Code 原生工具链的一部分 |
 | `writing-skill-md` 安全考虑 | `allowed-tools` 最小权限 + hook 收紧 = 纵深防御 |

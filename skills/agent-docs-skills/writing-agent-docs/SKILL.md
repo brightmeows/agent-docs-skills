@@ -73,7 +73,7 @@ license: Apache-2.0
 ```
 
 - 项目工具链 → `structuring-project-agent-md`
-- **Claude Code 机制层**（hooks 阻断、subagents 隔离）→ `structuring-project-agent-md`「机制层」节
+- **Claude Code 机制层**（hooks 阻断、subagents 隔离）→ `structuring-project-agent-md`“机制层”节
 - 技能脚本 → `writing-skill-md`
 
 #### A.3 不写易于获取的内容——代理能自行发现的，不写进文档

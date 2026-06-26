@@ -1,9 +1,12 @@
 # 机制层——Hooks / Subagents / Rules / Plugins
 
 > `structuring-project-agent-md` 参考文件。
+> **本文件描述的机制层以 Claude Code 为代表**——hooks、subagents、output styles、plugins 是 **Claude Code 专属**；
+> 其它代理（OpenCode / Cursor / Gemini CLI / Copilot）有各自的等价或尚无等价机制，见 [跨工具支持矩阵](#跨工具支持矩阵)。
+>
 > AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——告诉代理该做什么，依赖模型遵从。
-> Claude Code 还提供**机制层**——确定性强制代理行为或隔离执行。
-> 这是通用原则 "An instruction asks, a mechanism requires"（见 `writing-agent-docs` A.2）在 Claude Code 的落地。
+> 机制层则**确定性强制**代理行为或隔离执行。
+> 这是通用原则 "An instruction asks, a mechanism requires"（见 `writing-agent-docs` A.2）的具体落地形态之一（Claude Code 形态）。
 
 ---
 
@@ -16,6 +19,29 @@
 | **隔离层** | Subagents | 独立上下文执行 | 低（仅摘要回主会话）|
 
 **关键判据**：若一条规则"绝对不能被违反"（提交密钥、force push、删生产数据），指令是错的工具——模型在长会话、时间压力、或被注入的文件内容诱导下会失败。真正的护栏必须确定性，即 **hooks 与 permissions**。
+
+---
+
+## 跨工具支持矩阵
+
+机制层以 Claude Code 为代表。下表标注各主流代理的支持情况（✅ 原生 / ◐ 有等价或部分 / ❌ 无），帮助判断某条指导是否跨工具可移植：
+
+| 机制 | Claude Code | OpenCode | Cursor | Gemini CLI | Copilot |
+|---|---|---|---|---|---|
+| **Hooks**（生命周期 hook、exit 2 阻断）| ✅ 专属（5 类型、30+ 事件）| ❌（靠 permission / MCP / pre-commit）| ❌（靠 rules）| ❌ | ❌ |
+| **Subagents**（隔离上下文、Agent 工具）| ✅ 专属（`.claude/agents/`、5 层嵌套）| ◐（agent 定义 + task 工具，概念相近）| ◐（composer / agent 模式）| ❌ | ❌ |
+| **路径限定规则** | ✅ `.claude/rules` `paths:` | ◐（兼容 `.cursor/rules/*.mdc`）| ✅ `.cursor/rules` `globs` | ❌ | ❌ |
+| **Output styles**（覆盖系统提示）| ✅ 专属 | ❌ | ❌ | ❌ | ❌ |
+| **Plugins**（`plugin.json` 打包）| ✅ 专属 | ◐（自有 plugin / 扩展概念，格式不同）| ◐（extensions）| ❌ | ❌ |
+
+**对照**——指令层与技能层是跨工具的：
+
+| 层 | 跨工具标准 |
+|---|---|
+| AGENTS.md | ✅ 全部主流代理读取（跨工具 fallback）|
+| SKILL.md | ✅ Agent Skills 开放标准（Claude Code / OpenCode / Cursor 原生；实现程度不一）|
+
+> **写跨工具配置时**：机制层指导应明确标注工具归属；不确定某代理是否支持时，优先用跨工具标准（AGENTS.md 表达意图、SKILL.md 按需加载），把 Claude Code 专属机制作为"可选增强"而非依赖。完整概念对照见 [cross-tool-compat.md](./cross-tool-compat.md)。
 
 ---
 
@@ -49,7 +75,7 @@
 
 ---
 
-## Hooks（确定性强制）
+## Hooks（确定性强制 · Claude Code 专属）
 
 Hooks 是用户定义的命令 / HTTP / LLM 判断，在 Claude Code 生命周期事件上**确定性**触发。完整规范见 [hooks-guide](https://code.claude.com/docs/en/hooks-guide) 与 [hooks reference](https://code.claude.com/docs/en/hooks)。
 
@@ -126,7 +152,7 @@ exit 0   # exit 0 = 无意见，正常权限流程继续
 
 ---
 
-## Subagents（隔离执行）
+## Subagents（隔离执行 · Claude Code 专属）
 
 详见 [subagents 文档](https://code.claude.com/docs/en/sub-agents)。Subagent 是 `.claude/agents/` 下的 markdown 文件（YAML frontmatter `name` / `description` / 可选 `model` / 工具限定 + body 作系统提示），在**独立上下文窗口**运行。
 仅最终消息（摘要 + 元数据）回主会话。内置有 `Explore` / `Plan` / `general-purpose`。
@@ -144,7 +170,7 @@ exit 0   # exit 0 = 无意见，正常权限流程继续
 
 ---
 
-## .claude/rules（路径限定规则）
+## 路径限定规则（Claude Code `.claude/rules` · Cursor `.cursor/rules`）
 
 `.claude/rules/*.md` 用 YAML frontmatter 的 `paths:` 字段限定加载范围——Claude Code 原生等价于 `.cursor/rules` 的 globs：
 
@@ -161,7 +187,7 @@ paths:
 
 ---
 
-## Output styles 与 append-system-prompt（慎用）
+## Output styles 与 append-system-prompt（慎用 · Claude Code 专属）
 
 - **Output styles**（`.claude/output-styles/`）注入系统提示，**永不压缩、加载权重最高**——但**会覆盖默认系统提示**（除非 frontmatter 设 `keep-coding-instructions: true`）。
   误用会让 Claude 从"软件工程师助手"退化为"通用助手"，丢失变更范围控制、注释时机、验证习惯等默认指令。优先用内置的 `Proactive` / `Explanatory` / `Learning`。
@@ -169,7 +195,7 @@ paths:
 
 ---
 
-## Plugins（打包分发）
+## Plugins（打包分发 · Claude Code 专属）
 
 [Plugins](https://code.claude.com/docs/en/plugins) 把 skills + agents + hooks + MCP servers + output styles 打包成可分发单元（`plugin.json` + 组件目录）。团队级一致环境（一套 hooks + 一套 skills + 共享 MCP）适合做成 plugin 跨项目复用。
 

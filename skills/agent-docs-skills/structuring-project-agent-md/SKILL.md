@@ -77,7 +77,11 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 ## 机制层（Hooks / Subagents / Rules）
 
-AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵从，可被绕过。Claude Code 还提供**机制层**，用于确定性强制或隔离执行——这是通用原则 "An instruction asks, a mechanism requires"（见前置 Skill A.2）的落地。
+AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵从，可被绕过。**Claude Code** 还提供**机制层**，用于确定性强制或隔离执行——这是通用原则 "An instruction asks, a mechanism requires"（见前置 Skill A.2）的落地。
+
+> **工具归属**：以下机制（hooks / subagents / output styles / plugins）**多为 Claude Code 专属**；
+> 其它代理（OpenCode / Cursor / Gemini CLI / Copilot）的等价或尚无等价见 [references/mechanism-layer.md](references/mechanism-layer.md) 的跨工具支持矩阵。
+> 写跨工具配置时，优先用跨工具标准（AGENTS.md / SKILL.md），把 Claude Code 专属机制作"可选增强"。
 
 | 层 | 机制 | 强制度 | 成本 |
 |---|---|---|---|

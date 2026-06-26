@@ -58,11 +58,11 @@ sha256sum skills/agent-docs-skills/*/SKILL.md
 
 ## 提交格式
 
-Conventional Commits。title 英文，body 中文（可选）。
+Conventional Commits，全程中文。
 
 ```
-feat: add structured-agents-md skill
-chore: update .well-known digest for writing-skill-md
+feat: 新增结构化代理文档技能
+chore: 更新 writing-skill-md 的 well-known digest
 ```
 
 ## 技能依赖链

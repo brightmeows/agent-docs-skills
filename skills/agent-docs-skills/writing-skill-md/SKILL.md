@@ -412,14 +412,14 @@ helper1、helper2、step3、pattern4
 
 ## 参考文献
 
-| 编号 | 链接 | 标题 |
-|------|------|------|
-| [R1] | [agentskills.io](https://agentskills.io/specification) | Agent Skills Specification |
-| [R2] | [anthropic.com](https://anthropics-skills.mintlify.app/creating-skills/bundled-resources) | Creating Skills — Bundled Resources |
-| [R3] | [github.com](https://github.com/anthropics/skills) | anthropics/skills |
-| [R4] | [arXiv:2601.10338](https://arxiv.org/abs/2601.10338) | Vulnerability Analysis of Agent Skill Ecosystem |
-| [R5] | [arXiv:2604.04989](https://arxiv.org/abs/2604.04989) | SkillAttack: Adversarial Prompting on Agent Skills |
-| [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills |
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|---------|
+| [R1] | [agentskills.io](https://agentskills.io/specification) | Agent Skills Specification | 开放标准规范，定义 SKILL.md 格式与字段 |
+| [R2] | [anthropic.com](https://anthropics-skills.mintlify.app/creating-skills/bundled-resources) | Creating Skills — Bundled Resources | 资源组织、引用深度、主题分类等官方约定 |
+| [R3] | [github.com](https://github.com/anthropics/skills) | anthropics/skills | 官方技能参考仓库 |
+| [R4] | [arXiv:2601.10338](https://arxiv.org/abs/2601.10338) | Vulnerability Analysis of Agent Skill Ecosystem | 逾四分之一技能含安全漏洞 |
+| [R5] | [arXiv:2604.04989](https://arxiv.org/abs/2604.04989) | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
+| [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
 
 ---
 

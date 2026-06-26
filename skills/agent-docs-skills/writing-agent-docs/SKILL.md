@@ -188,6 +188,30 @@ export default function formatDate(date){ var result; ... }
 - 注意：位置对单条指令的即时遵从影响有限（[McMillan, 2026](https://arxiv.org/abs/2605.10039)），会话长度才是关键——bookend 服务可读性而非保证即时遵从
 - 步骤仅用于真正有顺序的工作流；并列任务用 bullet 不用编号（避免引入伪顺序）
 
+#### 13. 优先结构化而非逐条列举
+
+同等信息量下，优先用结构化格式（表格、具名区块、key-value 对、代码块 + 标签头）而非纯逐条 bullet list。
+
+- 代理解析结构化数据比解析无序列表更可靠——表格的行列关系、具名区块的标签是显式信号
+  （[Vercel Academy](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs)：“Agents extract structured data from markdown tables easily.
+  Bullet lists with mixed formatting are much harder to parse consistently.”）
+- 逐条积累的规则列表是反模式——它把约束平铺成线性序列，丢失了类别、优先级和层次关系；有效指令应构成**相互作用的约束系统**而非规则清单（[AgentPatterns.ai](https://agentpatterns.ai/training/foundations/prompt-engineering/)）
+- 长 bullet list 应重组为带标头的节或表格
+
+```markdown
+# 坏：纯逐条列举（条件与行动隐含，代理需自行解析映射）
+- 用户请求删除文件时，先确认再执行
+- 用户请求修改配置时，先备份原文件
+- 用户请求运行危险命令时，先解释风险
+
+# 好：结构化表格（列标签确定义条件→行动映射）
+| 用户请求 | 代理执行 |
+|----------|----------|
+| 删除文件 | 先确认，再执行 |
+| 修改配置 | 先备份原文件 |
+| 运行危险命令 | 先解释风险，再询问确认 |
+```
+
 ---
 
 ## 自检清单（部署前）
@@ -214,6 +238,7 @@ export default function formatDate(date){ var result; ... }
 
 - [ ] 重内容下沉子文件，入口精简、按需加载
 - [ ] 关键操作有验证 / 确认步骤
+- [ ] 组织检查——无长串无序 rule list；结构化格式（表格、具名区块）优先于纯 bullet
 
 > 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。
 

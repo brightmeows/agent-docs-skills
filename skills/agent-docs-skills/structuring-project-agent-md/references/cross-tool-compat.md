@@ -49,7 +49,17 @@
 
 ## 标准化进展
 
-AGENTS.md v1.1 处于**草案提案**阶段（[R2]，尚未合入，保持完全向后兼容）。提案明确了管辖范围、累积、优先级、隐式继承四大语义，并定义了 AGENTS.md 与 SKILL.md 的职责边界（behavior vs capabilities）。
+### 治理归属：AAIF / Linux Foundation
+
+AGENTS.md **已经正式归入 Agentic AI Foundation（AAIF）**（[R4]），
+后者是 Linux Foundation 下属的专项基金（2025-12 成立）。AAIF 还托管了 MCP
+（Model Context Protocol）和 Goose（Block 捐赠的开源 agent），
+为 agent 生态提供中立治理框架。AGENTS.md 的主页
+（[agents.md](https://agents.md)）及规范均在 AAIF 下维护。
+
+### v1.1 提案状态
+
+AGENTS.md v1.1 处于**草案提案**阶段（[R2]，2026-01 提出，尚未合入，保持完全向后兼容）。提案明确了管辖范围、累积、优先级、隐式继承四大语义，并定义了 AGENTS.md 与 SKILL.md 的职责边界（behavior vs capabilities）。
 
 **YAML Frontmatter**（渐进式披露，提案为可选）：可选的 frontmatter 允许代理在加载全文前建立轻量索引。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
 
@@ -87,3 +97,4 @@ frontmatter 帮助代理判断何时需要加载该文件的完整内容，无�
 | [R1] | <https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/> | Copilot code review AGENTS.md support and UI improvements | GitHub Copilot 自 2026-06-18 起在 code review 中支持 AGENTS.md |
 | [R2] | <https://github.com/agentsmd/agents.md/issues/135> | AGENTS.md v1.1 proposal | AGENTS.md v1.1 草案，明确管辖范围、累积、优先级、隐式继承四大语义 |
 | [R3] | <https://hermes-agent.nousresearch.com/docs/user-guide/features/skills> | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 自动创建 SKILL.md、三级渐进披露、skill bundles、`SOUL.md` 持久记忆 |
+| [R4] | <https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation> | Linux Foundation Announces the Formation of the AAIF | AAIF 成立公告，AGENTS.md 归入 Linux Foundation 旗下 |

@@ -1,3 +1,5 @@
+# 系统依赖：jq, sha256sum (coreutils), find, comm, sed, awk
+# 预装检查：which jq sha256sum find comm sed awk
 repos:
   - repo: local
     hooks:

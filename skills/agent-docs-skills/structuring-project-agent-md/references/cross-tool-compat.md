@@ -7,20 +7,21 @@
 
 ## 概念对照
 
-| 概念 | AGENTS.md 术语 | Claude Code | Cursor | OpenCode |
-|------|---------------|-------------|--------|----------|
-| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` + `.opencode/` |
-| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/AGENTS.md` + `~/.config/opencode/opencode.json` |
-| **技能存放（项目）** | `./.well-known/` | `.claude/skills/` | `.cursor/skills/` | `.opencode/skills/` |
-| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/`、`~/.config/opencode/skills/` |
-| **技能发现文件** | `.well-known/agent-skills/index.json` | 同左 | 同左 | 同左 |
-| **技能权限控制** | — | `allowed-tools` frontmatter | — | `permission.skill` 模式（allow/deny/ask）|
-| **工具配置（项目）** | — | `.claude/settings.json` | `.cursor/settings.json` | `opencode.json` / `.opencode/` |
-| **工具配置（个人）** | — | `~/.claude/settings.json` | `~/.cursor/settings.json` | `~/.config/opencode/opencode.json` |
-| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | `.opencode/agents/*.md` 或 `opencode.json agent` 定义 |
-| **Agent 定义** | — | `.claude/agents/*.md` subagent | — | `.opencode/agents/*.md` + `opencode.json agent` 配置 |
-| **子目录规则** | 子目录 `AGENTS.md` | 子目录 `CLAUDE.md` | `.cursor/rules/` 多文件 | 继承 `opencode.json` |
-| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC + Markdown（agent 文件）|
+| 概念 | AGENTS.md 术语 | Claude Code | Cursor | OpenCode | Hermes Agent [R3] |
+|------|---------------|-------------|--------|----------|-------------------|
+| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` + `.opencode/` | —（个人级为主）|
+| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/AGENTS.md` | `~/.hermes/SOUL.md`（身份）|
+| **技能存放（项目）** | `./.well-known/` | `.claude/skills/` | `.cursor/skills/` | `.opencode/skills/` | — |
+| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/` | `~/.hermes/skills/` |
+| **技能发现文件** | `.well-known/agent-skills/index.json` | 同左 | 同左 | 同左 | 同左 |
+| **技能权限控制** | — | `allowed-tools` frontmatter | — | `permission.skill` | `write_approval` 门控 + 安全扫描器 |
+| **工具配置（项目）** | — | `.claude/settings.json` | `.cursor/settings.json` | `opencode.json` | — |
+| **工具配置（个人）** | — | `~/.claude/settings.json` | `~/.cursor/settings.json` | `~/.config/opencode/opencode.json` | `~/.hermes/config.yaml` |
+| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | `.opencode/agents/*.md` | `SOUL.md`（持久身份） |
+| **Agent 定义** | — | `.claude/agents/*.md` subagent | — | `.opencode/agents/*.md` | 内置 agent 类型 |
+| **子目录规则** | 子目录 `AGENTS.md` | 子目录 `CLAUDE.md` | `.cursor/rules/` 多文件 | 继承 `opencode.json` | — |
+| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC + Markdown | Markdown + YAML + YAML bundles |
+| **特有机制** | — | Hooks / Subagents / DW | Composer / Agent 模式 | Task agent / 多 provider | `/learn` 自动创建技能 / skill bundles / 自演进技能 |
 
 ---
 
@@ -35,6 +36,7 @@
 | **Windsurf** | `.windsurfrules` / `.windsurf/rules/*.md` | 项目级规则；亦读 AGENTS.md 作为 fallback |
 | **JetBrains Junie** | `.junie/guidelines.md` | 项目级 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
+| **Hermes Agent** ([R3]) | `~/.hermes/skills/` | 个人级技能存放；`SOUL.md` 持久身份；`/learn` 自动创建技能 |
 | **通用（跨工具）** | `AGENTS.md` | 跨工具 fallback 标准 |
 
 ---
@@ -84,3 +86,4 @@ frontmatter 帮助代理判断何时需要加载该文件的完整内容，无�
 |------|------|------|----------|
 | [R1] | <https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/> | Copilot code review AGENTS.md support and UI improvements | GitHub Copilot 自 2026-06-18 起在 code review 中支持 AGENTS.md |
 | [R2] | <https://github.com/agentsmd/agents.md/issues/135> | AGENTS.md v1.1 proposal | AGENTS.md v1.1 草案，明确管辖范围、累积、优先级、隐式继承四大语义 |
+| [R3] | <https://hermes-agent.nousresearch.com/docs/user-guide/features/skills> | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 自动创建 SKILL.md、三级渐进披露、skill bundles、`SOUL.md` 持久记忆 |

@@ -27,7 +27,7 @@
       "type": "skill-md",
       "description": "指导 SKILL.md 的创建、格式规范与部署前验证。在新建或修改 skills/*/SKILL.md、技能不触发、description 不匹配、或需要确保技能可被搜索发现与正确加载时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/writing-skill-md/SKILL.md",
-      "digest": "sha256:1ed6c994fdd847c74fa65251f8c65ef4c4aafd0d3fb1dd4739127fac47fffbce"
+      "digest": "sha256:755ac8c6402392804dd877199469e0e2a08d18c639a6727e1e355fa062b4e690"
     }
   ]
 }

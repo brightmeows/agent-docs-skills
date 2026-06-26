@@ -97,7 +97,7 @@
 | opencode.json | 代理启动时加载（常驻）| 配置项计入上下文 | 工具配置、MCP、权限 |
 | .cursor/rules/\*.mdc | 按 glob 匹配注入（常驻）| 匹配时注入 | 文件级规则 |
 | SKILL.md | 按需加载 body | 仅在匹配时加载 | 任务知识、工作流 |
-| Hooks / Permissions（Claude Code 专属）| 生命周期事件触发 | ≈0（配置在上下文外）| 确定性强制、阻断危险操作 |
+| 机制层（确定性强制）| 生命周期事件触发 | ≈0（配置在上下文外）| 确定性强制、阻断危险操作 |
 
 **为何不把任务知识塞进 AGENTS.md**：AGENTS.md 常驻上下文，Skill 按需加载——等效内容常驻的 token 开销远高于按需加载（具体倍数与机制见 [comparison-tools.md](../../structuring-project-agent-md/references/comparison-tools.md)）。
 

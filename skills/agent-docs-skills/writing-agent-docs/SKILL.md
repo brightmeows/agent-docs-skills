@@ -292,7 +292,7 @@ export default function formatDate(date){ var result; ... }
 | [R4] | [vercel.com](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs) | Agent-Friendly Docs | 代理解析结构化数据比无序列举更可靠 |
 | [R5] | [arXiv:2605.10039](https://arxiv.org/abs/2605.10039) | Positional Bias in LLM Instruction Following | 指令位置对遵从影响有限，会话长度是关键 |
 | [R6] | [blakecrosley.com](https://blakecrosley.com/blog/agents-md-patterns) | AGENTS.md Patterns: What Actually Changes Agent Behavior | 命令优先指令、完成标准定义、阻塞升级路径 |
-| [R7] | [R7] | Best Practices for Skill Creators | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
+| [R7] | [github.com/mgechev](https://github.com/mgechev/skills-best-practices) | Skills Best Practices | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
 
 ---
 

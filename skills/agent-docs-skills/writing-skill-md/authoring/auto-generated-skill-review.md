@@ -9,7 +9,7 @@
 
 2026 年中，多个工具开始支持自动技能生成：
 
-- **Hermes Agent `/learn`**（Nous Research, 2026-06-24）：从目录、URL、对话或笔记自动生成 SKILL.md
+- **Hermes Agent `/learn`**（Nous Research, 2026-06-24 [R1]）：从目录、URL、对话或笔记自动生成 SKILL.md
 - **Hermes Agent `skill_manage`（auto）**：复杂任务完成后自动保存技能作为程序化记忆
 - **OpenClaw / 其他代理**：通过 `/learn` 风格命令将工作流转化为技能
 
@@ -139,6 +139,12 @@ client = Client(api_key=os.environ["MY_API_KEY"])
 
 ---
 
+## 参考文献
+
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|---------|
+| [R1] | [hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills) | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 从目录/URL/对话自动创建 SKILL.md；三级渐进披露 |
+
 ## 本地参考
 
 | 编号 | 文件 | 用途 |
@@ -146,3 +152,5 @@ client = Client(api_key=os.environ["MY_API_KEY"])
 | [L1] | [writing-skill-md SKILL.md](../SKILL.md) | 主技能文件，包含技能创建清单和自检项 |
 | [L2] | [security.md](../references/security.md) | 安全考虑的完整参考 |
 | [L3] | [claude-search-optimization.md](../references/claude-search-optimization.md) | CSO 完整规则和 description 编写规范 |
+
+[R1]: https://hermes-agent.nousresearch.com/docs/user-guide/features/skills

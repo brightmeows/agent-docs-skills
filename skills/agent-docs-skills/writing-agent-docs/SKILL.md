@@ -117,6 +117,7 @@ with pdfplumber.open("file.pdf") as pdf: ...
 ```
 
 - 指令越多，否定的劣势越大；指令少于 5–6 条时差距小
+- **例外——可 grep 的约束**：当约束可被确定性检查（grep / lint 可验证）时，否定形式更精确——禁令可 grep 确认，等效的肯定表达无法被自动校验（[AgentPatterns.ai](https://agentpatterns.ai/training/foundations/prompt-engineering/#negative-space-constraints-that-close-off-wrong-paths)）
 
 #### 6. 示例优先于解释
 
@@ -130,6 +131,20 @@ with pdfplumber.open("file.pdf") as pdf: ...
 export const formatDate = (date: Date): string => { ... }
 // 错误：默认导出，var 声明
 export default function formatDate(date){ var result; ... }
+```
+
+#### 14. 示例用真实值，禁用占位符
+
+示例中的占位值是代理的陷阱——代理会字面复制占位字符串（[Vercel Academy](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs)：“Placeholder values are landmines.”）。
+
+- 禁用：`"string"`、`"YOUR_VALUE"`、`"example-slug"`、“以此类推……”
+- 要求：使用项目真实数据中的值，让代理看到正确的格式、大小写、数据类型
+
+```markdown
+# 坏：占位值
+{ "courseSlug": "string", "rating": 0 }
+# 好：真实值
+{ "courseSlug": "bread-baking", "rating": 5 }
 ```
 
 #### 7. 优先整体约束而不是具体细节——给约束，让代理自己推理
@@ -187,6 +202,9 @@ export default function formatDate(date){ var result; ... }
 - **bookend**：关键规则放文件顶部和任务区前（长上下文中部 attention 最弱）
 - 注意：位置对单条指令的即时遵从影响有限（[McMillan, 2026](https://arxiv.org/abs/2605.10039)），会话长度才是关键——bookend 服务可读性而非保证即时遵从
 - 步骤仅用于真正有顺序的工作流；并列任务用 bullet 不用编号（避免引入伪顺序）
+- **按目标任务组织**：不按组件/端点/函数组织文档，而按代理要完成的任务组织。
+  任务文档包含完整步骤序列，消除顺序歧义（[Vercel Academy](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs)：
+  “Endpoint docs answer 'how do I call this?' Workflows answer 'how do I accomplish this?'”）
 
 #### 13. 优先结构化而非逐条列举
 
@@ -224,8 +242,9 @@ export default function formatDate(date){ var result; ... }
 **表达：**
 
 - [ ] 每条信息通过“模型真的需要吗？”质疑
-- [ ] 否定指令都配了肯定替代（或确属硬性禁令）
+- [ ] 否定指令都配了肯定替代（或确属硬性禁令）；可 grep 的约束优先否定形式
 - [ ] 用正反示例代替纯文字描述
+- [ ] 示例无占位符——用真实项目值而非 `"string"` / `"YOUR_VALUE"`
 
 **规范与一致性：**
 

@@ -75,6 +75,25 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 ---
 
+## 机制层（Hooks / Subagents / Rules）
+
+AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵从，可被绕过。Claude Code 还提供**机制层**，用于确定性强制或隔离执行——这是通用原则 "An instruction asks, a mechanism requires"（见前置 Skill A.2）的落地。
+
+| 层 | 机制 | 强制度 | 成本 |
+|---|---|---|---|
+| 指令层 | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从 | 高（常驻）|
+| 机制层 | Hooks / Permissions | 确定性（exit 2 阻断，不可绕过）| 低（配置在上下文外）|
+| 隔离层 | Subagents | 隔离上下文 | 低（仅摘要回主会话）|
+
+**核心判据**——"Never" 类规则该写在哪：
+
+- 偶尔被违反也无大碍 → 指令层（AGENTS.md）
+- **绝对不能被违反**（提交密钥、force push、删生产数据）→ **不要只写指令**；用 `PreToolUse` hook 阻断（exit 2），即使在 `bypassPermissions` 模式下也生效
+
+七种指令方法完整决策表（加载时机 / 压缩行为 / 成本 / 适用）、hooks 五类型与生命周期、subagent vs skill 决策、`.claude/rules` 的 `paths:`、output styles、plugins 见 [references/mechanism-layer.md](references/mechanism-layer.md)。
+
+---
+
 ## 写作原则
 
 AGENTS.md 专属写作原则（通用规则见前置 Skill）：
@@ -257,3 +276,4 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 | [L6] | [references/cross-tool-compat.md](references/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |
 | [L7] | [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
 | [L8] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
+| [L9] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层（Hooks / Subagents / Rules / Plugins + 七方法决策表）|

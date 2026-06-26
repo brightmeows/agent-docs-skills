@@ -50,3 +50,19 @@ Claude Code 支持在 `.claude/commands/` 下放可执行脚本作为斜杠命�
 ```
 
 每个脚本应有清晰的文件头说明用途。
+
+## .claude/ 目录生态
+
+`.claude/` 不只放 `commands/`，还承载 Claude Code 的其它原生组件：
+
+| 路径 | 用途 |
+|------|------|
+| `.claude/commands/` | 自定义斜杠命令（见上）|
+| `.claude/rules/*.md` | 路径限定规则（`paths:` frontmatter）|
+| `.claude/agents/*.md` | 自定义 subagent 定义（隔离上下文执行）|
+| `.claude/skills/` | 项目级技能 |
+| `.claude/settings.json` | 工具配置 + **hooks**（确定性强制）|
+| `.claude/output-styles/` | 自定义输出样式（覆盖系统提示，慎用）|
+| `.claude/plugins/` | 打包分发的插件 |
+
+rules / agents / hooks / output-styles / plugins 多为 **Claude Code 专属**机制，详见 [mechanism-layer.md](./mechanism-layer.md)（含跨工具支持矩阵）。CLAUDE.md 只是 `.claude/` 生态的入口之一——需要确定性强制或隔离执行时，优先考虑这些机制而非往 CLAUDE.md 堆指令。

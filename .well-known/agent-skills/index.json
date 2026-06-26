@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "指导个人级代理配置文件的创建与精简。在需要跨所有项目统一 agent 偏好、设置 Persona，或编辑 ~/.claude/CLAUDE_GLOBAL.md、~/.agents/AGENTS.md 等个人配置、个人配置超过 15 行时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/structuring-personal-agent-md/SKILL.md",
-      "digest": "sha256:655bda7c6c44025fb901db661d20bc1703a6ad56b6417dc39d8e3f81d3f977d2"
+      "digest": "sha256:af42877fc04634e1dc0b237112212af41e14896c2b648e04ff74a347b9672821"
     },
     {
       "name": "writing-skill-md",

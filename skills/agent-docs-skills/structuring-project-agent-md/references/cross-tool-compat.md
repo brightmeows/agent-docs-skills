@@ -29,10 +29,11 @@
 | **Claude Code** | `CLAUDE.md` | 项目级，自动发现 |
 | **Cursor** | `.cursor/rules/*.mdc` | 项目级，按 glob 匹配注入 |
 | **Gemini CLI** | `GEMINI.md` | 项目级，自动发现 |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | 项目级原生指令文件；亦读 AGENTS.md（[2026-06-18](https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/) 起 code review 支持）|
+| **Windsurf** | `.windsurfrules` / `.windsurf/rules/*.md` | 项目级规则；亦读 AGENTS.md 作为 fallback |
 | **JetBrains Junie** | `.junie/guidelines.md` | 项目级 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
 | **通用（跨工具）** | `AGENTS.md` | 跨工具 fallback 标准 |
-| **GitHub Copilot** | `AGENTS.md` | 项目级，自 [2026-06-18](https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/) 起 code review 支持 |
 
 ---
 

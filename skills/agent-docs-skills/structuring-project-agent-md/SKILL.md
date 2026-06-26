@@ -30,6 +30,8 @@ license: Apache-2.0
 | `CLAUDE.md` | Claude Code 原生项目配置 | Claude Code |
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则 | Cursor、OpenCode 等 |
 | `GEMINI.md` | Gemini CLI 项目配置 | Gemini CLI |
+| `.github/copilot-instructions.md` | GitHub Copilot 项目配置 | GitHub Copilot（亦读 AGENTS.md）|
+| `.windsurfrules` / `.windsurf/rules/*.md` | Windsurf 项目配置 | Windsurf（亦读 AGENTS.md）|
 | `.junie/guidelines.md` | JetBrains Junie 配置 | JetBrains Junie |
 
 与 README 职责分离（README 面向人，项目级配置面向代理）。

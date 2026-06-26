@@ -485,6 +485,7 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [L6] | [anti-rationalization.md](./authoring/anti-rationalization.md) | 合理化借口对照表、封堵手法、红旗清单模板 |
 | [L7] | [persuasion-principles.md](./authoring/persuasion-principles.md) | 技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
 | [L8] | [tdd-validation-example.md](./authoring/tdd-validation-example.md) | TDD 验证方法完整实战示例（CLAUDE.md 文档变体测试记录） |
+| [L9] | [auto-generated-skill-review.md](./authoring/auto-generated-skill-review.md) | 自动生成 SKILL.md 的质量审查清单与优化流程（Hermes `/learn` 等工具适用）|
 
 ---
 

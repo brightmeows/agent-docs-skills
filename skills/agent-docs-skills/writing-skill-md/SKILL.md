@@ -328,7 +328,7 @@ helper1、helper2、step3、pattern4
 
 技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链（漏洞发现 → 产业审计 → 可利用性验证 → 供应链投毒 → 扫描器绕过实证 → 真实攻击验证 → 行业安全标准）见 [security.md](./references/security.md)。
 
-> **2026-06 关键更新**：安全研究已证实主流技能扫描器均可被绕过（CSA, Trail of Bits），且已有虚假技能绕过所有检测、触及 26,000 个 agent 的真实攻击（AIR）。OWASP 同期发布 Agentic Skills Top 10 行业安全标准。详见 [security.md](./references/security.md)。
+> **2026 关键更新**：安全研究已证实主流技能扫描器均可被绕过（CSA, Trail of Bits），且已有虚假技能绕过所有检测、触及 26,000 个 agent 的真实攻击（AIR）。OWASP 发布 **Agentic Skills Top 10（AST10）** 行业安全标准。详见 [security.md](./references/security.md)。
 
 ### 编写安全——摘要
 
@@ -472,6 +472,7 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [R12] | <https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf> | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
 | [R13] | <https://github.com/agentskills/agentskills/issues/90> | Proposal: Skill Relationship Fields | 提案新增 `prerequisite-skills` 和 `related-skills` 字段到 SKILL.md 规范 |
 | [R14] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
+| [R15] | <https://owasp.org/www-project-agentic-skills-top-10/> | OWASP Agentic Skills Top 10 (AST10) | 首个 agent skill 安全行业标准框架，含 10 类风险和 Universal Skill Format |
 
 ---
 

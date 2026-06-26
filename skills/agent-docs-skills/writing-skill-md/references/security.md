@@ -13,10 +13,8 @@
 - **大规模行为审计**：[R10]（Palo Alto Unit 42, 2026-06）引入 Behavioral Integrity Verification（BIV），扫描 49,943 个技能——**80% 存在声明与行为偏差、18.9% 为恶意、2,490 个含多阶段攻击链**。[R11]（Orca Security）发现技能市场中存在全套供应链攻击原语，可组合实现创建→分发→持久化恶意技能的自动化流水线。
 - **扫描器绕过实证**：[R12]（CSA, 2026-06）Trail of Bits 研究人员在四小时内开发出三种绕过方法，成功绕过 ClawHub、Cisco 和 Vercel skills.sh 的恶意技能检测器——所有方法均利用已熟知的混淆技术。
 - **真实世界攻击验证**：[R13]（AIR, 2026-06）安全公司 AIR 制作了一个虚假技能，使用**可变外部链接**（扫描时指向无害内容，安装后切换 payload）绕过了所有主流市场的安全扫描器，然后通过 Instagram 广告触达 **~26,000 个 agent**（含企业账户）。攻击者可借此完全控制 agent 及其可达的内部系统。
-- **行业安全标准建立**：[R14]（OWASP, 2026-06）OWASP 正式发布 **Agentic Skills Top 10**
-  ——首个面向 agent skill 安全的行业标准框架。核心风险包括：AST01 Malicious Skills、
-  AST02 Supply Chain Poisoning、AST03 Data Exfiltration、AST04 Permission Abuse、
-  AST05 Prompt Injection via Skills 等。
+- **行业安全标准建立**：[R14]（OWASP, 2026-03）OWASP 正式发布 **Agentic Skills Top 10（AST10）**
+  ——首个面向 agent skill 安全的行业标准框架。详见下方 [OWASP AST10 框架](#owasp-ast10-框架) 小节。
 
 ## 编写安全注意事项
 
@@ -73,6 +71,61 @@
 - **OWASP Top 10 作为审计框架**：参考 [R14] OWASP Agentic Skills Top 10 的十大风险类别逐项审查——覆盖静态扫描难以发现的多阶段攻击链、声明-行为偏差、指令劫持等
 - **技能依赖审计**：技能引用的外部工具、MCP 服务器等也应纳入安全审查
 
+---
+
+## OWASP AST10 框架
+
+OWASP Agentic Skills Top 10（[R14]）是首个面向 agent skill 安全的行业标准框架，
+将技能生态的主要风险归纳为 10 个类别。以下是核心风险及与编写实践的映射：
+
+| # | 风险 | 严重度 | 核心缓解 | 与本技能编写要求的对应 |
+|---|------|--------|---------|----------------------|
+| AST01 | **Malicious Skills** | Critical | Merkle 签名 + 注册表扫描 | 锁定版本（tag/commit SHA）；`allowed-tools` 最小权限 |
+| AST02 | **Supply Chain Compromise** | Critical | 注册表透明 + 来源追踪 | 审计代码示例与脚本；来源不明技能不自动加载 |
+| AST03 | **Over-Privileged Skills** | High | 最小权限声明 + schema 校验 | `allowed-tools` 只给最小工具集；避免通配 `Bash(*)` |
+| AST04 | **Insecure Metadata** | High | 静态分析 + 安全解析器 + 沙箱加载 | description 不暴露敏感信息；前端校验禁止 XML 标签 |
+| AST05 | **Untrusted External Instructions** | High | 来源清单 + 内容锁定 + 持续重扫 | 可变外部链接风险；部署前校验引用内容 |
+| AST06 | **Weak Isolation** | High | 容器化 / Docker 沙箱 | OpenCode 任务 agent / Claude Code subagent 隔离执行 |
+| AST07 | **Update Drift** | Medium | 不可变锁定 + 哈希验证 | 生产环境锁定 release tag / commit SHA |
+| AST08 | **Poor Scanning** | Medium | 语义 + 行为双通道扫描 | 自动扫描 + 人工审查；不单独依赖扫描结果 |
+| AST09 | **No Governance** | Medium | 技能清单 + agent 身份控制 | 团队内建立技能审批流程 |
+| AST10 | **Cross-Platform Reuse** | Medium | 通用格式（USF）| 按 agentskills.io 开放标准编写，跨平台兼容 |
+
+### Universal Skill Format（USF）提案
+
+AST10 框架配套提出了 **Universal Skill Format** 提案，
+旨在跨平台统一 skill 元数据格式，从源头解决安全元数据丢失问题：
+
+```yaml
+---
+name: example-skill
+version: 1.0.0
+platforms: [openclaw, claude, cursor, vscode]
+permissions:
+  files:
+    read: [~/.config/app.json]
+    write: [~/.config/app.json]
+    deny_write: [SOUL.md, MEMORY.md, AGENTS.md]
+  network:
+    allow: [api.example.com]
+    deny: "*"
+  shell: false
+  tools: [web_fetch, read_file]
+risk_tier: L1
+signature: "ed25519:ABCDEF..."
+content_hash: "sha256:abcdef..."
+---
+```
+
+**对编写者的意义**：
+
+- `permissions.deny_write` 保护身份文件（`SOUL.md`/`MEMORY.md`）——当前 `allowed-tools` 不足以表达此粒度
+- `network.allow` 是域名白名单而非布尔开关——通配 `network: true` 是 AST03 典型隐患
+- `risk_tier` 实现自动化治理策略，无需逐个审查
+- USF 尚在提案阶段，但编写技能时已可用 `allowed-tools` + description 声明模拟其理念
+
+---
+
 ## 发现即检查清单
 
 部署前额外确认：
@@ -102,7 +155,8 @@
 | [R11] | <https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/> | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
 | [R12] | <https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf> | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
 | [R13] | <https://www.air.security/blog-posts/the-story-of-skills> | The Story of Skills — How We Hijacked 26,000 Agents | AIR 证实虚假技能可绕过所有扫描器，触及 26,000 agent，含企业账户 |
-| [R14] | <https://owasp.org/www-project-agentic-skills-top-10/> | OWASP Agentic Skills Top 10 | 首个 agent skill 安全行业标准（AST01 Malicious Skills 等十大风险）|
+| [R14] | <https://owasp.org/www-project-agentic-skills-top-10/> | OWASP Agentic Skills Top 10 | 首个 agent skill 安全行业标准框架：10 类风险、Universal Skill Format 提案、跨平台兼容方案 |
+| [R15] | <https://github.com/OWASP/www-project-agentic-skills-top-10/blob/main/docs/OWASP-Agentic-Skills-Top10-v0.5.pdf> | OWASP AST10 Full Report (v0.5) | 完整 PDF 报告含十大风险详情、攻击场景、缓解措施 |
 
 ## 本地参考
 

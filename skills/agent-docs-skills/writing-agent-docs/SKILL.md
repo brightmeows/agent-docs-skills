@@ -56,6 +56,7 @@ license: Apache-2.0
 - 不要为假设场景写规则
 - 起步极简 → 用真实任务观察 → 补充反复出现的问题 → 精简已能遵循的 → 重复
 - “best docs grow through iteration, not upfront planning.”
+- 当需要补充内容时，优先记录**具体踩坑点**（环境特有、反直觉的事实）而非通用建议——gotchas 是迭代中最直接的改进（[agentskills.io](https://agentskills.io/skill-creation/best-practices)）
 
 #### 2. 确定性约束优先——能用机制强制的，不写入文档
 
@@ -107,6 +108,8 @@ license: Apache-2.0
 #### 5. 简洁优先
 
 - 能用一句话说清绝不用一段
+- **命令优先**：指令写成精确的可执行命令（`pytest -v --tb=short`），而非描述性文字（“运行测试”）——命令可自验证，描述需要代理推断（blakecrosley.com）
+- **提供默认而非菜单**：多个方案时指定一个默认，备选一笔带过，避免代理逐一尝试（[agentskills.io](https://agentskills.io/skill-creation/best-practices)）
 - 原则是每 token 须自证价值；大小目标因文档类型而异（见领域 skill）
 
 ```markdown
@@ -215,13 +218,36 @@ export default function formatDate(date){ var result; ... }
 | 运行危险命令 | 先解释风险，再询问确认 |
 ```
 
+#### 14. 工作流闭包——完成标准 + 阻塞升级
+
+代理最常见的失败模式是未经验证就报告“完成”，以及在阻塞时采取破坏性变通方案。每条工作流应显式定义完成标准和异常路径。
+
+- **完成标准**：定义具体的可验证条件，代理据此自检后再报告完成。“完成 = lint 通过 + 测试通过 + 已提交”而非“完成 = 改完代码”
+- **阻塞升级**：说明代理在阻塞时应该做什么（和不该做什么）。“测试失败 3 次后停止并报告完整输出”“遇到冲突时停止并显示冲突文件”——禁止删除文件绕过错误
+
+```markdown
+# 坏：开放式的完成标准
+确保代码质量后再提交
+
+# 好：可验证的完成标准 + 升级路径
+完成标准：
+1. `ruff check .` 返回 0
+2. `pytest -v` 全通过
+3. 已提交，commit message 符合 conventional commits
+
+阻塞时：
+- 测试失败 3 次 → 停止并报告失败测试完整输出
+- 依赖缺失 → 先查 requirements.txt，再问
+- 绝不：删除文件解决错误、force push、跳过测试
+```
+
 ---
 
 ## 自检清单（部署前）
 
 **选材域：**
 
-- [ ] 无推测性规则（只针对观察到的真实失败）
+- [ ] 无推测性规则（只针对观察到的真实失败）；如补充内容，优先具体 gotchas
 - [ ] 可机制强制的约束交给机制，未写入文档
 - [ ] 无易于从代码/预训练获取的重复内容
 - [ ] 给整体约束而非穷举细节
@@ -239,6 +265,7 @@ export default function formatDate(date){ var result; ... }
 
 - [ ] 重内容下沉子文件，入口精简、按需加载
 - [ ] 关键操作有验证 / 确认步骤
+- [ ] 工作流有显式完成标准和阻塞升级路径
 - [ ] 组织检查——无长串无序 rule list；结构化格式优先，按目标任务组织
 
 > 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。

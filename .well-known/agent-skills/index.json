@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "提供代理文档写作的通用基础原则与约束。在创建、编辑或审校 AGENTS.md、SKILL.md、.cursor/rules、系统提示词等面向代理的文本前使用；是 structuring-project-agent-md、writing-skill-md 与 structuring-personal-agent-md 的前置依赖。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/writing-agent-docs/SKILL.md",
-      "digest": "sha256:6035c63a55eda73a5ee8253ecf4a7fb0fa99ab6e410296774487d18140dca355"
+      "digest": "sha256:6b80e1f1252bbca6ae36e6ffbd38dcef2513171199e2f3cfd10c029ee7fd25f6"
     },
     {
       "name": "structuring-project-agent-md",

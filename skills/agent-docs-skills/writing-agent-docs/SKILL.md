@@ -278,6 +278,7 @@ export default function formatDate(date){ var result; ... }
 
 - 写 **AGENTS.md / CLAUDE.md / .cursor/rules**（项目级配置）→ 加载 `structuring-project-agent-md`
 - 写 **SKILL.md**（TDD、技能类型、CSO、三级渐进式披露、一层引用深度、<500 行目标）→ 加载 `writing-skill-md`
+- 写 **~/.claude/CLAUDE_GLOBAL.md / ~/.agents/AGENTS.md**（个人级配置）→ 加载 `structuring-personal-agent-md`
 
 ---
 

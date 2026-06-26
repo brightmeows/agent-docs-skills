@@ -10,6 +10,15 @@
 
 因此本仓库技能的**主流程面向代理可执行的操作**。需要人类深度参与的方法论（如完整 TDD subagent 压力测试）作为**人类作者参考**保留，不作为代理执行的主路径——见 [writing-skill-md/authoring/tdd-validation.md](skills/agent-docs-skills/writing-skill-md/authoring/tdd-validation.md)。
 
+## 工具无关原则
+
+本仓库的通用指导**工具无关**——适用于 OpenCode、Claude Code、Cursor、Gemini CLI、Copilot 等任意代理。写内容时区分：
+
+- **跨工具通用**（AGENTS.md 标准、SKILL.md 开放标准、写作原则、实证数据）→ 默认，无需标注
+- **特定工具专属**（Claude Code hooks/subagents、Cursor `.mdc`、OpenCode `opencode.json` 等）→ **必须标注工具名**，并说明其它工具的等价或不等价
+
+不把单一工具的机制写成通用做法。
+
 ## 命令
 
 ```bash
@@ -21,7 +30,7 @@ pre-commit run check-well-known-digest       # index.json digest 与 SKILL.md �
 pre-commit run check-skill-name-consistency  # frontmatter name/description 与 index.json 一致
 pre-commit run check-skill-md-format         # frontmatter 字段格式与 body 行数合规
 
-# 编辑 SKILL.md 后更新 index.json 中的 digest
+# 编辑 SKILL.md 后更新 digest（hook 自动校验，此为手动更新命令）
 sha256sum skills/agent-docs-skills/*/SKILL.md
 ```
 
@@ -30,10 +39,10 @@ sha256sum skills/agent-docs-skills/*/SKILL.md
 ### Always
 
 - 修改 `.md` 后通过 `pre-commit run markdownlint` 验证（pre-commit 中以 `--config .markdownlint.toml` 覆盖默认规则，勿直接调用 markdownlint-cli2）
-- 修改 `skills/agent-docs-skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段
+- 修改 `skills/agent-docs-skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段（由 `check-well-known-digest` hook 强制）
 - 新增/移除技能目录时同步更新 `.well-known/agent-skills/index.json`（`.claude-plugin/plugin.json` 依赖默认 `skills/` 目录扫描，无需维护技能列表）
 - 发布新版本（release/tag）时，同步更新 `.claude-plugin/plugin.json` 的 `version` 字段和 `README.md` 中的安装命令版本引用
-- **修改任何技能前，必须先加载并完整读取所有前置 skill，禁止以任何理由绕过。** 具体为：必须加载 `writing-agent-docs`（基础写作原则）和对应的领域 skill（`writing-skill-md`、`structuring-project-agent-md` 或 `structuring-personal-agent-md`），并按其要求执行——本仓库是元技能仓库，技能本身即是规范
+- **修改任何技能前，必须先加载并完整读取所有前置 skill（禁止绕过）。** 依赖关系见[技能依赖链](#技能依赖链)——本仓库是元技能仓库，技能本身即是规范
 
 ### Ask
 

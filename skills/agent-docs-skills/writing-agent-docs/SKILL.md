@@ -266,7 +266,7 @@ export default function formatDate(date){ var result; ... }
 
 - [ ] 重内容下沉子文件，入口精简、按需加载
 - [ ] 关键操作有验证 / 确认步骤
-- [ ] 工作流有显式完成标准和阻塞升级路径
+- [ ] 工作流有显式完成标准 + 阻塞升级路径配对（同时定义“何时报告完成”和“阻塞时做什么”）
 - [ ] 组织检查——无长串无序 rule list；结构化格式优先，按目标任务组织
 
 > 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。

@@ -131,7 +131,10 @@ skill-name/
 
 **保持内联：** 原则和概念、代码模式（50 行以内）、其他所有内容。
 
-**引用保持一层深度**——所有被引用文件直接从 SKILL.md 链接（如 `references/foo.md`），避免深层嵌套（嵌套会导致代理用 `head` 预览，信息不完整）。
+**引用保持一层深度**——代理从 SKILL.md 到目标文件的引用链不超过 1 跳
+（如 `SKILL.md → references/foo.md` 可以，应避免 `→ references/sub/foo.md → bar.md`）。
+文件系统路径深度（如 `memo/subtopic/foo.md`）**不影响**引用链长度。
+嵌套引用会导致代理用 `head` 预览，信息不完整。
 
 ### 组织模式
 
@@ -415,42 +418,7 @@ helper1、helper2、step3、pattern4
 
 ## 技能生态与发布
 
-### 技能市场与注册中心
-
-技能生态在 2026 年上半年经历了爆发式增长。根据 Skillselion 追踪数据（[R14]），
-公开生态已达 **~66,000 个 agent skills、~7,800 个 MCP servers**，累计安装量 **112M**。
-各市场索引规模因口径而异——SkillsMP 约 80 万、Skills.sh 约 60 万、ClawHub 约 1.3 万
-（安全清查后余 3,200+）。质量参差——SkillsBench 评测 47,150 个公开技能平均 6.2/12（[R9]）。
-主要市场分布：
-
-| 平台 | 发布者 | 特点 |
-|------|--------|------|
-| **[Skills.sh](https://skills.sh)** | Vercel（2026-01） | CLI 安装（`npx skills install`）、Snyk 集成安全扫描、策展推荐 |
-| **[ClawHub](https://clawhub.ai)** | 社区 | 自动索引 GitHub 公开 SKILL.md 文件、质量指标 |
-| **[claude-plugins.dev/skills](https://claude-plugins.dev/skills)** | 社区 | 自动索引 Claude Code / Cursor / Codex 技能、开源 |
-| **SkillsMP** | 第三方 | 企业级技能市场 |
-
-### 如何发布技能
-
-1. **遵循开放标准**：确保 SKILL.md 格式符合 [agentskills.io](https://agentskills.io/specification) 规范——所有市场均基于同一标准
-2. **版本控制**：使用 Git tag 管理版本，发布时锁定到 release tag（`npx skills add <url>#v1.0.0`）
-3. **GitHub 公开仓库**：将技能放在公开 GitHub 仓库的 `skills/` 目录下，市场将自动索引
-4. **安全扫描**：发布前用 `mcp-scan` 扫描（`uvx mcp-scan@latest --skills`）
-5. **description 优化**：按 CSO 原则编写 description，确保市场搜索能匹配到你的技能
-
-### 技能生态验证
-
-SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 84 个任务 × 11 个领域 × 7,308 条轨迹。关键发现：
-
-- **质量方差大**：47,150 个公开技能平均评分仅 6.2/12，仅 top-quartile（≥9 分）才有实质提升
-- **精选技能有效**：精选技能提升通过率平均 16.2 个百分点（医疗领域 +51.9）
-- **聚焦胜于臃肿**：2–3 个聚焦技能优于单一大文档（+18.6 vs -2.9）
-
-可作为技能质量参考。
-
-### 跨工具兼容性
-
-SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode、Codex CLI、Cursor、Gemini CLI、GitHub Copilot、Microsoft Agent Framework 等）。写一次技能，跨平台可用。OpenCode、Cursor 等额外支持 Claude Code 扩展字段的子集。
+生态概况、市场列表、发布流程、SkillsBench 验证数据、跨工具兼容性等参考材料见 [references/ecosystem-publishing.md](./references/ecosystem-publishing.md)。
 
 ---
 
@@ -461,18 +429,8 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [R1] | <https://agentskills.io/specification> | Agent Skills Specification | 开放标准规范，定义 SKILL.md 格式与字段 |
 | [R2] | <https://anthropics-skills.mintlify.app/creating-skills/bundled-resources> | Creating Skills — Bundled Resources | 资源组织、引用深度、主题分类等官方约定 |
 | [R3] | <https://github.com/anthropics/skills> | anthropics/skills | 官方技能参考仓库 |
-| [R4] | <https://arxiv.org/abs/2601.10338> | Vulnerability Analysis of Agent Skill Ecosystem | 逾四分之一技能含安全漏洞 |
-| [R5] | <https://arxiv.org/abs/2604.04989> | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
-| [R6] | <https://arxiv.org/abs/2604.03081> | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
 | [R7] | <https://github.com/mgechev/skills-best-practices> | Skills Best Practices | 否定触发条件、技能验证方法论 |
-| [R8] | <https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/> | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
-| [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 84 任务 × 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
-| [R10] | <https://arxiv.org/abs/2605.11770> | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
-| [R11] | <https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/> | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
-| [R12] | <https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf> | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
 | [R13] | <https://github.com/agentskills/agentskills/issues/90> | Proposal: Skill Relationship Fields | 提案新增 `prerequisite-skills` 和 `related-skills` 字段到 SKILL.md 规范 |
-| [R14] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
-| [R15] | <https://owasp.org/www-project-agentic-skills-top-10/> | OWASP Agentic Skills Top 10 (AST10) | 首个 agent skill 安全行业标准框架，含 10 类风险和 Universal Skill Format |
 
 ---
 
@@ -488,6 +446,7 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [L2] | [claude-search-optimization.md](./references/claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
 | [L3] | [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
 | [L9] | [security.md](./references/security.md) | 安全考虑完整参考（证据链、注意事项、扩展风险场景、检查清单）|
+| [L11] | [ecosystem-publishing.md](./references/ecosystem-publishing.md) | 技能生态概况：市场分布、发布流程、SkillsBench 验证数据、跨工具兼容性 |
 
 **`scripts/`**（执行时不进入上下文）：
 
@@ -506,5 +465,4 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [L10] | [auto-generated-skill-review.md](./authoring/auto-generated-skill-review.md) | 自动生成 SKILL.md 的质量审查清单与优化流程（Hermes `/learn` 等工具适用）|
 
 ---
-
 > **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **[L5]**。代理在常规任务中无需执行——[技能创建清单 · 编写后](#技能创建清单) 已覆盖基础验证。

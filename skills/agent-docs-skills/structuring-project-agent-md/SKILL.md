@@ -1,6 +1,6 @@
 ---
 name: structuring-project-agent-md
-description: 指导项目级代理配置文件的创建、维护与审计。在创建或修改仓库内 AGENTS.md、CLAUDE.md、.cursor/rules，或代理反复犯错、忽略项目约定、配置文件超过 200 行时使用。
+description: 指导项目级代理配置文件的创建、维护与审计。在创建或修改仓库内 AGENTS.md、CLAUDE.md、.cursor/rules，或代理反复犯错、忽略项目约定、配置文件出现 Lint Leakage / Context Bloat / Skill Leakage 等配置异味时使用。
 license: Apache-2.0
 ---
 

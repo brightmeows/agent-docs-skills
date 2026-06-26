@@ -403,7 +403,7 @@ helper1、helper2、step3、pattern4
 
 ### 技能市场与注册中心
 
-技能生态在 2026 年上半年经历了爆发式增长。截至 2026 年 3 月，**490,000+ 技能** 分布在三个主要市场：
+技能生态在 2026 年上半年经历了爆发式增长，公开技能目录已达**百万级**（SkillsMP 索引约 190 万），但质量参差——平均质量评分 6.2/12（[R9]）。主要市场分布：
 
 | 平台 | 发布者 | 特点 |
 |------|--------|------|
@@ -422,7 +422,13 @@ helper1、helper2、step3、pattern4
 
 ### 技能生态验证
 
-SkillsBench（[R9]）是新兴的技能评估基准，用于衡量技能在标准化场景中的表现。可作为技能质量参考。
+SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 84 个任务 × 11 个领域 × 7,308 条轨迹。关键发现：
+
+- **质量方差大**：47,150 个公开技能平均评分仅 6.2/12，仅 top-quartile（≥9 分）才有实质提升
+- **精选技能有效**：精选技能提升通过率平均 16.2 个百分点（医疗领域 +51.9）
+- **聚焦胜于臃肿**：2–3 个聚焦技能优于单一大文档（+18.6 vs -2.9）
+
+可作为技能质量参考。
 
 ### 跨工具兼容性
 
@@ -442,7 +448,10 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
 | [R7] | [github.com/mgechev](https://github.com/mgechev/skills-best-practices) | Skills Best Practices | 否定触发条件、技能验证方法论 |
 | [R8] | [snyk.io](https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/) | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
-| [R9] | [arXiv:2602.12670](https://arxiv.org/abs/2602.12670) | SkillsBench: A Benchmark for Agent Skill Evaluation | 技能评估标准基准 |
+| [R9] | [arXiv:2602.12670](https://arxiv.org/abs/2602.12670) | SkillsBench: A Benchmark for Agent Skill Evaluation | 84 任务 × 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
+| [R10] | [arXiv:2605.11770](https://arxiv.org/abs/2605.11770) | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
+| [R11] | [orca.security](https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/) | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
+| [R12] | [cloudsecurityalliance.org](https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf) | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
 
 ---
 

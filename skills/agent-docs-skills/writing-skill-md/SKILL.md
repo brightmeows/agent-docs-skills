@@ -142,18 +142,41 @@ skill-name/
 
 **前置元数据（YAML）：**
 
-- 两个必需字段：`name` 和 `description`（开放标准字段见 agentskills.io 规范[1]）；两者均不得含 XML 标签
-- `name`：≤64 字符，仅小写字母、数字、连字符；不得连续连字符（`--`）、不得首尾连字符、不得含保留词（`anthropic`、`claude`）、**必须与父目录名一致**
-  - **推荐动名词（gerund）形式**：`processing-pdfs`、`testing-code`、`managing-databases`，语义清晰地描述技能提供的能力
-  - 也可用名词短语：`pdf-processing`、`code-review`；避免模糊命名：`helper`、`utils`、`tools`
-- `description`：≤1024 字符、非空，触发条件导向（第三人称、描述做什么 + 何时使用、绝不总结工作流）——完整规范见下方 [CSO](#claude-搜索优化cso) 章节
-- **agentskills.io 开放标准可选字段**（跨平台通用，见 agentskills.io 规范[1]）：
-  - `license`（许可证）、`compatibility`（≤500 字符，环境/工具要求）、`metadata`（任意键值对）
-  - `allowed-tools`（预批准的工具白名单，**实验性**——各实现支持程度不同）
-- **Claude Code 平台特有字段**（非开放标准，跨平台不通用，仅 Claude Code 支持）：
-  - `disable-model-invocation`（阻止自动加载，仅手动触发）、`user-invocable`（从 `/` 菜单隐藏）
-  - `disallowed-tools`（技能激活期间移除的工具）、`model`（指定模型）
-  - `context: fork`（隔离 subagent 运行）、`arguments`（命名参数替换，`$name` 语法）
+所有字段中，开放标准字段（agentskills.io 规范[1]）跨平台通用，Claude Code 特有字段仅该平台支持。`name` 和 `description` 在开放标准中为**必需**，Claude Code 中 `name` 默认为目录名（可选）、`description` 为推荐。
+
+**必需字段（开放标准）：**
+
+| 字段 | 约束 |
+|------|------|
+| `name` | ≤64 字符，仅小写字母/数字/连字符；不得连续连字符 `--`、首尾连字符、含保留词 `anthropic`/`claude`；**必须与父目录名一致**；推荐动名词形式如 `processing-pdfs`；避免模糊命名如 `helper`、`utils` |
+| `description` | ≤1024 字符、非空、不得含 XML 标签；第三人称、描述做什么 + 何时使用、绝不总结工作流（见 [CSO](#claude-搜索优化cso)） |
+
+**可选字段（开放标准 — agentskills.io）：**
+
+| 字段 | 说明 |
+|------|------|
+| `license` | 许可证名称或引用许可证文件 |
+| `compatibility` | ≤500 字符，环境/工具要求 |
+| `metadata` | 任意键值对，用于附加元数据 |
+| `allowed-tools` | ⚗️ 预批准的工具白名单，空格分隔，各实现支持程度不同 |
+
+**Claude Code 平台特有字段：**
+
+| 字段 | 说明 |
+|------|------|
+| `when_to_use` | 额外触发条件/示例请求，追加到 description，共享 1536 字符上限 |
+| `argument-hint` | 自动补全时显示的参数提示（如 `[issue-number]`） |
+| `arguments` | 命名位置参数，供 `$name` 替换，空格分隔或 YAML 列表 |
+| `disable-model-invocation` | `true` 阻止自动加载，仅手动 `/name` 触发，同时阻止 subagent 预加载 |
+| `user-invocable` | `false` 从 `/` 菜单隐藏，作背景知识 |
+| `disallowed-tools` | 技能激活期间从代理工具池移除的工具列表 |
+| `model` | 覆盖当前 turn 使用的模型，下一轮恢复会话模型 |
+| `effort` | 覆盖会话 effort（`low`/`medium`/`high`/`xhigh`/`max`） |
+| `context` | 设为 `fork` 时在隔离 subagent 中运行技能 |
+| `agent` | `context: fork` 时指定 subagent 类型（`Explore`/`Plan`/`general-purpose` 或自定义） |
+| `paths` | **Glob 模式** — 限制技能自动激活的文件范围，逗号分隔或 YAML 列表 |
+| `shell` | `!`command`` 代码块的 shell（`bash`/`powershell`，需 `CLAUDE_CODE_USE_POWERSHELL_TOOL=1`） |
+| `hooks` | 技能生命周期钩子 |
 
 **主体大小**：SKILL.md body 保持 <500 行 / **指令 < 5000 tokens**（agentskills.io 推荐预算）；接近上限时拆分到参考文件（超 100 行的参考文件加目录）。
 

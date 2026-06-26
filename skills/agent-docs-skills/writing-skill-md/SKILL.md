@@ -226,7 +226,7 @@ description: [做什么]. 在以下情况使用：[具体触发条件和症状]
 - **“做什么”是功能概述，不是步骤列举**——“从 PDF 提取文本”是功能，“用 pdfplumber 打开、读取、提取”是工作流
 - **绝不总结技能的过程或工作流**——测试发现，描述若总结工作流，Claude 会只跟随描述而跳过技能主体
 - 第三人称、含具体症状、与技术无关（除非技能本身技术特定）
-- **含否定触发条件**：明确说明技能不适用场景（“不要用于 Vue 项目”——mgechev/skills-best-practices），减少误触发。否定条件用于边界界定而非行为禁令，与 description 的触发匹配语义一致
+- **含否定触发条件**：明确说明技能不适用场景（“不要用于 Vue 项目”——[R7]），减少误触发。否定条件用于边界界定而非行为禁令，与 description 的触发匹配语义一致
 
 最简好坏对照：
 
@@ -420,6 +420,7 @@ helper1、helper2、step3、pattern4
 | [R4] | [arXiv:2601.10338](https://arxiv.org/abs/2601.10338) | Vulnerability Analysis of Agent Skill Ecosystem | 逾四分之一技能含安全漏洞 |
 | [R5] | [arXiv:2604.04989](https://arxiv.org/abs/2604.04989) | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
 | [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
+| [R7] | [github.com/mgechev](https://github.com/mgechev/skills-best-practices) | Skills Best Practices | 否定触发条件、技能验证方法论 |
 
 ---
 

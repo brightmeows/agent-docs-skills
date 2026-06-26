@@ -56,7 +56,7 @@ license: Apache-2.0
 - 不要为假设场景写规则
 - 起步极简 → 用真实任务观察 → 补充反复出现的问题 → 精简已能遵循的 → 重复
 - “best docs grow through iteration, not upfront planning.”
-- 当需要补充内容时，优先记录**具体踩坑点**（环境特有、反直觉的事实）而非通用建议——gotchas 是迭代中最直接的改进（[agentskills.io](https://agentskills.io/skill-creation/best-practices)）
+- 当需要补充内容时，优先记录**具体踩坑点**（环境特有、反直觉的事实）而非通用建议——gotchas 是迭代中最直接的改进（[R7]）
 
 #### A.2 确定性约束优先——能用机制强制的，不写入文档
 
@@ -108,8 +108,8 @@ license: Apache-2.0
 #### B.1 简洁优先
 
 - 能用一句话说清绝不用一段
-- **命令优先**：指令写成精确的可执行命令（`pytest -v --tb=short`），而非描述性文字（“运行测试”）——命令可自验证，描述需要代理推断（blakecrosley.com）
-- **提供默认而非菜单**：多个方案时指定一个默认，备选一笔带过，避免代理逐一尝试（[agentskills.io](https://agentskills.io/skill-creation/best-practices)）
+- **命令优先**：指令写成精确的可执行命令（`pytest -v --tb=short`），而非描述性文字（“运行测试”）——命令可自验证，描述需要代理推断（[R6]）
+- **提供默认而非菜单**：多个方案时指定一个默认，备选一笔带过，避免代理逐一尝试（[R7]）
 - 原则是每 token 须自证价值；大小目标因文档类型而异（见领域 skill）
 
 ```markdown
@@ -290,6 +290,8 @@ export default function formatDate(date){ var result; ... }
 | [R3] | [agentpatterns.ai](https://agentpatterns.ai/training/foundations/prompt-engineering/) | Prompt Engineering for Agent Instructions and Systems | 指令应构成约束系统而非规则清单 |
 | [R4] | [vercel.com](https://vercel.com/academy/agent-friendly-apis/agent-friendly-docs) | Agent-Friendly Docs | 代理解析结构化数据比无序列举更可靠 |
 | [R5] | [arXiv:2605.10039](https://arxiv.org/abs/2605.10039) | Positional Bias in LLM Instruction Following | 指令位置对遵从影响有限，会话长度是关键 |
+| [R6] | [blakecrosley.com](https://blakecrosley.com/blog/agents-md-patterns) | AGENTS.md Patterns: What Actually Changes Agent Behavior | 命令优先指令、完成标准定义、阻塞升级路径 |
+| [R7] | [R7] | Best Practices for Skill Creators | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
 
 ---
 

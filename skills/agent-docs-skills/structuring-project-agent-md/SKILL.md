@@ -30,9 +30,10 @@ license: Apache-2.0
 | `CLAUDE.md` | Claude Code 原生项目配置 | Claude Code |
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则 | Cursor、OpenCode 等 |
 | `GEMINI.md` | Gemini CLI 项目配置 | Gemini CLI |
-| `.github/copilot-instructions.md` | GitHub Copilot 项目配置 | GitHub Copilot（亦读 AGENTS.md）|
+| `.github/copilot-instructions.md` | GitHub Copilot 项目配置 | GitHub Copilot（亦读 AGENTS.md，2026-06 起 code review 支持）|
 | `.windsurfrules` / `.windsurf/rules/*.md` | Windsurf 项目配置 | Windsurf（亦读 AGENTS.md）|
 | `.junie/guidelines.md` | JetBrains Junie 配置 | JetBrains Junie |
+| `opencode.json` | OpenCode 项目配置（工具/权限/agent 定义）| OpenCode |
 
 与 README 职责分离（README 面向人，项目级配置面向代理）。
 
@@ -79,24 +80,26 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 ## 机制层（Hooks / Subagents / Rules）
 
-AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵从，可被绕过。**Claude Code** 还提供**机制层**，用于确定性强制或隔离执行——这是通用原则 "An instruction asks, a mechanism requires"（见前置 Skill A.2）的落地。
+AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵从，可被绕过。多种工具提供**机制层**用于确定性强制或隔离执行——这是通用原则 “An instruction asks, a mechanism requires”（见前置 Skill A.2）的落地。
 
 > **工具归属**：以下机制（hooks / subagents / output styles / plugins）**多为 Claude Code 专属**；
 > 其它代理（OpenCode / Cursor / Gemini CLI / Copilot）的等价或尚无等价见 [references/mechanism-layer.md](references/mechanism-layer.md) 的跨工具支持矩阵。
 > 写跨工具配置时，优先用跨工具标准（AGENTS.md / SKILL.md），把 Claude Code 专属机制作“可选增强”。
 
 | 层 | 机制 | 强制度 | 成本 |
-|---|---|---|---|
+|---|---|---|---|---|
 | 指令层 | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从 | 高（常驻）|
-| 机制层 | Hooks / Permissions | 确定性（exit 2 阻断，不可绕过）| 低（配置在上下文外）|
-| 隔离层 | Subagents | 隔离上下文 | 低（仅摘要回主会话）|
+| 机制层 | Hooks / Permissions / OpenCode `permission.skill` | 确定性（exit 2 阻断 / allow/deny/ask）| 低（配置在上下文外）|
+| 隔离层 | Subagents / OpenCode task agents | 隔离上下文 | 低（仅摘要回主会话）|
 
-**核心判据**——"Never" 类规则该写在哪：
+**OpenCode 权限模式**：OpenCode 的 `permission.skill` 支持三态控制——`allow`（立即加载）/ `deny`（隐藏拒绝）/ `ask`（请求批准），支持通配符模式（如 `internal-*`）和每 agent 覆盖。见 [opencode.ai/docs/skills](https://opencode.ai/docs/skills)。
+
+**核心判据**——“Never” 类规则该写在哪：
 
 - 偶尔被违反也无大碍 → 指令层（AGENTS.md）
 - **绝对不能被违反**（提交密钥、force push、删生产数据）→ **不要只写指令**；用 `PreToolUse` hook 阻断（exit 2），即使在 `bypassPermissions` 模式下也生效
 
-七种指令方法完整决策表（加载时机 / 压缩行为 / 成本 / 适用）、hooks 五类型与生命周期、subagent vs skill 决策、`.claude/rules` 的 `paths:`、output styles、plugins 见 [references/mechanism-layer.md](references/mechanism-layer.md)。
+八种指令方法完整决策表（加载时机 / 压缩行为 / 成本 / 适用）、hooks 五类型与生命周期、subagent vs skill 决策、`.claude/rules` 的 `paths:`、output styles、plugins、dynamic workflows 见 [references/mechanism-layer.md](references/mechanism-layer.md)。
 
 ---
 

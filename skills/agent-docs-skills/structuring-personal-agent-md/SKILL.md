@@ -30,7 +30,21 @@ license: Apache-2.0
 
 ## 配置文件位置
 
-完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [L1]。写作时最常用：Claude Code 的 `~/.claude/CLAUDE_GLOBAL.md`、通用的 `~/.agents/AGENTS.md`、OpenCode 的 `~/.config/opencode/AGENTS.md`。
+完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [L1]。写作时最常用：
+
+| 工具 | 个人级配置 | 用途 |
+|------|-----------|------|
+| Claude Code | `~/.claude/CLAUDE_GLOBAL.md` | 全局行为指令 |
+| 通用 | `~/.agents/AGENTS.md` | 个人级 AGENTS.md |
+| OpenCode | `~/.config/opencode/AGENTS.md` | 个人级全局规则 |
+| OpenCode | `~/.config/opencode/opencode.json` | 工具配置 + agent 定义 |
+| OpenCode | `~/.config/opencode/agents/*.md` | 自定义 agent 定义（Markdown agent 文件）|
+| Cursor | `~/.cursor/rules/` | 全局规则文件 |
+
+**OpenCode agent 定义**：OpenCode 支持通过 Markdown agent 文件
+（`~/.config/opencode/agents/*.md`）定义 agent 角色，含 YAML frontmatter
+（description/mode/model/permission 等）和系统提示 body。也可在 `opencode.json` 中以
+`agent` 字段配置。个人级 Persona 可直接在 agent 定义中设置。
 
 **加载优先级**：就近优先——个人级定义通用行为基调，项目级在冲突时覆盖（详见 [L1] 的“优先级规则”）。
 

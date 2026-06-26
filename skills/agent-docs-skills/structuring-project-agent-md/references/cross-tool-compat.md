@@ -9,16 +9,18 @@
 
 | 概念 | AGENTS.md 术语 | Claude Code | Cursor | OpenCode |
 |------|---------------|-------------|--------|----------|
-| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` |
-| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/` |
+| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` + `.opencode/` |
+| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/AGENTS.md` + `~/.config/opencode/opencode.json` |
 | **技能存放（项目）** | `./.well-known/` | `.claude/skills/` | `.cursor/skills/` | `.opencode/skills/` |
-| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/` |
+| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/`、`~/.config/opencode/skills/` |
 | **技能发现文件** | `.well-known/agent-skills/index.json` | 同左 | 同左 | 同左 |
-| **工具配置（项目）** | — | — | — | `opencode.json` / `.opencode/` |
+| **技能权限控制** | — | `allowed-tools` frontmatter | — | `permission.skill` 模式（allow/deny/ask）|
+| **工具配置（项目）** | — | `.claude/settings.json` | `.cursor/settings.json` | `opencode.json` / `.opencode/` |
 | **工具配置（个人）** | — | `~/.claude/settings.json` | `~/.cursor/settings.json` | `~/.config/opencode/opencode.json` |
-| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | agent 文件或 inline config |
+| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | `.opencode/agents/*.md` 或 `opencode.json agent` 定义 |
+| **Agent 定义** | — | `.claude/agents/*.md` subagent | — | `.opencode/agents/*.md` + `opencode.json agent` 配置 |
 | **子目录规则** | 子目录 `AGENTS.md` | 子目录 `CLAUDE.md` | `.cursor/rules/` 多文件 | 继承 `opencode.json` |
-| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC |
+| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC + Markdown（agent 文件）|
 
 ---
 
@@ -29,7 +31,7 @@
 | **Claude Code** | `CLAUDE.md` | 项目级，自动发现 |
 | **Cursor** | `.cursor/rules/*.mdc` | 项目级，按 glob 匹配注入 |
 | **Gemini CLI** | `GEMINI.md` | 项目级，自动发现 |
-| **GitHub Copilot** | `.github/copilot-instructions.md` | 项目级原生指令文件；亦读 AGENTS.md（[2026-06-18](https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/) 起 code review 支持）|
+| **GitHub Copilot** | `.github/copilot-instructions.md` | 项目级原生指令文件；亦读 AGENTS.md（[R1] 起 code review 支持）|
 | **Windsurf** | `.windsurfrules` / `.windsurf/rules/*.md` | 项目级规则；亦读 AGENTS.md 作为 fallback |
 | **JetBrains Junie** | `.junie/guidelines.md` | 项目级 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
@@ -45,7 +47,7 @@
 
 ## 标准化进展
 
-AGENTS.md v1.1 处于**草案提案**阶段（[GitHub issue #135](https://github.com/agentsmd/agents.md/issues/135)，尚未合入，保持完全向后兼容）。提案明确了管辖范围、累积、优先级、隐式继承四大语义，并定义了 AGENTS.md 与 SKILL.md 的职责边界（behavior vs capabilities）。
+AGENTS.md v1.1 处于**草案提案**阶段（[R2]，尚未合入，保持完全向后兼容）。提案明确了管辖范围、累积、优先级、隐式继承四大语义，并定义了 AGENTS.md 与 SKILL.md 的职责边界（behavior vs capabilities）。
 
 **YAML Frontmatter**（渐进式披露，提案为可选）：可选的 frontmatter 允许代理在加载全文前建立轻量索引。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
 
@@ -75,3 +77,10 @@ frontmatter 帮助代理判断何时需要加载该文件的完整内容，无�
 2. 重叠内容写入 `AGENTS.md`
 3. 独有内容留在各工具原生配置中
 4. 用 symlink 或工具配置指向 AGENTS.md
+
+## 参考文献
+
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|----------|
+| [R1] | <https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/> | Copilot code review AGENTS.md support and UI improvements | GitHub Copilot 自 2026-06-18 起在 code review 中支持 AGENTS.md |
+| [R2] | <https://github.com/agentsmd/agents.md/issues/135> | AGENTS.md v1.1 proposal | AGENTS.md v1.1 草案，明确管辖范围、累积、优先级、隐式继承四大语义 |

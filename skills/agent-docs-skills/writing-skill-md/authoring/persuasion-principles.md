@@ -2,11 +2,22 @@
 
 > writing-skill-md 参考文件：技能设计中说服原则的心理学基础（Cialdini, 2021；Meincke et al., 2025）。供 tdd-validation.md 的“为何有效”引用。
 
+## 目录
+
+- [概述](#概述)
+- [七项原则](#七项原则)
+- [按技能类型的原则组合](#按技能类型的原则组合)
+- [为何有效：背后的心理](#为何有效背后的心理)
+- [伦理使用](#伦理使用)
+- [研究引用](#研究引用)
+- [快速参考](#快速参考)
+- [参考文献](#参考文献)
+
 ## 概述
 
 LLM 与人类一样响应相同的说服原则。理解这一心理有助于你设计更有效的技能——目的不是操控，而是确保关键实践在压力下仍被遵守。
 
-**研究基础：** [Meincke 等人（2025）](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5357179)在 N=28,000 个 AI 对话中测试了 7 项说服原则。说服技术使遵从率提升至两倍以上（33% → 72%，p < .001）。
+**研究基础：** Meincke 等人（2025）[R1]在 N=28,000 个 AI 对话中测试了 7 项说服原则。说服技术使遵从率提升至两倍以上（33% → 72%，p < .001）。
 
 ## 七项原则
 
@@ -204,7 +215,7 @@ LLM 与人类一样响应相同的说服原则。理解这一心理有助于你�
 - 说服七原则
 - 影响力研究的实证基础
 
-**Meincke et al. (2025).** Call Me A Jerk: Persuading AI to Comply with Objectionable Requests. [SSRN 5357179](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5357179)。
+**Meincke et al. (2025).** Call Me A Jerk: Persuading AI to Comply with Objectionable Requests. SSRN 5357179 [R1]。
 
 - 在 N=28,000 次 LLM 对话中测试了 7 项原则
 - 说服技术使遵从率从 33% 提升至 72%
@@ -220,3 +231,9 @@ LLM 与人类一样响应相同的说服原则。理解这一心理有助于你�
 3. **适用哪些原则？**（纪律型通常用权威 + 承诺）
 4. **组合过多了吗？**（不要七项全用）
 5. **这合乎伦理吗？**（是否服务于用户的真实利益？）
+
+## 参考文献
+
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|---------|
+| [R1] | <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5357179> | Call Me A Jerk: Persuading AI to Comply with Objectionable Requests | 在 N=28,000 次 LLM 对话中测试了 7 项说服原则；说服技术使遵从率从 33% 提升至 72%（p < .001）；权威、承诺、稀缺性效果最强 |

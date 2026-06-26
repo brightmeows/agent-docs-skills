@@ -1,12 +1,12 @@
 # 技能编写最佳实践（Anthropic 官方补充）
 
 > 本文件仅保留 **writing-agent-docs（通用写作规则）与 writing-skill-md（SKILL.md 专属）未覆盖** 的 Anthropic 官方补充指导。简洁、渐进式披露、description 规范、命名、评估迭代等主题见那两个 skill。
-> 完整、随官方更新的原文与资源：
+> 完整、随官方更新的原文与资源（引用编号见文末[参考文献](#参考文献)）：
 >
-> - [The Complete Guide to Building Skills for Claude](https://claude.com/blog/complete-guide-to-building-skills-for-claude)（32 页完整指南，含 3 种测试方法、micro-skills 模式——[PDF 直链](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)）
-> - [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)（官方文档）
-> - [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)（工程博客）
-> - [anthropics/skills](https://github.com/anthropics/skills)（官方技能实现参考）
+> - [The Complete Guide to Building Skills for Claude][R1]（32 页完整指南，含 3 种测试方法、micro-skills 模式——[PDF 直链][R2]）
+> - [Skill authoring best practices][R3]（官方文档）
+> - [Equipping agents for the real world with Agent Skills][R4]（工程博客）
+> - [anthropics/skills][R5]（官方技能实现参考）
 
 ---
 
@@ -142,7 +142,7 @@ python scripts/validate_boxes.py fields.json  # 返回 "OK" 或列出冲突
 
 复杂、开放的任务易出错。用“计划-验证-执行”模式早期捕获错误：分析 → **创建计划文件** → **用脚本验证计划** → 执行 → 验证。
 
-适用于批量操作、破坏性变更、复杂验证规则、高风险操作。技巧：让验证脚本输出详细错误信息（如“字段 'signature_date' 未找到。可用字段：…”）以帮助代理修复。
+适用于批量操作、破坏性变更、复杂验证规则、高风险操作。技巧：让验证脚本输出详细错误信息（如“字段 ‘signature_date’ 未找到。可用字段：…”）以帮助代理修复。
 
 ### 运行时环境
 
@@ -183,10 +183,28 @@ Use the GitHub:create_issue tool to create issues.
 
 ## 规范校验工具
 
-[agentskills.io](https://agentskills.io) 提供官方校验工具 `skills-ref`：
+[agentskills.io][R6] 提供官方校验工具 `skills-ref`：
 
 ```bash
 skills-ref validate ./my-skill
 ```
 
 检查 SKILL.md frontmatter 是否合规（name 命名规则、必需字段、字符限制）。部署前运行可确定性捕获格式违规——呼应 Toolchain First 原则，把可机器校验的规则交给机器。
+
+## 参考文献
+
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|----------|
+| [R1] | <https://claude.com/blog/complete-guide-to-building-skills-for-claude> | The Complete Guide to Building Skills for Claude | 32 页完整指南，含 3 种测试方法、micro-skills 模式 |
+| [R2] | <https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf> | The Complete Guide to Building Skills for Claude（PDF） | 上述指南的 PDF 直链 |
+| [R3] | <https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices> | Skill authoring best practices | Anthropic 官方文档 |
+| [R4] | <https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills> | Equipping agents for the real world with Agent Skills | Anthropic 工程博客 |
+| [R5] | <https://github.com/anthropics/skills> | anthropics/skills | 官方技能实现参考 |
+| [R6] | <https://agentskills.io> | agentskills.io | 官方校验工具 skills-ref |
+
+[R1]: https://claude.com/blog/complete-guide-to-building-skills-for-claude
+[R2]: https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf
+[R3]: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+[R4]: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+[R5]: https://github.com/anthropics/skills
+[R6]: https://agentskills.io

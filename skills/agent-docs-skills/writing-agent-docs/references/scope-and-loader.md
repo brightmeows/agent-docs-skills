@@ -152,8 +152,10 @@
 
 ---
 
-## 参考
+## 参考文献
 
-- [comparison-tools.md](./comparison-tools.md) — AGENTS.md vs Skill vs MCP token 对比（常驻开销倍数的唯一定义）
-- [agent-persona.md](./agent-persona.md) — Agent Persona 定义（项目级 + 个人级）
-- [SKILL.md](../SKILL.md) — 作用域定义
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|----------|
+| [L1] | [comparison-tools.md](./comparison-tools.md) | AGENTS.md vs Skill vs MCP token 对比 | 常驻开销倍数的唯一定义 |
+| [L2] | [agent-persona.md](./agent-persona.md) | Agent Persona 定义 | 项目级 + 个人级 |
+| [L3] | [SKILL.md](../SKILL.md) | 作用域定义 | writing-agent-docs 中的 scope 定义 |

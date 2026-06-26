@@ -1,14 +1,28 @@
-# 机制层——Hooks / Subagents / Rules / Plugins
+# 机制层——Hooks / Subagents / Rules / Plugins / Dynamic Workflows
 
 > `structuring-project-agent-md` 参考文件。
-> **本文件描述的机制层以 Claude Code 为代表**——hooks、subagents、output styles、plugins 是 **Claude Code 专属**；
+> **本文件描述的机制层以 Claude Code 为代表**——hooks、subagents、output styles、plugins、dynamic workflows 是 **Claude Code 专属**；
 > 其它代理（OpenCode / Cursor / Gemini CLI / Copilot）有各自的等价或尚无等价机制，见 [跨工具支持矩阵](#跨工具支持矩阵)。
 >
 > AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——告诉代理该做什么，依赖模型遵从。
 > 机制层则**确定性强制**代理行为或隔离执行。
-> 这是通用原则 "An instruction asks, a mechanism requires"（见 `writing-agent-docs` A.2）的具体落地形态之一（Claude Code 形态）。
+> 这是通用原则 “An instruction asks, a mechanism requires”（见 `writing-agent-docs` A.2）的具体落地形态之一（Claude Code 形态）。
 
 ---
+
+## 目录
+
+- [指令层 vs 机制层 vs 隔离层](#指令层-vs-机制层-vs-隔离层)
+- [跨工具支持矩阵](#跨工具支持矩阵)
+- [八种指令方法决策表](#八种指令方法决策表)
+- [Hooks（确定性强制 · Claude Code 专属）](#hooks确定性强制--claude-code-专属)
+- [Subagents（隔离执行 · Claude Code 专属）](#subagents隔离执行--claude-code-专属)
+- [Dynamic Workflows（动态执行 harness · Claude Code 专属）](#dynamic-workflows动态执行-harness--claude-code-专属)
+- [路径限定规则（Claude Code `.claude/rules` · Cursor `.cursor/rules`）](#路径限定规则claude-code-clauderules--cursor-cursorrules)
+- [Output styles 与 append-system-prompt（慎用 · Claude Code 专属）](#output-styles-与-append-system-prompt慎用--claude-code-专属)
+- [Plugins（打包分发 · Claude Code 专属）](#plugins打包分发--claude-code-专属)
+- [与本仓库原则的映射](#与本仓库原则的映射)
+- [参考文献](#参考文献)
 
 ## 指令层 vs 机制层 vs 隔离层
 
@@ -17,8 +31,9 @@
 | **指令层** | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从（压力/长会话/注入可绕过）| 高（常驻）|
 | **机制层** | Hooks / Permissions | 确定性（exit 2 阻断，不可绕过）| 低（配置在上下文外）|
 | **隔离层** | Subagents | 独立上下文执行 | 低（仅摘要回主会话）|
+| **动态层** | Dynamic Workflows | 按需生成 harness，独立编排 | 取决于任务复杂度 |
 
-**关键判据**：若一条规则"绝对不能被违反"（提交密钥、force push、删生产数据），指令是错的工具——模型在长会话、时间压力、或被注入的文件内容诱导下会失败。真正的护栏必须确定性，即 **hooks 与 permissions**。
+**关键判据**：若一条规则“绝对不能被违反”（提交密钥、force push、删生产数据），指令是错的工具——模型在长会话、时间压力、或被注入的文件内容诱导下会失败。真正的护栏必须确定性，即 **hooks 与 permissions**。
 
 ---
 
@@ -45,9 +60,9 @@
 
 ---
 
-## 七种指令方法决策表
+## 八种指令方法决策表
 
-来源：[Steering Claude Code](https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more)（Anthropic 官方博客，2026-06）。
+来源：[Steering Claude Code](https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more)（Anthropic 官方博客，2026-06）；[A Harness for Every Task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)（2026-06）。
 
 | 方法 | 加载时机 | 压缩行为 | 上下文成本 | 适用场景 |
 |---|---|---|---|---|
@@ -58,6 +73,7 @@
 | Skills | name+description 常驻；body 调用时加载 | 重注入到共享预算，最旧先弃 | 低 | 程序化工作流（部署/发布清单/审查流程）|
 | Subagents | name+description+工具表常驻；body 仅调用时加载 | 仅最终消息回主会话 | 低（隔离上下文）| 隔离侧任务（深度搜索、日志分析、依赖审计）|
 | **Hooks** | 生命周期事件触发 | **完全绕过压缩** | 低（配置在上下文外）| **确定性自动化**：跑 linter、阻断命令、压缩前备份、Slack 通知 |
+| **Dynamic Workflows** | 调用时动态生成 | 按任务复杂度 | 取决于任务（复杂任务需更多 token）| 复杂、多步骤、需动态编排的任务（研究、安全分析、agent 团队、代码审查）|
 | Output styles | 会话开始注入系统提示 | 永不压缩 | 高（**覆盖**默认系统提示）| 角色大改（慎用，见下）|
 | append-system-prompt | 调用时 CLI flag 传入 | 仅当次调用 | 中（缓存后降低）| 语气/格式/领域知识，追加而非替换 |
 
@@ -72,6 +88,7 @@
 | 30 行流程写进配置 | CLAUDE.md | **Skill**（body 按需加载）|
 | API 专属规则无 paths | 无 glob 的 rule | 带 `paths:` 的 **rule**（或 `.cursor/rules` globs）|
 | 个人偏好 | 项目级 CLAUDE.md | 个人级文件（见 `structuring-personal-agent-md`）|
+| 复杂编排任务需动态定制 | 静态 Skill / CLAUDE.md | **Dynamic Workflow**（按需生成 harness）|
 
 ---
 
@@ -170,6 +187,52 @@ exit 0   # exit 0 = 无意见，正常权限流程继续
 
 ---
 
+## Dynamic Workflows（动态执行 harness · Claude Code 专属）
+
+2026 年 6 月，Claude Code 引入 Dynamic Workflows——Claude 可在运行时动态生成自定义执行 harness，专为当前任务定制 [来源](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)。
+
+### 与静态方法的区别
+
+| 维度 | 静态（Skill / Subagent） | Dynamic Workflow |
+|------|------------------------|------------------|
+| 定义时机 | 编写时预定义 | 运行时动态生成 |
+| 适用范围 | 通用、预知的工作流 | 复杂、多变、需定制编排的任务 |
+| 灵活性 | 固定结构，需覆盖所有边缘情况 | 按需生成，task-specific |
+| token 开销 | 可预测 | 取决于任务复杂度（复杂任务更多） |
+| 适用场景 | 部署流程、代码审查、测试 | 深度研究、安全分析、多 agent 团队、大规模代码审查 |
+
+### 常见模式
+
+Dynamic Workflows 可组合以下模式：
+
+| 模式 | 说明 |
+|------|------|
+| **Fan-out / Synthesize** | 拆分为多子任务，各 agent 独立执行，汇总结果（屏障等待）|
+| **/loop + /goal** | 重复执行工作流+硬性完成条件（适合 triage、研究、验证）|
+| **Token 预算** | 为 dynamic workflow 设置显式 token 预算（如 “use 10k tokens”）|
+
+### 与 Skill 的协同
+
+Dynamic Workflows 可通过 Skill 分发和复用：
+
+```markdown
+## 相关工作流
+
+将 JavaScript 工作流文件放入 skill 目录，在 SKILL.md 中引用。
+工作流视为模板（template）而非脚本（script），给 Claude 灵活性。
+```
+
+### 适用判据
+
+| 适合 Dynamic Workflow | 适合 Skill / Subagent |
+|-----------------------|----------------------|
+| 任务结构多变，无法预定义 | 工作流稳定、可预定义 |
+| 需要动态决定执行路径 | 执行路径确定 |
+| 希望 Claude 自行设计 harness | 希望人为控制每一步 |
+| 任务边界不清晰 | 任务边界明确 |
+
+---
+
 ## 路径限定规则（Claude Code `.claude/rules` · Cursor `.cursor/rules`）
 
 `.claude/rules/*.md` 用 YAML frontmatter 的 `paths:` 字段限定加载范围——Claude Code 原生等价于 `.cursor/rules` 的 globs：
@@ -210,3 +273,15 @@ paths:
 | `structuring-project` 三层边界 `Never` | `Never` 类禁令 → hook + permissions（确定性兜底）|
 | `structuring-project` Toolchain First | hook 是 Claude Code 原生工具链的一部分 |
 | `writing-skill-md` 安全考虑 | `allowed-tools` 最小权限 + hook 收紧 = 纵深防御 |
+
+## 参考文献
+
+| 编号 | 链接 | 标题 | 核心内容 |
+|------|------|------|----------|
+| [R1] | <https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more> | Steering Claude Code | Anthropic 官方博客，介绍 Claude Code 的八种指令方法（CLAUDE.md、rules、skills、subagents、hooks、dynamic workflows、output styles、append-system-prompt）及其决策表 |
+| [R2] | <https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code> | A Harness for Every Task | Anthropic 官方博客，介绍 Dynamic Workflows 的概念、模式（fan-out/synthesize、/loop+/goal、token 预算）及与静态方法（Skill/Subagent）的区别 |
+| [R3] | <https://code.claude.com/docs/en/hooks-guide> | Hooks Guide | Claude Code Hooks 完整使用指南 |
+| [R4] | <https://code.claude.com/docs/en/hooks> | Hooks Reference | Claude Code Hooks API 参考 |
+| [R5] | <https://code.claude.com/docs/en/hooks#hook-lifecycle> | Hook Lifecycle | Claude Code Hooks 生命周期事件完整表 |
+| [R6] | <https://code.claude.com/docs/en/sub-agents> | Subagents | Claude Code Subagents 文档——隔离上下文执行 |
+| [R7] | <https://code.claude.com/docs/en/plugins> | Plugins | Claude Code Plugins 文档——打包分发技能、代理、hooks、MCP server |

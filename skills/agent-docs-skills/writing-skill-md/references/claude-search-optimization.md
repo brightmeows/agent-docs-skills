@@ -161,3 +161,9 @@ wc -w skills/path/SKILL.md
 - 坏：`@skills/writing-agent-docs/SKILL.md`（强制加载，浪费上下文）
 
 **为什么不用 @ 链接：** `@` 语法会立即强制加载文件，在你需要之前就消耗 200k+ 上下文。相对路径的 Markdown 链接仅作引用，不触发加载。
+
+## 本地参考
+
+| 编号 | 文件路径 | 用途 |
+|------|----------|------|
+| [L1] | ../../writing-agent-docs/SKILL.md | writing-agent-docs 技能完整内容，作为交叉引用目标 |

@@ -43,3 +43,7 @@ globs: src/components/**/*.tsx
 - 跨工具共享 → AGENTS.md（.mdc 主要为 Cursor/OpenCode 生态）
 
 > OpenCode 兼容 `.cursor/rules/*.mdc` 格式，可作为项目级规则目录使用。
+
+## 本地参考
+
+（无本地引用）

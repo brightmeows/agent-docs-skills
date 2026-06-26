@@ -315,34 +315,17 @@ helper1、helper2、step3、pattern4
 
 ## 安全考虑
 
-技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链分四层：
+技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链四层（漏洞发现 → 产业审计 → 可利用性验证 → 供应链投毒）见 [security.md](./references/security.md)。
 
-- **漏洞发现**：[R4]（USENIX Security 2026）大规模分析发现逾四分之一技能含漏洞，含可执行脚本者风险更高。
-- **大规模产业审计**：[R8]（Snyk ToxicSkills，2026-02）扫描 3,984 个技能——**36.82% 含任意级别安全问题、13.4% 达 critical、76 个确认恶意**；规模与时效均优于 R4。
-- **可利用性验证**：[R5]（Duan et al., 2026）通过对抗性 prompting 证实真实技能可被利用。
-- **供应链投毒**：[R6] 提出 DDIPE——恶意逻辑藏于技能文档的代码示例，代理复用示例时即触发。[R8] 进一步发现 **91% 的恶意技能同时使用 prompt injection + 传统恶意代码**——前者绕过安全机制、后者实施窃取，二者汇聚使传统代码扫描失效。技能已成为新兴软件供应链攻击面。
+### 编写安全——摘要
 
-### 编写安全注意事项
+- **凭证与密钥**：不硬编码凭证；description 不暴露敏感信息；环境变量替代硬编码
+- **最小权限**：`allowed-tools` 只给最小工具集；结合 OpenCode 权限模式与 Claude Code hooks 纵深防御
+- **代码示例与脚本**：公开技能需审计脚本；代码示例不照搬来源不明片段；非可信源技能不自动加载
+- **记忆持久化**：技能若写 `SOUL.md`/`MEMORY.md` 等记忆文件，写入内容需审查
+- **供应链**：锁定版本（tag/commit SHA）；部署前用 `mcp-scan`（`uvx mcp-scan@latest --skills`）扫描
 
-- **避免在脚本中硬编码凭证**——API key、token 等不应包含在技能脚本或参考文件中
-- **`allowed-tools` 遵循最小权限原则**——只给技能完成任务所需的最小工具集，避免开放 `Bash(*)`、`Read(*)` 等通配权限
-- **公开分发的技能需审计脚本**——`scripts/` 目录下的可执行文件可能被代理在用户环境中运行，必须确保无害
-- **审慎对待代码示例**——技能中的代码示例与配置模板会被代理复用执行（DDIPE 攻击载体，[R6]）；借鉴第三方示例时先审阅其完整逻辑，避免照搬来源不明的片段
-- **description 不暴露敏感信息**——技能描述注入系统提示词，不应包含内部路径、凭证或密钥
-- **来源不明技能不自动加载**——来自不可信源的技能应先审阅 SKILL.md 和脚本再启用
-- **审慎对待会修改记忆/状态文件的技能**——[R8] 发现恶意技能可改写代理记忆文件（如 `SOUL.md`、`MEMORY.md`）实现跨会话持久化投毒；审查技能是否写记忆文件、写入内容是否可信
-
-### 发现即检查清单
-
-部署前额外确认：
-
-- [ ] 无硬编码凭证或密钥
-- [ ] `allowed-tools` 未过度授权
-- [ ] 脚本文件安全（不执行危险操作）
-- [ ] 代码示例与配置模板已审阅（无来源不明的可执行片段）
-- [ ] description 不暴露敏感信息
-- [ ] 部署前用 `mcp-scan` 扫描（`uvx mcp-scan@latest --skills`，[R8]）——把可机器校验的交给机器
-- [ ] 技能若写代理记忆文件（`SOUL.md`/`MEMORY.md` 等），写入内容已审阅
+**完整的安全注意事项、扩展风险场景（供应链、记忆投毒、市场风险）与发现即检查清单见 [security.md](./references/security.md)。**
 
 ## 验证与自检
 
@@ -394,7 +377,7 @@ helper1、helper2、step3、pattern4
 - [ ] 引用保持一层深度（无深层嵌套）
 - [ ] body <500 行；超限的参考已拆到单独文件
 - [ ] 走查：代理能否找到（CSO）、能否理解（结构）、能否遵从（清晰）
-- [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息
+- [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息——完整清单见 [security.md](./references/security.md)
 - [ ] （纪律执行型）考虑跑基线测试——见[L5]
 
 **部署：**
@@ -416,6 +399,37 @@ helper1、helper2、step3、pattern4
 
 ---
 
+## 技能生态与发布
+
+### 技能市场与注册中心
+
+技能生态在 2026 年上半年经历了爆发式增长。截至 2026 年 3 月，**490,000+ 技能** 分布在三个主要市场：
+
+| 平台 | 发布者 | 特点 |
+|------|--------|------|
+| **[Skills.sh](https://skills.sh)** | Vercel（2026-01） | CLI 安装（`npx skills install`）、Snyk 集成安全扫描、策展推荐 |
+| **[ClawHub](https://clawhub.ai)** | 社区 | 自动索引 GitHub 公开 SKILL.md 文件、质量指标 |
+| **[claude-plugins.dev/skills](https://claude-plugins.dev/skills)** | 社区 | 自动索引 Claude Code / Cursor / Codex 技能、开源 |
+| **SkillsMP** | 第三方 | 企业级技能市场 |
+
+### 如何发布技能
+
+1. **遵循开放标准**：确保 SKILL.md 格式符合 [agentskills.io](https://agentskills.io/specification) 规范——所有市场均基于同一标准
+2. **版本控制**：使用 Git tag 管理版本，发布时锁定到 release tag（`npx skills add <url>#v1.0.0`）
+3. **GitHub 公开仓库**：将技能放在公开 GitHub 仓库的 `skills/` 目录下，市场将自动索引
+4. **安全扫描**：发布前用 `mcp-scan` 扫描（`uvx mcp-scan@latest --skills`）
+5. **description 优化**：按 CSO 原则编写 description，确保市场搜索能匹配到你的技能
+
+### 技能生态验证
+
+SkillsBench（[R9]）是新兴的技能评估基准，用于衡量技能在标准化场景中的表现。可作为技能质量参考。
+
+### 跨工具兼容性
+
+SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode、Codex CLI、Cursor、Gemini CLI、GitHub Copilot、Microsoft Agent Framework 等）。写一次技能，跨平台可用。OpenCode、Cursor 等额外支持 Claude Code 扩展字段的子集。
+
+---
+
 ## 参考文献
 
 | 编号 | 链接 | 标题 | 核心内容 |
@@ -428,6 +442,7 @@ helper1、helper2、step3、pattern4
 | [R6] | [arXiv:2604.03081](https://arxiv.org/abs/2604.03081) | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
 | [R7] | [github.com/mgechev](https://github.com/mgechev/skills-best-practices) | Skills Best Practices | 否定触发条件、技能验证方法论 |
 | [R8] | [snyk.io](https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/) | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
+| [R9] | [arXiv:2602.12670](https://arxiv.org/abs/2602.12670) | SkillsBench: A Benchmark for Agent Skill Evaluation | 技能评估标准基准 |
 
 ---
 
@@ -442,6 +457,7 @@ helper1、helper2、step3、pattern4
 | [L1] | [anthropic-best-practices.md](./references/anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
 | [L2] | [claude-search-optimization.md](./references/claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
 | [L3] | [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
+| [L9] | [security.md](./references/security.md) | 安全考虑完整参考（证据链、注意事项、扩展风险场景、检查清单）|
 
 **`scripts/`**（执行时不进入上下文）：
 

@@ -189,7 +189,9 @@ exit 0   # exit 0 = 无意见，正常权限流程继续
 
 ## Dynamic Workflows（动态执行 harness · Claude Code 专属）
 
-2026 年 6 月，Claude Code 引入 Dynamic Workflows——Claude 可在运行时动态生成自定义执行 harness，专为当前任务定制 [来源](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)。
+Dynamic Workflows 是 Claude Code 的 GA 功能（自 v2.1.154 起），Claude 可在运行时动态生成 JavaScript 编排脚本，将任务拆分为数十到数百个并行的 subagent，在后台执行的同时主会话保持响应（[R1]；[R2]）。
+
+> **激活方式**：在提示中包含 `ultracode` 关键词，或设 `/effort ultracode` 让 Claude 自动为每个实质任务编排 workflow。保存后以 `/<name>` 命令复用。
 
 ### 与静态方法的区别
 
@@ -199,28 +201,29 @@ exit 0   # exit 0 = 无意见，正常权限流程继续
 | 适用范围 | 通用、预知的工作流 | 复杂、多变、需定制编排的任务 |
 | 灵活性 | 固定结构，需覆盖所有边缘情况 | 按需生成，task-specific |
 | token 开销 | 可预测 | 取决于任务复杂度（复杂任务更多） |
-| 适用场景 | 部署流程、代码审查、测试 | 深度研究、安全分析、多 agent 团队、大规模代码审查 |
+| 适用场景 | 部署流程、代码审查、测试 | 代码库审计、大规模迁移、跨源研究、多角度计划 |
+| 重复性 | 同一定义可反复使用 | 保存后也可复用（存为 `/<name>` 命令）|
 
 ### 常见模式
-
-Dynamic Workflows 可组合以下模式：
 
 | 模式 | 说明 |
 |------|------|
 | **Fan-out / Synthesize** | 拆分为多子任务，各 agent 独立执行，汇总结果（屏障等待）|
+| **对抗性交叉验证** | 多个独立 agent 相互审校对方发现，仅报告幸存结论 |
 | **/loop + /goal** | 重复执行工作流+硬性完成条件（适合 triage、研究、验证）|
-| **Token 预算** | 为 dynamic workflow 设置显式 token 预算（如 “use 10k tokens”）|
+| **Token 预算** | 为 workflow 设置显式 token 预算（如 “use 10k tokens”）|
 
-### 与 Skill 的协同
+### 与 Skill 的协同（[R1]）
 
-Dynamic Workflows 可通过 Skill 分发和复用：
+Skill 和 Dynamic Workflow 互补而非替代：
 
-```markdown
-## 相关工作流
+| 协同模式 | 做法 | 示例 |
+|---------|------|------|
+| **Skill 分发 Workflow 模板** | 将 `.js` 工作流文件放入 skill 目录，在 SKILL.md 中引用为 template | 部署流程 skill 附带回滚 workflow |
+| **Skill 定义 Workflow 子任务** | Workflow 中引用的子任务由 Skill 提供精确指令 | 审计 workflow 引用 `code-review` skill |
+| **Skill 作为 Fallback** | DW 不适合的简单任务回退到 Skill 按需加载 | 复杂迁移用 DW，单文件修改用 Skill |
 
-将 JavaScript 工作流文件放入 skill 目录，在 SKILL.md 中引用。
-工作流视为模板（template）而非脚本（script），给 Claude 灵活性。
-```
+**关键区分**：Skill 是代理遵从的**指令集**，DW 是可编排 agent 的**脚本**。Skill 的内容加载到代理的上下文，DW 的控制流在运行时脚本中。两者协作时：DW 决定"谁做什么"，Skill 告诉每个 agent "怎么做"。
 
 ### 适用判据
 
@@ -230,6 +233,7 @@ Dynamic Workflows 可通过 Skill 分发和复用：
 | 需要动态决定执行路径 | 执行路径确定 |
 | 希望 Claude 自行设计 harness | 希望人为控制每一步 |
 | 任务边界不清晰 | 任务边界明确 |
+| 需编排 10+ agent | 1–5 个 agent 足够 |
 
 ---
 
@@ -278,10 +282,11 @@ paths:
 
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|----------|
-| [R1] | <https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more> | Steering Claude Code | Anthropic 官方博客，介绍 Claude Code 的八种指令方法（CLAUDE.md、rules、skills、subagents、hooks、dynamic workflows、output styles、append-system-prompt）及其决策表 |
-| [R2] | <https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code> | A Harness for Every Task | Anthropic 官方博客，介绍 Dynamic Workflows 的概念、模式（fan-out/synthesize、/loop+/goal、token 预算）及与静态方法（Skill/Subagent）的区别 |
+| [R1] | <https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more> | Steering Claude Code | Anthropic 官方博客，介绍 Claude Code 的八种指令方法及其决策表 |
+| [R2] | <https://code.claude.com/docs/en/workflows> | Orchestrate Subagents at Scale with Dynamic Workflows | Claude Code Dynamic Workflows 官方文档（GA，v2.1.154+）：编排脚本、保存命令、ultracode 模式 |
 | [R3] | <https://code.claude.com/docs/en/hooks-guide> | Hooks Guide | Claude Code Hooks 完整使用指南 |
 | [R4] | <https://code.claude.com/docs/en/hooks> | Hooks Reference | Claude Code Hooks API 参考 |
 | [R5] | <https://code.claude.com/docs/en/hooks#hook-lifecycle> | Hook Lifecycle | Claude Code Hooks 生命周期事件完整表 |
 | [R6] | <https://code.claude.com/docs/en/sub-agents> | Subagents | Claude Code Subagents 文档——隔离上下文执行 |
 | [R7] | <https://code.claude.com/docs/en/plugins> | Plugins | Claude Code Plugins 文档——打包分发技能、代理、hooks、MCP server |
+| [R8] | <https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code> | A Harness for Every Task | Anthropic 官方博客，DW 初始发布的模式介绍（fan-out/synthesize、/loop+/goal）|

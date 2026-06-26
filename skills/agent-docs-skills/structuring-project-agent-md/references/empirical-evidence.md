@@ -51,6 +51,15 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 
 **[R6]（2026-02）**——可互操作、安全的 AI agent 标准框架，为 agent 配置文件标准化方向提供背书。
 
+## 产业最佳实践
+
+**[R9]**（Addy Osmani, 2026-06）Google Chrome 工程师 Addy Osmani 基于两项 2026 年研究的分析，提出 AGENTS.md 的核心洞察：
+
+- **自动生成有害**：`/init` 生成的 AGENTS.md 内容与代理已能自行发现的信息冗余，导致推理成本增加 20%+
+- **每条线须自证价值**：只有代理无法从代码中自行发现的非显而易见信息（工具链 gotcha、反直觉约定、环境地雷）才值得写入
+- **静态文件的结构局限**：扁平指令集无法按任务类型条件化加载，正确架构应是分层路由系统
+- **维护子 agent**：文档腐烂是结构性问题——应考虑用维护 agent 保持 AGENTS.md 准确
+
 ## OpenAI Codex 默认截断
 
 32 KiB，超出部分静默丢弃。
@@ -67,3 +76,4 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 | [R6] | <https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative> | NIST AI Agent Standards Initiative | AI agent 标准框架，为 agent 配置文件标准化方向提供背书 |
 | [R7] | <https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files> | How to Write Good AGENTS.md Files | 产业实测：最佳 AGENTS.md 相当于 Haiku→Opus 质量跃升，最差比没有更糟 |
 | [R8] | <https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/> | How to Write a Great Agents.md: Lessons from Over 2,500 Repositories | GitHub 分析 2,500+ 仓库，testing 列为高质量 AGENTS.md 六个核心领域之一 |
+| [R9] | <https://addyosmani.com/blog/agents-md/> | Stop Using /init for AGENTS.md | Addy Osmani 基于两项 2026 研究的 AGENTS.md 最佳实践分析：自动生成有害、每条线须自证价值、分层路由架构 |

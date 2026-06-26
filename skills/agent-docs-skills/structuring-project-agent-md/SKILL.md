@@ -275,7 +275,7 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 | 编号 | 文件 | 内容 |
 |------|------|------|
 | [L1] | [references/content-decisions.md](references/content-decisions.md) | 附录：内容决策详细目录（维度评分 / 放入条件 / 根子目录拆分） |
-| [L2] | [references/comparison-tools.md](references/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
+| [L2] | [comparison-tools.md](../writing-agent-docs/references/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
 | [L3] | [references/empirical-evidence.md](references/empirical-evidence.md) | AGENTS.md 实证数据（效率/成本/遵从，含自动生成危害与关键区分） |
 | [L4] | [agent-persona.md](../writing-agent-docs/references/agent-persona.md) | Agent Persona 完整定义（项目级 + 个人级，跨技能共享） |
 | [L5] | [references/cross-tool-compat.md](references/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |

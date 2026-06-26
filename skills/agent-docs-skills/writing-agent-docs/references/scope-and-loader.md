@@ -99,7 +99,7 @@
 | SKILL.md | 按需加载 body | 仅在匹配时加载 | 任务知识、工作流 |
 | 机制层（确定性强制）| 生命周期事件触发 | ≈0（配置在上下文外）| 确定性强制、阻断危险操作 |
 
-**为何不把任务知识塞进 AGENTS.md**：AGENTS.md 常驻上下文，Skill 按需加载——等效内容常驻的 token 开销远高于按需加载（具体倍数与机制见 [comparison-tools.md](../../structuring-project-agent-md/references/comparison-tools.md)）。
+**为何不把任务知识塞进 AGENTS.md**：AGENTS.md 常驻上下文，Skill 按需加载——等效内容常驻的 token 开销远高于按需加载（具体倍数与机制见 [comparison-tools.md](./comparison-tools.md)）。
 
 **同层优先级**（项目级根目录多文件时）：
 
@@ -154,6 +154,6 @@
 
 ## 参考
 
-- [comparison-tools.md](../../structuring-project-agent-md/references/comparison-tools.md) — AGENTS.md vs Skill vs MCP token 对比（常驻开销倍数的唯一定义）
+- [comparison-tools.md](./comparison-tools.md) — AGENTS.md vs Skill vs MCP token 对比（常驻开销倍数的唯一定义）
 - [agent-persona.md](./agent-persona.md) — Agent Persona 定义（项目级 + 个人级）
 - [SKILL.md](../SKILL.md) — 作用域定义

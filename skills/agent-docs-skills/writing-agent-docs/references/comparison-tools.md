@@ -1,7 +1,7 @@
 # 配置机制职责对比
 
-> structuring-project-agent-md 参考文件：配置机制的职责划分与 token 开销对比。
-> 前三者（AGENTS.md / Skill / MCP）为**跨工具标准**；Hooks / Subagent 为 **Claude Code 专属**，完整对比与跨工具支持矩阵见 [mechanism-layer.md](./mechanism-layer.md)。
+> writing-agent-docs 参考文件：配置机制的职责划分与 token 开销对比。本文件是“常驻 vs 按需”token 经济的唯一定义。
+> 前三者（AGENTS.md / Skill / MCP）为**跨工具标准**；Hooks / Subagent 为 **Claude Code 专属**机制（详见 `structuring-project-agent-md` 机制层参考）。
 
 | 用途 | 工具 | 示例 |
 |---|---|---|

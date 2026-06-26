@@ -4,7 +4,7 @@
 
 **需要加载此参考时：** 创建或编辑**纪律执行型**技能时、部署前，验证技能在压力下能工作并能抵抗合理化。
 
-**完整实战示例：** 参见 [claude-md-testing.md](./claude-md-testing.md)。
+**完整实战示例：** 参见 [tdd-validation-example.md](./tdd-validation-example.md)。
 
 ## 何时使用
 

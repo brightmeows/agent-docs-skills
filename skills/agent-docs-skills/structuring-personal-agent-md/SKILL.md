@@ -24,15 +24,15 @@ license: Apache-2.0
 
 个人级代理配置文件告诉 agent**你希望它如何为你工作**，独立于任何项目。
 
-与项目级配置的区别（位置 / 作用域 / 谁写 / 版本控制 / 生命周期 / 内容 / 优先级）见 [scope-and-loader.md 的“两类作用域对比”](../writing-agent-docs/references/scope-and-loader.md#两类作用域对比)。
+与项目级配置的区别（位置 / 作用域 / 谁写 / 版本控制 / 生命周期 / 内容 / 优先级）见 [L1] 的“两类作用域对比”。
 
 ---
 
 ## 配置文件位置
 
-完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [scope-and-loader.md](../writing-agent-docs/references/scope-and-loader.md)。写作时最常用：Claude Code 的 `~/.claude/CLAUDE_GLOBAL.md`、通用的 `~/.agents/AGENTS.md`、OpenCode 的 `~/.config/opencode/AGENTS.md`。
+完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [L1]。写作时最常用：Claude Code 的 `~/.claude/CLAUDE_GLOBAL.md`、通用的 `~/.agents/AGENTS.md`、OpenCode 的 `~/.config/opencode/AGENTS.md`。
 
-**加载优先级**：就近优先——个人级定义通用行为基调，项目级在冲突时覆盖（详见 [scope-and-loader.md](../writing-agent-docs/references/scope-and-loader.md#优先级规则)）。
+**加载优先级**：就近优先——个人级定义通用行为基调，项目级在冲突时覆盖（详见 [L1] 的“优先级规则”）。
 
 ---
 
@@ -88,7 +88,7 @@ license: Apache-2.0
 - 文档注释（///）必须有语义价值
 ```
 
-> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 [agent-persona.md](../writing-agent-docs/references/agent-persona.md)。
+> 个人级 Persona → 项目级 Persona → 技能级 Persona，按此顺序**累积**。项目级覆盖个人级冲突部分。详见 [L2]。
 
 ---
 
@@ -119,3 +119,14 @@ license: Apache-2.0
 | 用否定指令表达偏好 | 改写为肯定替代（见 writing-agent-docs） |
 | 在个人级重复项目级已覆盖的内容 | 信任就近优先规则——个人级只写个人偏好 |
 | 把 SKILL.md 当个人级配置 | SKILL.md 是按需加载的任务知识，个人级是常驻偏好 |
+
+---
+
+## 本地参考
+
+本技能引用的基础概念定义（位于前置 skill `writing-agent-docs`）：
+
+| 编号 | 文件 | 用途 |
+|------|------|------|
+| [L1] | [scope-and-loader.md](../writing-agent-docs/references/scope-and-loader.md) | 作用域与加载顺序的唯一定义（文件清单、流水线、优先级、两类作用域对比）|
+| [L2] | [agent-persona.md](../writing-agent-docs/references/agent-persona.md) | Agent Persona 定义（项目级 + 个人级，跨技能共享）|

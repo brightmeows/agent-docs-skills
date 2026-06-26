@@ -8,9 +8,7 @@ AGENTS.md 已被 **60,000+ 开源仓库**采用、被 30+ 工具原生支持（C
 
 GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的六个核心领域之一（[R8]）。
 
-## Lulla et al. (2026) —— 运行效率
-
-论文：[R1]——《On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents》。
+## [R1] 运行效率
 
 在 10 个仓库、124 个 PR 中测量（OpenAI Codex / gpt-5.2-codex，配对实验）：
 
@@ -18,9 +16,7 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 - **中位输出 token 减少 16.6%**（均值 20.1%）
 - 任务完成行为可比——效率提升不以质量为代价
 
-## Gloaguen et al. (2026) —— 成功率与行为
-
-论文：[R2]——《Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?》。
+## [R2] 成功率与行为
 
 在 12 个仓库、138 个任务实例（AGENTbench）+ SWE-bench Lite 上测量（4 个 agent × 多模型）：
 
@@ -35,9 +31,7 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 
 **关键区分——问题在“自动生成”，不在文件本身**：同期 Lulla et al.（上方）测得手写 AGENTS.md 使运行时间 −28.6%、token −16.6%。即手写精简提升效率，自动生成损害效率。`/init` 等结果须手工重写，而非弃用 AGENTS.md。
 
-## McMillan (2026) —— 结构变量与即时遵从
-
-论文：[R3]——《Instruction Adherence in Coding Agent Configuration Files: A Factorial Study of Four File-Structure Variables》。
+## [R3] 结构变量与即时遵从
 
 在 1,650 个 Claude Code CLI 会话（16,050 函数级观测，Sonnet 4.6 主力 + Opus 4.6 交叉验证）上做因子实验，检验四个文件结构变量：
 
@@ -50,8 +44,8 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 
 ## 内容分类实证
 
-- **Chatlatanagulchai et al. (2025)** “Agent READMEs”（[R4]）：context file 集中于功能性指令（构建/测试/实现），非功能性关注（性能/安全）稀少
-- **Mohsenimofidi et al. (2026)** MSR 2026（[R5]）：最常见类别为 conventions、architecture、project description——即代理最难自行推断的 core 项目知识
+- **[R4] “Agent READMEs”**：context file 集中于功能性指令（构建/测试/实现），非功能性关注（性能/安全）稀少
+- **[R5] MSR 2026**：最常见类别为 conventions、architecture、project description——即代理最难自行推断的 core 项目知识
 
 ## 标准化趋势
 

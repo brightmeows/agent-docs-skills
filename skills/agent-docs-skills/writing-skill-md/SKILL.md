@@ -12,13 +12,13 @@ license: Apache-2.0
 
 技能的好坏取决于三点：代理能否**找到**它（CSO）、能否**理解**它（结构）、能否**遵从**它（清晰）。
 
-**验证思维**：借鉴 TDD——先想清楚代理在没有这个技能时会怎么失败，再写最简的指导。本技能的主流程是代理可直接执行的实操指南；完整 TDD subagent 压力测试作为**人类作者参考**见 [tdd-validation.md](./authoring/tdd-validation.md)。
+**验证思维**：借鉴 TDD——先想清楚代理在没有这个技能时会怎么失败，再写最简的指导。本技能的主流程是代理可直接执行的实操指南；完整 TDD subagent 压力测试作为**人类作者参考**见本地参考 [L5]。
 
 **核心原则：** 如果你没想过 agent 在无技能时会如何失败，你就不知道技能是否教会了正确的东西。
 
 **技能的作用域**：技能可以放在项目级（仓库内 `skills/` 或 `.claude/skills/`）或个人级（`~/.claude/skills/`、`~/.agents/skills/`）。见下方 [作用域选择](#作用域选择)。
 
-**官方指导：** Anthropic 官方的技能编写最佳实践见 [anthropic-best-practices.md](./references/anthropic-best-practices.md)。本文档提供补充的模式和指南。
+**官方指导：** Anthropic 官方的技能编写最佳实践见本地参考 [L1]。本文档提供补充的模式和指南。
 
 ---
 
@@ -89,7 +89,7 @@ API 文档、语法指南、工具文档（office docs）
 
 ## 目录结构与文件组织
 
-遵循 agentskills.io 规范[1] 与 Anthropic 官方约定[2]：
+遵循 agentskills.io 规范[R1] 与 Anthropic 官方约定[R2]：
 
 ```
 skill-name/
@@ -111,11 +111,11 @@ skill-name/
 
 所有目录可选，仅在提供明确价值时添加。`authoring/` 是本仓库补充——官方标准未覆盖“代理常规任务不加载”这一类别。
 
-**分类标准是加载时机，不是内容来源**——`references/` 收纳所有代理按需加载的文档，不区分自撰参考与外部转载。不确定时参考 anthropics/skills[3] 仓库的实际组织。
+**分类标准是加载时机，不是内容来源**——`references/` 收纳所有代理按需加载的文档，不区分自撰参考与外部转载。不确定时参考 anthropics/skills[R3] 仓库的实际组织。
 
 **子目录分类指导**：
 
-- **按主题/领域分**：参考文件多且有自然主题层次时，在 `references/` 内部按主题分子目录（官方 Anthropic 参考组织模式[2]），如 `references/core/`、`references/extensions/`。
+- **按主题/领域分**：参考文件多且有自然主题层次时，在 `references/` 内部按主题分子目录（官方 Anthropic 参考组织模式[R2]），如 `references/core/`、`references/extensions/`。
 - **纯参考型例外**：若 SKILL.md 为索引、主体全是参考文档，主题目录可直接做顶层（如 `memo/`、`ext/`），不强制套 `references/`。
 - **不要按内容来源分**：无论放顶层还是 `references/` 内，分类维度是主题/领域，不是来源（自撰 vs 转载）。
 
@@ -142,7 +142,7 @@ skill-name/
 
 **前置元数据（YAML）：**
 
-所有字段中，开放标准字段（agentskills.io 规范[1]）跨平台通用，Claude Code 特有字段仅该平台支持。`name` 和 `description` 在开放标准中为**必需**，Claude Code 中 `name` 默认为目录名（可选）、`description` 为推荐。
+所有字段中，开放标准字段（agentskills.io 规范[R1]）跨平台通用，Claude Code 特有字段仅该平台支持。`name` 和 `description` 在开放标准中为**必需**，Claude Code 中 `name` 默认为目录名（可选）、`description` 为推荐。
 
 **必需字段（开放标准）：**
 
@@ -237,7 +237,7 @@ description: 在执行计划时使用——按任务分发 subagent，任务间�
 description: 协调多个 subagent 执行跨任务实施计划。在当前会话中涉及多个独立任务时使用。
 ```
 
-关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **[claude-search-optimization.md](./references/claude-search-optimization.md)**。
+关键词覆盖、描述性命名、Token 效率目标、交叉引用其他技能的完整规则与好坏示例见 **本地参考 [L2]**。
 
 ## 流程图使用
 
@@ -315,16 +315,16 @@ helper1、helper2、step3、pattern4
 
 技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链分三层：
 
-- **漏洞发现**：Liu et al., 2026[4]（USENIX Security 2026）大规模分析发现逾四分之一技能含漏洞，含可执行脚本者风险更高。
-- **可利用性验证**：SkillAttack[5]（Duan et al., 2026）通过对抗性 prompting 证实真实技能可被利用。
-- **供应链投毒**：Qu et al., 2026[6] 提出 DDIPE——恶意逻辑藏于技能文档的代码示例，代理复用示例时即触发。技能已成为新兴软件供应链攻击面。
+- **漏洞发现**：Liu et al., 2026[R4]（USENIX Security 2026）大规模分析发现逾四分之一技能含漏洞，含可执行脚本者风险更高。
+- **可利用性验证**：SkillAttack[R5]（Duan et al., 2026）通过对抗性 prompting 证实真实技能可被利用。
+- **供应链投毒**：Qu et al., 2026[R6] 提出 DDIPE——恶意逻辑藏于技能文档的代码示例，代理复用示例时即触发。技能已成为新兴软件供应链攻击面。
 
 ### 编写安全注意事项
 
 - **避免在脚本中硬编码凭证**——API key、token 等不应包含在技能脚本或参考文件中
 - **`allowed-tools` 遵循最小权限原则**——只给技能完成任务所需的最小工具集，避免开放 `Bash(*)`、`Read(*)` 等通配权限
 - **公开分发的技能需审计脚本**——`scripts/` 目录下的可执行文件可能被代理在用户环境中运行，必须确保无害
-- **审慎对待代码示例**——技能中的代码示例与配置模板会被代理复用执行（DDIPE 攻击载体，Qu et al., 2026[6]）；借鉴第三方示例时先审阅其完整逻辑，避免照搬来源不明的片段
+- **审慎对待代码示例**——技能中的代码示例与配置模板会被代理复用执行（DDIPE 攻击载体，Qu et al., 2026[R6]）；借鉴第三方示例时先审阅其完整逻辑，避免照搬来源不明的片段
 - **description 不暴露敏感信息**——技能描述注入系统提示词，不应包含内部路径、凭证或密钥
 - **来源不明技能不自动加载**——来自不可信源的技能应先审阅 SKILL.md 和脚本再启用
 
@@ -353,7 +353,7 @@ helper1、helper2、step3、pattern4
 | **模式型** | 自检 + 反例走查 | 识别测试 + 应用测试 |
 | **参考型** | 自检 + 检索走查（常用场景能否找到） | 检索测试 + 缺口测试 |
 
-**深度验证方法**（人类作者）见 [tdd-validation.md](./authoring/tdd-validation.md)。
+**深度验证方法**（人类作者）见本地参考 [L5]。
 
 ## 技能创建清单
 
@@ -367,7 +367,7 @@ helper1、helper2、step3、pattern4
 **编写中——结构与内容：**
 
 - [ ] 名称仅用小写字母、数字、连字符（无连续/首尾连字符，与父目录名一致，≤64 字符）；推荐**动名词形式**（`processing-pdfs`）
-- [ ] YAML 前置元数据含必需的 `name`（≤64）和 `description`（≤1024）字段；可选字段视需要添加（`allowed-tools`、`disable-model-invocation` 等）——见 agentskills.io 规范[1]
+- [ ] YAML 前置元数据含必需的 `name`（≤64）和 `description`（≤1024）字段；可选字段视需要添加（`allowed-tools`、`disable-model-invocation` 等）——见 agentskills.io 规范[R1]
 - [ ] description 格式为“做什么 + 何时使用”，未总结工作流
 - [ ] description 以第三人称编写，含具体触发条件/症状
 - [ ] 全文含搜索关键词（错误、症状、工具）
@@ -389,7 +389,7 @@ helper1、helper2、step3、pattern4
 - [ ] body <500 行；超限的参考已拆到单独文件
 - [ ] 走查：代理能否找到（CSO）、能否理解（结构）、能否遵从（清晰）
 - [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息
-- [ ] （纪律执行型）考虑跑基线测试——见 [tdd-validation.md](./authoring/tdd-validation.md)
+- [ ] （纪律执行型）考虑跑基线测试——见本地参考 [L5]
 
 **部署：**
 
@@ -412,53 +412,53 @@ helper1、helper2、step3、pattern4
 
 ## 参考文献
 
-[1] agentskills.io. “Agent Skills Specification.” *agentskills.io*, 2026.
+[R1] agentskills.io. “Agent Skills Specification.” *agentskills.io*, 2026.
     <https://agentskills.io/specification>
 
-[2] Anthropic. “Creating Skills — Bundled Resources.” *anthropic.com*, 2026.
+[R2] Anthropic. “Creating Skills — Bundled Resources.” *anthropic.com*, 2026.
     <https://anthropics-skills.mintlify.app/creating-skills/bundled-resources>
 
-[3] anthropics/skills. GitHub repository.
+[R3] anthropics/skills. GitHub repository.
     <https://github.com/anthropics/skills>
 
-[4] Liu, Z. et al. “Vulnerability Analysis of Agent Skill Ecosystem.” *arXiv:2601.10338*, 2026.
+[R4] Liu, Z. et al. “Vulnerability Analysis of Agent Skill Ecosystem.” *arXiv:2601.10338*, 2026.
     <https://arxiv.org/abs/2601.10338>
 
-[5] Duan, R. et al. “SkillAttack: Adversarial Prompting on Agent Skills.” *arXiv:2604.04989*, 2026.
+[R5] Duan, R. et al. “SkillAttack: Adversarial Prompting on Agent Skills.” *arXiv:2604.04989*, 2026.
     <https://arxiv.org/abs/2604.04989>
 
-[6] Qu, Y. et al. “DDIPE: Supply Chain Poisoning of Agent Skills.” *arXiv:2604.03081*, 2026.
+[R6] Qu, Y. et al. “DDIPE: Supply Chain Poisoning of Agent Skills.” *arXiv:2604.03081*, 2026.
     <https://arxiv.org/abs/2604.03081>
 
 ---
 
-## 参考文件索引
+## 本地参考
 
 所有支持文件均直接从本 SKILL.md 链接（一层引用深度）。按目录与加载时机分组：
 
 **`references/`**（代理任务中按需加载）：
 
-| 文件 | 用途 |
-|---|---|
-| [anthropic-best-practices.md](./references/anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
-| [claude-search-optimization.md](./references/claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
-| [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
+| 编号 | 文件 | 用途 |
+|------|------|------|
+| [L1] | [anthropic-best-practices.md](./references/anthropic-best-practices.md) | Anthropic 官方最佳实践补充（自由度、模型测试、可执行脚本、MCP 引用）|
+| [L2] | [claude-search-optimization.md](./references/claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
+| [L3] | [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
 
 **`scripts/`**（执行时不进入上下文）：
 
-| 文件 | 用途 |
-|---|---|
-| [render-graphs.js](./scripts/render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具（人类可视化辅助）|
+| 编号 | 文件 | 用途 |
+|------|------|------|
+| [L4] | [render-graphs.js](./scripts/render-graphs.js) | 渲染 SKILL.md 中 dot 代码块为 SVG 的工具（人类可视化辅助）|
 
 **`authoring/`**（人类作者参考，代理常规任务无需加载）：
 
-| 文件 | 用途 |
-|---|---|
-| [tdd-validation.md](./authoring/tdd-validation.md) | TDD 验证方法（RED-GREEN-REFACTOR、压力场景、铁律）|
-| [anti-rationalization.md](./authoring/anti-rationalization.md) | 合理化借口对照表、封堵手法、红旗清单模板 |
-| [persuasion-principles.md](./authoring/persuasion-principles.md) | 技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
-| [claude-md-testing.md](./authoring/claude-md-testing.md) | CLAUDE.md 测试文档变体的完整实战测试记录 |
+| 编号 | 文件 | 用途 |
+|------|------|------|
+| [L5] | [tdd-validation.md](./authoring/tdd-validation.md) | TDD 验证方法（RED-GREEN-REFACTOR、压力场景、铁律）|
+| [L6] | [anti-rationalization.md](./authoring/anti-rationalization.md) | 合理化借口对照表、封堵手法、红旗清单模板 |
+| [L7] | [persuasion-principles.md](./authoring/persuasion-principles.md) | 技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
+| L8 | [claude-md-testing.md](./authoring/claude-md-testing.md) | CLAUDE.md 测试文档变体的完整实战测试记录 |
 
 ---
 
-> **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **[tdd-validation.md](./authoring/tdd-validation.md)**。代理在常规任务中无需执行——[技能创建清单 · 编写后](#技能创建清单) 已覆盖基础验证。
+> **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **本地参考 [L5]**。代理在常规任务中无需执行——[技能创建清单 · 编写后](#技能创建清单) 已覆盖基础验证。

@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "指导项目级代理配置文件的创建、维护与审计。在创建或修改仓库内 AGENTS.md、CLAUDE.md、.cursor/rules，或代理反复犯错、忽略项目约定、配置文件超过 200 行时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:1a65e62569b145dd80eb381db1a26bcf5942b7b566ddebc9e63b056e7d14757f"
+      "digest": "sha256:6e4fe2d0413446a752d53ec3cf2a800d94283fe1c103e99434e5e4869c69b352"
     },
     {
       "name": "structuring-personal-agent-md",

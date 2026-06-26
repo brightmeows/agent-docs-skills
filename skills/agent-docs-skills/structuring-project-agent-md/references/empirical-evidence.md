@@ -31,6 +31,10 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 - **Context Map 价值有限**：目录映射对实现任务的文件发现加速不显著——代理已能自主导航。真实价值在于新会话的架构定向（spec 编写、错误分类、ADR 撰写），而非实现代理的导航捷径
 - 移除现有文档后 LLM 生成文件反而 +2.7%——说明生成内容多与现有文档冗余
 
+**原因**：代理忠实跟随生成指令，但生成内容含微妙不准确，导致探索范围扩大、推理成本上升。产业实测印证（Augmentcode, 2026）：最好的 AGENTS.md 带来相当于 Haiku→Opus 的质量跃升，最差的比没有 AGENTS.md 更糟。
+
+**关键区分——问题在“自动生成”，不在文件本身**：同期 Lulla et al.（上方）测得手写 AGENTS.md 使运行时间 −28.6%、token −16.6%。即手写精简提升效率，自动生成损害效率。`/init` 等结果须手工重写，而非弃用 AGENTS.md。
+
 ## McMillan (2026) —— 结构变量与即时遵从
 
 论文：[arXiv:2605.10039](https://arxiv.org/abs/2605.10039)——《Instruction Adherence in Coding Agent Configuration Files: A Factorial Study of Four File-Structure Variables》。

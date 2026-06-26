@@ -119,7 +119,7 @@ AGENTS.md 专属写作原则（通用规则见前置 Skill）：
   - **Never Do**：绝对禁止（如提交密钥、push main）——配肯定替代（见前置 Skill“肯定指令优先”）
   - **分小节放置**：用 `### Always` / `### Ask` / `### Never` 独立小节分类承载，代理跳读时可快速定位。混排在大表或单一列表中会削弱分类索引价值。
   - **保持索引精简**——每条一行、高信号：工具链能强制的（hook / CI / linter）不入此列，指向其配置（见 `Toolchain First`）；长解释下沉到引用文件。“只增不减”是膨胀主因，定期移除代理已能遵循的条目（见[维护流程](#维护流程)）。
-- **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率、推高推理成本（完整数据与机制见[L5]）。`/init` 等结果只当“内容清单”，手工重写。
+- **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率、推高推理成本（完整数据与机制见[L3]）。`/init` 等结果只当“内容清单”，手工重写。
 - **关键文件路径显式标注**——入口点、基类、配置文件应显式标注路径。
 - **@import 引用**——部分工具（如 Claude Code）支持 `@路径/文件名.md` 内联引用外部文件，根文件保持精简，知识按需加载。非 v1.1 标准特性（进展见 [cross-tool-compat.md](references/cross-tool-compat.md#标准化进展)），使用前确认工具兼容性。
 - **重点标注非常规**——主流实践、常见配置等显而易见的内容一笔带过；非常规、反直觉、项目特有的内容重点提及。
@@ -276,10 +276,9 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 |------|------|------|
 | [L1] | [references/content-decisions.md](references/content-decisions.md) | 附录：内容决策详细目录（维度评分 / 放入条件 / 根子目录拆分） |
 | [L2] | [references/comparison-tools.md](references/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
-| [L3] | [references/empirical-evidence.md](references/empirical-evidence.md) | Princeton/ETH Zurich/上下文效率等实证数据 |
+| [L3] | [references/empirical-evidence.md](references/empirical-evidence.md) | AGENTS.md 实证数据（效率/成本/遵从，含自动生成危害与关键区分） |
 | [L4] | [agent-persona.md](../writing-agent-docs/references/agent-persona.md) | Agent Persona 完整定义（项目级 + 个人级，跨技能共享） |
-| [L5] | [references/auto-gen-warning.md](references/auto-gen-warning.md) | LLM 自动生成危害与实证数据 |
-| [L6] | [references/cross-tool-compat.md](references/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |
-| [L7] | [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
-| [L8] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
-| [L9] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层（Hooks / Subagents / Rules / Plugins + 七方法决策表）|
+| [L5] | [references/cross-tool-compat.md](references/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |
+| [L6] | [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
+| [L7] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
+| [L8] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层（Hooks / Subagents / Rules / Plugins + 七方法决策表）|

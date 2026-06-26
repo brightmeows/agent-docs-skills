@@ -37,7 +37,13 @@
 | **JetBrains Junie** | `.junie/guidelines.md` | 项目级 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
 | **Hermes Agent** ([R3]) | `~/.hermes/skills/` | 个人级技能存放；`SOUL.md` 持久身份；`/learn` 自动创建技能 |
-| **通用（跨工具）** | `AGENTS.md` | 跨工具 fallback 标准 |
+| **Goose** | `AGENTS.md` | 项目级，自动发现；Block 捐赠至 AAIF |
+| **Factory** | `AGENTS.md` | 项目级，自动发现 |
+| **Amp** | `AGENTS.md` | 项目级，自动发现 |
+| **Aider** | `.aider.conf.yml` → AGENTS.md | 通过配置指向 AGENTS.md |
+| **Augment Code** | `AGENTS.md` | CLI 模式支持 |
+| **Devin** | `AGENTS.md` | 项目级，自动发现 |
+| **通用（跨工具）** | `AGENTS.md` | AAIF 维护的跨工具标准 |
 
 ---
 

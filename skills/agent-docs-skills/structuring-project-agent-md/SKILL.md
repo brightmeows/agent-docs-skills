@@ -27,6 +27,8 @@ license: Apache-2.0
 | 文件 / 目录 | 定位 | 工具原生支持 |
 |-------------|------|-------------|
 | `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 60,000+ 仓库、40+ 工具 |
+| `.well-known/agent-skills/index.json` | 技能发现清单（AAIF 标准） | 所有 SKILL.md 兼容工具 |
+| `AGENTS.md` + ARD（[L5]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
 | `CLAUDE.md` | Claude Code 原生项目配置 | Claude Code |
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则 | Cursor、OpenCode 等 |
 | `GEMINI.md` | Gemini CLI 项目配置 | Gemini CLI |
@@ -59,6 +61,30 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 | **深层 AGENTS.md** | 极端特化规则，覆盖祖先的不适用约束 |
 
 根文件应精简；内容冗余时先归入当前文件的其它相关章节，无合适归处再下沉子目录。子文件只声明该目录特有内容，祖先已声明的无需重复。
+
+### 渐进式披露：AGENTS.md 可选 Frontmatter
+
+AGENTS.md v1.1（[R6]）草案提案引入了可选的 YAML frontmatter，支持代理在加载全文前建立轻量索引，适用于 monorepo 中含大量 AGENTS.md 文件的场景。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
+
+```yaml
+---
+description: React component conventions for the frontend package
+tags: [react, components, frontend]
+---
+```
+
+**何时使用 frontmatter：**
+
+- 目录位置本身不足以描述文件用途（如根目录下多个 AGENTS.md 共享同一路径上下文）
+- monorepo 含 5+ 个 AGENTS.md 文件，代理需要索引能力
+- 文件指导范围足够特化，值得显式标注触发条件
+
+**无需使用 frontmatter：**
+
+- 仅含一个 AGENTS.md 的小项目——路径本身已足够
+- 内容从文件名即可推断（如 `scripts/AGENTS.md` 显然与脚本相关）
+
+> 此提案尚在草案阶段，非所有工具均已实现 frontmatter 感知。写入 frontmatter 不影响向后兼容——不识别的工具会忽略它。
 
 ---
 
@@ -211,6 +237,45 @@ AGENTS.md 专属：
 
 ---
 
+## Monorepo 多 AGENTS.md 最佳实践
+
+大型 monorepo 中常出现多个 AGENTS.md 文件（如 OpenAI 仓库已有 88 个）。正确管理多文件的索引与发现对维持代理效率至关重要。
+
+### 索引策略
+
+- **根 AGENTS.md 做目录索引**：在根文件顶部列出所有子 AGENTS.md 的 path + 一句话概述，帮助代理预览可用的上下文范围。
+- **子文件配 frontmatter**（可选）：为每个子 AGENTS.md 添加 YAML `description` 和 `tags`，代理可建立轻量索引而非全量加载（见上方[渐进式披露](#渐进式披露agentsmd-可选-frontmatter)）。
+
+```yaml
+---
+description: API service build and test conventions for the payments team
+tags: [payments, api, rust, ci]
+---
+```
+
+### 增量审计流程
+
+多 AGENTS.md 的维护分三步：
+
+1. **索引审计**（每季度）——遍历所有 AGENTS.md 文件，检查是否存在：
+   - 过时指令（参考的 API 已废弃、路径已迁移）
+   - 与根文件或兄弟文件重复的规则
+   - 超过 200 行且未配 frontmatter 的大文件
+2. **精简回合**——删除重复规则、将长文件拆分子目录、补充缺失的 frontmatter
+3. **交叉验证**——随机选 2–3 个目录测试代理是否加载了正确的 AGENTS.md 指导
+
+### 文件命名约定
+
+- 根文件：`AGENTS.md`
+- 子目录文件：`<目录名>/AGENTS.md`（不额外命名，路径即标识）
+- 避免同一目录出现多个 `AGENTS.*` 变体（如 `AGENT.md` + `AGENTS.md`），会造成优先级歧义
+
+### 参考
+
+Monorepo 多 AGENTS.md 的加载规则（管辖范围、累积、优先级）见上方[层级与作用域](#层级与作用域)。OpenAI 88 个 AGENTS.md 的实战案例见 [agents.md 官网](https://agents.md)。
+
+---
+
 ## 内容决策指南
 
 什么内容该放入 AGENTS.md、什么不该放，按 5 维度评分，越高越该放入：
@@ -285,6 +350,7 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 | [R3] | <https://arxiv.org/abs/2602.11988> | Redundant Instructions Increase Reasoning Costs in LLM Agents | 不必要指令推高推理成本 |
 | [R4] | <https://arxiv.org/abs/2605.10039> | Positional Bias in LLM Instruction Following | 文件大小/位置对遵从无显著效应 |
 | [R5] | <https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files> | How to Write Good agents.md Files | 决策表提升 best_practices 遵从率 25% |
+| [R6] | <https://github.com/agentsmd/agents.md/issues/135> | AGENTS.md v1.1 Proposal | YAML frontmatter（description/tags）、渐进式披露、管辖/累积/优先级/继承四大语义 |
 
 ---
 

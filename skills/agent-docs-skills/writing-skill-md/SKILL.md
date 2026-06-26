@@ -140,6 +140,13 @@ skill-name/
 - **索引型（纯参考）**——SKILL.md 为索引，参考文档按主题分目录存放（`memo/`、`ext/` 等）。参考文件多、需要按主题导航时适用。
 - **带可复用工具**——在上述任一模式基础上增加 `scripts/`（可执行辅助代码）或 `assets/`（输出用资源）。
 
+### 技能组合（Skill Bundles）
+
+多个技能需协同工作时可用 **Skill Bundle** 模式——清单文件将多技能组合成逻辑单元，单条命令批量加载。
+支持工具：Hermes Agent（YAML 文件 `~/.hermes/skill-bundles/`）、Claude Code（Dynamic Workflow 编排）。
+适用：技能组经常同时加载、多步骤工作流需确定性顺序、分发 onboarding 包。
+**注意**：Bundle 是工具特定功能，尚无跨工具标准；写跨工具技能时保持每个 SKILL.md 独立可用。
+
 ## SKILL.md 结构
 
 **前置元数据（YAML）：**
@@ -161,6 +168,8 @@ skill-name/
 | `compatibility` | ≤500 字符，环境/工具要求 |
 | `metadata` | 任意键值对，用于附加元数据 |
 | `allowed-tools` | ⚗️ 预批准的工具白名单，空格分隔，各实现支持程度不同 |
+| `prerequisite-skills` | 🧪 **提案中**（[R13]）——技能执行前建议先加载的依赖技能列表，含 `slug` 和可选 `reason` |
+| `related-skills` | 🧪 **提案中**（[R13]）——与本技能配合使用的互补技能列表，含 `slug` 和可选 `reason` |
 
 **Claude Code 平台特有字段：**
 
@@ -181,6 +190,8 @@ skill-name/
 | `hooks` | 技能生命周期钩子 |
 
 **主体大小**：SKILL.md body 保持 <500 行 / **指令 < 5000 tokens**（agentskills.io 推荐预算）；接近上限时拆分到参考文件（超 100 行的参考文件加目录）。
+
+**description 长度指引**：字段上限 1024 字符，建议目标 ≤**60 字符**（Hermes 标准），不超过 200 字符——短描述在技能索引中更易被代理快速扫描。
 
 ```markdown
 ---
@@ -406,7 +417,11 @@ helper1、helper2、step3、pattern4
 
 ### 技能市场与注册中心
 
-技能生态在 2026 年上半年经历了爆发式增长，公开技能目录已达**百万级**（SkillsMP 索引约 190 万），但质量参差——平均质量评分 6.2/12（[R9]）。主要市场分布：
+技能生态在 2026 年上半年经历了爆发式增长。根据 Skillselion 追踪数据（[R14]），
+公开生态已达 **~66,000 个 agent skills、~7,800 个 MCP servers**，累计安装量 **112M**。
+各市场索引规模因口径而异——SkillsMP 约 80 万、Skills.sh 约 60 万、ClawHub 约 1.3 万
+（安全清查后余 3,200+）。质量参差——SkillsBench 评测 47,150 个公开技能平均 6.2/12（[R9]）。
+主要市场分布：
 
 | 平台 | 发布者 | 特点 |
 |------|--------|------|
@@ -455,6 +470,8 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [R10] | [arXiv:2605.11770](https://arxiv.org/abs/2605.11770) | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
 | [R11] | [orca.security](https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/) | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
 | [R12] | [cloudsecurityalliance.org](https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf) | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
+| [R13] | [github.com/agentskills/agentskills](https://github.com/agentskills/agentskills/issues/90) | Proposal: Skill Relationship Fields | 提案新增 `prerequisite-skills` 和 `related-skills` 字段到 SKILL.md 规范 |
+| [R14] | [skillselion.com](https://skillselion.com/state-of-ai-agent-skills-2026) | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
 
 ---
 
@@ -485,8 +502,11 @@ SKILL.md 开放标准已被 **30+ 工具** 原生支持（Claude Code、OpenCode
 | [L6] | [anti-rationalization.md](./authoring/anti-rationalization.md) | 合理化借口对照表、封堵手法、红旗清单模板 |
 | [L7] | [persuasion-principles.md](./authoring/persuasion-principles.md) | 技能设计中说服原则的心理学基础（Cialdini 2021; Meincke et al. 2025）|
 | [L8] | [tdd-validation-example.md](./authoring/tdd-validation-example.md) | TDD 验证方法完整实战示例（CLAUDE.md 文档变体测试记录） |
-| [L9] | [auto-generated-skill-review.md](./authoring/auto-generated-skill-review.md) | 自动生成 SKILL.md 的质量审查清单与优化流程（Hermes `/learn` 等工具适用）|
+| [L10] | [auto-generated-skill-review.md](./authoring/auto-generated-skill-review.md) | 自动生成 SKILL.md 的质量审查清单与优化流程（Hermes `/learn` 等工具适用）|
 
 ---
 
 > **人类作者参考：** 完整 TDD 验证方法（TDD 映射、铁律、分类型测试、对抗合理化、RED-GREEN-REFACTOR 循环、压力场景编写）见 **[L5]**。代理在常规任务中无需执行——[技能创建清单 · 编写后](#技能创建清单) 已覆盖基础验证。
+
+[R13]: https://github.com/agentskills/agentskills/issues/90
+[R14]: https://skillselion.com/state-of-ai-agent-skills-2026

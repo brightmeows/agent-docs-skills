@@ -45,7 +45,7 @@
 - **核心产物**：技能/MCP 的可搜索目录
 - **发现机制**：GitHub 公开仓库索引 + 注册表 + 策展推荐
 - **安全扫描**：各市场提供不同程度的自动化扫描（Snyk / mcp-scan 等）
-- **典型市场**：Skills.sh（Vercel）、ClawHub（社区）、SkillsMP、claude-plugins.dev
+- **典型市场**：CLI 安装型（如 Vercel Skills.sh）、社区索引型（如 ClawHub）、全网抓取型（如 SkillsMP）、插件集合型（如 claude-plugins.dev）
 
 ---
 

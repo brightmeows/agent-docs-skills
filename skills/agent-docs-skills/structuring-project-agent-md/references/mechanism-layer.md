@@ -58,6 +58,32 @@
 
 > **写跨工具配置时**：机制层指导应明确标注工具归属；不确定某代理是否支持时，优先用跨工具标准（AGENTS.md 表达意图、SKILL.md 按需加载），把 Claude Code 专属机制作为“可选增强”而非依赖。完整概念对照见 [cross-tool-compat.md](./cross-tool-compat.md)。
 
+### OpenCode 权限模式（参考）
+
+OpenCode 不与 Claude Code hooks 直接对标，但提供了等效的 **`permission.skill`** 机制用于技能级访问控制：
+
+- **三态控制**：`allow`（立即加载）/ `deny`（隐藏拒绝）/ `ask`（请求批准）
+- **通配符支持**：如 `internal-*` 批量管理同模式技能
+- **每 agent 覆盖**：可在 `opencode.json` 或 Markdown agent 定义中按 agent 覆写全局设置
+- **实际用途**：阻止来源不明的技能自动加载、限制生产环境技能权限、按团队角色分配不同的技能可见性
+
+示例：
+
+```json
+{
+  "permission": {
+    "skill": {
+      "internal-deploy-*": "allow",
+      "*": "ask"
+    }
+  }
+}
+```
+
+参考：[opencode.ai/docs/skills](https://opencode.ai/docs/skills)
+
+> **工具归属**：`permission.skill` 是 OpenCode 专属，不跨工具。写跨工具配置时不要依赖此机制。
+
 ---
 
 ## 八种指令方法决策表

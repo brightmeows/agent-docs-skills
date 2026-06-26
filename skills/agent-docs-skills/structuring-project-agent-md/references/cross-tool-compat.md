@@ -27,23 +27,20 @@
 
 ## 文件名对照
 
-| 工具 | 文件 | 说明 |
-|------|------|------|
-| **Claude Code** | `CLAUDE.md` | 项目级，自动发现 |
-| **Cursor** | `.cursor/rules/*.mdc` | 项目级，按 glob 匹配注入 |
-| **Gemini CLI** | `GEMINI.md` | 项目级，自动发现 |
-| **GitHub Copilot** | `.github/copilot-instructions.md` | 项目级原生指令文件；亦读 AGENTS.md（[R1] 起 code review 支持）|
-| **Windsurf** | `.windsurfrules` / `.windsurf/rules/*.md` | 项目级规则；亦读 AGENTS.md 作为 fallback |
-| **JetBrains Junie** | `.junie/guidelines.md` | 项目级 |
+下表列出来主要工具的配置文件及与 AGENTS.md 的关系。多数工具近年新增的配置（如 Factory、Amp、Goose、Augment Code、Devin）均直接复用 `AGENTS.md` 作为项目级指令文件——这本身就是 AGENTS.md 标准化效果的体现。如使用未列出的新工具，先检查其是否原生支持 `AGENTS.md`。
+
+| 工具 | 文件 | 与 AGENTS.md 关系 |
+|------|------|-------------------|
+| **AGENTS.md 原生** | `AGENTS.md` | 直接读取，跨工具标准（AAIF 维护） |
+| **Claude Code** | `CLAUDE.md` | 工具原生格式；可 symlink 到 AGENTS.md 共享真理源 |
+| **Gemini CLI** | `GEMINI.md` | 工具原生格式；可配置指向 AGENTS.md |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | 原生指令文件；亦读 AGENTS.md（[R1] 起 code review 支持）|
+| **Windsurf** | `.windsurfrules` / `.windsurf/rules/*.md` | 原生规则文件；亦读 AGENTS.md 作为 fallback |
+| **Cursor** | `.cursor/rules/*.mdc` | 按 glob 匹配注入；与 AGENTS.md 职责互补 |
+| **JetBrains Junie** | `.junie/guidelines.md` | 原生格式 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
-| **Hermes Agent** ([R3]) | `~/.hermes/skills/` | 个人级技能存放；`SOUL.md` 持久身份；`/learn` 自动创建技能 |
-| **Goose** | `AGENTS.md` | 项目级，自动发现；Block 捐赠至 AAIF |
-| **Factory** | `AGENTS.md` | 项目级，自动发现 |
-| **Amp** | `AGENTS.md` | 项目级，自动发现 |
-| **Aider** | `.aider.conf.yml` → AGENTS.md | 通过配置指向 AGENTS.md |
-| **Augment Code** | `AGENTS.md` | CLI 模式支持 |
-| **Devin** | `AGENTS.md` | 项目级，自动发现 |
-| **通用（跨工具）** | `AGENTS.md` | AAIF 维护的跨工具标准 |
+| **Hermes Agent** ([R3]) | `~/.hermes/skills/` | 个人级技能存放 + `SOUL.md` 持久身份 |
+| **Aider** | `.aider.conf.yml` | 通过配置指向 AGENTS.md |
 
 ---
 

@@ -8,17 +8,17 @@
 
 技能生态在 2026 年上半年经历了爆发式增长。根据 Skillselion 追踪数据（[R14]），
 公开生态已达 **~66,000 个 agent skills、~7,800 个 MCP servers**，累计安装量 **112M**。
-各市场索引规模因口径而异——SkillsMP 约 **190 万**、Skills.sh 约 60 万、ClawHub 约 1.3 万
+各市场索引规模因口径而异——全网抓取型（如 SkillsMP）约 **190 万**、注册索引型（如 Skills.sh）约 60 万、社区索引型（如 ClawHub）约 1.3 万
 （安全清查后余 3,200+）。质量参差——SkillsBench 评测 47,150 个公开技能平均 6.2/12（[R9]）。
 
-主要市场分布：
+主要市场类型（代表平台见 [R15]）：
 
-| 平台 | 发布者 | 特点 |
-|------|--------|------|
-| **[Skills.sh](https://skills.sh)** | Vercel（2026-01） | CLI 安装（`npx skills install`）、Snyk 集成安全扫描、策展推荐 |
-| **[ClawHub](https://clawhub.ai)** | 社区 | 自动索引 GitHub 公开 SKILL.md 文件、质量指标 |
-| **[claude-plugins.dev/skills](https://claude-plugins.dev/skills)** | 社区 | 自动索引 Claude Code / Cursor / Codex 技能、开源 |
-| **SkillsMP** | 第三方 | 企业级技能市场 |
+| 类型 | 特点 |
+|------|------|
+| **CLI 安装型**（如 Vercel Skills.sh） | `npx skills install`、Snyk 安全扫描、策展推荐 |
+| **社区索引型**（如 ClawHub） | 自动索引 GitHub 公开 SKILL.md，质量指标 |
+| **插件集合型**（如 claude-plugins.dev） | 按工具分类聚合技能，开源社区维护 |
+| **全网抓取型**（如 SkillsMP） | 大规模 GitHub 扫描，覆盖面广、但无审查 |
 
 ## 如何发布技能
 
@@ -40,11 +40,11 @@ SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 **87 �
 
 ## 跨工具兼容性
 
-SKILL.md 开放标准已被 **~40 工具** 原生支持，包括 Claude Code、OpenCode、Codex CLI、Cursor、
-Gemini CLI、GitHub Copilot、Microsoft Agent Framework、JetBrains Junie、Goose、Amp、
-Kiro、Roo Code、Factory、Databricks Genie Code、Snowflake Cortex Code、Spring AI 等
-（完整列表见 [agentskills.io 展示页](https://agentskills.io/clients)）。写一次技能，跨平台可用。
-OpenCode、Cursor 等额外支持 Claude Code 扩展字段的子集。
+SKILL.md 开放标准已被 **~40 工具** 原生支持，覆盖编码 agent（Claude Code、Codex CLI、Cursor、
+Gemini CLI、OpenCode 等）、IDE（VS Code、JetBrains Junie 等）、开源 agent（Goose、Amp 等）、
+企业数据平台（Databricks Genie Code、Snowflake Cortex Code 等）和框架（Spring AI 等）。
+完整列表见 [agentskills.io 展示页](https://agentskills.io/clients)。写一次技能，跨平台可用。
+部分工具（OpenCode、Cursor 等）额外支持 Claude Code 扩展字段的子集。
 
 ## 参考文献
 

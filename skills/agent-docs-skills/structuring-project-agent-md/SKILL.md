@@ -29,12 +29,8 @@ license: Apache-2.0
 | `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 60,000+ 仓库、40+ 工具 |
 | `.well-known/agent-skills/index.json` | 技能发现清单（AAIF 标准） | 所有 SKILL.md 兼容工具 |
 | `AGENTS.md` + ARD（[L5]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
-| `CLAUDE.md` | Claude Code 原生项目配置 | Claude Code |
-| `.cursor/rules/*.mdc` | Cursor 文件匹配规则 | Cursor、OpenCode 等 |
-| `GEMINI.md` | Gemini CLI 项目配置 | Gemini CLI |
-| `.github/copilot-instructions.md` | GitHub Copilot 项目配置 | GitHub Copilot（亦读 AGENTS.md，2026-06 起 code review 支持）|
-| `.windsurfrules` / `.windsurf/rules/*.md` | Windsurf 项目配置 | Windsurf（亦读 AGENTS.md）|
-| `.junie/guidelines.md` | JetBrains Junie 配置 | JetBrains Junie |
+| `CLAUDE.md` / `GEMINI.md` / 等 | 各工具原生项目配置（独有特性见 [L5]、[L6]） | 对应工具（多数亦读 AGENTS.md）|
+| `.cursor/rules/*.mdc` | Cursor 文件匹配规则，按 glob 注入 | Cursor、OpenCode 等 |
 | `opencode.json` | OpenCode 项目配置（工具/权限/agent 定义）| OpenCode |
 
 与 README 职责分离（README 面向人，项目级配置面向代理）。
@@ -115,17 +111,15 @@ AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵
 | 层 | 机制 | 强制度 | 成本 |
 |---|---|---|---|---|
 | 指令层 | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从 | 高（常驻）|
-| 机制层 | Hooks / Permissions / OpenCode `permission.skill` | 确定性（exit 2 阻断 / allow/deny/ask）| 低（配置在上下文外）|
-| 隔离层 | Subagents / OpenCode task agents | 隔离上下文 | 低（仅摘要回主会话）|
-
-**OpenCode 权限模式**：OpenCode 的 `permission.skill` 支持三态控制——`allow`（立即加载）/ `deny`（隐藏拒绝）/ `ask`（请求批准），支持通配符模式（如 `internal-*`）和每 agent 覆盖。见 [opencode.ai/docs/skills](https://opencode.ai/docs/skills)。
+| 机制层 | Hooks / Permissions | 确定性（exit 2 阻断 / allow/deny/ask）| 低（配置在上下文外）|
+| 隔离层 | Subagents / task agents | 隔离上下文 | 低（仅摘要回主会话）|
 
 **核心判据**——“Never” 类规则该写在哪：
 
 - 偶尔被违反也无大碍 → 指令层（AGENTS.md）
 - **绝对不能被违反**（提交密钥、force push、删生产数据）→ **不要只写指令**；用 `PreToolUse` hook 阻断（exit 2），即使在 `bypassPermissions` 模式下也生效
 
-八种指令方法完整决策表（加载时机 / 压缩行为 / 成本 / 适用）、hooks 五类型与生命周期、subagent vs skill 决策、`.claude/rules` 的 `paths:`、output styles、plugins、dynamic workflows 见 [references/mechanism-layer.md](references/mechanism-layer.md)。
+八种指令方法完整决策表（加载时机 / 压缩行为 / 成本 / 适用）、hooks 五类型与生命周期、subagent vs skill 决策、`.claude/rules` 的 `paths:`、output styles、plugins、dynamic workflows、**OpenCode 权限模式（`permission.skill`）** 见 [references/mechanism-layer.md](references/mechanism-layer.md)。
 
 ---
 

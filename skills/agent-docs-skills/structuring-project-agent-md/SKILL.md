@@ -85,13 +85,13 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 4. **精简**：代理已能遵循的规则可移除
 5. **重复**
 
-**大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；[dos Santos et al., 2026](https://arxiv.org/abs/2606.15828) 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
+**大小参考**：无最低行数要求；建议 100–150 行，不超过 200 行（Anthropic 官方建议 <200 行；dos Santos et al., 2026[1] 对 100 个热门仓库分析发现 42% 的文件 >200 行并出现 Context Bloat）。
 
 实证呈现张力——**效果由内容质量与精简度共同决定，而非“有无”本身**：
 
-- **手写精简有益**：[Lulla et al., 2026](https://arxiv.org/abs/2601.20404) 测得手写 AGENTS.md 降低运行时间与 token 消耗，且不损质量。
-- **冗余内容有害**：[Gloaguen et al., 2026](https://arxiv.org/abs/2602.11988) 发现不必要指令推高推理成本，自动生成更是一致降低成功率。
-- **结构变量对即时遵从影响有限**：[McMillan, 2026](https://arxiv.org/abs/2605.10039) 未检测到文件大小/位置/架构对单条指令遵从的效应。这与上述成本证据不冲突——测的维度不同。结论：精简有成本价值，但不必过度优化指令位置。
+- **手写精简有益**：Lulla et al., 2026[2] 测得手写 AGENTS.md 降低运行时间与 token 消耗，且不损质量。
+- **冗余内容有害**：Gloaguen et al., 2026[3] 发现不必要指令推高推理成本，自动生成更是一致降低成功率。
+- **结构变量对即时遵从影响有限**：McMillan, 2026[4] 未检测到文件大小/位置/架构对单条指令遵从的效应。这与上述成本证据不冲突——测的维度不同。结论：精简有成本价值，但不必过度优化指令位置。
 
 结论：精简、聚焦非显而易见内容是收益来源；冗余与自动生成是成本来源（详见 [empirical-evidence.md](references/empirical-evidence.md)）。
 
@@ -127,7 +127,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 ### 决策表（Decision Tables）
 
-当项目中存在两种或多种合理做法时，决策表能强制让代理在选择前做出决定，而不靠猜测。来自 [AugmentCode 实证研究](https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files) 的最强模式之一——将决策表加入 AGENTS.md 后 `best_practices` 提升 25%。
+当项目中存在两种或多种合理做法时，决策表能强制让代理在选择前做出决定，而不靠猜测。来自 AugmentCode 实证研究[5] 的最强模式之一——将决策表加入 AGENTS.md 后 `best_practices` 提升 25%。
 
 ```markdown
 ## 状态管理选型
@@ -180,7 +180,7 @@ CLAUDE.md 是 Claude Code 原生读取的项目级配置文件。核心策略是
 
 ### 配置异味检测
 
-[dos Santos et al., 2026](https://arxiv.org/abs/2606.15828) 分析了 100 个热门仓库的 AGENTS.md，识别出六种常见配置异味。编写和审计时应检查：
+dos Santos et al., 2026[1] 分析了 100 个热门仓库的 AGENTS.md，识别出六种常见配置异味。编写和审计时应检查：
 
 | 异味 | 说明 | 检查方法 |
 |------|------|---------|
@@ -221,6 +221,25 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 **判定**：重要性高 + 推断难 + 特异 → 放入；可工具化（linter / 类型 / CI 能强制）→ 不放，指向工具配置；介于之间 → 视项目复杂度 / 团队 / 安全要求酌情放入。
 
 各内容类型的分类（推荐 / 可选 / 不放）、详细维度评分与根 / 子目录拆分见 [references/content-decisions.md](references/content-decisions.md)（附录：详细目录）。
+
+---
+
+## 参考文献
+
+[1] dos Santos, A. et al. “Context Bloat in AGENTS.md: An Empirical Study of 100 Repositories.” *arXiv:2606.15828*, 2026.
+    <https://arxiv.org/abs/2606.15828>
+
+[2] Lulla, K. et al. “Hand-crafted AGENTS.md Improves Efficiency Without Quality Loss.” *arXiv:2601.20404*, 2026.
+    <https://arxiv.org/abs/2601.20404>
+
+[3] Gloaguen, P. et al. “Redundant Instructions Increase Reasoning Costs in LLM Agents.” *arXiv:2602.11988*, 2026.
+    <https://arxiv.org/abs/2602.11988>
+
+[4] McMillan, C. “Positional Bias in LLM Instruction Following.” *arXiv:2605.10039*, 2026.
+    <https://arxiv.org/abs/2605.10039>
+
+[5] AugmentCode. “How to Write Good agents.md Files.” *augmentcode.com*, 2026.
+    <https://www.augmentcode.com/blog/how-to-write-good-agents-dot-md-files>
 
 ---
 

@@ -44,6 +44,8 @@ license: Apache-2.0
 - 能假设它已知吗？
 - 这段文字值得它的 token 成本吗？
 
+> **为什么这些原则紧迫**：IBM Research 在 ACM CAIS 2026 发表的“Markdown Mayhem”研究（[R8]）指出，agent 文档无序泛滥已导致**系统性文档危机**——太多代理持续更新太多 markdown 文件，造成歧义、冗余和权威性侵蚀。本技能的核心原则（增量迭代、确定性约束优先、每 token 须自证价值）正是解决这一危机的关键路径。
+
 ---
 
 ## 通用规则
@@ -270,6 +272,8 @@ export default function formatDate(date){ var result; ... }
 - [ ] 组织检查——无长串无序 rule list；结构化格式优先，按目标任务组织
 
 > 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。
+>
+> **扩展阅读**：Addy Osmani（Google Chrome）2026 年发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
 
 ---
 
@@ -294,6 +298,8 @@ export default function formatDate(date){ var result; ... }
 | [R5] | <https://arxiv.org/abs/2605.10039> | Positional Bias in LLM Instruction Following | 指令位置对遵从影响有限，会话长度是关键 |
 | [R6] | <https://blakecrosley.com/blog/agents-md-patterns> | AGENTS.md Patterns: What Actually Changes Agent Behavior | 命令优先指令、完成标准定义、阻塞升级路径 |
 | [R7] | <https://github.com/mgechev/skills-best-practices> | Skills Best Practices | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
+| [R8] | <https://research.ibm.com/publications/markdown-mayhem-taming-the-agentic-documentation-explosion> | Markdown Mayhem: Taming the Agentic Documentation Explosion (ACM CAIS 2026) | IBM Research 指出 agent 文档无序泛滥导致系统性危机；本仓库的核心原则（增量迭代、确定性约束优先、每 token 须自证价值）是其解药 |
+| [R9] | <https://addyosmani.com/blog/good-spec/> | How to Write a Good Spec for AI Agents (Addy Osmani, 2026) | 5 原则：高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+人类判断、迭代演进 |
 
 ---
 

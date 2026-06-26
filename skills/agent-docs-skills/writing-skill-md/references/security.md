@@ -142,6 +142,42 @@ content_hash: "sha256:abcdef..."
 - [ ] 参考 OWASP Agentic Skills Top 10 [R14] 逐项审计（覆盖多阶段攻击链、声明-行为偏差、指令劫持等）
 - [ ] 生产环境使用锁定的版本（tag/commit SHA）
 
+---
+
+## 部署后安全治理
+
+技能上线后的安全管理不亚于编写时的安全审查。基于 OWASP AST10 框架（[R14]）与产业最佳实践，建议建立以下治理机制：
+
+### 运行时行为监控
+
+- **技能行为基线**：记录每项技能的典型行为模式（读取了哪些文件、调用了什么工具、网络请求的目标域名），与预期行为对比发现异常
+- **异常检测**：监控非预期文件访问（如文本处理技能突然读取 SSH 密钥）、非预期网络外发（如技能 description 未声明网络访问但出现外连）
+- **审计日志**：保留技能执行轨迹（调用栈、工具调用序列、读写文件列表），便于事后溯源
+
+### 供应链持续管理
+
+- **版本追踪**：记录每项部署技能的来源（市场/仓库/作者）、版本号、安装时间、content_hash
+- **更新审计**：技能更新时对比 diff——不仅看脚本变更，也要审查 SKILL.md body 的指令变更（指令劫持常通过修改 body 而非脚本实现，[R10]）
+- **依赖链审查**：技能引用的外部工具、MCP 服务器、运行时库也纳入安全扫描范围
+- **废弃技能退役**：不再使用的技能从注册表中移除，避免无人维护的技能成为攻击入口
+
+### 事件响应
+
+- **技能隔离**：发现可疑技能后立即从所有 agent 会话中移除（不依赖代理自身判断，通过工具配置禁用）
+- **溯源**：确认事件窗口内受影响的 agent 会话、可能泄露的数据范围
+- **修补**：如果是技能本身的漏洞，发布修补版本并强制更新；如果是市场的供应链问题，报告给市场运营方
+
+### 治理成熟度模型
+
+| 等级 | 特征 | 适合场景 |
+|------|------|---------|
+| **L0 — 无治理** | 不审查、不锁定版本、不记录 | 个人实验、一次性脚本 |
+| **L1 — 部署前审查** | 部署前走完发现即检查清单 | 小团队、内部技能 |
+| **L2 — 运行时监控** | L1 + 基线对比 + 异常告警 | 中等团队、公开分发的技能 |
+| **L3 — 全生命周期** | L2 + 供应链追踪 + 事件响应 + 定期的第三方审计 | 企业级、受监管行业 |
+
+> 治理不是一次性的设置，而是随技能库增长持续演进的实践。从 L1 起步，在首次发现异常行为后升级到 L2。
+
 ## 参考文献
 
 | 编号 | 链接 | 标题 | 核心内容 |
@@ -150,7 +186,7 @@ content_hash: "sha256:abcdef..."
 | [R5] | <https://arxiv.org/abs/2604.04989> | SkillAttack: Adversarial Prompting on Agent Skills | 通过对抗性 prompting 可利用技能漏洞 |
 | [R6] | <https://arxiv.org/abs/2604.03081> | DDIPE: Supply Chain Poisoning of Agent Skills | 恶意逻辑可藏于代码示例被代理复用 |
 | [R8] | <https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/> | ToxicSkills: Agent Skills Supply Chain Audit | 3,984 技能审计：36.82% 含漏洞、91% 恶意技能汇聚 injection+恶意代码、记忆投毒 |
-| [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 84 任务 × 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
+| [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 87 任务（v1.1）× 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
 | [R10] | <https://arxiv.org/abs/2605.11770> | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
 | [R11] | <https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/> | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
 | [R12] | <https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf> | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |

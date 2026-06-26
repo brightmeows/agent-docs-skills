@@ -42,7 +42,7 @@ sha256sum skills/agent-docs-skills/*/SKILL.md
 - 修改 `skills/agent-docs-skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段（由 `check-well-known-digest` hook 强制）
 - 新增/移除技能目录时同步更新 `.well-known/agent-skills/index.json`（`.claude-plugin/plugin.json` 依赖默认 `skills/` 目录扫描，无需维护技能列表）
 - 发布新版本（release/tag）时，同步更新 `.claude-plugin/plugin.json` 的 `version` 字段和 `README.md` 中的安装命令版本引用
-- **修改任何技能前，必须先加载并完整读取所有前置 skill（禁止绕过）。** 依赖关系见[技能依赖链](#技能依赖链)——本仓库是元技能仓库，技能本身即是规范
+- **修改任何技能前，必须先完整读取本仓库内的所有前置技能文档。** 依赖关系见[技能依赖链](#技能依赖链)——本仓库是元技能仓库，技能本身即是规范
 
 ### Ask
 

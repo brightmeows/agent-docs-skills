@@ -10,7 +10,13 @@
 - **大规模产业审计**：[R8]（Snyk ToxicSkills，2026-02）扫描 3,984 个技能——**36.82% 含任意级别安全问题、13.4% 达 critical、76 个确认恶意**；规模与时效均优于 R4。
 - **可利用性验证**：[R5]（Duan et al., 2026）通过对抗性 prompting 证实真实技能可被利用。
 - **供应链投毒**：[R6] 提出 DDIPE——恶意逻辑藏于技能文档的代码示例，代理复用示例时即触发。[R8] 进一步发现 **91% 的恶意技能同时使用 prompt injection + 传统恶意代码**——前者绕过安全机制、后者实施窃取，二者汇聚使传统代码扫描失效。技能已成为新兴软件供应链攻击面。
-- **大规模行为审计**：[R10]（Palo Alto Unit 42, 2026-06）引入 Behavioral Integrity Verification（BIV），扫描 49,943 个技能——**80% 存在声明与行为偏差、18.9% 为恶意、2,490 个含多阶段攻击链**。[R11]（Orca Security）发现技能市场中存在全套供应链攻击原语，可组合实现创建→分发→持久化恶意技能的自动化流水线。[R12]（CSA）证实技能安全扫描器本身可被绕过。
+- **大规模行为审计**：[R10]（Palo Alto Unit 42, 2026-06）引入 Behavioral Integrity Verification（BIV），扫描 49,943 个技能——**80% 存在声明与行为偏差、18.9% 为恶意、2,490 个含多阶段攻击链**。[R11]（Orca Security）发现技能市场中存在全套供应链攻击原语，可组合实现创建→分发→持久化恶意技能的自动化流水线。
+- **扫描器绕过实证**：[R12]（CSA, 2026-06）Trail of Bits 研究人员在四小时内开发出三种绕过方法，成功绕过 ClawHub、Cisco 和 Vercel skills.sh 的恶意技能检测器——所有方法均利用已熟知的混淆技术。
+- **真实世界攻击验证**：[R13]（AIR, 2026-06）安全公司 AIR 制作了一个虚假技能，使用**可变外部链接**（扫描时指向无害内容，安装后切换 payload）绕过了所有主流市场的安全扫描器，然后通过 Instagram 广告触达 **~26,000 个 agent**（含企业账户）。攻击者可借此完全控制 agent 及其可达的内部系统。
+- **行业安全标准建立**：[R14]（OWASP, 2026-06）OWASP 正式发布 **Agentic Skills Top 10**
+  ——首个面向 agent skill 安全的行业标准框架。核心风险包括：AST01 Malicious Skills、
+  AST02 Supply Chain Poisoning、AST03 Data Exfiltration、AST04 Permission Abuse、
+  AST05 Prompt Injection via Skills 等。
 
 ## 编写安全注意事项
 
@@ -38,6 +44,17 @@
 - **审慎对待会修改记忆/状态文件的技能**——[R8] 发现恶意技能可改写代理记忆文件（如 `SOUL.md`、`MEMORY.md`）实现跨会话持久化投毒；审查技能是否写记忆文件、写入内容是否可信
 - **记忆文件写操作应显式声明**：如果技能需要写入记忆文件，应在 SKILL.md 中说明写入内容与原因
 
+### 安全扫描器的信任边界
+
+安全扫描器是技能供应链的第一道防线，但**不是最后一道**。[R12] 和 [R13] 连续证实当前主流扫描器存在系统性盲区：
+
+- **可变内容绕过**：扫描时提供无害版本，安装后通过外部 URL 切换为恶意 payload——扫描器的一次性检查无法捕获动态内容
+- **混淆技术有效**：所有成功绕过均依赖已熟知的混淆手法（Base64 编码、间接跳转、条件执行），说明扫描器的检测深度有限
+- **组合攻击不可见**：单步操作（读文件 + 编码 + 外发）各自看似合法，但组合即构成攻击链。逐条检查无法发现
+- **声明-行为不匹配**：技能 description 声明无害功能，但 body 或脚本执行未声明的操作——80% 的技能存在此类偏差 [R10]
+
+**应对策略**：扫描器作为快速过滤层，但不替代人工审查；关注可变外部资源；参考 OWASP Top 10 框架做系统性审计。
+
 ### 行为完整性验证
 
 技能声明（description）与实际行为（代码 + 指令）可能不一致——这是技能生态中最容易被忽视的风险。
@@ -51,6 +68,9 @@
 - **技能市场风险**：Skills.sh、ClawHub、claude-plugins.dev 等市场已达 **百万级技能**，但质量参差不齐（平均评分 6.2/12，[R9]）。安装前审阅 SKILL.md 和脚本内容
 - **版本锁定**：生产环境使用技能时锁定到 release tag 或 commit SHA，避免 `main` 分支的未审阅变更
 - **自动扫描**：部署前用 `mcp-scan` 扫描（`uvx mcp-scan@latest --skills`，[R8]）——把可机器校验的交给机器
+- **扫描器有盲区，不单独依赖**：[R12] 已证实主流安全扫描器可被绕过；[R13] 进一步演示了绕过扫描器后触及 26,000 个 agent 的真实攻击。自动扫描是必经检查点，但不是最终安全保证——须结合人工审查
+- **关注动态内容**：可变外部链接（扫描时 vs 安装后指向不同内容）是绕过扫描器的主要手法之一。技能引用的外部资源应在安装时验证其静态内容
+- **OWASP Top 10 作为审计框架**：参考 [R14] OWASP Agentic Skills Top 10 的十大风险类别逐项审查——覆盖静态扫描难以发现的多阶段攻击链、声明-行为偏差、指令劫持等
 - **技能依赖审计**：技能引用的外部工具、MCP 服务器等也应纳入安全审查
 
 ## 发现即检查清单
@@ -64,7 +84,9 @@
 - [ ] description 不暴露敏感信息
 - [ ] description 与实际行为一致——SKILL.md body 不执行 description 未声明的操作
 - [ ] 部署前用 `mcp-scan` 或等效工具扫描
+- [ ] **扫描器有盲区**——不单独依赖自动扫描结果，结合人工审查确认无可变外部链接/混淆代码
 - [ ] 技能若写代理记忆文件（`SOUL.md`/`MEMORY.md` 等），写入内容已审阅
+- [ ] 参考 OWASP Agentic Skills Top 10 [R14] 逐项审计（覆盖多阶段攻击链、声明-行为偏差、指令劫持等）
 - [ ] 生产环境使用锁定的版本（tag/commit SHA）
 
 ## 参考文献
@@ -79,6 +101,8 @@
 | [R10] | [arXiv:2605.11770](https://arxiv.org/abs/2605.11770) | Behavioral Integrity Verification for AI Agent Skills | Unit 42 BIV：49,943 技能中 80% 有行为偏差、18.9% 恶意、2,490 个含多阶段攻击链 |
 | [R11] | [orca.security](https://orca.security/resources/blog/ai-agent-skill-supply-chain-security/) | AI Agent Skill Supply Chain Attack Vectors | Orca Security 发现技能市场中全套供应链攻击原语 |
 | [R12] | [cloudsecurityalliance.org](https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/06/CSA_research_note_AI_agent_skill_scanner_bypass_20260610-csa-styled.pdf) | AI Agent Skill Scanner Bypass | CSA 证实技能安全扫描器可被绕过 |
+| [R13] | [air.security](https://www.air.security/blog-posts/the-story-of-skills) | The Story of Skills — How We Hijacked 26,000 Agents | AIR 证实虚假技能可绕过所有扫描器，触及 26,000 agent，含企业账户 |
+| [R14] | [owasp.org](https://owasp.org/www-project-agentic-skills-top-10/) | OWASP Agentic Skills Top 10 | 首个 agent skill 安全行业标准（AST01 Malicious Skills 等十大风险）|
 
 ## 本地参考
 

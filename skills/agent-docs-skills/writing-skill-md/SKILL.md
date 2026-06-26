@@ -315,7 +315,9 @@ helper1、helper2、step3、pattern4
 
 ## 安全考虑
 
-技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链四层（漏洞发现 → 产业审计 → 可利用性验证 → 供应链投毒）见 [security.md](./references/security.md)。
+技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链（漏洞发现 → 产业审计 → 可利用性验证 → 供应链投毒 → 扫描器绕过实证 → 真实攻击验证 → 行业安全标准）见 [security.md](./references/security.md)。
+
+> **2026-06 关键更新**：安全研究已证实主流技能扫描器均可被绕过（CSA, Trail of Bits），且已有虚假技能绕过所有检测、触及 26,000 个 agent 的真实攻击（AIR）。OWASP 同期发布 Agentic Skills Top 10 行业安全标准。详见 [security.md](./references/security.md)。
 
 ### 编写安全——摘要
 
@@ -324,8 +326,9 @@ helper1、helper2、step3、pattern4
 - **代码示例与脚本**：公开技能需审计脚本；代码示例不照搬来源不明片段；非可信源技能不自动加载
 - **记忆持久化**：技能若写 `SOUL.md`/`MEMORY.md` 等记忆文件，写入内容需审查
 - **供应链**：锁定版本（tag/commit SHA）；部署前用 `mcp-scan`（`uvx mcp-scan@latest --skills`）扫描
+- **扫描器盲区**：自动扫描是必经检查点，但不是最终安全保证——[security.md](./references/security.md) 详述盲区类型与应对策略
 
-**完整的安全注意事项、扩展风险场景（供应链、记忆投毒、市场风险）与发现即检查清单见 [security.md](./references/security.md)。**
+**完整的安全注意事项、扩展风险场景（供应链、记忆投毒、扫描器盲区、市场风险、OWASP Top 10）与发现即检查清单见 [security.md](./references/security.md)。**
 
 ## 验证与自检
 

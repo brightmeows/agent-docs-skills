@@ -109,7 +109,7 @@ AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵
 > 写跨工具配置时，优先用跨工具标准（AGENTS.md / SKILL.md），把 Claude Code 专属机制作“可选增强”。
 
 | 层 | 机制 | 强制度 | 成本 |
-|---|---|---|---|---|
+|---|---|---|---|
 | 指令层 | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从 | 高（常驻）|
 | 机制层 | Hooks / Permissions | 确定性（exit 2 阻断 / allow/deny/ask）| 低（配置在上下文外）|
 | 隔离层 | Subagents / task agents | 隔离上下文 | 低（仅摘要回主会话）|
@@ -288,7 +288,7 @@ Monorepo 多 AGENTS.md 的加载规则（管辖范围、累积、优先级）见
 ### 常见错误
 
 | 错误 | 详见 |
-|---|---|---|
+|---|---|
 | 含 README 内容 | 定位 |
 | 重复工具链已强制内容（即 Lint Leakage）| 写作原则 Toolchain First / [配置异味检测](#配置异味检测) |
 | 自动生成不审校（即 Init Fossilization）| 写作原则 反自动化生成 / [配置异味检测](#配置异味检测) |

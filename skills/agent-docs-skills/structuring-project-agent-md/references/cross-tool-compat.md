@@ -7,21 +7,43 @@
 
 ## 概念对照
 
-| 概念 | AGENTS.md 术语 | Claude Code | Cursor | OpenCode | Codex CLI | Hermes Agent [R3] |
-|------|---------------|-------------|--------|----------|-----------|-------------------|
-| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` + `.opencode/` | `AGENTS.md` | —（个人级为主）|
-| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/AGENTS.md` | `AGENTS.override.md` | `~/.hermes/SOUL.md`（身份）|
-| **技能存放（项目）** | `./.well-known/` | `.claude/skills/` | `.cursor/skills/` | `.opencode/skills/` | `.codex/skills/` | — |
-| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/` | `~/.codex/skills/` | `~/.hermes/skills/` |
-| **技能发现文件** | `.well-known/agent-skills/index.json` | 同左 | 同左 | 同左 | 同左 | 同左 |
-| **技能权限控制** | — | `allowed-tools` frontmatter | — | `permission.skill` | — | `write_approval` 门控 + 安全扫描器 |
-| **工具配置（项目）** | — | `.claude/settings.json` | `.cursor/settings.json` | `opencode.json` | `~/.codex/config.toml` | — |
-| **工具配置（个人）** | — | `~/.claude/settings.json` | `~/.cursor/settings.json` | `~/.config/opencode/opencode.json` | `~/.codex/config.toml` | `~/.hermes/config.yaml` |
-| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | `.opencode/agents/*.md` | `AGENTS.md` | `SOUL.md`（持久身份） |
-| **Agent 定义** | — | `.claude/agents/*.md` subagent | — | `.opencode/agents/*.md` | — | 内置 agent 类型 |
-| **子目录规则** | 子目录 `AGENTS.md` | 子目录 `CLAUDE.md` | `.cursor/rules/` 多文件 | 继承 `opencode.json` | 子目录 `AGENTS.md` | — |
-| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC + Markdown | Markdown | Markdown + YAML + YAML bundles |
-| **特有机制** | — | Hooks / Subagents / DW | Composer / Agent 模式 | Task agent / 多 provider | 内置 sandbox 执行 | `/learn` 自动创建技能 / skill bundles / 自演进技能 |
+按主题拆分为三张工具行表，方便新增工具时仅添加行而非列。`AGENTS.md` 术语作为跨工具标准参考列。
+
+### 配置文件位置
+
+| 工具 | 项目级规则 | 个人级规则 | 子目录规则 | 项目工具配置 | 个人工具配置 |
+|------|-----------|-----------|-----------|------------|------------|
+| **AGENTS.md 原生**（标准术语）| `./AGENTS.md` | — | 子目录 `AGENTS.md` | — | — |
+| **Claude Code** | `./CLAUDE.md` | `~/.claude/CLAUDE_GLOBAL.md` | 子目录 `CLAUDE.md` | `.claude/settings.json` | `~/.claude/settings.json` |
+| **Cursor** | `.cursor/rules/*.mdc` | `~/.cursor/rules/`（全局）| `.cursor/rules/` 多文件 | `.cursor/settings.json` | `~/.cursor/settings.json` |
+| **OpenCode** | `opencode.json` + `.opencode/` | `~/.config/opencode/AGENTS.md` | 继承 `opencode.json` | `opencode.json` | `~/.config/opencode/opencode.json` |
+| **OpenAI Codex CLI** | `AGENTS.md` | `AGENTS.override.md` | 子目录 `AGENTS.md` | `~/.codex/config.toml` | `~/.codex/config.toml` |
+| **Gemini CLI** | `GEMINI.md` | — | — | `~/.gemini/settings.json` | `~/.gemini/settings.json` |
+| **Hermes Agent** [R3] | —（个人级为主）| `~/.hermes/SOUL.md`（身份）| — | — | `~/.hermes/config.yaml` |
+
+### 技能配置
+
+所有兼容工具的**技能发现文件**统一使用 `.well-known/agent-skills/index.json`（AAIF 标准）。
+
+| 工具 | 项目级技能存放 | 个人级技能存放 | 技能权限控制 |
+|------|--------------|--------------|-------------|
+| **Claude Code** | `.claude/skills/` | `~/.claude/skills/` | `allowed-tools` frontmatter |
+| **Cursor** | `.cursor/skills/` | `~/.cursor/skills/` | — |
+| **OpenCode** | `.opencode/skills/` | `~/.agents/skills/` | `permission.skill` |
+| **OpenAI Codex CLI** | `.codex/skills/` | `~/.codex/skills/` | — |
+| **Gemini CLI** | `.gemini/skills/` | `~/.gemini/skills/` | — |
+| **Hermes Agent** [R3] | — | `~/.hermes/skills/` | `write_approval` 门控 + 安全扫描器 |
+
+### 角色与特有机制
+
+| 工具 | 角色/Persona 定义 | Agent 定义 | 常驻配置格式 | 特有机制 |
+|------|-----------------|-----------|-------------|---------|
+| **Claude Code** | `CLAUDE.md` 或 skill | `.claude/agents/*.md` subagent | Markdown | Hooks / Subagents / Dynamic Workflows |
+| **Cursor** | `.cursor/rules/` | — | Markdown + YAML frontmatter | Composer / Agent 模式 |
+| **OpenCode** | `.opencode/agents/*.md` | `.opencode/agents/*.md` | JSON / JSONC + Markdown | Task agent / 多 provider |
+| **OpenAI Codex CLI** | `AGENTS.md` | — | Markdown | 内置 sandbox 执行 |
+| **Gemini CLI** | `GEMINI.md` | — | Markdown | — |
+| **Hermes Agent** [R3] | `SOUL.md`（持久身份）| 内置 agent 类型 | Markdown + YAML + YAML bundles | `/learn` 自动创建技能 / skill bundles / 自演进技能 |
 
 ---
 

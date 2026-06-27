@@ -113,8 +113,7 @@ skill-name/
 | `examples/` 🧪 | 示例输入/输出、用例演示 | 代理按需参考 |
 | `authoring/` | 仅供人类作者参考的内容（如 TDD 验证流程） | 代理常规任务不加载 |
 
-所有目录可选，仅在提供明确价值时添加。`authoring/` 是本仓库补充——官方标准未覆盖“代理常规任务不加载”这一类别。
-`templates/` 和 `examples/` 是部分生态扩展（[R15]）接纳的可选约定，官方标准未强制要求。
+所有目录可选，仅在提供明确价值时添加。`authoring/` 是本仓库补充；`templates/` 和 `examples/` 是部分生态扩展（[R15]）接纳的可选约定。
 
 **分类标准是加载时机，不是内容来源**——`references/` 收纳所有代理按需加载的文档，不区分自撰参考与外部转载。不确定时参考 [R3] 仓库的实际组织。
 
@@ -124,8 +123,7 @@ skill-name/
 - **纯参考型例外**：若 SKILL.md 为索引、主体全是参考文档，主题目录可直接做顶层（如 `memo/`、`ext/`），不强制套 `references/`。
 - **不要按内容来源分**：无论放顶层还是 `references/` 内，分类维度是主题/领域，不是来源（自撰 vs 转载）。
 
-**官方未覆盖的边界**（如 Gherkin 测试规格、示例数据）：可建自定义目录（如 `test/`、`samples/`），在 SKILL.md 中明确说明其用途与加载时机。官方约定是起点，不是终点。
-`templates/`（输出模板）、`examples/`（示例演示）已被部分生态工具接纳为可选约定（[R15]），编写时可按需采用。
+**官方未覆盖的边界**（如 Gherkin 测试规格、示例数据）：可建自定义目录（如 `test/`、`samples/`），在 SKILL.md 中明确说明用途与加载时机。官方约定是起点，不是终点。
 
 **归置优先级**——内容先就地或归入当前文件的其它相关章节（非索引类），就近归并、免一次加载跳转；同文件无合适归处、或属下列类型时才下沉子文件。
 
@@ -137,10 +135,7 @@ skill-name/
 
 **保持内联：** 原则和概念、代码模式（50 行以内）、其他所有内容。
 
-**引用保持一层深度**——代理从 SKILL.md 到目标文件的引用链不超过 1 跳
-（如 `SKILL.md → references/foo.md` 可以，应避免 `→ references/sub/foo.md → bar.md`）。
-文件系统路径深度（如 `memo/subtopic/foo.md`）**不影响**引用链长度。
-嵌套引用会导致代理用 `head` 预览，信息不完整。
+**引用保持一层深度**——代理从 SKILL.md 到目标文件的引用链不超过 1 跳（如 `SKILL.md → references/foo.md`，应避免 `→ references/sub/foo.md → bar.md`）。文件系统路径深度**不影响**引用链长度。嵌套引用会导致代理用 `head` 预览，信息不完整。
 
 ### 组织模式
 
@@ -250,8 +245,7 @@ description: [做什么]. 在以下情况使用：[具体触发条件和症状]
 
 **核心原则：描述 = 做什么 + 何时使用，绝不总结工作流。**
 
-- 前半句说明技能功能（做什么），后半句聚焦触发条件与症状（何时使用）
-  - 模式：`[做什么]. Use when [触发条件].` 或 `[做什么]. [触发条件时] 使用。`
+- 前半句说明技能功能（做什么），后半句聚焦触发条件与症状（何时使用）——模式：`[做什么]. Use when [触发条件].` 或 `[做什么]. [触发条件时] 使用。`
 - **重点放在“何时使用”上**——“做什么”只需一句话界定功能范畴；“何时使用”应包含具体症状、触发条件和典型场景。搜索匹配主要靠症状，功能概述仅用于确认边界。
 - **“做什么”是功能概述，不是步骤列举**——“从 PDF 提取文本”是功能，“用 pdfplumber 打开、读取、提取”是工作流
 - **绝不总结技能的过程或工作流**——测试发现，描述若总结工作流，代理会只跟随描述而跳过技能主体
@@ -390,6 +384,18 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 
 **深度验证方法**（人类作者）见[L5]。
 
+### 工具辅助验证
+
+除手动自检外，可用工具辅助验证：
+
+| 工具 | 工作流 | 适用阶段 |
+|------|--------|---------|
+| **Anthropic Skill Creator** | Create → Eval（测触发率）→ Improve（优化 description）→ Benchmark（对比报告）[R16] | 编写后、迭代中 |
+| **mcp-scan** | 静态分析 SKILL.md 与脚本中的已知恶意模式 | 部署前 |
+| **Snyk Agent Scan** | 扫描 SKILL.md 中恶意模式，90–100% 召回、0% 误报（[R8]） | 部署前 |
+
+> 工具辅助是自检的补充而非替代。自动扫描无法发现多阶段攻击链和声明-行为偏差（见 security.md），始终结合人工审查。
+
 ## 技能创建清单
 
 **重要：使用 TodoWrite 为下方每个清单项创建待办事项。**
@@ -466,6 +472,7 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 | [R13] | <https://github.com/agentskills/agentskills/issues/90> | Proposal: Skill Relationship Fields | 提案新增 `prerequisite-skills` 和 `related-skills` 字段到 SKILL.md 规范 |
 | [R14] | <https://zylos.ai/research/2026-05-12-agent-skill-composition-modular-capability-architecture> | Agent Skill Composition: The Architecture of Modular AI Capabilities | 四种技能组合模式（顺序管道、并行扇出、复合嵌套、条件分发）与生产部署最佳实践 |
 | [R15] | <https://www.agensi.io/learn/skill-md-specification-open-standard> | The SKILL.md Open Standard: Full Specification (Agensi, 2026) | 社区整理的 SKILL.md 完整规范参考，含 `templates/` 和 `examples/` 可选目录约定 |
+| [R16] | <https://claude.com/plugins/skill-creator> | Skill Creator — Claude Code 插件 | Create → Eval → Improve → Benchmark 四阶段 description 优化循环 |
 
 ---
 

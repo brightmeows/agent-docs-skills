@@ -49,11 +49,11 @@ GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的
 
 ## 标准化趋势
 
-**[R6]（2026-02）**——可互操作、安全的 AI agent 标准框架，为 agent 配置文件标准化方向提供背书。
+**[R6]**——可互操作、安全的 AI agent 标准框架，为 agent 配置文件标准化方向提供背书。
 
 ## 产业最佳实践
 
-**[R9]**（Addy Osmani, 2026-06）Google Chrome 工程师 Addy Osmani 基于两项 2026 年研究的分析，提出 AGENTS.md 的核心洞察：
+**[R9]**（Addy Osmani）Google Chrome 工程师 Addy Osmani 基于近期研究的分析，提出 AGENTS.md 的核心洞察：
 
 - **自动生成有害**：`/init` 生成的 AGENTS.md 内容与代理已能自行发现的信息冗余，导致推理成本增加 20%+
 - **每条线须自证价值**：只有代理无法从代码中自行发现的非显而易见信息（工具链 gotcha、反直觉约定、环境地雷）才值得写入

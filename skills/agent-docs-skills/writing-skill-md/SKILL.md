@@ -331,7 +331,7 @@ helper1、helper2、step3、pattern4
 
 技能直接注入代理上下文，恶意或脆弱的技能可导致数据窃取、权限提升等风险。证据链（漏洞发现 → 产业审计 → 可利用性验证 → 供应链投毒 → 扫描器绕过实证 → 真实攻击验证 → 行业安全标准）见 [security.md](./references/security.md)。
 
-> **2026 关键更新**：安全研究已证实主流技能扫描器均可被绕过（CSA, Trail of Bits），且已有虚假技能绕过所有检测、触及 26,000 个 agent 的真实攻击（AIR）。OWASP 发布 **Agentic Skills Top 10（AST10）** 行业安全标准。详见 [security.md](./references/security.md)。
+> **安全态势**：安全研究已证实主流技能扫描器均可被绕过（CSA, Trail of Bits），且已有虚假技能绕过所有检测、触及 26,000 个 agent 的真实攻击（AIR）。OWASP 发布 **Agentic Skills Top 10（AST10）** 行业安全标准。详见 [security.md](./references/security.md)。
 
 ### 编写安全——摘要
 

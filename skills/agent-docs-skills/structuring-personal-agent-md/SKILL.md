@@ -46,7 +46,7 @@ license: Apache-2.0
 （description/mode/model/permission 等）和系统提示 body。也可在 `opencode.json` 中以
 `agent` 字段配置。个人级 Persona 可直接在 agent 定义中设置。
 
-**OpenCode v1.16.0+**（2026-06）新增 skill discovery 和 file-based agent 加载，
+**OpenCode** 支持 skill discovery 和 file-based agent 加载，
 项目级 `AGENTS.md` 和 `SKILL.md` 自动被索引。个人级技能依然支持
 `~/.agents/skills/` 目录。
 

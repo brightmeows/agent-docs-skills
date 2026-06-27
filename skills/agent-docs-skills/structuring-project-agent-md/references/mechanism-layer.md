@@ -88,7 +88,8 @@ OpenCode 不与 Claude Code hooks 直接对标，但提供了等效的 **`permis
 
 ## 八种指令方法决策表
 
-来源：[Steering Claude Code](https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more)（Anthropic 官方博客，2026-06）；[A Harness for Every Task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)（2026-06）。
+来源：[Steering Claude Code](https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more)；
+[A Harness for Every Task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)（均为 Anthropic 官方博客）。
 
 | 方法 | 加载时机 | 压缩行为 | 上下文成本 | 适用场景 |
 |---|---|---|---|---|
@@ -215,7 +216,7 @@ exit 0   # exit 0 = 无意见，正常权限流程继续
 
 ## Dynamic Workflows（动态执行 harness · Claude Code 专属）
 
-Dynamic Workflows 是 Claude Code 的 GA 功能（自 v2.1.154 起），Claude 可在运行时动态生成 JavaScript 编排脚本，将任务拆分为数十到数百个并行的 subagent，在后台执行的同时主会话保持响应（[R1]；[R2]）。
+Dynamic Workflows 是 Claude Code 的 GA 功能，Claude 可在运行时动态生成 JavaScript 编排脚本，将任务拆分为数十到数百个并行的 subagent，在后台执行的同时主会话保持响应（[R1]；[R2]）。
 
 > **激活方式**：在提示中包含 `ultracode` 关键词，或设 `/effort ultracode` 让 Claude 自动为每个实质任务编排 workflow。保存后以 `/<name>` 命令复用。
 
@@ -309,7 +310,7 @@ paths:
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|----------|
 | [R1] | <https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more> | Steering Claude Code | Anthropic 官方博客，介绍 Claude Code 的八种指令方法及其决策表 |
-| [R2] | <https://code.claude.com/docs/en/workflows> | Orchestrate Subagents at Scale with Dynamic Workflows | Claude Code Dynamic Workflows 官方文档（GA，v2.1.154+）：编排脚本、保存命令、ultracode 模式 |
+| [R2] | <https://code.claude.com/docs/en/workflows> | Orchestrate Subagents at Scale with Dynamic Workflows | Claude Code Dynamic Workflows 官方文档（GA）：编排脚本、保存命令、ultracode 模式 |
 | [R3] | <https://code.claude.com/docs/en/hooks-guide> | Hooks Guide | Claude Code Hooks 完整使用指南 |
 | [R4] | <https://code.claude.com/docs/en/hooks> | Hooks Reference | Claude Code Hooks API 参考 |
 | [R5] | <https://code.claude.com/docs/en/hooks#hook-lifecycle> | Hook Lifecycle | Claude Code Hooks 生命周期事件完整表 |

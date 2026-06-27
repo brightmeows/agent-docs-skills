@@ -7,9 +7,9 @@
 
 ## 背景
 
-2026 年中，多个工具开始支持自动技能生成：
+近期，多个工具开始支持自动技能生成：
 
-- **Hermes Agent `/learn`**（Nous Research, 2026-06-24 [R1]）：从目录、URL、对话或笔记自动生成 SKILL.md
+- **Hermes Agent `/learn`**（Nous Research，[R1]）：从目录、URL、对话或笔记自动生成 SKILL.md
 - **Hermes Agent `skill_manage`（auto）**：复杂任务完成后自动保存技能作为程序化记忆
 - **OpenClaw / 其他代理**：通过 `/learn` 风格命令将工作流转化为技能
 

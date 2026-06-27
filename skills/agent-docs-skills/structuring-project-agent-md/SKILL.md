@@ -28,32 +28,12 @@ license: Apache-2.0
 |-------------|------|-------------|
 | `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 事实标准——广泛采用 |
 | `.well-known/agent-skills/index.json` | 技能发现清单（AAIF 标准） | 所有 SKILL.md 兼容工具 |
-| `AGENTS.md` + ARD（[L5]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
+| `AGENTS.md` + ARD（[L5]、[L9]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
 | `CLAUDE.md` / `GEMINI.md` / 等 | 各工具原生项目配置（独有特性见 [L5]、[L6]） | 对应工具（多数亦读 AGENTS.md）|
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则，按 glob 注入 | Cursor、OpenCode 等 |
 | `opencode.json` | OpenCode 项目配置（工具/权限/agent 定义）| OpenCode |
 
 与 README 职责分离（README 面向人，项目级配置面向代理）。
-
-### 三文件职责对比
-
-仓库中常存在三个顶层 Markdown 文件——README.md、AGENTS.md、CONTRIBUTING.md，各自的受众和内容定位不同：
-
-| 维度 | README.md | AGENTS.md | CONTRIBUTING.md |
-|------|-----------|-----------|-----------------|
-| **受众** | 人类开发者（新用户、访客） | AI 编码代理 | 人类贡献者 |
-| **用途** | 项目概述、安装、使用示例、徽章 | 构建命令、约定、边界、项目特有不显而易见知识 | 如何提交 PR、代码风格（人读）、审查流程 |
-| **加载** | 人类阅读，不进代理上下文 | 代理发现项目时自动加载（常驻） | 仅当代理被要求处理 PR 时可能读取 |
-| **语气** | 面向人的友好说明 | 命令式、精确、可验证 | 面向人的流程说明 |
-| **维护频率** | 中（随发布更新） | 高（随代码漂移需持续精简） | 低（流程稳定后少变） |
-| **版本控制** | 是 | 是 | 是 |
-
-**内容交叉时的处理策略**：
-
-- AGENTS.md 与 README 的重叠内容（如构建命令）以 AGENTS.md 为准，README 保留给人看的版本
-- “安装步骤”完全属于 README——代理不需要这些信息
-- “非显而易见架构决策”应同时在 README（人读概述）和 AGENTS.md（代理读精确路径/命令）中提及
-- 代理读取 README 会浪费 token——不把代理需要的说明只写在 README 中；代理需要的信息应直接放入 AGENTS.md
 
 **核心原则**：维护一个主要的 AGENTS.md 作为跨工具真理源，通过 symlink 或工具配置让各工具读取。仅在跨工具有实质性行为差异时维护独立文件。
 
@@ -273,51 +253,6 @@ tags: [payments, api, rust, ci]
 2. **精简回合**——删除重复规则、将长文件拆分子目录、补充缺失的 frontmatter
 3. **交叉验证**——随机选 2–3 个目录测试代理是否加载了正确的 AGENTS.md 指导
 
-### `.mdc` 与 AGENTS.md 的协同
-
-monorepo 中 `.cursor/rules/*.mdc` 与 AGENTS.md 各有侧重：
-
-| 场景 | 用 AGENTS.md | 用 `.mdc` |
-|------|-------------|-----------|
-| 全局构建命令、技术栈 | ✅ 根 AGENTS.md | ❌ 不属于文件级规则 |
-| 某目录下所有文件的编码约束 | ✅ 子目录 AGENTS.md | ✅ 也可用 `.mdc` 带 globs—但路径即目录时 AGENTS.md 更直接 |
-| 横切多个目录但非全部目录的规则 | ❌ 需要多个子文件 | ✅ `.mdc` 带 globs 最合适 |
-| `alwaysApply: true` 的常驻规则 | ✅ AGENTS.md | ❌ 与 AGENTS.md 重复，选其一 |
-
-**推荐模式**：AGENTS.md 作跨工具真理源，`.mdc` 仅补充 Cursor 专有行为（如内联编辑规则）。不在 `.mdc` 中重复 AGENTS.md 已有内容。
-
-### 自动化审计辅助
-
-多 AGENTS.md 的大规模审计可借助脚本加速：
-
-```bash
-#!/bin/bash
-# 检测潜在问题：超大文件、缺失 frontmatter、可疑重复
-for f in $(find . -name AGENTS.md -type f); do
-  lines=$(wc -l < "$f")
-  # >200 行标记
-  [ "$lines" -gt 200 ] && echo "LARGE: $f ($lines 行)"
-  # 缺 frontmatter 标记
-  head -1 "$f" | grep -q '^---$' || echo "NO_FM: $f"
-  # 过时命令标记（示例：检查 npm 但实际用 pnpm）
-  grep -q 'npm' "$f" 2>/dev/null && [ -f package.json ] && \
-    grep -q '"packageManager":.*pnpm' package.json 2>/dev/null && \
-    echo "STALE_CMD: $f 可能含 npm 但项目用 pnpm"
-done
-```
-
-> 此脚本是起始模板，根据项目实际调整检测规则。通过 CI 定时运行可替代人工季度审计。
-
-### 维护反模式
-
-| 反模式 | 问题 | 正确做法 |
-|--------|------|---------|
-| **重复全局规则** | 子目录 AGENTS.md 重复根文件内容 | 依赖累积继承，子文件只声明特化内容 |
-| **无 frontmatter 的 200+ 行文件** | 代理无法高效索引 | 拆分子目录或补充 frontmatter |
-| **多工具各自维护** | AGENTS.md / CLAUDE.md / .cursorrules 内容漂移 | 以 AGENTS.md 为真理源，symlink 到其他入口 |
-| **根文件膨胀不拆** | 所有规则堆在根 AGENTS.md | 按目录/领域拆分到子文件 |
-| **自动化生成不审校** | /init 内容堆砌冗余指令 | 视作草稿，手工重写（见反自动化生成原则）|
-
 ### 文件命名约定
 
 - 根文件：`AGENTS.md`
@@ -327,12 +262,6 @@ done
 ### 参考
 
 Monorepo 多 AGENTS.md 的加载规则（管辖范围、累积、优先级）见上方[层级与作用域](#层级与作用域)。OpenAI 数十个 AGENTS.md 的实战案例见 [agents.md 官网](https://agents.md)。
-
-**相关参考**：
-
-- `.cursor/rules/*.mdc` 与 AGENTS.md 的协同——上方[`.mdc` 与 AGENTS.md 的协同](#mdc-与-agentsmd-的协同)及 [cursor-rules.md 参考](references/cursor-rules.md)
-- AGENTS.md 内容决策（5 维度评分）——[内容决策指南](#内容决策指南)及 [references/content-decisions.md](references/content-decisions.md)
-- AGENTS.md 大小规范与 Context Bloat——[维护流程](#维护流程)及 [references/empirical-evidence.md](references/empirical-evidence.md)
 
 ---
 
@@ -426,3 +355,4 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 | [L6] | [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
 | [L7] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
 | [L8] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层的唯一定义（指令/机制/隔离三层 + 八方法决策表）|
+| [L9] | [references/ard-integration.md](references/ard-integration.md) | ARD（Agentic Resource Discovery）集成指南——与 `.well-known/` 的协同、快速集成步骤、注意事项 |

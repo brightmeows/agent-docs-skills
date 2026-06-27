@@ -63,7 +63,7 @@
 
 ## 加载顺序
 
-典型编码代理（Claude Code / OpenCode / Cursor）按以下顺序加载配置：
+典型编码代理（Claude Code / OpenCode / Cursor / Codex CLI / Gemini CLI）按以下顺序加载配置：
 
 ### 流水线层级
 
@@ -71,13 +71,15 @@
 2. **个人级配置**（全局加载一次）
    - `~/.config/opencode/opencode.json`、`~/.config/opencode/AGENTS.md`
    - `~/.claude/CLAUDE_GLOBAL.md`
-   - `~/.claude/settings.json`、`~/.cursor/settings.json`
+   - `~/.claude/settings.json`、`~/.cursor/settings.json`、`~/.codex/config.toml`
    - `~/.claude/skills/*/SKILL.md`、`~/.agents/skills/*/SKILL.md`
+   - `~/.codex/skills/*/SKILL.md`、`~/.gemini/skills/*/SKILL.md`
 3. **项目级配置**（进入仓库时发现）
    - `opencode.json` / `opencode.jsonc`
    - `AGENTS.md`（跨工具标准）
    - `CLAUDE.md`（Claude Code 原生）
    - `.cursor/rules/*.mdc`（Cursor 规则）
+   - `.claude/rules/*.md`（Claude Code 路径限定规则）
    - `GEMINI.md`、`.junie/guidelines.md`、`.claude/`
 4. **项目级技能发现**（加载 frontmatter 元数据）
    - `.well-known/agent-skills/index.json`
@@ -96,6 +98,7 @@
 | AGENTS.md | 项目发现时加载（常驻）| 常驻开销显著高于 Skill | 项目上下文、边界、命令 |
 | opencode.json | 代理启动时加载（常驻）| 配置项计入上下文 | 工具配置、MCP、权限 |
 | .cursor/rules/\*.mdc | 按 glob 匹配注入（常驻）| 匹配时注入 | 文件级规则 |
+| .claude/rules/\*.md | 按 paths 匹配注入（常驻）| 匹配时注入 | 文件级规则（Claude Code）|
 | SKILL.md | 按需加载 body | 仅在匹配时加载 | 任务知识、工作流 |
 | 机制层（确定性强制）| 生命周期事件触发 | ≈0（配置在上下文外）| 确定性强制、阻断危险操作 |
 
@@ -149,6 +152,20 @@
 2. 读取 `.cursor/rules/` 目录下的 `*.mdc` 文件
 3. 按 `globs` 匹配注入规则
 4. `alwaysApply: true` 的规则始终注入
+
+### OpenAI Codex CLI
+
+1. 加载 `~/.codex/config.toml`（个人级工具配置）
+2. 读取项目根 `AGENTS.md`（原生支持）
+3. 读取 `AGENTS.override.md`（个人级覆盖，如存在）
+4. 扫描 `~/.codex/skills/` 和 `.codex/skills/` 技能
+
+### Gemini CLI
+
+1. 加载 `~/.gemini/settings.json`
+2. 读取项目根 `GEMINI.md`
+3. 如未配置 `GEMINI.md`，回退到读取 `AGENTS.md`
+4. 扫描 `~/.gemini/skills/` 技能
 
 ---
 

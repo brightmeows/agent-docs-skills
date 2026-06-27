@@ -26,7 +26,7 @@ license: Apache-2.0
 
 | 文件 / 目录 | 定位 | 工具原生支持 |
 |-------------|------|-------------|
-| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 数万仓库、数十工具 |
+| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 事实标准——广泛采用 |
 | `.well-known/agent-skills/index.json` | 技能发现清单（AAIF 标准） | 所有 SKILL.md 兼容工具 |
 | `AGENTS.md` + ARD（[L5]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
 | `CLAUDE.md` / `GEMINI.md` / 等 | 各工具原生项目配置（独有特性见 [L5]、[L6]） | 对应工具（多数亦读 AGENTS.md）|

@@ -4,7 +4,7 @@
 
 ## 采用情况
 
-AGENTS.md 已被数万开源仓库采用、被数十款主流编码 agent 与 IDE 原生支持。
+AGENTS.md 已被广泛采用——是事实标准，不是实验性规范。
 
 GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的六个核心领域之一（[R8]）。
 

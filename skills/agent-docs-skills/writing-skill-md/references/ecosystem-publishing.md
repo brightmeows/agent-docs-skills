@@ -6,11 +6,8 @@
 
 ## 技能市场与注册中心
 
-技能生态近期经历了爆发式增长。根据 Skillselion 追踪数据（[R14]），
-公开生态已达数万级 agent skills 与数千 MCP servers，累计安装量过亿。
-各市场索引规模因口径而异——全网抓取型达百万级，注册索引型与社区索引型规模递减
-（安全清查后社区索引型余数千）。质量参差——公开技能平均评分偏低（[R9]）。
-精确数字见参考表 [R14]、[R15]。
+技能生态已具规模——SKILL.md 是分发代理知识的标准载体，而非小众实验。
+质量参差——精选技能有效，平均水平偏低（[R9]；精确数据见参考表 [R14]、[R15]）。
 
 主要市场类型（代表平台见 [R15]）：
 
@@ -41,11 +38,9 @@ SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 87 个�
 
 ## 跨工具兼容性
 
-SKILL.md 开放标准已被数十款工具原生支持，覆盖编码 agent（Claude Code、Codex CLI、Cursor、
-Gemini CLI、OpenCode 等）、IDE（VS Code、JetBrains Junie 等）、开源 agent（Goose、Amp 等）、
-企业数据平台（Databricks Genie Code、Snowflake Cortex Code 等）和框架（Spring AI 等）。
-完整列表见 [agentskills.io 展示页](https://agentskills.io/clients)。写一次技能，跨平台可用。
-部分工具（OpenCode、Cursor 等）额外支持 Claude Code 扩展字段的子集。
+SKILL.md 是开放标准——跨工具兼容是其设计目标，写一次即可跨平台使用。
+完整兼容列表见 [agentskills.io 展示页](https://agentskills.io/clients)。
+部分工具额外支持 Claude Code 扩展字段的子集。
 
 ## 参考文献
 

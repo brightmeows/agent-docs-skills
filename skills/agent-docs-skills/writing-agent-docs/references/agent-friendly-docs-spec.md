@@ -1,7 +1,7 @@
 # Agent-Friendly Documentation Spec
 
 > `writing-agent-docs` 参考文件：Agent-Friendly Documentation Spec（[agentdocsspec.com](https://agentdocsspec.com/spec/)）的概要与映射。
-> 本文件是**文档站点面向 agent 的技术基础设施层标准**，与 `writing-agent-docs` 的内容写作原则互补——前者管"文档怎么写"，后者管"站点怎么为 agent 提供文档"。完整规范见 [R1]。
+> 本文件是**文档站点面向 agent 的技术基础设施层标准**，与 `writing-agent-docs` 的内容写作原则互补——前者管“文档怎么写”，后者管“站点怎么为 agent 提供文档”。完整规范见 [R1]。
 
 ---
 
@@ -54,7 +54,7 @@ Agent-Friendly Documentation Spec（草案 v0.5.1，2026-05-08）定义了评估
 | 检查 | 核心建议 |
 |------|---------|
 | `tabbed-content-serialization` | Tab 内容序列化后 <50,000 字符 |
-| `section-header-quality` | Tab 内容的标题应含语境区分（如"步骤 1（Python）"）|
+| `section-header-quality` | Tab 内容的标题应含语境区分（如“步骤 1（Python）”）|
 | `markdown-code-fence-validity` | 代码 fence 必须成对闭合 |
 
 ### Category 5–7：URL 稳定性、认证与缓存

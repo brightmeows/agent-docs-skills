@@ -293,36 +293,6 @@ export default function formatDate(date){ var result; ... }
 
 ---
 
-## 自检清单（部署前）
-
-**选材域：**
-
-- [ ] 无推测性规则，只针对观察到的真实失败（A.1）
-- [ ] 可机制强制的约束交给机制（A.2）
-- [ ] 无易于从代码/预训练获取的重复内容（A.3）
-- [ ] 给整体约束而非穷举细节（A.4）
-- [ ] 事实陈述已升维为原则，精确数字下沉引用编号（A.5）
-
-**雕琢域：**
-
-- [ ] 每条信息简洁——能用一句话说清（B.1）
-- [ ] 否定指令配了肯定替代；可 grep 的约束优先否定（B.2）
-- [ ] 示例驱动——含正反对比且无占位符（B.3）
-- [ ] 命令带精确 flag，路径用正斜杠，命名描述性（B.4）
-- [ ] 术语一致，无版本号/日期等过时信息（B.5）
-
-**架构域：**
-
-- [ ] 路径/命令真实存在，关键操作有验证步骤（C.1）
-- [ ] 重内容下沉子文件，入口精简（C.2）
-- [ ] 按目标任务组织，步骤有真顺序（C.3）
-- [ ] 结构化格式优先于长 bullet list（C.4）
-- [ ] 工作流有完成标准 + 阻塞升级配对（C.5）
-
-> 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。
->
-> **扩展阅读**：Addy Osmani（Google Chrome）发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
-
 ---
 
 ## 维护
@@ -348,6 +318,10 @@ export default function formatDate(date){ var result; ... }
 - 写 **AGENTS.md / CLAUDE.md / .cursor/rules**（项目级配置）→ 加载 `structuring-project-agent-md`
 - 写 **SKILL.md**（TDD、技能类型、CSO、三级渐进式披露、一层引用深度、<500 行目标）→ 加载 `writing-skill-md`
 - 写 **~/.claude/CLAUDE_GLOBAL.md / ~/.agents/AGENTS.md**（个人级配置）→ 加载 `structuring-personal-agent-md`
+
+> 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见上述子 skill。
+>
+> **扩展阅读**：Addy Osmani（Google Chrome）发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
 
 ---
 

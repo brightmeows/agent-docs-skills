@@ -4,7 +4,7 @@
 
 ## 采用情况
 
-AGENTS.md 已被 **60,000+ 开源仓库**采用、被 30+ 工具原生支持（Codex、Copilot、Cursor、Windsurf、Gemini CLI、Devin、Amp、Claude Code 等）。
+AGENTS.md 已被数万开源仓库采用、被数十款主流编码 agent 与 IDE 原生支持。
 
 GitHub 对 2,500+ 仓库的归纳分析将 testing 列为高质量 AGENTS.md 的六个核心领域之一（[R8]）。
 

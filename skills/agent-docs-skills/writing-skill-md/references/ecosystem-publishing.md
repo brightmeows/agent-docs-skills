@@ -41,7 +41,7 @@ SkillsBench（[R9]）是首个 peer-reviewed 技能评估基准，基于 87 个�
 
 ## 跨工具兼容性
 
-SKILL.md 开放标准已被 **~40 工具** 原生支持，覆盖编码 agent（Claude Code、Codex CLI、Cursor、
+SKILL.md 开放标准已被数十款工具原生支持，覆盖编码 agent（Claude Code、Codex CLI、Cursor、
 Gemini CLI、OpenCode 等）、IDE（VS Code、JetBrains Junie 等）、开源 agent（Goose、Amp 等）、
 企业数据平台（Databricks Genie Code、Snowflake Cortex Code 等）和框架（Spring AI 等）。
 完整列表见 [agentskills.io 展示页](https://agentskills.io/clients)。写一次技能，跨平台可用。

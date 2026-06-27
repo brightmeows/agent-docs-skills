@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "指导项目级代理配置文件的创建、维护与审计。在创建或修改仓库内 AGENTS.md、CLAUDE.md、.cursor/rules，或代理反复犯错、忽略项目约定、配置文件出现 Lint Leakage / Context Bloat / Skill Leakage 等配置异味时使用。",
       "url": "https://codeberg.org/brightmeows/agent-docs-skills/raw/branch/main/skills/agent-docs-skills/structuring-project-agent-md/SKILL.md",
-      "digest": "sha256:920f57f8e1cc58fe9e86d03e0e9b135ed95923882bfd18757d46ebea41e9b3b3"
+      "digest": "sha256:e748677138aaa9fdda5cf6fcc6fc8aecd7f0dd752caab21a152eb03f58dfffec"
     },
     {
       "name": "structuring-personal-agent-md",

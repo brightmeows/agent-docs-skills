@@ -26,7 +26,7 @@ license: Apache-2.0
 
 | 文件 / 目录 | 定位 | 工具原生支持 |
 |-------------|------|-------------|
-| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 60,000+ 仓库、40+ 工具 |
+| `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 数万仓库、数十工具 |
 | `.well-known/agent-skills/index.json` | 技能发现清单（AAIF 标准） | 所有 SKILL.md 兼容工具 |
 | `AGENTS.md` + ARD（[L5]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
 | `CLAUDE.md` / `GEMINI.md` / 等 | 各工具原生项目配置（独有特性见 [L5]、[L6]） | 对应工具（多数亦读 AGENTS.md）|
@@ -233,7 +233,7 @@ AGENTS.md 专属：
 
 ## Monorepo 多 AGENTS.md 最佳实践
 
-大型 monorepo 中常出现多个 AGENTS.md 文件（如 OpenAI 仓库已有 88 个）。正确管理多文件的索引与发现对维持代理效率至关重要。
+大型 monorepo 中常出现多个 AGENTS.md 文件（如 OpenAI 仓库已有数十个）。正确管理多文件的索引与发现对维持代理效率至关重要。
 
 ### 索引策略
 
@@ -266,7 +266,7 @@ tags: [payments, api, rust, ci]
 
 ### 参考
 
-Monorepo 多 AGENTS.md 的加载规则（管辖范围、累积、优先级）见上方[层级与作用域](#层级与作用域)。OpenAI 88 个 AGENTS.md 的实战案例见 [agents.md 官网](https://agents.md)。
+Monorepo 多 AGENTS.md 的加载规则（管辖范围、累积、优先级）见上方[层级与作用域](#层级与作用域)。OpenAI 数十个 AGENTS.md 的实战案例见 [agents.md 官网](https://agents.md)。
 
 ---
 

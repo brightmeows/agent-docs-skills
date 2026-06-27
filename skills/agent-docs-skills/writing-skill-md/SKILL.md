@@ -443,6 +443,10 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 
 生态概况、市场列表、发布流程、SkillsBench 验证数据、跨工具兼容性等参考材料见 [references/ecosystem-publishing.md](./references/ecosystem-publishing.md)。
 
+## 技能生命周期管理
+
+技能发布后仍需维护。版本策略（简化 SemVer）、更新流程（变更驱动 → description 同步 → digest 更新）、废弃三阶段（标记 → 冻结 → 归档）的完整指南见 [references/skill-lifecycle.md](./references/skill-lifecycle.md)。
+
 ---
 
 ## 参考文献
@@ -472,6 +476,7 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 | [L9] | [security.md](./references/security.md) | 安全考虑完整参考（证据链、注意事项、扩展风险场景、检查清单）|
 | [L11] | [ecosystem-publishing.md](./references/ecosystem-publishing.md) | 技能生态概况：市场分布、发布流程、SkillsBench 验证数据、跨工具兼容性 |
 | [L12] | [skill-composition.md](./references/skill-composition.md) | 技能组合模式：顺序/并行/复合/条件四种编排方式 + 选型指南 + 跨工具支持 + 反模式 |
+| [L13] | [skill-lifecycle.md](./references/skill-lifecycle.md) | 技能全生命周期管理：版本策略、更新流程、废弃三阶段与归档检查清单 |
 
 **`scripts/`**（执行时不进入上下文）：
 

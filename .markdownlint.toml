@@ -10,12 +10,12 @@
 
 default = true
 
-MD024 = false   # 不同章节允许相同标题（如多个"示例"）
-MD025 = false   # 代码块内容被误判为标题
-MD036 = false   # 故意使用加粗文字作为子标题（如 TDD 中的"RED"/借口标题）
-MD040 = false   # 技能文档大量代码块无需 language spec（Shell/Python/JS 混合）
-MD046 = false   # 代码块风格 fenced/indented 混用
+MD024 = false   # 不同章节允许相同标题——代码块内的重复 H2 会被误判
+MD025 = false   # 保留——部分 markdownlint 版本仍可能误判代码块内的 #；当前版本已正确处理但留作保险
+MD036 = false   # 故意使用加粗文字作为子标题（如 TDD 中的"RED"/scope-and-loader 的"文件清单"）
+MD040 = false   # 技能文档约 20% 代码块无需 language spec（ASCII 图/目录树/markdown 示例含嵌套栅栏）
 MD060 = false   # CJK+代码混排表格中列对齐误报严重
+# MD046（代码块风格一致）无需禁用——当前已全库使用 fenced 风格，0 违规
 
 [MD013]
 line_length = 200   # 行宽 200（CJK 混排 + URL 引用需要更多空间）

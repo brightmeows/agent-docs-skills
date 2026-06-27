@@ -47,5 +47,5 @@ SKILL.md 是开放标准——跨工具兼容是其设计目标，写一次即�
 | 编号 | 链接 | 标题 | 核心内容 |
 |------|------|------|---------|
 | [R9] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 87 任务（v1.1）× 11 领域 × 7,308 轨迹；47,150 公开技能平均评分 6.2/12；精选技能提升通过率 +16.2pp |
-| [R14] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：~66K skills、~7.8K MCP、112M 总安装量 |
+| [R14] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：84K+ 工具（65K skills、7.8K MCP、8.3K 市场）、112M 总安装量 |
 | [R15] | <https://agentman.ai/blog/agent-skills-ecosystem-report-2026> | The Agent Skills Ecosystem in 2026 | 2026-06 生态系统报告：~40 兼容产品、190 万+ 公开技能、SkillsBench 6.2/12、安全审计 22,511 技能含 140,963 问题 |

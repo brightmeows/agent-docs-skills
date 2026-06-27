@@ -7,40 +7,49 @@
 
 ## 概念对照
 
-| 概念 | AGENTS.md 术语 | Claude Code | Cursor | OpenCode | Hermes Agent [R3] |
-|------|---------------|-------------|--------|----------|-------------------|
-| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` + `.opencode/` | —（个人级为主）|
-| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/AGENTS.md` | `~/.hermes/SOUL.md`（身份）|
-| **技能存放（项目）** | `./.well-known/` | `.claude/skills/` | `.cursor/skills/` | `.opencode/skills/` | — |
-| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/` | `~/.hermes/skills/` |
-| **技能发现文件** | `.well-known/agent-skills/index.json` | 同左 | 同左 | 同左 | 同左 |
-| **技能权限控制** | — | `allowed-tools` frontmatter | — | `permission.skill` | `write_approval` 门控 + 安全扫描器 |
-| **工具配置（项目）** | — | `.claude/settings.json` | `.cursor/settings.json` | `opencode.json` | — |
-| **工具配置（个人）** | — | `~/.claude/settings.json` | `~/.cursor/settings.json` | `~/.config/opencode/opencode.json` | `~/.hermes/config.yaml` |
-| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | `.opencode/agents/*.md` | `SOUL.md`（持久身份） |
-| **Agent 定义** | — | `.claude/agents/*.md` subagent | — | `.opencode/agents/*.md` | 内置 agent 类型 |
-| **子目录规则** | 子目录 `AGENTS.md` | 子目录 `CLAUDE.md` | `.cursor/rules/` 多文件 | 继承 `opencode.json` | — |
-| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC + Markdown | Markdown + YAML + YAML bundles |
-| **特有机制** | — | Hooks / Subagents / DW | Composer / Agent 模式 | Task agent / 多 provider | `/learn` 自动创建技能 / skill bundles / 自演进技能 |
+| 概念 | AGENTS.md 术语 | Claude Code | Cursor | OpenCode | Codex CLI | Hermes Agent [R3] |
+|------|---------------|-------------|--------|----------|-----------|-------------------|
+| **项目级规则** | `./AGENTS.md` | `./CLAUDE.md` | `.cursor/rules/*.mdc` | `opencode.json` + `.opencode/` | `AGENTS.md` | —（个人级为主）|
+| **个人级规则** | — | `~/.claude/CLAUDE_GLOBAL.md` | `~/.cursor/rules/`（全局）| `~/.config/opencode/AGENTS.md` | `AGENTS.override.md` | `~/.hermes/SOUL.md`（身份）|
+| **技能存放（项目）** | `./.well-known/` | `.claude/skills/` | `.cursor/skills/` | `.opencode/skills/` | `.codex/skills/` | — |
+| **技能存放（个人）** | — | `~/.claude/skills/` | `~/.cursor/skills/` | `~/.agents/skills/` | `~/.codex/skills/` | `~/.hermes/skills/` |
+| **技能发现文件** | `.well-known/agent-skills/index.json` | 同左 | 同左 | 同左 | 同左 | 同左 |
+| **技能权限控制** | — | `allowed-tools` frontmatter | — | `permission.skill` | — | `write_approval` 门控 + 安全扫描器 |
+| **工具配置（项目）** | — | `.claude/settings.json` | `.cursor/settings.json` | `opencode.json` | `~/.codex/config.toml` | — |
+| **工具配置（个人）** | — | `~/.claude/settings.json` | `~/.cursor/settings.json` | `~/.config/opencode/opencode.json` | `~/.codex/config.toml` | `~/.hermes/config.yaml` |
+| **角色定义** | `AGENTS.md` 中写 Persona | `CLAUDE.md` 或 skill | `.cursor/rules/` | `.opencode/agents/*.md` | `AGENTS.md` | `SOUL.md`（持久身份） |
+| **Agent 定义** | — | `.claude/agents/*.md` subagent | — | `.opencode/agents/*.md` | — | 内置 agent 类型 |
+| **子目录规则** | 子目录 `AGENTS.md` | 子目录 `CLAUDE.md` | `.cursor/rules/` 多文件 | 继承 `opencode.json` | 子目录 `AGENTS.md` | — |
+| **常驻配置格式** | Markdown | Markdown | Markdown + YAML frontmatter | JSON / JSONC + Markdown | Markdown | Markdown + YAML + YAML bundles |
+| **特有机制** | — | Hooks / Subagents / DW | Composer / Agent 模式 | Task agent / 多 provider | 内置 sandbox 执行 | `/learn` 自动创建技能 / skill bundles / 自演进技能 |
 
 ---
 
 ## 文件名对照
 
-下表列出来主要工具的配置文件及与 AGENTS.md 的关系。多数工具近年新增的配置（如 Factory、Amp、Goose、Augment Code、Devin）均直接复用 `AGENTS.md` 作为项目级指令文件——这本身就是 AGENTS.md 标准化效果的体现。如使用未列出的新工具，先检查其是否原生支持 `AGENTS.md`。
+下表列出来主要工具的配置文件及与 AGENTS.md 的关系。多数工具近年新增的配置（如 Factory、Amp、Goose、Augment Code、Devin）均直接复用 `AGENTS.md` 作为项目级指令文件——这本身就是 AGENTS.md 标准化效果的体现。如使用未列出的新工具，先检查其是否原生支持 `AGENTS.md`。更完整的 38+ 工具参考见 [agentconfig.ing](https://agentconfig.ing/files)。
 
 | 工具 | 文件 | 与 AGENTS.md 关系 |
 |------|------|-------------------|
 | **AGENTS.md 原生** | `AGENTS.md` | 直接读取，跨工具标准（AAIF 维护） |
 | **Claude Code** | `CLAUDE.md` | 工具原生格式；可 symlink 到 AGENTS.md 共享真理源 |
+| **OpenAI Codex CLI** | `AGENTS.md` | 原生读取 AGENTS.md；另有 `AGENTS.override.md` 作个人覆盖 |
 | **Gemini CLI** | `GEMINI.md` | 工具原生格式；可配置指向 AGENTS.md |
 | **GitHub Copilot** | `.github/copilot-instructions.md` | 原生指令文件；亦读 AGENTS.md（[R1] 起 code review 支持）|
-| **Windsurf** | `.windsurfrules` / `.windsurf/rules/*.md` | 原生规则文件；亦读 AGENTS.md 作为 fallback |
+| **Windsurf** | `.windsurf/rules/*.md` | 原生规则文件目录（v0.45+ 弃用单 `.windsurfrules`）；亦读 AGENTS.md |
 | **Cursor** | `.cursor/rules/*.mdc` | 按 glob 匹配注入；与 AGENTS.md 职责互补 |
-| **JetBrains Junie** | `.junie/guidelines.md` | 原生格式 |
 | **OpenCode** | `opencode.json` | 项目级工具配置（含规则路径引用）|
+| **JetBrains Junie** | `.junie/guidelines.md` | 原生格式 |
+| **Cline** | `.clinerules/*.md` | 原生规则文件目录，Markdown frontmatter 格式 |
+| **Roo Code** | `.roo/rules/*.md` | 原生规则文件目录 |
+| **Continue** | `.continue/rules/*.md` | 原生规则文件目录 |
+| **Kiro** | `.kiro/steering/*.md` | 原生规则文件目录 |
+| **Trae** | `.trae/rules/*.md` | 原生规则文件目录 |
+| **Aider** | `.aider.conf.yml` | YAML 配置；通过配置指向 AGENTS.md |
 | **Hermes Agent** ([R3]) | `~/.hermes/skills/` | 个人级技能存放 + `SOUL.md` 持久身份 |
-| **Aider** | `.aider.conf.yml` | 通过配置指向 AGENTS.md |
+| **Antigravity CLI** | `ANTIGRAVITY.md` | Google 新 CLI agent，原生读取项目级配置 |
+| **Kimi Code** | 支持 SKILL.md | 通过 `.well-known/` 发现技能 |
+| **Docker Agent** | YAML 配置 | Docker 官方 agent：YAML 定义 agent 行为，通过 OCI registry 分发 |
 
 ---
 
@@ -101,3 +110,4 @@ frontmatter 帮助代理判断何时需要加载该文件的完整内容，无�
 | [R2] | <https://github.com/agentsmd/agents.md/issues/135> | AGENTS.md v1.1 proposal | AGENTS.md v1.1 草案，明确管辖范围、累积、优先级、隐式继承四大语义 |
 | [R3] | <https://hermes-agent.nousresearch.com/docs/user-guide/features/skills> | Hermes Agent Skills System | 开源 self-improving agent；`/learn` 自动创建 SKILL.md、三级渐进披露、skill bundles、`SOUL.md` 持久记忆 |
 | [R4] | <https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation> | Linux Foundation Announces the Formation of the AAIF | AAIF 成立公告，AGENTS.md 归入 Linux Foundation 旗下 |
+| [R5] | <https://agentconfig.ing/files> | AI Tool Configuration Reference (agentconfig.ing) | 跨工具配置文件参考：38 工具、125+ 配置文件、8 种格式、6 种协议 |

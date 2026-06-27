@@ -16,6 +16,8 @@
 | **Marketplaces** | 分发、发现与安全扫描 |
 
 > 生态规模与精确数据见参考表 [R1]、[R3]。质量参差——公开技能平均评分偏低，仅顶部四分之一有实质提升（[R2]）。
+>
+> **代码级补充**：代码内联文档标准（如 SAGE Spec——[sage-spec](https://github.com/mikewcasale/sage-spec)）在 docstring 中用 `@graph`、`@agent-guidance` 等标签嵌入 agent 指导。这是与 Skills/MCP/Marketplaces 不同层次的标准——解决"代码本身如何为 agent 提供上下文"的问题，与本仓库的配置文件级指导互补。
 
 ---
 

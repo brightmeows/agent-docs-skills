@@ -109,10 +109,11 @@ AGENTS.md / CLAUDE.md / `.cursor/rules` 都是**指令层**——依赖模型遵
 > 写跨工具配置时，优先用跨工具标准（AGENTS.md / SKILL.md），把 Claude Code 专属机制作“可选增强”。
 
 | 层 | 机制 | 强制度 | 成本 |
-|---|---|---|---|---|
+|---|---|---|---|---|---|
 | 指令层 | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从 | 高（常驻）|
 | 机制层 | Hooks / Permissions | 确定性（exit 2 阻断 / allow/deny/ask）| 低（配置在上下文外）|
 | 隔离层 | Subagents / task agents | 隔离上下文 | 低（仅摘要回主会话）|
+| **动态层** | **Dynamic Workflows** | 运行时动态生成编排 harness | 取决于任务复杂度（复杂任务更多 token）|
 
 **核心判据**——“Never” 类规则该写在哪：
 

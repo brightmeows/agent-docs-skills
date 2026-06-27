@@ -24,7 +24,7 @@
 技能间的依赖关系（修改前的读取义务见下方 Always 边界）：
 
 ```
-writing-agent-docs（基础写作原则）
+writing-agent-docs（基础原则 + 各代理文档共通部分）
 ├── writing-skill-md（SKILL.md 格式——跨项目级/个人级）
 ├── structuring-project-agent-md（项目级配置：AGENTS.md / CLAUDE.md / .cursor/rules）
 └── structuring-personal-agent-md（个人级配置：CLAUDE_GLOBAL.md / 个人 AGENTS.md）
@@ -104,7 +104,7 @@ chore: 更新 writing-skill-md 的 well-known digest
 ├── 属于现有技能范围？
 │   ├── 是 → 进入该技能目录
 │   └── 否 → 属于哪个技能？（见[技能依赖链](#技能依赖链)）
-│       ├── 基础写作原则 → writing-agent-docs
+│       ├── 基础原则 + 各代理文档共通部分 → writing-agent-docs
 │       ├── SKILL.md 格式 → writing-skill-md
 │       ├── 项目级配置 → structuring-project-agent-md
 │       └── 个人级配置 → structuring-personal-agent-md

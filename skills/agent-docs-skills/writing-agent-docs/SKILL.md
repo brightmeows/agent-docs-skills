@@ -361,3 +361,4 @@ export default function formatDate(date){ var result; ... }
 | [L3] | [comparison-tools.md](./references/comparison-tools.md) | 配置机制职责对比（AGENTS.md / Skill / MCP / Hooks / Subagent）+ 常驻 vs 按需 token 经济 |
 | [L4] | [ecosystem.md](./references/ecosystem.md) | 生态全景：Agent Skills / MCP / Marketplaces 三大类工具的职责划分、组合模式、市场类型、发布指南与选型 |
 | [L5] | [agent-friendly-docs-spec.md](./references/agent-friendly-docs-spec.md) | Agent-Friendly Documentation Spec 概要与映射——文档站点面向 agent 的**交付层**标准，与内容层写作原则互补 |
+| [L6] | [ard-integration.md](./references/ard-integration.md) | ARD（Agentic Resource Discovery）参考——agent 资源的发布、发现与验证协议，三层发现栈（环境层/检索层/注册层），与本仓库组件的协同 |

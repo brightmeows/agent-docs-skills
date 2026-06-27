@@ -28,12 +28,11 @@ license: Apache-2.0
 |-------------|------|-------------|
 | `AGENTS.md` | 跨工具标准，项目约定 / 命令 / 边界 | 事实标准——广泛采用 |
 | `.well-known/agent-skills/index.json` | 技能发现清单（AAIF 标准） | 所有 SKILL.md 兼容工具 |
-| `AGENTS.md` + ARD（[L5]、[L9]） | 全类 agent 资源发现（技能/工具/agent）| Google 等联合发布的开放规范 |
 | `CLAUDE.md` / `GEMINI.md` / 等 | 各工具原生项目配置（独有特性见 [L5]、[L6]） | 对应工具（多数亦读 AGENTS.md）|
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则，按 glob 注入 | Cursor、OpenCode 等 |
 | `opencode.json` | OpenCode 项目配置（工具/权限/agent 定义）| OpenCode |
 
-与 README、CONTRIBUTING.md 职责分离——README 面向人、AGENTS.md 面向代理、CONTRIBUTING.md 面向贡献者。混淆与协同原则见 [L10]。
+与 README、CONTRIBUTING.md 职责分离——README 面向人、AGENTS.md 面向代理、CONTRIBUTING.md 面向贡献者。混淆与协同原则见 [L9]。
 
 **核心原则**：维护一个主要的 AGENTS.md 作为跨工具真理源，通过 symlink 或工具配置让各工具读取。仅在跨工具有实质性行为差异时维护独立文件。
 
@@ -355,5 +354,4 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 | [L6] | [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
 | [L7] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
 | [L8] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层的唯一定义（指令/机制/隔离三层 + 八方法决策表）|
-| [L9] | [references/ard-integration.md](references/ard-integration.md) | ARD（Agentic Resource Discovery）集成指南——与 `.well-known/` 的协同、快速集成步骤、注意事项 |
-| [L10] | [references/file-responsibilities.md](references/file-responsibilities.md) | README vs AGENTS.md vs CONTRIBUTING.md 三文件职责分离——典型混淆场景、协同原则、验证方法 |
+| [L9] | [references/file-responsibilities.md](references/file-responsibilities.md) | README vs AGENTS.md vs CONTRIBUTING.md 三文件职责分离——典型混淆场景、协同原则、验证方法 |

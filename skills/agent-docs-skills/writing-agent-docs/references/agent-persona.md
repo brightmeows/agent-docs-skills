@@ -101,6 +101,4 @@ Favor explicit error handling and composition over inheritance.
 
 ## 本地参考
 
-| 编号 | 文件路径 | 用途 |
-|------|----------|------|
-| | | |
+<!-- 本文件暂无本地交叉引用 -->

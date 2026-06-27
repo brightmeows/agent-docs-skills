@@ -352,11 +352,11 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 
 | 编号 | 文件 | 内容 |
 |------|------|------|
-| [L1] | [references/content-decisions.md](references/content-decisions.md) | 附录：内容决策详细目录（维度评分 / 放入条件 / 根子目录拆分） |
+| [L1] | [references/content-decisions.md](references/content-decisions.md) | 内容决策的唯一定义（5 维度评分 / 放入条件 / 根子目录拆分） |
 | [L2] | [comparison-tools.md](../writing-agent-docs/references/comparison-tools.md) | AGENTS.md vs Skill vs MCP 对比（含 token 开销） |
 | [L3] | [references/empirical-evidence.md](references/empirical-evidence.md) | AGENTS.md 实证数据（效率/成本/遵从，含自动生成危害与关键区分） |
 | [L4] | [agent-persona.md](../writing-agent-docs/references/agent-persona.md) | Agent Persona 完整定义（项目级 + 个人级，跨技能共享） |
 | [L5] | [references/cross-tool-compat.md](references/cross-tool-compat.md) | 跨工具概念对照 + AGENTS.md v1.1 标准化进展 |
 | [L6] | [references/claude-md.md](references/claude-md.md) | CLAUDE.md 专属指导（Symlink 策略、独有特性、Commands 目录）|
 | [L7] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
-| [L8] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层（Hooks / Subagents / Rules / Plugins + 七方法决策表）|
+| [L8] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层的唯一定义（指令/机制/隔离三层 + 八方法决策表）|

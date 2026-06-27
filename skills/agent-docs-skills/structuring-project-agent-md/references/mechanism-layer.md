@@ -1,6 +1,6 @@
 # 机制层——Hooks / Subagents / Rules / Plugins / Dynamic Workflows
 
-> `structuring-project-agent-md` 参考文件。
+> `structuring-project-agent-md` 参考文件。本文件是**机制层（指令/机制/隔离三层模型 + 八方法决策表）的唯一定义**。
 > **本文件描述的机制层以 Claude Code 为代表**——hooks、subagents、output styles、plugins、dynamic workflows 是 **Claude Code 专属**；
 > 其它代理（OpenCode / Cursor / Gemini CLI / Copilot）有各自的等价或尚无等价机制，见 [跨工具支持矩阵](#跨工具支持矩阵)。
 >

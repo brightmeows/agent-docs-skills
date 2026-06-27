@@ -1,6 +1,6 @@
 # 机制层——Hooks / Subagents / Rules / Plugins / Dynamic Workflows
 
-> `structuring-project-agent-md` 参考文件。本文件是**机制层（指令/机制/隔离三层模型 + 八方法决策表）的唯一定义**。
+> `structuring-project-agent-md` 参考文件。本文件是**机制层（八方法决策表 + 各机制详解）的唯一定义**。
 > **本文件描述的机制层以 Claude Code 为代表**——hooks、subagents、output styles、plugins、dynamic workflows 是 **Claude Code 专属**；
 > 其它代理（OpenCode / Cursor / Gemini CLI / Copilot）有各自的等价或尚无等价机制，见 [跨工具支持矩阵](#跨工具支持矩阵)。
 >
@@ -12,7 +12,6 @@
 
 ## 目录
 
-- [指令层 vs 机制层 vs 隔离层](#指令层-vs-机制层-vs-隔离层)
 - [跨工具支持矩阵](#跨工具支持矩阵)
 - [八种指令方法决策表](#八种指令方法决策表)
 - [Hooks（确定性强制 · Claude Code 专属）](#hooks确定性强制--claude-code-专属)
@@ -23,19 +22,6 @@
 - [Plugins（打包分发 · Claude Code 专属）](#plugins打包分发--claude-code-专属)
 - [与本仓库原则的映射](#与本仓库原则的映射)
 - [参考文献](#参考文献)
-
-## 指令层 vs 机制层 vs 隔离层
-
-| 层 | 机制 | 强制度 | 上下文成本 |
-|---|---|---|---|
-| **指令层** | AGENTS.md / CLAUDE.md / rules | 依赖模型遵从（压力/长会话/注入可绕过）| 高（常驻）|
-| **机制层** | Hooks / Permissions | 确定性（exit 2 阻断，不可绕过）| 低（配置在上下文外）|
-| **隔离层** | Subagents | 独立上下文执行 | 低（仅摘要回主会话）|
-| **动态层** | Dynamic Workflows | 按需生成 harness，独立编排 | 取决于任务复杂度 |
-
-**关键判据**：若一条规则“绝对不能被违反”（提交密钥、force push、删生产数据），指令是错的工具——模型在长会话、时间压力、或被注入的文件内容诱导下会失败。真正的护栏必须确定性，即 **hooks 与 permissions**。
-
----
 
 ## 跨工具支持矩阵
 

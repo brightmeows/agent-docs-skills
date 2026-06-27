@@ -143,12 +143,20 @@ skill-name/
 - **索引型（纯参考）**——SKILL.md 为索引，参考文档按主题分目录存放（`memo/`、`ext/` 等）。参考文件多、需要按主题导航时适用。
 - **带可复用工具**——在上述任一模式基础上增加 `scripts/`（可执行辅助代码）或 `assets/`（输出用资源）。
 
-### 技能组合（Skill Bundles）
+### 技能组合（Skill Bundles & Composition）
 
-多个技能需协同工作时可用 **Skill Bundle** 模式——清单文件将多技能组合成逻辑单元，单条命令批量加载。
+多个技能需协同工作时，有两种模式——**Skill Bundle**（清单级批量加载）和 **Skill Composition**（执行流编排），两者互补：
+
+| 模式 | 解决 | 典型场景 |
+|------|------|---------|
+| **Skill Bundle** | 同时加载哪些技能 | 发布流程触发一组技能（部署 + 验证 + 通知）|
+| **Skill Composition** | 技能间如何配合执行 | 顺序管道、并行扇出、复合嵌套、条件分发 |
+
+**Bundle**：清单文件将多技能组合成逻辑单元，单条命令批量加载。
 支持工具：Hermes Agent（YAML 文件 `~/.hermes/skill-bundles/`）、Claude Code（Dynamic Workflow 编排）。
-适用：技能组经常同时加载、多步骤工作流需确定性顺序、分发 onboarding 包。
 **注意**：Bundle 是工具特定功能，尚无跨工具标准；写跨工具技能时保持每个 SKILL.md 独立可用。
+
+**Composition**：顺序/并行/复合/条件四种组合模式——详见 [references/skill-composition.md](./references/skill-composition.md)（含选型指南、跨工具支持矩阵、反模式）。
 
 ## SKILL.md 结构
 
@@ -431,6 +439,7 @@ helper1、helper2、step3、pattern4
 | [R3] | <https://github.com/anthropics/skills> | anthropics/skills | 官方技能参考仓库 |
 | [R7] | <https://github.com/mgechev/skills-best-practices> | Skills Best Practices | 否定触发条件、技能验证方法论 |
 | [R13] | <https://github.com/agentskills/agentskills/issues/90> | Proposal: Skill Relationship Fields | 提案新增 `prerequisite-skills` 和 `related-skills` 字段到 SKILL.md 规范 |
+| [R14] | <https://zylos.ai/research/2026-05-12-agent-skill-composition-modular-capability-architecture> | Agent Skill Composition: The Architecture of Modular AI Capabilities | 四种技能组合模式（顺序管道、并行扇出、复合嵌套、条件分发）与生产部署最佳实践 |
 
 ---
 
@@ -447,6 +456,7 @@ helper1、helper2、step3、pattern4
 | [L3] | [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
 | [L9] | [security.md](./references/security.md) | 安全考虑完整参考（证据链、注意事项、扩展风险场景、检查清单）|
 | [L11] | [ecosystem-publishing.md](./references/ecosystem-publishing.md) | 技能生态概况：市场分布、发布流程、SkillsBench 验证数据、跨工具兼容性 |
+| [L12] | [skill-composition.md](./references/skill-composition.md) | 技能组合模式：顺序/并行/复合/条件四种编排方式 + 选型指南 + 跨工具支持 + 反模式 |
 
 **`scripts/`**（执行时不进入上下文）：
 

@@ -350,7 +350,22 @@ helper1、helper2、step3、pattern4
 - **供应链**：锁定版本（tag/commit SHA）；部署前用 `mcp-scan`（`uvx mcp-scan@latest --skills`）扫描
 - **扫描器盲区**：自动扫描是必经检查点，但不是最终安全保证——[security.md](./references/security.md) 详述盲区类型与应对策略
 
-**完整的安全注意事项、扩展风险场景（供应链、记忆投毒、扫描器盲区、市场风险、OWASP Top 10）与发现即检查清单见 [security.md](./references/security.md)。**
+**完整的安全注意事项、扩展风险场景（供应链、记忆投毒、扫描器盲区、市场风险）、OWASP AST10 完整框架（十大风险 × 映射表 + USF 提案）与发现即检查清单见 [security.md](./references/security.md)。**
+
+### OWASP AST10 框架速览
+
+OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准，2026 年 3 月发布。编写技能时应重点关注的顶级风险：
+
+| 风险 | 严重度 | 核心缓解 |
+|------|--------|---------|
+| **AST01 恶意技能** | Critical | 锁定版本（tag/commit SHA）；`allowed-tools` 最小权限 |
+| **AST02 供应链投毒** | Critical | 审计代码示例与脚本；来源不明技能不自动加载 |
+| **AST03 过度授权** | High | `allowed-tools` 只给最小工具集；避免通配 `Bash(*)` |
+| **AST04 不安全元数据** | High | description 不暴露敏感信息；校验禁止 XML 标签 |
+| **AST05 不可信外部指令** | High | 可变外部链接风险；部署前校验引用内容 |
+| **AST07 更新漂移** | Medium | 生产环境锁定 release tag / commit SHA |
+
+> 完整十大风险、攻击场景、缓解措施与**治理成熟度模型（L0–L3）** 见 [security.md](./references/security.md)。
 
 ## 验证与自检
 
@@ -402,7 +417,7 @@ helper1、helper2、step3、pattern4
 - [ ] 引用保持一层深度（无深层嵌套）
 - [ ] body <500 行；超限的参考已拆到单独文件
 - [ ] 走查：代理能否找到（CSO）、能否理解（结构）、能否遵从（清晰）
-- [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息——完整清单见 [security.md](./references/security.md)
+- [ ] 安全检查：无硬编码凭证、`allowed-tools` 最小权限、description 未暴露敏感信息、对照 OWASP AST10 六大高风险项逐项审计——完整清单见 [security.md](./references/security.md)
 - [ ] （纪律执行型）考虑跑基线测试——见[L5]
 
 **部署：**

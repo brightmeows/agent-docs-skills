@@ -51,14 +51,11 @@ license: Apache-2.0
 （SOUL.md → AGENTS.md → SKILL.md HARD GATE）。此模式目前为 OpenClaw 生态专有，
 但其“持久身份与项目配置分离”的设计理念值得借鉴。
 
-**OpenCode agent 定义**：OpenCode 支持通过 Markdown agent 文件
-（`~/.config/opencode/agents/*.md`）定义 agent 角色，含 YAML frontmatter
-（description/mode/model/permission 等）和系统提示 body。也可在 `opencode.json` 中以
-`agent` 字段配置。个人级 Persona 可直接在 agent 定义中设置。
-
-**OpenCode** 支持 skill discovery 和 file-based agent 加载，
-项目级 `AGENTS.md` 和 `SKILL.md` 自动被索引。个人级技能依然支持
-`~/.agents/skills/` 目录。
+**OpenCode** 支持通过 Markdown agent 文件（`~/.config/opencode/agents/*.md`）定义 agent 角色，
+含 YAML frontmatter（description/mode/model/permission 等）和系统提示 body；
+也可在 `opencode.json` 中以 `agent` 字段配置。个人级 Persona 可直接在 agent 定义中设置。
+同时支持 skill discovery 和 file-based agent 加载，项目级 `AGENTS.md` 和 `SKILL.md` 自动被索引。
+个人级技能依然支持 `~/.agents/skills/` 目录。
 
 **加载优先级**：就近优先——个人级定义通用行为基调，项目级在冲突时覆盖（详见 [L1] 的“优先级规则”）。
 

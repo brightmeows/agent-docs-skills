@@ -33,7 +33,7 @@ license: Apache-2.0
 | `.cursor/rules/*.mdc` | Cursor 文件匹配规则，按 glob 注入 | Cursor、OpenCode 等 |
 | `opencode.json` | OpenCode 项目配置（工具/权限/agent 定义）| OpenCode |
 
-与 README 职责分离（README 面向人，项目级配置面向代理）。
+与 README、CONTRIBUTING.md 职责分离——README 面向人、AGENTS.md 面向代理、CONTRIBUTING.md 面向贡献者。混淆与协同原则见 [L10]。
 
 **核心原则**：维护一个主要的 AGENTS.md 作为跨工具真理源，通过 symlink 或工具配置让各工具读取。仅在跨工具有实质性行为差异时维护独立文件。
 
@@ -356,3 +356,4 @@ AGENTS.md 注入代理上下文，因此也引入安全风险。编写时注意�
 | [L7] | [references/cursor-rules.md](references/cursor-rules.md) | .cursor/rules .mdc 格式（字段说明、与 AGENTS.md 职责划分）|
 | [L8] | [references/mechanism-layer.md](references/mechanism-layer.md) | 机制层的唯一定义（指令/机制/隔离三层 + 八方法决策表）|
 | [L9] | [references/ard-integration.md](references/ard-integration.md) | ARD（Agentic Resource Discovery）集成指南——与 `.well-known/` 的协同、快速集成步骤、注意事项 |
+| [L10] | [references/file-responsibilities.md](references/file-responsibilities.md) | README vs AGENTS.md vs CONTRIBUTING.md 三文件职责分离——典型混淆场景、协同原则、验证方法 |

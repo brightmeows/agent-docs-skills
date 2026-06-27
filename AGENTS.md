@@ -53,6 +53,7 @@ Conventional Commits，全程中文。
 
 ```
 feat: 新增结构化代理文档技能
+docs: 更新 writing-skill-md 的目录结构说明
 chore: 更新 writing-skill-md 的 well-known digest
 ```
 

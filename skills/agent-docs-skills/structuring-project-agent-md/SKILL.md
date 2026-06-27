@@ -273,6 +273,51 @@ tags: [payments, api, rust, ci]
 2. **精简回合**——删除重复规则、将长文件拆分子目录、补充缺失的 frontmatter
 3. **交叉验证**——随机选 2–3 个目录测试代理是否加载了正确的 AGENTS.md 指导
 
+### `.mdc` 与 AGENTS.md 的协同
+
+monorepo 中 `.cursor/rules/*.mdc` 与 AGENTS.md 各有侧重：
+
+| 场景 | 用 AGENTS.md | 用 `.mdc` |
+|------|-------------|-----------|
+| 全局构建命令、技术栈 | ✅ 根 AGENTS.md | ❌ 不属于文件级规则 |
+| 某目录下所有文件的编码约束 | ✅ 子目录 AGENTS.md | ✅ 也可用 `.mdc` 带 globs—但路径即目录时 AGENTS.md 更直接 |
+| 横切多个目录但非全部目录的规则 | ❌ 需要多个子文件 | ✅ `.mdc` 带 globs 最合适 |
+| `alwaysApply: true` 的常驻规则 | ✅ AGENTS.md | ❌ 与 AGENTS.md 重复，选其一 |
+
+**推荐模式**：AGENTS.md 作跨工具真理源，`.mdc` 仅补充 Cursor 专有行为（如内联编辑规则）。不在 `.mdc` 中重复 AGENTS.md 已有内容。
+
+### 自动化审计辅助
+
+多 AGENTS.md 的大规模审计可借助脚本加速：
+
+```bash
+#!/bin/bash
+# 检测潜在问题：超大文件、缺失 frontmatter、可疑重复
+for f in $(find . -name AGENTS.md -type f); do
+  lines=$(wc -l < "$f")
+  # >200 行标记
+  [ "$lines" -gt 200 ] && echo "LARGE: $f ($lines 行)"
+  # 缺 frontmatter 标记
+  head -1 "$f" | grep -q '^---$' || echo "NO_FM: $f"
+  # 过时命令标记（示例：检查 npm 但实际用 pnpm）
+  grep -q 'npm' "$f" 2>/dev/null && [ -f package.json ] && \
+    grep -q '"packageManager":.*pnpm' package.json 2>/dev/null && \
+    echo "STALE_CMD: $f 可能含 npm 但项目用 pnpm"
+done
+```
+
+> 此脚本是起始模板，根据项目实际调整检测规则。通过 CI 定时运行可替代人工季度审计。
+
+### 维护反模式
+
+| 反模式 | 问题 | 正确做法 |
+|--------|------|---------|
+| **重复全局规则** | 子目录 AGENTS.md 重复根文件内容 | 依赖累积继承，子文件只声明特化内容 |
+| **无 frontmatter 的 200+ 行文件** | 代理无法高效索引 | 拆分子目录或补充 frontmatter |
+| **多工具各自维护** | AGENTS.md / CLAUDE.md / .cursorrules 内容漂移 | 以 AGENTS.md 为真理源，symlink 到其他入口 |
+| **根文件膨胀不拆** | 所有规则堆在根 AGENTS.md | 按目录/领域拆分到子文件 |
+| **自动化生成不审校** | /init 内容堆砌冗余指令 | 视作草稿，手工重写（见反自动化生成原则）|
+
 ### 文件命名约定
 
 - 根文件：`AGENTS.md`
@@ -282,6 +327,12 @@ tags: [payments, api, rust, ci]
 ### 参考
 
 Monorepo 多 AGENTS.md 的加载规则（管辖范围、累积、优先级）见上方[层级与作用域](#层级与作用域)。OpenAI 数十个 AGENTS.md 的实战案例见 [agents.md 官网](https://agents.md)。
+
+**相关参考**：
+
+- `.cursor/rules/*.mdc` 与 AGENTS.md 的协同——上方[`.mdc` 与 AGENTS.md 的协同](#mdc-与-agentsmd-的协同)及 [cursor-rules.md 参考](references/cursor-rules.md)
+- AGENTS.md 内容决策（5 维度评分）——[内容决策指南](#内容决策指南)及 [references/content-decisions.md](references/content-decisions.md)
+- AGENTS.md 大小规范与 Context Bloat——[维护流程](#维护流程)及 [references/empirical-evidence.md](references/empirical-evidence.md)
 
 ---
 

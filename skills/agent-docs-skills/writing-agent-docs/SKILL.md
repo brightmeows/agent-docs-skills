@@ -275,7 +275,23 @@ export default function formatDate(date){ var result; ... }
 
 > 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见 structuring-project-agent-md / writing-skill-md。
 >
-> **扩展阅读**：Addy Osmani（Google Chrome）2026 年发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
+> **扩展阅读**：Addy Osmani（Google Chrome）发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
+
+---
+
+## 维护
+
+文档不是一次性产物。增量迭代的循环（A.1）、过时信息的避免（B.5）都是维护的一部分。以下是判断文档**何时需要维护**的通用腐败信号——出现即修或删：
+
+| 信号 | 处理 |
+|------|------|
+| 引用的路径/命令已不存在 | 修或删 |
+| 规则与代码/工具现状矛盾 | 更新或删 |
+| 代理已稳定遵循（规则已“毕业”）| 删 |
+| 可被工具链强制（linter/CI/类型）| 迁移到工具配置 |
+| 含版本号/日期等已过时的精确信息 | 定性化或删 |
+
+> 项目级 AGENTS.md 的六种配置异味深化（Lint Leakage / Context Bloat / Skill Leakage 等）见 structuring-project-agent-md。
 
 ---
 

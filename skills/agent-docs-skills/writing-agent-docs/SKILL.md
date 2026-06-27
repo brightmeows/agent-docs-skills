@@ -332,6 +332,10 @@ export default function formatDate(date){ var result; ... }
 > **互补标准——文档交付层**：Agent-Friendly Documentation Spec（[R10]）定义了文档站点面向 coding agent 的 23 项检查（`llms.txt`、markdown 可用性、截断预防、内容结构等）。它解决的是“站点怎么为 agent 提供内容”的**交付层**问题，与本技能的**内容层**写作原则互补。详见 [L5]。
 >
 > **扩展阅读**：Addy Osmani（Google Chrome）发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
+>
+> **RAG 与文档质量**：部分 agent 工具（如 Docker Agent）开始集成 RAG（Retrieval-Augmented Generation）直接注入文档知识库。
+> 这意味着文档的**检索质量**成为新维度——结构化、高信号密度的文档在 RAG 检索中排名更高、截断后损失更少。
+> 本技能的内容层原则（简洁优先 B.1、结构化优先 C.4、每 token 须自证价值）同时优化了人读和 RAG 检索两种消费路径，无需为 RAG 另设规则。
 
 ---
 

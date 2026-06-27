@@ -329,6 +329,8 @@ export default function formatDate(date){ var result; ... }
 
 > 工具链优先、Always/Ask/Never 边界、反自动生成、行数目标、一层引用深度等**领域专属规则**见上述子 skill。
 >
+> **互补标准——文档交付层**：Agent-Friendly Documentation Spec（[R10]）定义了文档站点面向 coding agent 的 23 项检查（`llms.txt`、markdown 可用性、截断预防、内容结构等）。它解决的是"站点怎么为 agent 提供内容"的**交付层**问题，与本技能的**内容层**写作原则互补。详见 [L5]。
+>
 > **扩展阅读**：Addy Osmani（Google Chrome）发表的 AI agent 规范写作指南（[R9]）提出 5 原则（高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+判断、迭代演进），与本技能的三个域（选材/雕琢/架构）互补——选材域对应“模块化任务”，雕琢域对应“PRD 结构化”，架构域对应“内建自检”。
 
 ---
@@ -346,6 +348,7 @@ export default function formatDate(date){ var result; ... }
 | [R7] | <https://github.com/mgechev/skills-best-practices> | Skills Best Practices | Gotchas 模式、提供默认而非菜单、Plan-Validate-Execute |
 | [R8] | <https://research.ibm.com/publications/markdown-mayhem-taming-the-agentic-documentation-explosion> | Markdown Mayhem: Taming the Agentic Documentation Explosion (ACM CAIS 2026) | IBM Research 指出 agent 文档无序泛滥导致系统性危机；本仓库的核心原则（增量迭代、确定性约束优先、每 token 须自证价值）是其解药 |
 | [R9] | <https://addyosmani.com/blog/good-spec/> | How to Write a Good Spec for AI Agents (Addy Osmani, 2026) | 5 原则：高层愿景→AI 扩展、PRD 结构化、模块化任务、内建自检+人类判断、迭代演进 |
+| [R10] | <https://agentdocsspec.com/spec/> | Agent-Friendly Documentation Spec v0.5.1 | 文档站点面向 coding agent 的 23 项检查 × 7 类别（`llms.txt`、markdown 可用性、截断预防、内容结构、URL 稳定性等）|
 
 ---
 
@@ -357,3 +360,4 @@ export default function formatDate(date){ var result; ... }
 | [L2] | [agent-persona.md](./references/agent-persona.md) | Agent Persona 定义（项目级 + 个人级，跨技能共享）|
 | [L3] | [comparison-tools.md](./references/comparison-tools.md) | 配置机制职责对比（AGENTS.md / Skill / MCP / Hooks / Subagent）+ 常驻 vs 按需 token 经济 |
 | [L4] | [ecosystem-landscape.md](./references/ecosystem-landscape.md) | 生态全景：Agent Skills / MCP / Marketplaces 三大类工具的职责划分、组合模式与选型指南 |
+| [L5] | [agent-friendly-docs-spec.md](./references/agent-friendly-docs-spec.md) | Agent-Friendly Documentation Spec 概要与映射——文档站点面向 agent 的**交付层**标准，与内容层写作原则互补 |

@@ -211,5 +211,5 @@
 
 | 编号 | 文件 | 用途 |
 |------|------|------|
-| [L1] | [ecosystem-publishing.md](./ecosystem-publishing.md) | 技能生态概况与发布流程 |
+| [L1] | [ecosystem.md](../../writing-agent-docs/references/ecosystem.md) | 技能生态全景：生态构成、市场类型、发布指南、SkillsBench 验证数据、跨工具兼容性与选型 |
 | [L2] | [anthropic-best-practices.md](./anthropic-best-practices.md) | 官方最佳实践补充——自由度、可执行脚本、MCP 引用 |

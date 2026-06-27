@@ -1,7 +1,7 @@
 # 生态全景——Agent Skills / MCP / Marketplaces
 
-> `writing-agent-docs` 参考文件：技能生态中三类工具的职责划分、组合模式和选型指南。
-> 数据来源：[Skillselion State of AI Agent Skills 2026][R1]。
+> `writing-agent-docs` 参考文件：技能生态的完整参考——生态构成、职责划分、市场类型、组合模式、质量验证、发布指南与选型。
+> 合并自原 `ecosystem-landscape.md` 与 `writing-skill-md` 的 `ecosystem-publishing.md`，作为生态知识单一真理源。
 
 ---
 
@@ -17,7 +17,7 @@
 
 > 生态规模与精确数据见参考表 [R1]、[R3]。质量参差——公开技能平均评分偏低，仅顶部四分之一有实质提升（[R2]）。
 >
-> **代码级补充**：代码内联文档标准（如 SAGE Spec——[sage-spec](https://github.com/mikewcasale/sage-spec)）在 docstring 中用 `@graph`、`@agent-guidance` 等标签嵌入 agent 指导。这是与 Skills/MCP/Marketplaces 不同层次的标准——解决“代码本身如何为 agent 提供上下文”的问题，与本仓库的配置文件级指导互补。
+> **代码级补充**：代码内联文档标准（如 SAGE Spec——[sage-spec](https://github.com/mikewcasale/sage-spec)）在 docstring 中用 `@graph`、`@agent-guidance` 等标签嵌入 agent 指导。这是与 Skills/MCP/Marketplaces 不同层次的标准——解决"代码本身如何为 agent 提供上下文"的问题，与本仓库的配置文件级指导互补。
 
 ---
 
@@ -42,7 +42,21 @@
 - **核心产物**：技能/MCP 的可搜索目录
 - **发现机制**：GitHub 公开仓库索引 + 注册表 + 策展推荐
 - **安全扫描**：各市场提供不同程度的自动化扫描（Snyk / mcp-scan 等）
-- **典型市场**：CLI 安装型（如 Vercel Skills.sh）、社区索引型（如 ClawHub）、全网抓取型（如 SkillsMP）、插件集合型（如 claude-plugins.dev）
+- **典型市场**：见下方[技能市场与注册中心](#技能市场与注册中心)
+
+---
+
+## 技能市场与注册中心
+
+技能生态已具规模——SKILL.md 是分发代理知识的标准载体，而非小众实验。
+质量参差——精选技能有效，平均水平偏低（[R2]；精确数据见参考表 [R1]、[R3]）。
+
+| 市场类型 | 特点 | 代表平台 |
+|---------|------|---------|
+| **CLI 安装型** | `npx skills install`、Snyk 安全扫描、策展推荐 | Vercel Skills.sh |
+| **社区索引型** | 自动索引 GitHub 公开 SKILL.md，附质量指标 | ClawHub |
+| **插件集合型** | 按工具分类聚合技能，开源社区维护 | claude-plugins.dev |
+| **全网抓取型** | 大规模 GitHub 扫描，覆盖面广、但无审查 | SkillsMP |
 
 ---
 
@@ -65,9 +79,9 @@ Skill 和 MCP 互补而非竞争。典型的组合模式：
 
 ---
 
-## 生态质量概览
+## 生态质量验证
 
-SkillsBench 评测（[R2]）对数万个公开技能的评估：
+SkillsBench（[R2]）是首个 peer-reviewed 技能评估基准，基于 87 个任务 × 11 个领域 × 7,308 条轨迹。对数万个公开技能的评估：
 
 | 指标 | 数据 |
 |------|------|
@@ -77,6 +91,24 @@ SkillsBench 评测（[R2]）对数万个公开技能的评估：
 | 2–3 个聚焦技能 vs 单一大文档 | +18.6 vs -2.9 |
 
 **关键结论**：质量方差大——仅顶部四分之一的技能有实质提升效果。精选 > 增补。
+
+---
+
+## 发布技能
+
+1. **遵循开放标准**：确保 SKILL.md 格式符合 [agentskills.io](https://agentskills.io/specification) 规范——所有市场均基于同一标准
+2. **版本控制**：使用 Git tag 管理版本，发布时锁定到 release tag（`npx skills add <url>#v1.0.0`）
+3. **GitHub 公开仓库**：将技能放在公开 GitHub 仓库的 `skills/` 目录下，市场将自动索引
+4. **安全扫描**：发布前用 `mcp-scan` 扫描（`uvx mcp-scan@latest --skills`）
+5. **description 优化**：按 CSO 原则编写 description，确保市场搜索能匹配到你的技能
+
+---
+
+## 跨工具兼容性
+
+SKILL.md 是开放标准——跨工具兼容是其设计目标，写一次即可跨平台使用。
+完整兼容列表见 [agentskills.io 展示页](https://agentskills.io/clients)。
+部分工具额外支持 Claude Code 扩展字段的子集。
 
 ---
 
@@ -99,7 +131,3 @@ SkillsBench 评测（[R2]）对数万个公开技能的评估：
 | [R1] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：84K+ 工具（65K skills、7.8K MCP、8.3K 市场）、112M 总安装量 |
 | [R2] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 47,150 公开技能平均 6.2/12；精选技能提升 +16.2pp |
 | [R3] | <https://agentman.ai/blog/agent-skills-ecosystem-report-2026> | The Agent Skills Ecosystem in 2026 | 2026-06 报告：~40 兼容产品、1.9M+ 公开技能、22,511 技能安全审计、质量/安全双维度警示 |
-
-[R1]: https://skillselion.com/state-of-ai-agent-skills-2026
-[R2]: https://arxiv.org/abs/2602.12670
-[R3]: https://agentman.ai/blog/agent-skills-ecosystem-report-2026

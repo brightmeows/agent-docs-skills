@@ -441,7 +441,7 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 
 ## 技能生态与发布
 
-生态概况、市场列表、发布流程、SkillsBench 验证数据、跨工具兼容性等参考材料见 [references/ecosystem-publishing.md](./references/ecosystem-publishing.md)。
+生态概况、市场类型、发布指南、SkillsBench 验证数据、跨工具兼容性等参考材料见 [ecosystem.md](../writing-agent-docs/references/ecosystem.md)。
 
 ## 技能生命周期管理
 
@@ -474,7 +474,7 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 | [L2] | [claude-search-optimization.md](./references/claude-search-optimization.md) | CSO 完整规则（关键词覆盖、命名、Token 效率、交叉引用）|
 | [L3] | [graphviz-conventions.dot](./references/graphviz-conventions.dot) | Graphviz 流程图样式规则 |
 | [L9] | [security.md](./references/security.md) | 安全考虑完整参考（证据链、注意事项、扩展风险场景、检查清单）|
-| [L11] | [ecosystem-publishing.md](./references/ecosystem-publishing.md) | 技能生态概况：市场分布、发布流程、SkillsBench 验证数据、跨工具兼容性 |
+| [L11] | [ecosystem.md](../writing-agent-docs/references/ecosystem.md) | 技能生态全景：生态构成、市场类型、发布指南、SkillsBench 验证数据、跨工具兼容性与选型（合并自原 ecosystem-landscape + ecosystem-publishing）|
 | [L12] | [skill-composition.md](./references/skill-composition.md) | 技能组合模式：顺序/并行/复合/条件四种编排方式 + 选型指南 + 跨工具支持 + 反模式 |
 | [L13] | [skill-lifecycle.md](./references/skill-lifecycle.md) | 技能全生命周期管理：版本策略、更新流程、废弃三阶段与归档检查清单 |
 

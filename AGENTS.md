@@ -19,6 +19,19 @@
 
 不把单一工具的机制写成通用做法。
 
+## 技能依赖链
+
+技能间的依赖关系（修改前的读取义务见下方 Always 边界）：
+
+```
+writing-agent-docs（基础写作原则）
+├── writing-skill-md（SKILL.md 格式——跨项目级/个人级）
+├── structuring-project-agent-md（项目级配置：AGENTS.md / CLAUDE.md / .cursor/rules）
+└── structuring-personal-agent-md（个人级配置：CLAUDE_GLOBAL.md / 个人 AGENTS.md）
+```
+
+**引用原则**：依赖方向决定引用方向——上游技能不引用下游技能（无反向引用）。
+
 ## 命令
 
 ```bash
@@ -32,6 +45,15 @@ pre-commit run check-skill-md-format         # frontmatter 字段格式与 body 
 
 # 编辑 SKILL.md 后更新 digest（hook 自动校验，此为手动更新命令）
 sha256sum skills/agent-docs-skills/*/SKILL.md
+```
+
+## 提交格式
+
+Conventional Commits，全程中文。
+
+```
+feat: 新增结构化代理文档技能
+chore: 更新 writing-skill-md 的 well-known digest
 ```
 
 ## 边界
@@ -56,26 +78,6 @@ sha256sum skills/agent-docs-skills/*/SKILL.md
 
 - 通过 raw URL 使用 `npx skills add` 时，仓库根目录必须配置 `.well-known/agent-skills/index.json`，否则无法发现技能
 
-## 提交格式
-
-Conventional Commits，全程中文。
-
-```
-feat: 新增结构化代理文档技能
-chore: 更新 writing-skill-md 的 well-known digest
-```
-
-## 技能依赖链
-
-技能间的依赖关系（修改前的读取义务见上方 Always 边界）：
-
-```
-writing-agent-docs（基础写作原则）
-├── writing-skill-md（SKILL.md 格式——跨项目级/个人级）
-├── structuring-project-agent-md（项目级配置：AGENTS.md / CLAUDE.md / .cursor/rules）
-└── structuring-personal-agent-md（个人级配置：CLAUDE_GLOBAL.md / 个人 AGENTS.md）
-```
-
 ## 内容规则
 
 - 修改后通过 `pre-commit run markdownlint` 验证格式
@@ -90,3 +92,49 @@ writing-agent-docs（基础写作原则）
   - **数字→定性/引用编号**：正文用定性描述（“大规模”“高比例”“快速增长”），精确数字放参考文献表“核心内容”列，正文仅标 `[Rx]`；引用源更新时正文不动，只改参考表一行
   - **版本/日期下沉**：正文去掉版本号与日期（用“较新版本”“近期”“已发布”“草案阶段”等状态词），版本与日期放参考文献或官方文档链接
   - **例外**：安全警示等需精确度论证紧迫性的场景，可保留精确数字，但同样建议正文定性 + 参考表精确
+
+## 维护指南
+
+### 新增内容归属判断
+
+新内容需要写入本仓库时，按以下路径决策：
+
+```
+有新内容要添加
+├── 属于现有技能范围？
+│   ├── 是 → 进入该技能目录
+│   └── 否 → 属于哪个技能？（见[技能依赖链](#技能依赖链)）
+│       ├── 基础写作原则 → writing-agent-docs
+│       ├── SKILL.md 格式 → writing-skill-md
+│       ├── 项目级配置 → structuring-project-agent-md
+│       └── 个人级配置 → structuring-personal-agent-md
+└── 不属于任何现有技能？
+    └── 确认是否需要新增技能目录（见 writing-skill-md“何时创建技能”）
+```
+
+### 内容放置决策
+
+确定归属技能后，按以下规则决定放在文件系统的哪个位置：
+
+| 内容类型 | 放哪 | 触发条件 |
+|---------|------|---------|
+| **原则、概念、简短模式**（≤50 行）| 内联在 SKILL.md 正文 | 内容精简，无需跳转即可理解 |
+| **重量级参考**（>50 行）| 下沉到 `references/` | 内容篇幅长，代理按需加载 |
+| **可复用脚本/工具** | 下沉到 `scripts/` | 内容是可执行代码 |
+| **静态模板/资源** | 下沉到 `assets/` | 内容用于输出嵌入 |
+| **人类作者参考** | 下沉到 `authoring/` | 代理常规任务不加载 |
+
+> **参照写作-skill-md 的目录结构规范**：`references/` 按主题分子目录，不按来源分（自撰 vs 转载）。
+
+### 归属优先顺序
+
+内容先检查能否**就地归入当前文件的相关章节**（非索引类），就近归并、免一次加载跳转；同文件无合适归处时才按上表下沉到子文件。
+
+### 引用文件同步
+
+新增或修改参考文件后：
+
+1. 如果参考文件被 SKILL.md 引用 → 更新 SKILL.md 的 `## 本地参考` 表，添加/修改对应 `[Lx]` 条目
+2. 如果修改了 SKILL.md → 重新计算 digest（`sha256sum`），更新 `.well-known/agent-skills/index.json`
+3. 如果参考文件引用了其他文件 → 确保引用路径正确（使用相对路径，遵循依赖方向）
+4. 如果新增/删除了参考文件 → 运行 `pre-commit run --all-files` 检查一致性

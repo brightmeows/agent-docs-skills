@@ -40,6 +40,16 @@ license: Apache-2.0
 | OpenCode | `~/.config/opencode/opencode.json` | 工具配置 + agent 定义 |
 | OpenCode | `~/.config/opencode/agents/*.md` | 自定义 agent 定义（Markdown agent 文件）|
 | Cursor | `~/.cursor/rules/` | 全局规则文件 |
+| Hermes Agent | `~/.hermes/SOUL.md` | 持久 agent 身份（Persona + 行为指令）|
+| OpenClaw / Starpod | `SOUL.md` | 持久 agent 身份（姓名、角色、核心指令）|
+
+**SOUL.md 模式**：OpenClaw、Hermes Agent、Starpod 等多个 agent 框架引入 `SOUL.md`
+文件作为**持久 agent 身份**载体。与 `AGENTS.md` 或 `CLAUDE_GLOBAL.md` 不同，
+`SOUL.md` 专门存放 agent 的身份特征（姓名、角色描述、核心行为原则），
+被视为不可轻易覆盖的“身份层”——会话压缩后仍保留，而非每次重新注入。
+个人级 Persona 可直接写在 `SOUL.md` 中，与项目级 `AGENTS.md` 形成三层身份叠加
+（SOUL.md → AGENTS.md → SKILL.md HARD GATE）。此模式目前为 OpenClaw 生态专有，
+但其“持久身份与项目配置分离”的设计理念值得借鉴。
 
 **OpenCode agent 定义**：OpenCode 支持通过 Markdown agent 文件
 （`~/.config/opencode/agents/*.md`）定义 agent 角色，含 YAML frontmatter
@@ -124,7 +134,25 @@ license: Apache-2.0
 
 # 提交习惯
 用 Conventional Commits（feat/fix/chore/docs/refactor）；提交前看 git diff --stat。
+
+# 持久身份（SOUL.md 风格）
+我叫 Alice，是一名资深全栈工程师。我偏好简洁、类型安全的代码，不写注释掉的死代码。
+响应时直接给结论再解释，不要兜圈子。
 ```
+
+### SOUL.md 持久身份模式
+
+部分 agent 框架（OpenClaw、Hermes Agent、Starpod）支持 `SOUL.md` 文件定义**持久 agent 身份**。与常驻的个人级配置不同，`SOUL.md` 是「身份层」——定义 agent 是谁、说话风格、核心原则，会话压缩后仍保留。
+
+```markdown
+# ~/.hermes/SOUL.md（Hermes Agent 示例）
+你是一位资深 Rust 工程师。你以精确、简洁著称，在架构讨论中优先考虑正确性。
+- 回复直接、专业，偶尔带技术幽默
+- 优先用类型系统表达约束，而非运行时检查
+- 在安全性和性能之间始终选安全性
+```
+
+> `SOUL.md` 的写入和读取由框架管理，无需手动维护。此模式与技能安全中的记忆投毒风险相关——详见 [`writing-skill-md` 安全参考](../writing-skill-md/references/security.md)。
 
 ---
 

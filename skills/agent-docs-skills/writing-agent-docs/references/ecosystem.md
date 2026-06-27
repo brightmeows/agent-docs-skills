@@ -15,7 +15,7 @@
 | **MCP Servers** | 外部工具与数据连接，给 agent **用什么** |
 | **Marketplaces** | 分发、发现与安全扫描 |
 
-> 生态规模与精确数据见参考表 [R1]、[R3]。质量参差——公开技能平均评分偏低，仅顶部四分之一有实质提升（[R2]）。
+> 生态规模与精确数据见参考表 [R1]、[R3]、[R4]。质量参差——公开技能平均评分偏低，仅顶部四分之一有实质提升（[R2]）。
 >
 > **代码级补充**：代码内联文档标准（如 SAGE Spec——[sage-spec](https://github.com/mikewcasale/sage-spec)）在 docstring 中用 `@graph`、`@agent-guidance` 等标签嵌入 agent 指导。这是与 Skills/MCP/Marketplaces 不同层次的标准——解决"代码本身如何为 agent 提供上下文"的问题，与本仓库的配置文件级指导互补。
 
@@ -49,7 +49,7 @@
 ## 技能市场与注册中心
 
 技能生态已具规模——SKILL.md 是分发代理知识的标准载体，而非小众实验。
-质量参差——精选技能有效，平均水平偏低（[R2]；精确数据见参考表 [R1]、[R3]）。
+质量参差——精选技能有效，平均水平偏低（[R2]；精确数据见参考表 [R1]、[R3]、[R4]）。
 
 | 市场类型 | 特点 | 代表平台 |
 |---------|------|---------|
@@ -94,6 +94,28 @@ SkillsBench（[R2]）是首个 peer-reviewed 技能评估基准，基于 87 个�
 
 ---
 
+## 技能自动优化
+
+技能文档的传统编写方式是手写或一次生成。随着生态规模增长，技能优化开始从人工转向自动化——**SkillOpt**（[R5]）是这一方向的首个系统化框架。
+
+SkillOpt 由微软研究院于 2026 年 5 月发布，将 SKILL.md 视为可训练的“外部状态”，通过轨迹驱动迭代自动优化技能文档：
+
+1. **采样轨迹批次**——在目标任务上运行 agent，收集成功与失败的完整执行轨迹
+2. **反射分析**——对比成功/失败轨迹，识别失败模式与改进方向
+3. **边界编辑**——对 SKILL.md 做有限次自然语言修改（防止过度优化/偏离核心）
+4. **验证门控**——仅保留经验证提升了表现的修改，拒绝退化修改
+5. **产出**——可部署的 `best_skill.md` 产物，替代初始技能文档
+
+**实测效果**：在 SearchQA、ALFWorld 等基准上，任务成功率提升 +20 分以上（0.73→0.93），效果随迭代步数持续改善（[R5]）。
+
+**对本仓库编写者的意义**：
+
+- **自动迭代不替代初始质量**——SkillOpt 在好初始技能上效果更好；手写质量仍是基准线
+- **验证门控原则与本仓库一致**——“只保留有改进的修改”与本仓库 A.1 增量迭代、C.5 工作流闭包方向一致
+- **当前阶段**：手写 + 人工迭代仍是主流；SkillOpt 是前沿方向，可关注观察
+
+---
+
 ## 发布技能
 
 1. **遵循开放标准**：确保 SKILL.md 格式符合 [agentskills.io](https://agentskills.io/specification) 规范——所有市场均基于同一标准
@@ -131,3 +153,5 @@ SKILL.md 是开放标准——跨工具兼容是其设计目标，写一次即�
 | [R1] | <https://skillselion.com/state-of-ai-agent-skills-2026> | The State of AI Agent Skills 2026 | Skillselion 生态追踪：84K+ 工具（65K skills、7.8K MCP、8.3K 市场）、112M 总安装量 |
 | [R2] | <https://arxiv.org/abs/2602.12670> | SkillsBench: A Benchmark for Agent Skill Evaluation | 47,150 公开技能平均 6.2/12；精选技能提升 +16.2pp |
 | [R3] | <https://agentman.ai/blog/agent-skills-ecosystem-report-2026> | The Agent Skills Ecosystem in 2026 | 2026-06 报告：~40 兼容产品、1.9M+ 公开技能、22,511 技能安全审计、质量/安全双维度警示 |
+| [R4] | <https://www.termdock.com/en/blog/agent-skills-guide> | Agent Skills Guide 2026: Build, Share & Secure | 生态规模：SkillsMP 400K+、Skills.sh 83K+/8M+ 安装，总计 ~490K skills |
+| [R5] | <https://arxiv.org/abs/2605.23904> | SkillOpt: Executive Strategy for Self-Evolving Agent Skills | SkillOpt 文本空间优化器：轨迹驱动迭代自动优化 SKILL.md，SearchQA 提升 +20 分 |

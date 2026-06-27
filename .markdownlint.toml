@@ -24,4 +24,4 @@ tables = false      # 表格内容不折行
 heading_line_length = 80  # 标题保持简短
 
 [MD033]
-allowed_elements = ["br", "code", "pre", "details", "summary"]  # 技能文档允许的 HTML 元素（中文标签如 <好>/<坏> 因 markdownlint 不识别中文为元素名而无需列入）
+allowed_elements = ["a", "br", "code", "pre", "details", "summary"]  # 技能文档允许的 HTML 元素（"a" 用于跨文件锚点引用；中文标签如 <好>/<坏> 因 markdownlint 不识别中文为元素名而无需列入）

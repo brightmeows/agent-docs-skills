@@ -106,7 +106,7 @@ ARD 与 `.well-known/agent-skills/index.json` 的异同：
 3. 如果 Cursor 需要文件级规则 → `.cursor/rules/*.mdc` 配 globs
 4. 检查工具兼容性：`@import`、`Commands` 等特性可能不跨工具
 
-### 从多份独立文件收敛到单一真理源
+### <a name="converge-to-single-truth"></a>从多份独立文件收敛到单一真理源
 
 1. 对比各工具配置文件，找出重叠内容
 2. 重叠内容写入 `AGENTS.md`

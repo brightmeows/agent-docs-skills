@@ -66,7 +66,7 @@ globs: src/components/**/*.tsx
 |---------|---------|
 | 单一 `.cursorrules` | `.cursor/rules/platform-base.mdc`（`alwaysApply: true`）+ 按领域拆分 `.mdc` 文件 |
 | AGENTS.md 含 Cursor 专有指令 | 移出到 `.mdc`，AGENTS.md 只保留跨工具内容 |
-| CLAUDE.md 与 AGENTS.md 不相关 | 用 symlink 维护单一真理源（CLAUDE.md → AGENTS.md）|
+| CLAUDE.md 与 AGENTS.md 不相关 | 见 [cross-tool-compat.md](./cross-tool-compat.md#converge-to-single-truth)「从多份独立文件收敛到单一真理源」|
 
 > OpenCode 兼容 `.cursor/rules/*.mdc` 格式，可作为项目级规则目录使用。
 

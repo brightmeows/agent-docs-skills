@@ -66,3 +66,5 @@ Claude Code 支持在 `.claude/commands/` 下放可执行脚本作为斜杠命�
 | `.claude/plugins/` | 打包分发的插件 |
 
 rules / agents / hooks / output-styles / plugins 多为 **Claude Code 专属**机制，详见 [mechanism-layer.md](./mechanism-layer.md)（含跨工具支持矩阵）。CLAUDE.md 只是 `.claude/` 生态的入口之一——需要确定性强制或隔离执行时，优先考虑这些机制而非往 CLAUDE.md 堆指令。
+
+> **跨工具迁移**：CLAUDE.md 与 AGENTS.md 的 symlink/独立文件策略是[多工具收敛](./cross-tool-compat.md#converge-to-single-truth)的一部分。遇到多份配置文件漂移时，先读 `cross-tool-compat.md` 的迁移指南再决策。

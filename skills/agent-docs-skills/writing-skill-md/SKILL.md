@@ -97,6 +97,8 @@ skill-name/
 ├── references/       # 代理按需加载的文档
 ├── scripts/          # 可执行代码
 ├── assets/           # 静态资源（模板、字体、图标）
+├── templates/        # 模板文件（部分生态扩展）
+├── examples/         # 示例资源（部分生态扩展）
 └── authoring/        # 人类作者参考（代理常规任务不加载——本仓库补充）
 ```
 
@@ -107,9 +109,12 @@ skill-name/
 | `references/` | 详细参考、外部权威转载、按域/框架拆分的指南 | 代理任务中按需加载 |
 | `scripts/` | 可执行代码（确定性/重复性任务） | 执行时不进入上下文 |
 | `assets/` | 输出用静态文件（模板、字体、图标） | 嵌入输出时读取 |
+| `templates/` 🧪 | 输出用模板文件（文档模板、配置骨架） | 嵌入输出时读取 |
+| `examples/` 🧪 | 示例输入/输出、用例演示 | 代理按需参考 |
 | `authoring/` | 仅供人类作者参考的内容（如 TDD 验证流程） | 代理常规任务不加载 |
 
 所有目录可选，仅在提供明确价值时添加。`authoring/` 是本仓库补充——官方标准未覆盖“代理常规任务不加载”这一类别。
+`templates/` 和 `examples/` 是部分生态扩展（[R15]）接纳的可选约定，官方标准未强制要求。
 
 **分类标准是加载时机，不是内容来源**——`references/` 收纳所有代理按需加载的文档，不区分自撰参考与外部转载。不确定时参考 [R3] 仓库的实际组织。
 
@@ -120,6 +125,7 @@ skill-name/
 - **不要按内容来源分**：无论放顶层还是 `references/` 内，分类维度是主题/领域，不是来源（自撰 vs 转载）。
 
 **官方未覆盖的边界**（如 Gherkin 测试规格、示例数据）：可建自定义目录（如 `test/`、`samples/`），在 SKILL.md 中明确说明其用途与加载时机。官方约定是起点，不是终点。
+`templates/`（输出模板）、`examples/`（示例演示）已被部分生态工具接纳为可选约定（[R15]），编写时可按需采用。
 
 **归置优先级**——内容先就地或归入当前文件的其它相关章节（非索引类），就近归并、免一次加载跳转；同文件无合适归处、或属下列类型时才下沉子文件。
 
@@ -459,6 +465,7 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 | [R7] | <https://github.com/mgechev/skills-best-practices> | Skills Best Practices | 否定触发条件、技能验证方法论 |
 | [R13] | <https://github.com/agentskills/agentskills/issues/90> | Proposal: Skill Relationship Fields | 提案新增 `prerequisite-skills` 和 `related-skills` 字段到 SKILL.md 规范 |
 | [R14] | <https://zylos.ai/research/2026-05-12-agent-skill-composition-modular-capability-architecture> | Agent Skill Composition: The Architecture of Modular AI Capabilities | 四种技能组合模式（顺序管道、并行扇出、复合嵌套、条件分发）与生产部署最佳实践 |
+| [R15] | <https://www.agensi.io/learn/skill-md-specification-open-standard> | The SKILL.md Open Standard: Full Specification (Agensi, 2026) | 社区整理的 SKILL.md 完整规范参考，含 `templates/` 和 `examples/` 可选目录约定 |
 
 ---
 

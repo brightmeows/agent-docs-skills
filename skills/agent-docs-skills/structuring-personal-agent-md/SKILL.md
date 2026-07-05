@@ -28,6 +28,18 @@ license: Apache-2.0
 
 ---
 
+## 速查——症状到章节
+
+| 症状 / 场景 | 看哪节 |
+|---|---|
+| 个人级配置放哪 | 配置文件位置 |
+| 该写什么 / 不该写什么 | 写作原则 |
+| 配置太长 / 膨胀 | 写作原则·保持简短 / 维护 |
+| 定义 agent 角色 / Persona | 写作原则·Persona / 常见模式 |
+| SOUL.md 是什么 | 常见模式·SOUL.md 持久身份 |
+
+---
+
 ## 配置文件位置
 
 完整的个人级配置文件清单、加载顺序、与项目级的优先级规则见 [L1]。写作时最常用：
@@ -43,13 +55,7 @@ license: Apache-2.0
 | Hermes Agent | `~/.hermes/SOUL.md` | 持久 agent 身份（Persona + 行为指令）|
 | OpenClaw / Starpod | `SOUL.md` | 持久 agent 身份（姓名、角色、核心指令）|
 
-**SOUL.md 模式**：OpenClaw、Hermes Agent、Starpod 等多个 agent 框架引入 `SOUL.md`
-文件作为**持久 agent 身份**载体。与 `AGENTS.md` 或 `CLAUDE_GLOBAL.md` 不同，
-`SOUL.md` 专门存放 agent 的身份特征（姓名、角色描述、核心行为原则），
-被视为不可轻易覆盖的“身份层”——会话压缩后仍保留，而非每次重新注入。
-个人级 Persona 可直接写在 `SOUL.md` 中，与项目级 `AGENTS.md` 形成三层身份叠加
-（SOUL.md → AGENTS.md → SKILL.md HARD GATE）。此模式目前为 OpenClaw 生态专有，
-但其“持久身份与项目配置分离”的设计理念值得借鉴。
+**SOUL.md**：OpenClaw、Hermes Agent、Starpod 等框架的**持久 agent 身份**载体——专门存放身份特征（姓名、角色、核心原则），会话压缩后仍保留，与项目级 `AGENTS.md` 形成三层身份叠加（SOUL.md → AGENTS.md → SKILL.md）。完整说明与示例见下方[常见模式](#常见模式)节。
 
 **OpenCode** 支持通过 Markdown agent 文件（`~/.config/opencode/agents/*.md`）定义 agent 角色，
 含 YAML frontmatter（description/mode/model/permission 等）和系统提示 body；

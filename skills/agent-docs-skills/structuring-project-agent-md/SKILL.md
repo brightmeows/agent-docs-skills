@@ -38,6 +38,21 @@ license: Apache-2.0
 
 ---
 
+## 速查——症状到章节
+
+| 症状 / 场景 | 看哪节 |
+|---|---|
+| 创建/维护 AGENTS.md | 定位 + 写作原则 |
+| 这内容该不该放进 AGENTS.md | 内容决策指南 |
+| 规则写指令还是用 hook 强制 | 机制层 |
+| Always/Ask/Never 怎么组织 | 写作原则·三层边界 |
+| 文件越来越长 / 出现异味 | 审计与质量·配置异味检测 |
+| 多工具各维护一份配置 | 定位·核心原则（symlink）|
+| monorepo 多个 AGENTS.md | Monorepo 多 AGENTS.md |
+| CLAUDE.md / .cursor/rules 怎么搞 | CLAUDE.md 专属 / .cursor/rules 格式 |
+
+---
+
 ## 层级与作用域
 
 AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
@@ -59,7 +74,7 @@ AGENTS.md 按文件系统层级组织，遵循 4 核心作用域概念：
 
 ### 渐进式披露：AGENTS.md 可选 Frontmatter
 
-AGENTS.md v1.1（[R6]）草案提案引入了可选的 YAML frontmatter，支持代理在加载全文前建立轻量索引，适用于 monorepo 中含大量 AGENTS.md 文件的场景。`description` 和 `tags` 均为可选——文件路径本身已提供足够上下文，不要求 frontmatter 以保持向后兼容。
+AGENTS.md v1.1（[R6]）草案提案引入可选 YAML frontmatter（`description` + `tags`），让代理在加载全文前建立轻量索引。两者均可选——文件路径本身已提供足够上下文。
 
 ```yaml
 ---
@@ -68,18 +83,9 @@ tags: [react, components, frontend]
 ---
 ```
 
-**何时使用 frontmatter：**
+**何时用**：monorepo 含 5+ 个 AGENTS.md、或目录位置不足以描述文件用途时。**无需用**：单 AGENTS.md 小项目，或内容可从路径推断（如 `scripts/AGENTS.md`）。
 
-- 目录位置本身不足以描述文件用途（如根目录下多个 AGENTS.md 共享同一路径上下文）
-- monorepo 含 5+ 个 AGENTS.md 文件，代理需要索引能力
-- 文件指导范围足够特化，值得显式标注触发条件
-
-**无需使用 frontmatter：**
-
-- 仅含一个 AGENTS.md 的小项目——路径本身已足够
-- 内容从文件名即可推断（如 `scripts/AGENTS.md` 显然与脚本相关）
-
-> 此提案尚在草案阶段，非所有工具均已实现 frontmatter 感知。写入 frontmatter 不影响向后兼容——不识别的工具会忽略它。
+> 草案阶段，非所有工具已实现 frontmatter 感知；写入不影响向后兼容——不识别的工具会忽略它。
 
 ---
 
@@ -136,12 +142,12 @@ AGENTS.md 专属写作原则（通用规则见前置 Skill）：
   不要用 var，始终用 const/let，import 顺序按标准库/三方/内部排列...
   ```
 
-- **三层边界 Always / Ask / Never**——比简单禁令清单更有效，但维护中极易**膨胀**，应作为快速索引而非规则正文：
-  - **Always Do**：每次自动执行（如提交前运行 `pnpm test`）
+- **三层边界 Always / Ask / Never**——比简单禁令清单更有效，但易**膨胀**，应作快速索引而非规则正文：
+  - **Always**：每次自动执行（如提交前 `pnpm test`）
   - **Ask First**：重大变更先确认（如改数据库 schema）
-  - **Never Do**：绝对禁止（如提交密钥、push main）——配肯定替代（见前置 Skill“肯定指令优先”）
-  - **分小节放置**：用 `### Always` / `### Ask` / `### Never` 独立小节分类承载，代理跳读时可快速定位。混排在大表或单一列表中会削弱分类索引价值。
-  - **保持索引精简**——每条一行、高信号：工具链能强制的（hook / CI / linter）不入此列，指向其配置（见 `Toolchain First`）；长解释下沉到引用文件。“只增不减”是膨胀主因，定期移除代理已能遵循的条目（见[维护流程](#维护流程)）。
+  - **Never**：绝对禁止（如提交密钥、push main）——配肯定替代（见前置 Skill“肯定指令优先”）
+  - **分小节放置**：用 `### Always` / `### Ask` / `### Never` 独立小节承载，代理跳读可快速定位；混排会削弱索引价值
+  - **保持精简**：每条一行高信号；工具链能强制的（hook/CI/linter）不入此列，指向配置（见 `Toolchain First`）；定期移除代理已能遵循的条目（见[维护流程](#维护流程)）
 - **反自动化生成**——LLM 自动生成的 AGENTS.md 一致降低成功率、推高推理成本（完整数据与机制见[L3]）。`/init` 等结果只当“内容清单”，手工重写。
 - **关键文件路径显式标注**——入口点、基类、配置文件应显式标注路径。
 - **@import 引用**——部分工具（如 Claude Code）支持 `@路径/文件名.md` 内联引用外部文件，根文件保持精简，知识按需加载。非 v1.1 标准特性（进展见 [cross-tool-compat.md](references/cross-tool-compat.md#标准化进展)），使用前确认工具兼容性。

@@ -16,13 +16,15 @@ license: Apache-2.0
 
 ## 速查——症状到章节
 
+> 括注为失败模式术语，定义见前置 Skill [L14]。
+
 | 症状 / 场景 | 看哪节 |
 |---|---|
-| 技能搜不到 / 不触发 | 技能搜索优化（CSO）|
+| 技能搜不到 / 不触发（可发现性）| 技能搜索优化（CSO）|
 | 放项目级还是个人级 | 作用域选择 |
-| body 太长 / 不知拆哪 | 目录结构与文件组织·引用深度 |
+| body 太长 / 不知拆哪（上下文衰减）| 目录结构与文件组织·引用深度 |
 | 用流程图还是表格 | 流程图使用 |
-| 验证够不够 | 验证与自检 / 技能创建清单 |
+| 验证够不够（腐败成功）| 验证与自检 / 技能创建清单 |
 | 担心安全风险 | 安全考虑 |
 
 ---
@@ -221,6 +223,8 @@ skill-name/
 
 ## 技能搜索优化（CSO）
 
+**根因：** 领域术语（[L14]）— description 是检索入口，术语锚定匹配边界
+
 **对发现性至关重要：** 未来的代理通过读取 description 决定是否加载你的技能。
 
 **核心原则：描述 = 做什么 + 何时使用，绝不总结工作流。**
@@ -347,6 +351,8 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 
 ## 验证与自检
 
+**根因：** 静默失败·腐败成功 / 复合衰减（[L14]）— 未经验证的技能 = 未经验证的代码
+
 **核心原则：未经验证的技能 = 未经验证的代码。** 但验证强度因技能类型而异，代理可执行的自检是所有类型的基础。
 
 > 常规自检项已整合进下方的 [技能创建清单](#技能创建清单)（编写后阶段），此处不重复。
@@ -469,6 +475,7 @@ OWASP Agentic Skills Top 10（AST10）是首个 agent skill 安全行业标准�
 | [L11] | [ecosystem.md](../writing-agent-docs/references/ecosystem.md) | 技能生态全景：生态构成、市场类型、发布指南、SkillsBench 验证数据、跨工具兼容性与选型（合并自原 ecosystem-landscape + ecosystem-publishing）|
 | [L12] | [skill-composition.md](./references/skill-composition.md) | 技能组合模式：顺序/并行/复合/条件四种编排方式 + 选型指南 + 跨工具支持 + 反模式 |
 | [L13] | [skill-lifecycle.md](./references/skill-lifecycle.md) | 技能全生命周期管理：版本策略、更新流程、废弃三阶段与归档检查清单 |
+| [L14] | [llm-failure-modes.md](../writing-agent-docs/references/llm-failure-modes.md) | LLM 失败模式术语表（前置 Skill）——CSO、验证等节 `**根因：**` tagline 所用术语的定义处 |
 
 **`scripts/`**（执行时不进入上下文）：
 

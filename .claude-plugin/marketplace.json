@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    {
+      "name": "agent-docs-skills",
+      "source": "./",
+      "skills": [
+        "./skills/agent-docs-skills/writing-agent-docs",
+        "./skills/agent-docs-skills/writing-skill-md",
+        "./skills/agent-docs-skills/structuring-project-agent-md",
+        "./skills/agent-docs-skills/structuring-personal-agent-md"
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
     "./skills/agent-docs-skills/structuring-project-agent-md",
     "./skills/agent-docs-skills/structuring-personal-agent-md"
   ],
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Meta-skills for AI coding assistants on writing effective agent documentation — AGENTS.md, SKILL.md, .cursor/rules, and system prompts.",
   "homepage": "https://codeberg.org/brightmeows/agent-docs-skills",
   "repository": "https://codeberg.org/brightmeows/agent-docs-skills",

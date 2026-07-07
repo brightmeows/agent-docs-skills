@@ -51,6 +51,49 @@ repos:
         language: system
         pass_filenames: false
 
+      - id: check-plugin-skills-list
+        name: Check plugin.json skills list
+        description: 验证 .claude-plugin/plugin.json 的 skills 数组与 skills/ 下实际技能目录一致
+        entry: bash
+        args:
+          - -c
+          - |
+            set -euo pipefail
+            errors=0
+            echo "=== plugin.json skills 数组 vs SKILL.md 目录 ==="
+            # 从 plugin.json skills 数组提取技能名（取路径 basename）
+            plugin_names=$(jq -r '.skills[]?' .claude-plugin/plugin.json | xargs -I{} basename {} | sort -u)
+            # 文件系统实际技能名（与 check-well-known-list 同口径）
+            fs_names=$(find skills -name SKILL.md -type f -printf '%h\n' | xargs -I{} basename {} | sort -u)
+
+            # Forward: 文件系统中有但 plugin.json skills 数组中无
+            missing_in_plugin=$(comm -23 <(echo "$fs_names") <(echo "$plugin_names"))
+            if [ -n "$missing_in_plugin" ]; then
+              while IFS= read -r name; do
+                path=$(find skills -path "*/$name/SKILL.md" -type f | head -1)
+                echo "  ERROR: $path 存在但未列入 plugin.json skills 数组"
+                errors=$((errors + 1))
+              done <<< "$missing_in_plugin"
+            fi
+
+            # Reverse: plugin.json skills 数组中有但文件系统中无
+            missing_on_fs=$(comm -13 <(echo "$fs_names") <(echo "$plugin_names"))
+            if [ -n "$missing_on_fs" ]; then
+              while IFS= read -r name; do
+                echo "  ERROR: plugin.json skills 数组中 '$name' 无对应的 SKILL.md 文件"
+                errors=$((errors + 1))
+              done <<< "$missing_on_fs"
+            fi
+
+            if [ "$errors" -gt 0 ]; then
+              echo "FAILED: ${errors} 个错误"
+              echo "修复：编辑 .claude-plugin/plugin.json 的 skills 数组，使其与 skills/ 下目录一致"
+              exit 1
+            fi
+            echo "OK: plugin.json skills 数组与技能目录一致"
+        language: system
+        pass_filenames: false
+
       - id: check-well-known-digest
         name: Check well-known digest
         description: 验证 index.json 中的 SHA256 digest 与文件匹配

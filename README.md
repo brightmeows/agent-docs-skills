@@ -35,13 +35,13 @@ writing-agent-docs（基础写作原则）
 锁定到指定 release tag：
 
 ```bash
-npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git#v0.3.1
+npx skills add https://github.com/brightmeows/agent-docs-skills.git#v0.3.1
 ```
 
 拉取 `main` 分支，始终最新：
 
 ```bash
-npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git
+npx skills add https://github.com/brightmeows/agent-docs-skills.git
 ```
 
 ### 手动引用
@@ -49,7 +49,7 @@ npx skills add https://codeberg.org/brightmeows/agent-docs-skills.git
 克隆仓库后，在 AI 助手的配置中引用 `skills/` 下的 `SKILL.md`：
 
 ```bash
-git clone https://codeberg.org/brightmeows/agent-docs-skills.git
+git clone https://github.com/brightmeows/agent-docs-skills.git
 ```
 
 ## 贡献

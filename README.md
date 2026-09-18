@@ -30,27 +30,13 @@ writing-agent-docs（基础写作原则）
 
 ## 使用方式
 
-### npx skills（推荐）
-
-锁定到指定 release tag：
+通过 `npx skills` 直接安装：
 
 ```bash
-npx skills add https://github.com/brightmeows/agent-docs-skills.git#v0.3.1
+npx skills add brightmeows/agent-docs-skills
 ```
 
-拉取 `main` 分支，始终最新：
-
-```bash
-npx skills add https://github.com/brightmeows/agent-docs-skills.git
-```
-
-### 手动引用
-
-克隆仓库后，在 AI 助手的配置中引用 `skills/` 下的 `SKILL.md`：
-
-```bash
-git clone https://github.com/brightmeows/agent-docs-skills.git
-```
+拉取 `main` 分支，始终最新。
 
 ## 贡献
 

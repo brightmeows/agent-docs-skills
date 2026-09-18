@@ -65,7 +65,6 @@ chore: 更新 writing-skill-md 的 well-known digest
 - 修改 `.md` 后通过 `pre-commit run markdownlint` 验证（pre-commit 中以 `--config .markdownlint.toml` 覆盖默认规则，勿直接调用 markdownlint-cli2）
 - 修改 `skills/agent-docs-skills/*/SKILL.md` 后，同步更新 `.well-known/agent-skills/index.json` 中对应 `digest` 字段（由 `check-well-known-digest` hook 强制）
 - 新增/移除技能目录时同步更新 `.well-known/agent-skills/index.json` 与 `.claude-plugin/marketplace.json` 的 `skills` 数组（后者为 `npx skills` 提供分组显示，缺则技能平铺无组名）
-- 发布新版本（release/tag）时，更新 `README.md` 中安装命令的版本号引用（`#vX.Y.Z`）
 - **修改任何技能前，必须先完整读取本仓库内的所有前置技能文档。** 依赖关系见[技能依赖链](#技能依赖链)——本仓库是元技能仓库，技能本身即是规范
 
 ### Ask
